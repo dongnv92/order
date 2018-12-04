@@ -9,6 +9,9 @@ session_start();
 error_reporting(0);
 date_default_timezone_set('Asia/Ho_Chi_Minh');
 
+define('_HOME', 'http://localhost/dong/order');
+define('_API', 'http://localhost/dong/order/api');
+
 // Get Parameter
 $submit	    = $_POST['submit'];
 $id 	    = isset($_REQUEST['id']) 	    ? abs(intval($_REQUEST['id'])) 	: false;
