@@ -2,7 +2,7 @@
 require_once '../includes/core.php';
 switch ($act){
     case 'get_tmall':
-        require_once '../includes/class/simple_html_dom.php';
+        require_once '../includes/lib/simple_html_dom.php';
         $url_parse                          = parse_url($url);
         parse_str($url_parse['query'], $query);
         //echo 'https://detail.tmall.com/item.htm?id='.$query['id']; exit();

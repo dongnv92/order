@@ -6,7 +6,7 @@
  * Time: 22:45
  */
 require_once '../includes/core.php';
-$admin_title = isset($admin_title) && !empty($admin_title) ? $admin_title : 'VIDEO';
+$header['title'] = isset($header['title']) && !empty($header['title']) ? $header['title'] : 'SHOP ORDER';
 ?>
 <!DOCTYPE html>
 <html class="loading" lang="en" data-textdirection="ltr">
@@ -15,7 +15,7 @@ $admin_title = isset($admin_title) && !empty($admin_title) ? $admin_title : 'VID
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
     <meta name="author" content="DONG NGUYN">
-    <title><?php echo $admin_title;?></title>
+    <title><?=$header['title']?></title>
     <link rel="apple-touch-icon" href="../media/images/system/favicon.ico">
     <link rel="shortcut icon" type="image/x-icon" href="../media/images/system/favicon.ico">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Quicksand:300,400,500,700" rel="stylesheet">
@@ -40,7 +40,7 @@ $admin_title = isset($admin_title) && !empty($admin_title) ? $admin_title : 'VID
                 <li class="nav-item">
                     <a class="navbar-brand" href="<?php echo _URL_ADMIN;?>">
                         <img class="brand-logo" alt="modern admin logo" src="../media/images/system/logo.png">
-                        <h3 class="brand-text">VIDEO SOCIAL</h3>
+                        <h3 class="brand-text">SHOP ORDER</h3>
                     </a>
                 </li>
                 <li class="nav-item d-md-none">
@@ -101,20 +101,14 @@ $admin_title = isset($admin_title) && !empty($admin_title) ? $admin_title : 'VID
                 <span data-i18n="nav.category.layouts">Nội dung</span><i class="la la-ellipsis-h ft-minus" data-toggle="tooltip" data-placement="right" data-original-title="Layouts"></i>
             </li>
             <li class=" nav-item">
-                <a href="#"><i class="ft-folder"></i><span class="menu-title">Chuyên Mục</span></a>
+                <a href="#"><i class="ft-shopping-cart"></i><span class="menu-title">Sản Phẩm</span></a>
                 <ul class="menu-content">
-                    <li <?php echo ($admin_module == 'category' && $act == 'list') ? 'class="active"' : '';?>><a class="menu-item" href="<?php echo _URL_ADMIN;?>/category.php?act=list">Danh sách chuyên mục</a></li>
-                    <li <?php echo ($admin_module == 'category' && $type == 'video') ? 'class="active"' : '';?>><a class="menu-item" href="<?php echo _URL_ADMIN;?>/category.php?type=video">Video</a></li>
+                    <li <?php echo ($admin_module == 'product' && $act == '') ? 'class="active"' : '';?>><a class="menu-item" href="<?php echo _URL_ADMIN;?>/product.php"><i class="ft-list"></i> Danh sách sản phẩm</a></li>
+                    <li <?php echo ($admin_module == 'product' && $act == 'add') ? 'class="active"' : '';?>><a class="menu-item" href="<?php echo _URL_ADMIN;?>/product.php?act=add"><i class="ft-plus"></i> Thêm sản phẩm</a></li>
+                    <li <?php echo ($admin_module == 'category' && $type == 'shop') ? 'class="active"' : '';?>><a class="menu-item" href="<?php echo _URL_ADMIN;?>/category.php?type=shop"><i class="ft-hash"></i> Chuyên mục</a></li>
+                    <li <?php echo ($admin_module == 'category' && $type == 'brand') ? 'class="active"' : '';?>><a class="menu-item" href="<?php echo _URL_ADMIN;?>/category.php?type=brand"><i class="la la-twitter-square"></i> Thương Hiệu</a></li>
                 </ul>
             </li>
-            <li class=" nav-item">
-                <a href="#"><i class="ft-edit"></i><span class="menu-title" data-i18n="nav.page_layouts.main">Bài viết</span></a>
-                <ul class="menu-content">
-                    <li <?php echo ($admin_module == 'post' && (!$act || $act == 'update') && $type == 'video') ? 'class="active"' : '';?>><a class="menu-item" href="<?php echo _URL_ADMIN;?>/post.php?type=video">Danh sách Video</a></li>
-                    <li <?php echo ($admin_module == 'post' && $act == 'add' && $type == 'video') ? 'class="active"' : '';?>><a class="menu-item" href="<?php echo _URL_ADMIN;?>/post.php?act=add&type=video">Thêm Video</a></li>
-                </ul>
-            </li>
-            <li class=" nav-item <?php echo $admin_module == 'dl' ? 'active' : '';?>"><a href="<?php echo _URL_ADMIN;?>/dl.php"><i class="ft-download"></i><span class="menu-title">Tải Video</span></a></li>
             <li class=" navigation-header"><span data-i18n="nav.category.layouts">Điều hướng</span><i class="la la-ellipsis-h ft-minus" data-toggle="tooltip" data-placement="right" data-original-title="Layouts"></i></li>
             <li class=" nav-item"><a href="<?php echo _URL_HOME;?>" target="_blank"><i class="la la-home"></i><span class="menu-title">Trang Chủ</span></a></li>
             <li class=" nav-item"><a href="<?php echo _URL_LOGOUT;?>"><i class="la la-long-arrow-left"></i><span class="menu-title">Đăng xuất</span></a></li>

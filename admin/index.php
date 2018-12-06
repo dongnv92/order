@@ -7,7 +7,11 @@
  */
 require_once '../includes/core.php';
 // Kiểm tra đã đăng nhập chưa
-if(!$user){ $funcion->redirectUrl(_URL_LOGIN);exit();}
+if(!$user){
+    //$funcion->redirectUrl(_URL_LOGIN);
+    //exit();
+    echo 'Chưa đăng nhập';
+}
 
 $admin_title = 'Trang quản trị';
 require_once 'header.php';

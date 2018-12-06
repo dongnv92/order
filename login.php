@@ -7,7 +7,7 @@
  */
 require_once 'includes/core.php';
 if($user){
-    echo 'Ok';
+    $function->redirect(_URL_ADMIN);
 }
 if($submit){
     $username 	= $_REQUEST['username'] 	? trim($_REQUEST['username']) : '';
@@ -15,11 +15,11 @@ if($submit){
     $remember 	= $_REQUEST['remember'] 	? trim($_REQUEST['remember']) : '';
     if($submit){
         $error = array();
-        $db->from(_TABLE_USERS);
-        $db->where('users_password' , md5($password));
+        $db->from(_TABLE_USER);
+        $db->where('user_password' , md5($password));
         $db->open_where();
-        $db->where('users_login', $username);
-        $db->or_where('users_email', $username);
+        $db->where('user_login', $username);
+        $db->or_where('user_email', $username);
         $db->close_where();
         $row = $db->fetch_first();
         if(!$username || !$password){
@@ -31,13 +31,13 @@ if($submit){
         /* Xử lý đăng nhập thành công */
         if(!$error){
             if($remember){
-                setcookie("user", $row['users_id'], time() + 30*24*60*60);
-                setcookie('pass', $row['users_password'],time() + 30*24*60*60);
-                $_SESSION['user'] = $row['users_id'];
-                $_SESSION['pass'] = $row['users_password'];
+                setcookie("user", $row['user_id'], time() + 30*24*60*60);
+                setcookie('pass', $row['user_password'],time() + 30*24*60*60);
+                $_SESSION['user'] = $row['user_id'];
+                $_SESSION['pass'] = $row['user_password'];
             }else{
-                $_SESSION['user'] = $row['users_id'];
-                $_SESSION['pass'] = $row['users_password'];
+                $_SESSION['user'] = $row['user_id'];
+                $_SESSION['pass'] = $row['user_password'];
             }
             $funcion->redirectUrl(_URL_ADMIN);
             exit();
@@ -46,7 +46,7 @@ if($submit){
 }
 ?>
 <!DOCTYPE html>
-<html class="loading" lang="en" data-textdirection="ltr">
+<html class="loading" lang="vi" data-textdirection="ltr">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -86,7 +86,7 @@ if($submit){
                             <div class="card-header border-0">
                                 <div class="card-title text-center">
                                     <div class="p-1">
-                                        <img src="style/layouts/imgs/logo.png" alt="branding logo">
+                                        <img src="<?=_URL_HOME?>/media/images/system/logo.png" alt="branding logo">
                                     </div>
                                 </div>
                                 <h6 class="card-subtitle line-on-side text-muted text-center font-small-3 pt-2">
@@ -128,7 +128,7 @@ if($submit){
                             <div class="card-footer">
                                 <div class="">
                                     <p class="float-sm-left text-center m-0">
-                                        <a href="#" class="card-link">VIDEO GIẢI TRÍ</a>
+                                        <a href="#" class="card-link">ORDER HÀNG TRUNG QUỐC</a>
                                     </p>
                                     <p class="float-sm-right text-center m-0">
                                         <a href="#" class="card-link">LIÊN HỆ</a>
