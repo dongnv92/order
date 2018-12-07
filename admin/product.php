@@ -61,7 +61,7 @@ switch ($act){
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-md-10">
-                                        <input type="text" class="form-control round border-blue" name="product_suorce" value="<?=$product_suorce?>" placeholder="Link sản phẩm gốc">
+                                        <input type="text" class="form-control round border-blue" name="product_suorce" value="<?=$product_suorce?>" placeholder="Link sản phẩm gốc, VD: https://detail.tmall.com/item.htm?id=574580973041">
                                     </div>
                                     <div class="col-md-2 text-right">
                                         <button class="btn round btn-outline-blue" id="connect_ajax">Lấy thông tin</button>
@@ -142,9 +142,18 @@ switch ($act){
                                 <?php echo $error['product_category'] ? $function->getAlert('help_error', $error['product_category']) : '';?>
                             </fieldset>
                             <fieldset class="form-group">
-                                <label><strong class="text-danger">(*)</strong> Thương Hiệu</label><br />
-                                <select name="product_brand[]" id="category_select" class="select2 form-control border-grey-blue" multiple="multiple">
+                                <label>Thương Hiệu</label><br />
+                                <select name="product_brand[]" id="category_select" class="select2 form-control border-grey-blue">
+                                    <option value="">Trống</option>
                                     <?php $function->showCategories($db->select('category_id, category_name, category_parent')->from(_TABLE_CATEGORY)->where(array('category_type' => 'brand'))->fetch(), 0, '','select'); ?>
+                                </select>
+                                <?php echo $error['product_brand'] ? $function->getAlert('help_error', $error['product_brand']) : '';?>
+                            </fieldset>
+                            <fieldset class="form-group">
+                                <label>Loại sản phẩm</label><br />
+                                <select name="product_brand[]" id="category_select" class="select2 form-control border-grey-blue">
+                                    <option value="">Trống</option>
+                                    <?php $function->showCategories($db->select('category_id, category_name, category_parent')->from(_TABLE_CATEGORY)->where(array('category_type' => 'quality'))->fetch(), 0, '','select'); ?>
                                 </select>
                                 <?php echo $error['product_brand'] ? $function->getAlert('help_error', $error['product_brand']) : '';?>
                             </fieldset>
@@ -164,7 +173,7 @@ switch ($act){
                         <div class="card-body">
                             <h4 class="card-title">MÀU</h4><hr />
                             <div class="row skin skin-flat">
-                                <div class="col-md-6 col-sm-12">
+                                <div class="col-md-6 col-sm-12" id="ajax_color">
 
                                 </div>
                             </div>
@@ -201,7 +210,7 @@ switch ($act){
                         dataType    : 'json',
                         data        : {'act' : 'add_product', 'url' : product_suorce},
                         beforeSend  : function () {
-                            $('#connect_ajax').html('<i class="la-circle-o-notch la spinner"></i>');
+                            $('#connect_ajax').html('Vui lòng chờ <i class="la-refresh la spinner"></i>');
                         },
                         success     : function (data) {
                             $('input[name=product_price_default]').val(data.product_price_default);
@@ -210,9 +219,19 @@ switch ($act){
                             $('input[name=product_suorce]').val(data.product_url);
                             $('#ajax_images').html(data.images);
                             $('#ajax_size').html(data.size);
+                            $('#ajax_color').html(data.color);
                             $('#connect_ajax').html('Lấy thông tin');
-                        }
-                    })
+                        },
+                        error: function(jqXHR, textStatus){
+                            if(textStatus == 'timeout')
+                            {
+                                swal("Thông báo!", "Không lấy được dữ liệu, vui lòng thử lại","error");
+                                $('#connect_ajax').html('Lấy thông tin');
+                                return false;
+                            }
+                        },
+                        timeout: 20000
+                    });
                     return false;
                 });
             });

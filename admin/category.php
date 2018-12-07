@@ -13,7 +13,7 @@ $admin_module   = 'category';
 
 switch ($act){
     default:
-        if(!in_array($type, array('shop', 'brand'))){
+        if(!in_array($type, array('shop', 'brand', 'quality'))){
             $admin_title = 'Chuyên Mục';
             require_once 'header.php';
             echo $function->getPanelError(array('title' => 'Trang Không Tồn Tại', 'content' => 'Không đúng định dạng chuyên mục !'));

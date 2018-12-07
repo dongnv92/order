@@ -25,8 +25,8 @@ switch ($act){
         foreach ($response['product_color'] AS $color){
             $response['color'] .= '<fieldset>
             <div class="row">
-                <div class="col-6 text-left"><input type="checkbox" checked name="product_color[]" id="'. $size .'" value="'. $size .'"></div>
-                <div class="col-6 text-right"><label for="'. $size .'">'. $size .'</label></div>
+                <div class="col-6 text-left"><input type="checkbox" checked name="product_color[]" id="'. $color .'" value="'. $color .'"></div>
+                <div class="col-6 text-right"><label for="'. $color .'"><img src="'. $color .'" width="50px" height="50px" class="round"></label></div>
             </div>
             </fieldset>';
         }
