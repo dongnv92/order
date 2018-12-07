@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th12 07, 2018 lúc 11:19 AM
--- Phiên bản máy phục vụ: 10.1.35-MariaDB
--- Phiên bản PHP: 7.2.9
+-- Thời gian đã tạo: Th12 07, 2018 lúc 05:52 PM
+-- Phiên bản máy phục vụ: 10.1.36-MariaDB
+-- Phiên bản PHP: 7.2.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -34,7 +34,7 @@ CREATE TABLE `dong_category` (
   `category_url` varchar(500) COLLATE utf8_unicode_ci NOT NULL,
   `category_type` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `category_parent` int(11) NOT NULL,
-  `category_users` int(11) NOT NULL,
+  `category_user` int(11) NOT NULL,
   `category_time` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -42,7 +42,7 @@ CREATE TABLE `dong_category` (
 -- Đang đổ dữ liệu cho bảng `dong_category`
 --
 
-INSERT INTO `dong_category` (`category_id`, `category_name`, `category_url`, `category_type`, `category_parent`, `category_users`, `category_time`) VALUES
+INSERT INTO `dong_category` (`category_id`, `category_name`, `category_url`, `category_type`, `category_parent`, `category_user`, `category_time`) VALUES
 (1, 'Giày - Dép', 'giay-dep', 'shop', 0, 0, 0),
 (2, 'Giày thể thao', 'giay-the-thao', 'shop', 1, 0, 0),
 (3, 'Giày thường', 'giay-thuong', 'shop', 1, 0, 0),
@@ -63,13 +63,29 @@ INSERT INTO `dong_category` (`category_id`, `category_name`, `category_url`, `ca
 CREATE TABLE `dong_media` (
   `media_id` int(11) NOT NULL,
   `media_type` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `media_store` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
   `media_name` varchar(500) COLLATE utf8_unicode_ci NOT NULL,
   `media_source` varchar(1000) COLLATE utf8_unicode_ci NOT NULL,
-  `media_store` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
-  `media_users` int(11) NOT NULL,
+  `media_user` int(11) NOT NULL,
   `media_parent` int(11) NOT NULL,
   `media_time` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `dong_media`
+--
+
+INSERT INTO `dong_media` (`media_id`, `media_type`, `media_store`, `media_name`, `media_source`, `media_user`, `media_parent`, `media_time`) VALUES
+(1, 'images_product', 'remote', 'TB2Iltdb4YaK1RjSZFnXXa80pXa_!!917312802-0-item_pic.jpg_500x500q90.jpg', 'https://img.alicdn.com/imgextra/i3/917312802/TB2Iltdb4YaK1RjSZFnXXa80pXa_!!917312802-0-item_pic.jpg_500x500q90.jpg', 1, 1, 1544200956),
+(2, 'images_product', 'local', 'TB2Iltdb4YaK1RjSZFnXXa80pXa_!!917312802-0-item_pic.jpg_500x500q90.jpg', 'assets/images/products/TB2Iltdb4YaK1RjSZFnXXa80pXa_!!917312802-0-item_pic.jpg_500x500q90.jpg', 1, 1, 1544200956),
+(3, 'images_product', 'remote', 'TB2xpVtXNjaK1RjSZKzXXXVwXXa_!!917312802.jpg_500x500q90.jpg', 'https://img.alicdn.com/imgextra/i3/917312802/TB2xpVtXNjaK1RjSZKzXXXVwXXa_!!917312802.jpg_500x500q90.jpg', 1, 1, 1544200956),
+(4, 'images_product', 'local', 'TB2xpVtXNjaK1RjSZKzXXXVwXXa_!!917312802.jpg_500x500q90.jpg', 'assets/images/products/TB2xpVtXNjaK1RjSZKzXXXVwXXa_!!917312802.jpg_500x500q90.jpg', 1, 1, 1544200956),
+(5, 'images_product', 'remote', 'TB2TQRXXMHqK1RjSZFEXXcGMXXa_!!917312802-0-item_pic.jpg_500x500q90.jpg', 'https://img.alicdn.com/imgextra/i1/917312802/TB2TQRXXMHqK1RjSZFEXXcGMXXa_!!917312802-0-item_pic.jpg_500x500q90.jpg', 1, 1, 1544200956),
+(6, 'images_product', 'local', 'TB2TQRXXMHqK1RjSZFEXXcGMXXa_!!917312802-0-item_pic.jpg_500x500q90.jpg', 'assets/images/products/TB2TQRXXMHqK1RjSZFEXXcGMXXa_!!917312802-0-item_pic.jpg_500x500q90.jpg', 1, 1, 1544200956),
+(7, 'images_product', 'remote', 'TB26j8aXRLoK1RjSZFuXXXn0XXa_!!917312802.jpg_500x500q90.jpg', 'https://img.alicdn.com/imgextra/i1/917312802/TB26j8aXRLoK1RjSZFuXXXn0XXa_!!917312802.jpg_500x500q90.jpg', 1, 1, 1544200956),
+(8, 'images_product', 'local', 'TB26j8aXRLoK1RjSZFuXXXn0XXa_!!917312802.jpg_500x500q90.jpg', 'assets/images/products/TB26j8aXRLoK1RjSZFuXXXn0XXa_!!917312802.jpg_500x500q90.jpg', 1, 1, 1544200956),
+(9, 'images_product', 'remote', 'TB2h6pbXHvpK1RjSZFqXXcXUVXa_!!917312802.jpg_500x500q90.jpg', 'https://img.alicdn.com/imgextra/i3/917312802/TB2h6pbXHvpK1RjSZFqXXcXUVXa_!!917312802.jpg_500x500q90.jpg', 1, 1, 1544200956),
+(10, 'images_product', 'local', 'TB2h6pbXHvpK1RjSZFqXXcXUVXa_!!917312802.jpg_500x500q90.jpg', 'assets/images/products/TB2h6pbXHvpK1RjSZFqXXcXUVXa_!!917312802.jpg_500x500q90.jpg', 1, 1, 1544200956);
 
 -- --------------------------------------------------------
 
@@ -78,13 +94,20 @@ CREATE TABLE `dong_media` (
 --
 
 CREATE TABLE `dong_metadata` (
-  `group_id` int(11) NOT NULL,
-  `group_type` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `group_index` int(11) NOT NULL,
-  `group_value` int(11) NOT NULL,
-  `group_users` int(11) NOT NULL,
-  `group_time` int(11) NOT NULL
+  `metadata_id` int(11) NOT NULL,
+  `metadata_type` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `metadata_suorce` int(11) NOT NULL,
+  `metadata_value` int(11) NOT NULL,
+  `metadata_user` int(11) NOT NULL,
+  `metadata_time` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Đang đổ dữ liệu cho bảng `dong_metadata`
+--
+
+INSERT INTO `dong_metadata` (`metadata_id`, `metadata_type`, `metadata_suorce`, `metadata_value`, `metadata_user`, `metadata_time`) VALUES
+(1, 'category_product', 1, 1, 1, 1544200956);
 
 -- --------------------------------------------------------
 
@@ -97,13 +120,26 @@ CREATE TABLE `dong_product` (
   `product_name` varchar(500) COLLATE utf8_unicode_ci NOT NULL,
   `product_content` text COLLATE utf8_unicode_ci,
   `product_suorce` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `product_brand` int(11) DEFAULT NULL,
+  `product_quality` int(11) DEFAULT NULL,
   `product_price_default` int(11) DEFAULT NULL,
   `product_price_promotion` int(11) DEFAULT NULL,
+  `product_sale` int(5) DEFAULT NULL,
   `product_price_vn` int(11) NOT NULL,
+  `product_size` varchar(2000) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `product_color` varchar(2000) COLLATE utf8_unicode_ci DEFAULT NULL,
   `product_user` int(11) NOT NULL,
   `product_status` int(11) NOT NULL,
+  `product_show` int(11) DEFAULT '1',
   `product_time` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `dong_product`
+--
+
+INSERT INTO `dong_product` (`product_id`, `product_name`, `product_content`, `product_suorce`, `product_brand`, `product_quality`, `product_price_default`, `product_price_promotion`, `product_sale`, `product_price_vn`, `product_size`, `product_color`, `product_user`, `product_status`, `product_show`, `product_time`) VALUES
+(1, 'test', '', 'https://detail.tmall.com/item.htm?id=577399054350', 0, 0, 138, 58, 43, 203000, 'a:6:{i:0;s:2:\"39\";i:1;s:2:\"40\";i:2;s:2:\"41\";i:3;s:2:\"42\";i:4;s:2:\"43\";i:5;s:2:\"44\";}', 'a:0:{}', 1, 0, 1, 1544200956);
 
 -- --------------------------------------------------------
 
@@ -150,7 +186,7 @@ ALTER TABLE `dong_media`
 -- Chỉ mục cho bảng `dong_metadata`
 --
 ALTER TABLE `dong_metadata`
-  ADD PRIMARY KEY (`group_id`);
+  ADD PRIMARY KEY (`metadata_id`);
 
 --
 -- Chỉ mục cho bảng `dong_product`
@@ -178,19 +214,19 @@ ALTER TABLE `dong_category`
 -- AUTO_INCREMENT cho bảng `dong_media`
 --
 ALTER TABLE `dong_media`
-  MODIFY `media_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `media_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT cho bảng `dong_metadata`
 --
 ALTER TABLE `dong_metadata`
-  MODIFY `group_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `metadata_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT cho bảng `dong_product`
 --
 ALTER TABLE `dong_product`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT cho bảng `dong_user`

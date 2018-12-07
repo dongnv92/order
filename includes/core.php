@@ -23,6 +23,8 @@ $function = new orderFunction();
 
 // Đặt các giá trị hằng số mặc định
 define('_CONGIF_TIME', time());
+define('_CONGIF_FOLDER_IMAGES_PRODUCT', 'assets/images/products');
+define('_CONGIF_FOLDER_IMAGES_PRODUCT_COLOR', 'assets/images/products/color');
 
 // Đặt các giá trị hằng số các đường dẫn
 define('_URL_HOME','http://localhost/dong/order');
@@ -36,7 +38,8 @@ define('_URL_STYLE', _URL_HOME.'/style/social');
 define('_TABLE_USER','dong_user');
 define('_TABLE_CATEGORY','dong_category');
 define('_TABLE_MEDIA','dong_media');
-define('_TABLE_GROUP','dong_group');
+define('_TABLE_METADATA','dong_metadata');
+define('_TABLE_PRODUCT','dong_product');
 
 // Đặt các giá trị hằng số cho thông tin kết nối cơ sở dữ liệu
 define('_DB_HOST','localhost');

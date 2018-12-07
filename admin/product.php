@@ -14,7 +14,136 @@ $admin_module   = 'product';
 switch ($act){
     case 'add':
         if($submit){
+            $product_name               = isset($_POST['product_name'])             && !empty($_POST['product_name'])               ? $_POST['product_name']                : '';
+            $product_content            = isset($_POST['product_content'])          && !empty($_POST['product_content'])            ? $_POST['product_content']             : '';
+            $product_suorce             = isset($_POST['product_suorce'])           && !empty($_POST['product_suorce'])             ? $_POST['product_suorce']              : '';
+            $product_status             = isset($_POST['product_status'])           && !empty($_POST['product_status'])             ? $_POST['product_status']              : 0;
+            $product_show               = isset($_POST['product_show'])             && !empty($_POST['product_show'])               ? $_POST['product_show']                : 0;
+            $product_price_default      = isset($_POST['product_price_default'])    && !empty($_POST['product_price_default'])      ? $_POST['product_price_default']       : '';
+            $product_price_promotion    = isset($_POST['product_price_promotion'])  && !empty($_POST['product_price_promotion'])    ? $_POST['product_price_promotion']     : '';
+            $product_price_vn           = isset($_POST['product_price_vn'])         && !empty($_POST['product_price_vn'])           ? $_POST['product_price_vn']            : '';
+            $product_category           = isset($_POST['product_category'])         && !empty($_POST['product_category'])           ? $_POST['product_category']            : '';
+            $product_brand              = isset($_POST['product_brand'])            && !empty($_POST['product_brand'])              ? $_POST['product_brand']               : '';
+            $product_quality            = isset($_POST['product_quality'])          && !empty($_POST['product_quality'])            ? $_POST['product_quality']             : '';
+            $product_size               = isset($_POST['product_size'])             && !empty($_POST['product_size'])               ? $_POST['product_size']                : '';
+            $product_color              = isset($_POST['product_color'])            && !empty($_POST['product_color'])              ? $_POST['product_color']               : '';
+            $product_images             = isset($_POST['product_images'])           && !empty($_POST['product_images'])             ? $_POST['product_images']              : '';
+            $product_sale               = ceil(($product_price_promotion/$product_price_default)*100);
+            $error = array();
+            if(!$product_name){
+                $error['product_name']  = 'Bạn cần nhập tên sản phẩm';
+            }
+            if($product_suorce && !filter_var($product_suorce, FILTER_VALIDATE_URL)){
+                $error['product_suorce']= 'Nguồn sản phẩm không đúng định dạng URL';
+            }
+            if(!$product_price_vn){
+                $error['product_price_vn']  = 'Bạn cần nhập giá Việt Nam';
+            }
+            if(count($product_category) == 1 && $product_category[0] == ''){
+                $error['product_category']  = 'Bạn hãy chọn 1 chuyên mục';
+            }
+            if($product_price_default && !is_numeric($product_price_default)){
+                $error['product_price_default']  = 'Số tiền phải là dạng số';
+            }
+            if($product_price_promotion && !is_numeric($product_price_promotion)){
+                $error['product_price_promotion']  = 'Số tiền phải là dạng số';
+            }
+            if($product_price_vn && !is_numeric($product_price_vn)){
+                $error['product_price_vn']  = 'Số tiền phải là dạng số';
+            }
 
+            if(!$error){
+                $list_color = array();
+                foreach ($product_color as $color){
+                    if(filter_var($color, FILTER_VALIDATE_URL)){
+                        if(copy($color, '../'._CONGIF_FOLDER_IMAGES_PRODUCT_COLOR.'/'.basename($color))){
+                            $list_color[] = _CONGIF_FOLDER_IMAGES_PRODUCT_COLOR.'/'.basename($color);
+                        }
+                    }
+                }
+
+                $data_product = array(
+                    'product_name'              => $product_name,
+                    'product_content'           => $product_content,
+                    'product_suorce'            => $product_suorce,
+                    'product_brand'             => $product_brand,
+                    'product_quality'           => $product_quality,
+                    'product_price_default'     => $product_price_default,
+                    'product_price_promotion'   => $product_price_promotion,
+                    'product_sale'              => $product_sale,
+                    'product_price_vn'          => $product_price_vn,
+                    'product_size'              => serialize($product_size),
+                    'product_color'             => serialize($list_color),
+                    'product_user'              => $user['user_id'],
+                    'product_status'            => $product_status,
+                    'product_show'              => $product_show,
+                    'product_time'              => _CONGIF_TIME
+                );
+                $product_id = $db->insert(_TABLE_PRODUCT, $data_product);
+                // nếu thêm dữ liệu lỗi thì break
+                if(!$product_id){
+                    $admin_title = 'Thêm sảm phẩm';
+                    require_once 'header.php';
+                    echo $function->getPanelError(array('title' => 'Thêm sản phẩm', 'content' => 'Thêm sản phẩm không thành công. Lỗi MYSQLI !'));
+                    require_once 'footer.php';
+                    break;
+                }
+                // thêm chuyên mục của sản phẩm vào bảng metadata
+                foreach ($product_category as $category){
+                    $data_category = array(
+                        'metadata_type'     => 'category_product',
+                        'metadata_suorce'   => $product_id,
+                        'metadata_value'    => $category,
+                        'metadata_user'     => $user['user_id'],
+                        'metadata_time'     => _CONGIF_TIME
+                    );
+                    if(!$db->insert(_TABLE_METADATA, $data_category)){
+                        $admin_title = 'Thêm sảm phẩm';
+                        require_once 'header.php';
+                        echo $function->getPanelError(array('title' => 'Thêm sản phẩm', 'content' => 'Thêm chuyên mục không thành công. Lỗi MYSQLI !'));
+                        require_once 'footer.php';
+                        break;
+                    }
+                }
+                // thêm ảnh vào bảng media
+                foreach ($product_images as $images){
+                    $data_images = array(
+                        'media_type'    => 'images_product',
+                        'media_store'   => 'remote',
+                        'media_name'    => basename($images),
+                        'media_source'  => $images,
+                        'media_user'    => $user['user_id'],
+                        'media_parent'  => $product_id,
+                        'media_time'    => _CONGIF_TIME
+                    );
+                    if(!$db->insert(_TABLE_MEDIA, $data_images)){
+                        $admin_title = 'Thêm sảm phẩm';
+                        require_once 'header.php';
+                        echo $function->getPanelError(array('title' => 'Thêm sản phẩm', 'content' => 'Thêm ảnh không thành công. Lỗi MYSQLI !'));
+                        require_once 'footer.php';
+                        break;
+                    }
+                    $images_location = '../'._CONGIF_FOLDER_IMAGES_PRODUCT.'/'.basename($images);
+                    copy($images, $images_location);
+                    $data_images = array(
+                        'media_type'    => 'images_product',
+                        'media_store'   => 'local',
+                        'media_name'    => basename($images),
+                        'media_source'  => _CONGIF_FOLDER_IMAGES_PRODUCT.'/'.basename($images),
+                        'media_user'    => $user['user_id'],
+                        'media_parent'  => $product_id,
+                        'media_time'    => _CONGIF_TIME
+                    );
+                    if(!$db->insert(_TABLE_MEDIA, $data_images)){
+                        $admin_title = 'Thêm sảm phẩm';
+                        require_once 'header.php';
+                        echo $function->getPanelError(array('title' => 'Thêm sản phẩm', 'content' => 'Thêm ảnh không thành công. Lỗi MYSQLI !'));
+                        require_once 'footer.php';
+                        break;
+                    }
+                }
+                echo 'OK'; exit();
+            }
         }
 
         $header['breadcrumbs']  = array(_URL_ADMIN.'/product.php' => 'Sản phẩm', _URL_ADMIN.'/product.php?act=add' => 'Thêm sản phẩm');
@@ -54,6 +183,7 @@ switch ($act){
                         <div class="card-body">
                             <div class="form-group">
                                 <input type="text" required class="form-control round border-blue" name="product_name" value="<?=$product_name?>" autofocus placeholder="Tên sản phẩm">
+                                <?php echo $error['product_name'] ? $function->getAlert('help_error', $error['product_name']) : '';?>
                             </div>
                             <div class="form-group">
                                 <textarea class="tinymce round" name="product_content"><?=$product_content?></textarea>
@@ -66,6 +196,7 @@ switch ($act){
                                     <div class="col-md-2 text-right">
                                         <button class="btn round btn-outline-blue" id="connect_ajax">Lấy thông tin</button>
                                     </div>
+                                    <?php echo $error['product_suorce'] ? $function->getAlert('help_error', $error['product_suorce']) : '';?>
                                 </div>
                             </div>
                         </div>
@@ -74,6 +205,28 @@ switch ($act){
                 <div class="col-lg-3">
                     <div class="card border-left-blue border-right-blue">
                         <div class="card-body">
+                            <div class="form-group">
+                                <fieldset>
+                                    <div class="row skin skin-flat">
+                                        <div class="col-6 text-left">
+                                            <input type="checkbox" <?=$product_status == 1 ? 'checked="checked" ' : ''?> name="product_status" id="product_status" value="1">
+                                        </div>
+                                        <div class="col-6 text-right">
+                                            <label for="product_status">Nổi bật</label>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <fieldset>
+                                    <div class="row skin skin-flat">
+                                        <div class="col-6 text-left">
+                                            <input type="checkbox" <?=$product_show == 0 ? '' : 'checked="checked" '?> checked name="product_show" id="product_show" value="1">
+                                        </div>
+                                        <div class="col-6 text-right">
+                                            <label for="product_show">Ẩn/Hiện</label>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
                             <div class="text-center">
                                 <input class="btn round btn-outline-blue" type="submit" name="submit" value="Thêm sản phẩm">
                             </div>
@@ -89,33 +242,36 @@ switch ($act){
                                     <div class="form-group">
                                         <label for="timesheetinput5">Giá gốc</label>
                                         <div class="position-relative has-icon-left">
-                                            <input type="text" class="form-control round border-blue" name="product_price_default">
+                                            <input type="number" class="form-control round border-blue" value="<?=$product_price_default?>" name="product_price_default">
                                             <div class="form-control-position">
                                                 <i class="la la-cny"></i>
                                             </div>
                                         </div>
+                                        <?php echo $error['product_price_default'] ? $function->getAlert('help_error', $error['product_price_default']) : '';?>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="timesheetinput6">Giá khuyến mãi</label>
                                         <div class="position-relative has-icon-left">
-                                            <input type="text" class="form-control round border-blue" name="product_price_promotion">
+                                            <input type="number" class="form-control round border-blue" value="<?=$product_price_promotion?>" name="product_price_promotion">
                                             <div class="form-control-position">
                                                 <i class="la la-cny"></i>
                                             </div>
                                         </div>
+                                        <?php echo $error['product_price_promotion'] ? $function->getAlert('help_error', $error['product_price_promotion']) : '';?>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="timesheetinput6">Giá Việt Nam Đồng</label>
                                 <div class="position-relative has-icon-left">
-                                    <input type="text" class="form-control round border-blue" name="product_price_vn">
+                                    <input type="number" required class="form-control round border-blue" value="<?=$product_price_vn?>" name="product_price_vn">
                                     <div class="form-control-position">
                                         <i class="la la-vimeo"></i>
                                     </div>
                                 </div>
+                                <?php echo $error['product_price_vn'] ? $function->getAlert('help_error', $error['product_price_vn']) : '';?>
                             </div>
                         </div>
                     </div>
@@ -143,7 +299,7 @@ switch ($act){
                             </fieldset>
                             <fieldset class="form-group">
                                 <label>Thương Hiệu</label><br />
-                                <select name="product_brand[]" id="category_select" class="select2 form-control border-grey-blue">
+                                <select name="product_brand" id="category_select" class="select2 form-control border-grey-blue">
                                     <option value="">Trống</option>
                                     <?php $function->showCategories($db->select('category_id, category_name, category_parent')->from(_TABLE_CATEGORY)->where(array('category_type' => 'brand'))->fetch(), 0, '','select'); ?>
                                 </select>
@@ -151,11 +307,11 @@ switch ($act){
                             </fieldset>
                             <fieldset class="form-group">
                                 <label>Loại sản phẩm</label><br />
-                                <select name="product_brand[]" id="category_select" class="select2 form-control border-grey-blue">
+                                <select name="product_quality" id="category_select" class="select2 form-control border-grey-blue">
                                     <option value="">Trống</option>
                                     <?php $function->showCategories($db->select('category_id, category_name, category_parent')->from(_TABLE_CATEGORY)->where(array('category_type' => 'quality'))->fetch(), 0, '','select'); ?>
                                 </select>
-                                <?php echo $error['product_brand'] ? $function->getAlert('help_error', $error['product_brand']) : '';?>
+                                <?php echo $error['product_quality'] ? $function->getAlert('help_error', $error['product_quality']) : '';?>
                             </fieldset>
                         </div>
                     </div>
