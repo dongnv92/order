@@ -11,11 +11,11 @@ switch ($act){
         $product                                = file_get_contents(_URL_HOME.'/api/?act=get_tmall&url='.urlencode($url));
         $product                                = json_decode($product, true);
         $response                               = array();
-        $response['product_price_default']      = $product['product_price_default'];
-        $response['product_price_promotion']    = $product['product_price_promotion'];
-        $response['product_price_vn']           = $response['product_price_promotion'] * 3500;
-        $response['product_url']                = $product['product_url'];
-        $response['response']                   = $product['response'];
+        $response['product_price_default']      = trim($product['product_price_default']);
+        $response['product_price_promotion']    = trim($product['product_price_promotion']);
+        $response['product_price_vn']           = trim($response['product_price_promotion'] * 3500);
+        $response['product_url']                = trim($product['product_url']);
+        $response['response']                   = trim($product['response']);
         $response['product_images']             = $product['product_images'];
         $response['product_size']               = $product['product_size'];
         $response['product_color']              = $product['product_color'];

@@ -24,7 +24,7 @@ $function = new orderFunction();
 // Đặt các giá trị hằng số mặc định
 define('_CONGIF_TIME', time());
 define('_CONGIF_FOLDER_IMAGES_PRODUCT', 'assets/images/products');
-define('_CONGIF_FOLDER_IMAGES_PRODUCT_COLOR', 'assets/images/products/color');
+define('_CONGIF_FOLDER_IMAGES_PRODUCT_COLOR', 'assets/images/products_color');
 
 // Đặt các giá trị hằng số các đường dẫn
 define('_URL_HOME','http://localhost/dong/order');
