@@ -51,8 +51,8 @@ switch ($act){
                     'category_url'      => $category_url,
                     'category_type'     => $type,
                     'category_parent'   => $category_parent,
-                    'category_users'    => $user['users_id'],
-                    'category_time'     => _CONFIG_TIME
+                    'category_user'     => $user['users_id'],
+                    'category_time'     => _CONGIF_TIME
                 );
                 $id = $db->insert(_TABLE_CATEGORY, $data);
                 if(!$id){

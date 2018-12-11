@@ -395,4 +395,50 @@ switch ($act){
         <?php
         require_once 'footer.php';
         break;
+    default:
+        $db->select()->from(_TABLE_PRODUCT);
+        $data = $db->fetch();
+        require_once 'header.php';
+        ?>
+        <div class="row clearfix">
+            <div class="col-lg-12">
+                <div class="card product_item_list">
+                    <div class="body table-responsive">
+                        <table class="table table-hover m-b-0">
+                            <thead>
+                            <tr>
+                                <th>Ảnh sản phẩm</th>
+                                <th>Tên sản phẩm</th>
+                                <th data-breakpoints="sm xs">Giá chuẩn (¥)</th>
+                                <th data-breakpoints="sm xs">Giá khuyến mãi (¥)</th>
+                                <th data-breakpoints="sm xs">Giá Việt Nam (₫)</th>
+                                <th data-breakpoints="sm xs">Người Đăng</th>
+                                <th data-breakpoints="sm xs">Ngày đăng</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php
+                            foreach ($data as $row){
+                                $product_user   = $db->select()->from(_TABLE_USER)->where('user_id', $row['product_user'])->fetch_first();
+                                $product_images = $db->select()->from(_TABLE_MEDIA)->where(array('media_store' => 'remote', 'media_type' => 'images_product', 'media_parent' => $row['product_id']))->fetch_first();
+                                echo '<tr>';
+                                    echo '<td><img src="'. $product_images['media_suorce'] .'" height="50" /></td>';
+                                    echo '<td>'. $row['product_name'] .'</td>';
+                                    echo '<td>'. $row['product_price_default'] .' ¥</td>';
+                                    echo '<td>'. $row['product_price_promotion'] .' ¥</td>';
+                                    echo '<td>'. $row['product_price_vn'] .' ₫</td>';
+                                    echo '<td>'. $product_user['user_name'] .'</td>';
+                                    echo '<td>'. $function->getTimeDisplay($row['product_time']) .'</td>';
+                                echo '</tr>';
+                            }
+                            ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php
+        require_once 'footer.php';
+        break;
 }
