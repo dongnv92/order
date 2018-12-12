@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th12 11, 2018 lúc 11:22 AM
+-- Thời gian đã tạo: Th12 12, 2018 lúc 05:58 AM
 -- Phiên bản máy phục vụ: 10.1.35-MariaDB
 -- Phiên bản PHP: 7.2.9
 
@@ -143,7 +143,6 @@ CREATE TABLE `dong_product` (
   `product_color` varchar(2000) COLLATE utf8_unicode_ci DEFAULT NULL,
   `product_user` int(11) NOT NULL,
   `product_status` int(11) NOT NULL,
-  `product_show` int(11) DEFAULT '1',
   `product_time` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -151,9 +150,9 @@ CREATE TABLE `dong_product` (
 -- Đang đổ dữ liệu cho bảng `dong_product`
 --
 
-INSERT INTO `dong_product` (`product_id`, `product_name`, `product_content`, `product_suorce`, `product_brand`, `product_quality`, `product_price_default`, `product_price_promotion`, `product_sale`, `product_price_vn`, `product_size`, `product_color`, `product_user`, `product_status`, `product_show`, `product_time`) VALUES
-(1, 'test', '', 'https://detail.tmall.com/item.htm?id=577399054350', 0, 0, 138, 58, 43, 203000, 'a:6:{i:0;s:2:\"39\";i:1;s:2:\"40\";i:2;s:2:\"41\";i:3;s:2:\"42\";i:4;s:2:\"43\";i:5;s:2:\"44\";}', 'a:0:{}', 1, 1, 1, 1544200956),
-(2, 'Áo test', '', 'https://detail.tmall.com/item.htm?id=576586722639', 0, 0, 395, 159, 41, 556500, 'a:6:{i:0;s:3:\"160\";i:1;s:3:\"165\";i:2;s:3:\"170\";i:3;s:3:\"175\";i:4;s:3:\"180\";i:5;s:3:\"185\";}', 'a:6:{i:0;s:88:\"assets/images/products_color/TB23rPlpMZC2uNjSZFnXXaxZpXa_!!1664555011.jpg_500x500q90.jpg\";i:1;s:88:\"assets/images/products_color/TB2wptfkNtnkeRjSZSgXXXAuXXa_!!1664555011.jpg_500x500q90.jpg\";i:2;s:88:\"assets/images/products_color/TB2ucblpMZC2uNjSZFnXXaxZpXa_!!1664555011.jpg_500x500q90.jpg\";i:3;s:82:\"assets/images/products_color/O1CN011mt59WzH1szGTYz_!!1664555011.jpg_500x500q90.jpg\";i:4;s:82:\"assets/images/products_color/O1CN011mt59ZIELv7tIBj_!!1664555011.jpg_500x500q90.jpg\";i:5;s:82:\"assets/images/products_color/O1CN011mt59YS6PeyZskr_!!1664555011.jpg_500x500q90.jpg\";}', 1, 1, 1, 1544241213);
+INSERT INTO `dong_product` (`product_id`, `product_name`, `product_content`, `product_suorce`, `product_brand`, `product_quality`, `product_price_default`, `product_price_promotion`, `product_sale`, `product_price_vn`, `product_size`, `product_color`, `product_user`, `product_status`, `product_time`) VALUES
+(1, 'test', '', 'https://detail.tmall.com/item.htm?id=577399054350', 0, 0, 138, 58, 43, 203000, 'a:6:{i:0;s:2:\"39\";i:1;s:2:\"40\";i:2;s:2:\"41\";i:3;s:2:\"42\";i:4;s:2:\"43\";i:5;s:2:\"44\";}', 'a:0:{}', 1, 1, 1544200956),
+(2, 'Áo test', '', 'https://detail.tmall.com/item.htm?id=576586722639', 0, 0, 395, 159, 41, 556500, 'a:6:{i:0;s:3:\"160\";i:1;s:3:\"165\";i:2;s:3:\"170\";i:3;s:3:\"175\";i:4;s:3:\"180\";i:5;s:3:\"185\";}', 'a:6:{i:0;s:88:\"assets/images/products_color/TB23rPlpMZC2uNjSZFnXXaxZpXa_!!1664555011.jpg_500x500q90.jpg\";i:1;s:88:\"assets/images/products_color/TB2wptfkNtnkeRjSZSgXXXAuXXa_!!1664555011.jpg_500x500q90.jpg\";i:2;s:88:\"assets/images/products_color/TB2ucblpMZC2uNjSZFnXXaxZpXa_!!1664555011.jpg_500x500q90.jpg\";i:3;s:82:\"assets/images/products_color/O1CN011mt59WzH1szGTYz_!!1664555011.jpg_500x500q90.jpg\";i:4;s:82:\"assets/images/products_color/O1CN011mt59ZIELv7tIBj_!!1664555011.jpg_500x500q90.jpg\";i:5;s:82:\"assets/images/products_color/O1CN011mt59YS6PeyZskr_!!1664555011.jpg_500x500q90.jpg\";}', 1, 1, 1544241213);
 
 -- --------------------------------------------------------
 

@@ -18,7 +18,6 @@ switch ($act){
             $product_content            = isset($_POST['product_content'])          && !empty($_POST['product_content'])            ? $_POST['product_content']             : '';
             $product_suorce             = isset($_POST['product_suorce'])           && !empty($_POST['product_suorce'])             ? $_POST['product_suorce']              : '';
             $product_status             = isset($_POST['product_status'])           && !empty($_POST['product_status'])             ? $_POST['product_status']              : 0;
-            $product_show               = isset($_POST['product_show'])             && !empty($_POST['product_show'])               ? $_POST['product_show']                : 0;
             $product_price_default      = isset($_POST['product_price_default'])    && !empty($_POST['product_price_default'])      ? $_POST['product_price_default']       : '';
             $product_price_promotion    = isset($_POST['product_price_promotion'])  && !empty($_POST['product_price_promotion'])    ? $_POST['product_price_promotion']     : '';
             $product_price_vn           = isset($_POST['product_price_vn'])         && !empty($_POST['product_price_vn'])           ? $_POST['product_price_vn']            : '';
@@ -30,6 +29,7 @@ switch ($act){
             $product_images             = isset($_POST['product_images'])           && !empty($_POST['product_images'])             ? $_POST['product_images']              : '';
             $product_sale               = ceil(($product_price_promotion/$product_price_default)*100);
             $error = array();
+
             if(!$product_name){
                 $error['product_name']  = 'Bạn cần nhập tên sản phẩm';
             }
@@ -76,7 +76,6 @@ switch ($act){
                     'product_color'             => serialize($list_color),
                     'product_user'              => $user['user_id'],
                     'product_status'            => $product_status,
-                    'product_show'              => $product_show,
                     'product_time'              => _CONGIF_TIME
                 );
                 $product_id = $db->insert(_TABLE_PRODUCT, $data_product);
@@ -205,24 +204,36 @@ switch ($act){
                 <div class="col-lg-3">
                     <div class="card border-left-blue border-right-blue">
                         <div class="card-body">
+                            <h4 class="card-title">Thuộc tính</h4>
+                            <hr>
                             <div class="form-group">
                                 <fieldset>
                                     <div class="row skin skin-flat">
                                         <div class="col-6 text-left">
-                                            <input type="checkbox" <?=$product_status == 1 ? 'checked="checked" ' : ''?> name="product_status" id="product_status" value="1">
+                                            <input type="radio" <?php echo ($submit && $product_status == 2) ? 'checked' : '';?> name="product_status" id="product_status_2" value="2">
                                         </div>
                                         <div class="col-6 text-right">
-                                            <label for="product_status">Nổi bật</label>
+                                            <label for="product_status_2">Nổi bật</label>
                                         </div>
                                     </div>
                                 </fieldset>
                                 <fieldset>
                                     <div class="row skin skin-flat">
                                         <div class="col-6 text-left">
-                                            <input type="checkbox" <?=$product_show == 0 ? '' : 'checked="checked" '?> checked name="product_show" id="product_show" value="1">
+                                            <input type="radio" <?php echo (($submit && $product_status == 1) || !$submit) ? 'checked' : '';?> name="product_status" id="product_status_1" value="1">
                                         </div>
                                         <div class="col-6 text-right">
-                                            <label for="product_show">Ẩn/Hiện</label>
+                                            <label for="product_status_1">Hiện</label>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <fieldset>
+                                    <div class="row skin skin-flat">
+                                        <div class="col-6 text-left">
+                                            <input type="radio" <?php echo ($submit && $product_status == 0) ? 'checked' : '';?> name="product_status" id="product_status_0" value="0">
+                                        </div>
+                                        <div class="col-6 text-right">
+                                            <label for="product_status_0">Ẩn</label>
                                         </div>
                                     </div>
                                 </fieldset>
@@ -292,7 +303,7 @@ switch ($act){
                             <h4 class="card-title">Chuyên mục & hãng</h4><hr>
                             <fieldset class="form-group">
                                 <label><strong class="text-danger">(*)</strong> Chuyên Mục</label><br />
-                                <select name="product_category[]" id="category_select" class="select2 form-control border-grey-blue" multiple="multiple">
+                                <select name="product_category[]" id="category_select" class="select2 form-control border-grey-blue" multiple="multiple" required>
                                     <?php $function->showCategories($db->select('category_id, category_name, category_parent')->from(_TABLE_CATEGORY)->where(array('category_type' => 'shop'))->fetch(), 0, '','select'); ?>
                                 </select>
                                 <?php echo $error['product_category'] ? $function->getAlert('help_error', $error['product_category']) : '';?>
@@ -412,6 +423,7 @@ switch ($act){
                                 <th data-breakpoints="sm xs">Giá chuẩn (¥)</th>
                                 <th data-breakpoints="sm xs">Giá khuyến mãi (¥)</th>
                                 <th data-breakpoints="sm xs">Giá Việt Nam (₫)</th>
+                                <th data-breakpoints="sm xs">Nổi bật</th>
                                 <th data-breakpoints="sm xs">Người Đăng</th>
                                 <th data-breakpoints="sm xs">Ngày đăng</th>
                             </tr>
@@ -422,11 +434,12 @@ switch ($act){
                                 $product_user   = $db->select()->from(_TABLE_USER)->where('user_id', $row['product_user'])->fetch_first();
                                 $product_images = $db->select()->from(_TABLE_MEDIA)->where(array('media_store' => 'remote', 'media_type' => 'images_product', 'media_parent' => $row['product_id']))->fetch_first();
                                 echo '<tr>';
-                                    echo '<td><img src="'. $product_images['media_suorce'] .'" height="50" /></td>';
+                                    echo '<td><img src="'. $product_images['media_source'] .'" height="50" /></td>';
                                     echo '<td>'. $row['product_name'] .'</td>';
                                     echo '<td>'. $row['product_price_default'] .' ¥</td>';
                                     echo '<td>'. $row['product_price_promotion'] .' ¥</td>';
                                     echo '<td>'. $row['product_price_vn'] .' ₫</td>';
+                                    echo '<td></td>';
                                     echo '<td>'. $product_user['user_name'] .'</td>';
                                     echo '<td>'. $function->getTimeDisplay($row['product_time']) .'</td>';
                                 echo '</tr>';
