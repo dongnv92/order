@@ -25,6 +25,7 @@ $function = new orderFunction();
 define('_CONGIF_TIME', time());
 define('_CONGIF_FOLDER_IMAGES_PRODUCT', 'assets/images/products');
 define('_CONGIF_FOLDER_IMAGES_PRODUCT_COLOR', 'assets/images/products_color');
+define('_CONFIG_PAGINATION', 50);
 
 // Đặt các giá trị hằng số các đường dẫn
 define('_URL_HOME','http://localhost/dong/order');
@@ -68,8 +69,9 @@ if ($_SESSION['user'] && $_SESSION['pass']) {
 }
 
 // Khởi tạo các biến Form
-$submit = (isset($_POST['submit'])  && !empty($_POST['submit']))    ? trim($_POST['submit']): false;
-$id     = (isset($_REQUEST['id'])   && !empty($_REQUEST['id']))     ? (int) $_REQUEST['id'] : false;
-$act    = (isset($_REQUEST['act'])  && !empty($_REQUEST['act']))    ? $_REQUEST['act']      : false;
-$type   = (isset($_REQUEST['type']) && !empty($_REQUEST['type']))   ? $_REQUEST['type']     : false;
-$url    = (isset($_REQUEST['url'])  && !empty($_REQUEST['url']))    ? trim($_REQUEST['url']): false;
+$submit = (isset($_POST['submit'])  && !empty($_POST['submit']))    ? trim($_POST['submit'])    : false;
+$id     = (isset($_REQUEST['id'])   && !empty($_REQUEST['id']))     ? (int) $_REQUEST['id']     : false;
+$act    = (isset($_REQUEST['act'])  && !empty($_REQUEST['act']))    ? $_REQUEST['act']          : false;
+$type   = (isset($_REQUEST['type']) && !empty($_REQUEST['type']))   ? $_REQUEST['type']         : false;
+$url    = (isset($_REQUEST['url'])  && !empty($_REQUEST['url']))    ? trim($_REQUEST['url'])    : false;
+$page   = (isset($_REQUEST['page']) && !empty($_REQUEST['page']))   ? trim($_REQUEST['page'])   : 1;

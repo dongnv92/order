@@ -1,6 +1,45 @@
 <?php
 require_once '../includes/core.php';
 switch ($act){
+    case 'product':
+        switch ($type){
+            case 'update_status':
+                $response = array();
+                $product_status = isset($_REQUEST['product_status']) && !empty($_REQUEST['product_status']) ? $_REQUEST['product_status'] : '';
+                // Kiểm tra đã truyền giá trị product status chưa
+                if(!$product_status){
+                    $response['response']   = 404;
+                    $response['message']    = 'Miss product status value';
+                    echo json_encode($response);
+                    break;
+                }
+                // Check xem sản phẩm có tồn tại trên hệ thống không
+                $db->select('product_id')->from(_TABLE_PRODUCT)->where('product_id', $id)->fetch_first();
+                if($db->affected_rows == 0){
+                    $response['response']   = 404;
+                    $response['message']    = 'Product id wrong';
+                    echo json_encode($response);
+                    break;
+                }
+                // Update trạng thái sản phẩm
+                if(!$db->where('product_id', $id)->update(_TABLE_PRODUCT, array('product_status' => $product_status))){
+                    $response['response']   = 400;
+                    $response['message']    = 'Cant update Product status ';
+                    echo json_encode($response);
+                    break;
+                }
+                $response['response']   = 200;
+                $response['message']    = 'Update trạng thái sản phẩm thành công';
+                echo json_encode($response);
+                break;
+            default:
+                $response = array();
+                $response['response']   = 200;
+                $response['message']    = 'Default Product Page';
+                echo json_encode($response);
+                break;
+        }
+        break;
     case 'get_tmall':
         require_once '../includes/lib/simple_html_dom.php';
         $url_parse                          = parse_url($url);
@@ -64,5 +103,6 @@ switch ($act){
         $response = array();
         $response['response']   = 200;
         $response['message']    = 'Default Page';
+        echo json_encode($response);
         break;
 }

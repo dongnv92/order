@@ -10,7 +10,6 @@ require_once '../includes/core.php';
 // Kiểm tra đã đăng nhập chưa
 if(!$user){$function->redirect(_URL_LOGIN);}
 $admin_module   = 'product';
-
 switch ($act){
     case 'add':
         if($submit){
@@ -407,9 +406,40 @@ switch ($act){
         require_once 'footer.php';
         break;
     default:
-        $db->select()->from(_TABLE_PRODUCT);
+        $product_where = array();
+        $product_where['product_status !='] = 0;
+        // Tính tổng số lượng product
+        $db->select('product_id')->from(_TABLE_PRODUCT)->where($product_where)->fetch();
+        $pagination['page_row']    = _CONFIG_PAGINATION;
+        $pagination['page_num']    = ceil($db->affected_rows/$pagination['page_row']);
+        $pagination['url']         = _URL_ADMIN.'/product.php?page={page}';
+        $page_start                = ($page-1) * $pagination['page_row'];
+
+        // Hiển thị dữ liệu
+        $db->from(_TABLE_PRODUCT)->where($product_where);
+        $db->limit(_CONFIG_PAGINATION, $page_start);
+        $db->order_by('product_id', 'desc');
         $data = $db->fetch();
+
+        $css_plus       = array(
+            'app-assets/vendors/css/forms/toggle/bootstrap-switch.min.css',
+            'app-assets/vendors/css/forms/toggle/switchery.min.css',
+            'app-assets/css/plugins/forms/switch.min.css',
+            'app-assets/css/core/colors/palette-switch.min.css',
+            'app-assets/vendors/css/extensions/sweetalert.css'
+        );
+        $js_plus        = array(
+            'app-assets/vendors/js/forms/toggle/bootstrap-switch.min.js',
+            'app-assets/vendors/js/forms/toggle/bootstrap-checkbox.min.js',
+            'app-assets/vendors/js/forms/toggle/switchery.min.js',
+            'app-assets/js/scripts/forms/switch.min.js',
+            'app-assets/vendors/js/extensions/sweetalert.min.js',
+            'app-assets/js/scripts/extensions/sweet-alerts.min.js'
+        );
+        $header['breadcrumbs']  = array(_URL_ADMIN.'/product.php' => 'Sản phẩm', _URL_ADMIN.'/product.php' => 'Danh sách sản phẩm');
+        $header['title']        = 'Danh sách sản phẩm';
         require_once 'header.php';
+        echo $function->breadcrumbs($header['title'], $header['breadcrumbs']);
         ?>
         <div class="row clearfix">
             <div class="col-lg-12">
@@ -434,12 +464,12 @@ switch ($act){
                                 $product_user   = $db->select()->from(_TABLE_USER)->where('user_id', $row['product_user'])->fetch_first();
                                 $product_images = $db->select()->from(_TABLE_MEDIA)->where(array('media_store' => 'remote', 'media_type' => 'images_product', 'media_parent' => $row['product_id']))->fetch_first();
                                 echo '<tr>';
-                                    echo '<td><img src="'. $product_images['media_source'] .'" height="50" /></td>';
-                                    echo '<td>'. $row['product_name'] .'</td>';
+                                    echo '<td><img class="rounded" src="'. $product_images['media_source'] .'" height="50" /></td>';
+                                    echo '<td><a href="product.php?act=update&id='. $row['product_id'] .'">'. $row['product_name'] .'</a></td>';
                                     echo '<td>'. $row['product_price_default'] .' ¥</td>';
                                     echo '<td>'. $row['product_price_promotion'] .' ¥</td>';
-                                    echo '<td>'. $row['product_price_vn'] .' ₫</td>';
-                                    echo '<td></td>';
+                                    echo '<td>'. number_format($row['product_price_vn'], 0,'', '.') .' ₫</td>';
+                                    echo '<td><input data-content="'. $row['product_id'] .'" name="product_status" type="checkbox" '. (($row['product_status'] == 2) ? 'checked' : '') .' class="switchery" data-size="xs" data-color="primary"/></td>';
                                     echo '<td>'. $product_user['user_name'] .'</td>';
                                     echo '<td>'. $function->getTimeDisplay($row['product_time']) .'</td>';
                                 echo '</tr>';
@@ -447,10 +477,36 @@ switch ($act){
                             ?>
                             </tbody>
                         </table>
+                        <?=$function->pagination($pagination)?>
                     </div>
                 </div>
             </div>
         </div>
+        <script language="JavaScript">
+            $(document).ready(function () {
+                $('input[name=product_status]').change(function () {
+                    var product_id = $(this).attr('data-content');
+                    if(this.checked){
+                        var product_status = 2;
+                    }else{
+                        var product_status = 1;
+                    }
+                    $.ajax({
+                        url     : '<?=_URL_HOME?>/api/',
+                        method  : 'POST',
+                        dataType: 'json',
+                        data    : {'act' : 'product', 'type' : 'update_status', 'id' : product_id, 'product_status' : product_status},
+                        success : function (data) {
+                            if(data.response == 200){
+                                swal("Update!", data.message, "success");
+                            }else{
+                                swal("Error!", data.message, "error");
+                            }
+                        }
+                    });
+                });
+            });
+        </script>
         <?php
         require_once 'footer.php';
         break;
