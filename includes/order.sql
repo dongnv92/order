@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th12 12, 2018 lúc 05:58 AM
+-- Thời gian đã tạo: Th12 13, 2018 lúc 11:33 AM
 -- Phiên bản máy phục vụ: 10.1.35-MariaDB
 -- Phiên bản PHP: 7.2.9
 
@@ -53,7 +53,8 @@ INSERT INTO `dong_category` (`category_id`, `category_name`, `category_url`, `ca
 (8, 'Super Fake', 'super-fake', 'quality', 0, 0, 0),
 (9, 'Fake 1', 'fake-1', 'quality', 0, 0, 0),
 (10, 'Việt Nam Xuất Khẩu', 'viet-nam-xuat-khau', 'quality', 0, 0, 0),
-(11, 'XTEP', 'xtep', 'brand', 0, 0, 1544425982);
+(11, 'XTEP', 'xtep', 'brand', 0, 0, 1544425982),
+(12, 'Starling', 'starling', 'brand', 0, 0, 1544667679);
 
 -- --------------------------------------------------------
 
@@ -96,7 +97,17 @@ INSERT INTO `dong_media` (`media_id`, `media_type`, `media_store`, `media_name`,
 (17, 'images_product', 'remote', 'TB2_JuWX9zqK1RjSZFjXXblCFXa_!!1664555011.jpg_500x500q90.jpg', 'https://img.alicdn.com/imgextra/i1/1664555011/TB2_JuWX9zqK1RjSZFjXXblCFXa_!!1664555011.jpg_500x500q90.jpg', 1, 2, 1544241213),
 (18, 'images_product', 'local', 'TB2_JuWX9zqK1RjSZFjXXblCFXa_!!1664555011.jpg_500x500q90.jpg', 'assets/images/products/TB2_JuWX9zqK1RjSZFjXXblCFXa_!!1664555011.jpg_500x500q90.jpg', 1, 2, 1544241213),
 (19, 'images_product', 'remote', 'TB2Z_aWXVzqK1RjSZFCXXbbxVXa_!!1664555011.jpg_500x500q90.jpg', 'https://img.alicdn.com/imgextra/i4/1664555011/TB2Z_aWXVzqK1RjSZFCXXbbxVXa_!!1664555011.jpg_500x500q90.jpg', 1, 2, 1544241213),
-(20, 'images_product', 'local', 'TB2Z_aWXVzqK1RjSZFCXXbbxVXa_!!1664555011.jpg_500x500q90.jpg', 'assets/images/products/TB2Z_aWXVzqK1RjSZFCXXbbxVXa_!!1664555011.jpg_500x500q90.jpg', 1, 2, 1544241213);
+(20, 'images_product', 'local', 'TB2Z_aWXVzqK1RjSZFCXXbbxVXa_!!1664555011.jpg_500x500q90.jpg', 'assets/images/products/TB2Z_aWXVzqK1RjSZFCXXbbxVXa_!!1664555011.jpg_500x500q90.jpg', 1, 2, 1544241213),
+(21, 'images_product', 'remote', 'TB2FBEQv_mWBKNjSZFBXXXxUFXa_!!469256589-0-item_pic.jpg_500x500q90.jpg', 'https://img.alicdn.com/imgextra/i4/469256589/TB2FBEQv_mWBKNjSZFBXXXxUFXa_!!469256589-0-item_pic.jpg_500x500q90.jpg', 1, 3, 1544667521),
+(22, 'images_product', 'local', 'TB2FBEQv_mWBKNjSZFBXXXxUFXa_!!469256589-0-item_pic.jpg_500x500q90.jpg', 'assets/images/products/TB2FBEQv_mWBKNjSZFBXXXxUFXa_!!469256589-0-item_pic.jpg_500x500q90.jpg', 1, 3, 1544667521),
+(23, 'images_product', 'remote', 'TB21UlYvFooBKNjSZPhXXc2CXXa_!!469256589.jpg_500x500q90.jpg', 'https://img.alicdn.com/imgextra/i4/469256589/TB21UlYvFooBKNjSZPhXXc2CXXa_!!469256589.jpg_500x500q90.jpg', 1, 3, 1544667521),
+(24, 'images_product', 'local', 'TB21UlYvFooBKNjSZPhXXc2CXXa_!!469256589.jpg_500x500q90.jpg', 'assets/images/products/TB21UlYvFooBKNjSZPhXXc2CXXa_!!469256589.jpg_500x500q90.jpg', 1, 3, 1544667521),
+(25, 'images_product', 'remote', 'TB2U4.4vFooBKNjSZFPXXXa2XXa_!!469256589.jpg_500x500q90.jpg', 'https://img.alicdn.com/imgextra/i1/469256589/TB2U4.4vFooBKNjSZFPXXXa2XXa_!!469256589.jpg_500x500q90.jpg', 1, 3, 1544667521),
+(26, 'images_product', 'local', 'TB2U4.4vFooBKNjSZFPXXXa2XXa_!!469256589.jpg_500x500q90.jpg', 'assets/images/products/TB2U4.4vFooBKNjSZFPXXXa2XXa_!!469256589.jpg_500x500q90.jpg', 1, 3, 1544667521),
+(27, 'images_product', 'remote', 'TB28SpLvIUrBKNjSZPxXXX00pXa_!!469256589.jpg_500x500q90.jpg', 'https://img.alicdn.com/imgextra/i2/469256589/TB28SpLvIUrBKNjSZPxXXX00pXa_!!469256589.jpg_500x500q90.jpg', 1, 3, 1544667521),
+(28, 'images_product', 'local', 'TB28SpLvIUrBKNjSZPxXXX00pXa_!!469256589.jpg_500x500q90.jpg', 'assets/images/products/TB28SpLvIUrBKNjSZPxXXX00pXa_!!469256589.jpg_500x500q90.jpg', 1, 3, 1544667521),
+(29, 'images_product', 'remote', 'TB2jWkLvRsmBKNjSZFsXXaXSVXa_!!469256589.jpg_500x500q90.jpg', 'https://img.alicdn.com/imgextra/i2/469256589/TB2jWkLvRsmBKNjSZFsXXaXSVXa_!!469256589.jpg_500x500q90.jpg', 1, 3, 1544667521),
+(30, 'images_product', 'local', 'TB2jWkLvRsmBKNjSZFsXXaXSVXa_!!469256589.jpg_500x500q90.jpg', 'assets/images/products/TB2jWkLvRsmBKNjSZFsXXaXSVXa_!!469256589.jpg_500x500q90.jpg', 1, 3, 1544667521);
 
 -- --------------------------------------------------------
 
@@ -120,7 +131,8 @@ CREATE TABLE `dong_metadata` (
 INSERT INTO `dong_metadata` (`metadata_id`, `metadata_type`, `metadata_suorce`, `metadata_value`, `metadata_user`, `metadata_time`) VALUES
 (1, 'category_product', 1, 1, 1, 1544200956),
 (2, 'category_product', 2, 2, 1, 1544241213),
-(3, 'category_product', 2, 3, 1, 1544241213);
+(3, 'category_product', 2, 3, 1, 1544241213),
+(4, 'category_product', 3, 3, 1, 1544667521);
 
 -- --------------------------------------------------------
 
@@ -152,7 +164,8 @@ CREATE TABLE `dong_product` (
 
 INSERT INTO `dong_product` (`product_id`, `product_name`, `product_content`, `product_suorce`, `product_brand`, `product_quality`, `product_price_default`, `product_price_promotion`, `product_sale`, `product_price_vn`, `product_size`, `product_color`, `product_user`, `product_status`, `product_time`) VALUES
 (1, 'test', '', 'https://detail.tmall.com/item.htm?id=577399054350', 0, 0, 138, 58, 43, 203000, 'a:6:{i:0;s:2:\"39\";i:1;s:2:\"40\";i:2;s:2:\"41\";i:3;s:2:\"42\";i:4;s:2:\"43\";i:5;s:2:\"44\";}', 'a:0:{}', 1, 1, 1544200956),
-(2, 'Áo test', '', 'https://detail.tmall.com/item.htm?id=576586722639', 0, 0, 395, 159, 41, 556500, 'a:6:{i:0;s:3:\"160\";i:1;s:3:\"165\";i:2;s:3:\"170\";i:3;s:3:\"175\";i:4;s:3:\"180\";i:5;s:3:\"185\";}', 'a:6:{i:0;s:88:\"assets/images/products_color/TB23rPlpMZC2uNjSZFnXXaxZpXa_!!1664555011.jpg_500x500q90.jpg\";i:1;s:88:\"assets/images/products_color/TB2wptfkNtnkeRjSZSgXXXAuXXa_!!1664555011.jpg_500x500q90.jpg\";i:2;s:88:\"assets/images/products_color/TB2ucblpMZC2uNjSZFnXXaxZpXa_!!1664555011.jpg_500x500q90.jpg\";i:3;s:82:\"assets/images/products_color/O1CN011mt59WzH1szGTYz_!!1664555011.jpg_500x500q90.jpg\";i:4;s:82:\"assets/images/products_color/O1CN011mt59ZIELv7tIBj_!!1664555011.jpg_500x500q90.jpg\";i:5;s:82:\"assets/images/products_color/O1CN011mt59YS6PeyZskr_!!1664555011.jpg_500x500q90.jpg\";}', 1, 1, 1544241213);
+(2, 'Áo test', '', 'https://detail.tmall.com/item.htm?id=576586722639', 0, 0, 395, 159, 41, 556500, 'a:6:{i:0;s:3:\"160\";i:1;s:3:\"165\";i:2;s:3:\"170\";i:3;s:3:\"175\";i:4;s:3:\"180\";i:5;s:3:\"185\";}', 'a:6:{i:0;s:88:\"assets/images/products_color/TB23rPlpMZC2uNjSZFnXXaxZpXa_!!1664555011.jpg_500x500q90.jpg\";i:1;s:88:\"assets/images/products_color/TB2wptfkNtnkeRjSZSgXXXAuXXa_!!1664555011.jpg_500x500q90.jpg\";i:2;s:88:\"assets/images/products_color/TB2ucblpMZC2uNjSZFnXXaxZpXa_!!1664555011.jpg_500x500q90.jpg\";i:3;s:82:\"assets/images/products_color/O1CN011mt59WzH1szGTYz_!!1664555011.jpg_500x500q90.jpg\";i:4;s:82:\"assets/images/products_color/O1CN011mt59ZIELv7tIBj_!!1664555011.jpg_500x500q90.jpg\";i:5;s:82:\"assets/images/products_color/O1CN011mt59YS6PeyZskr_!!1664555011.jpg_500x500q90.jpg\";}', 1, 2, 1544241213),
+(3, 'Giày nam Starling giày mùa đông nam phiên bản Hàn Quốc', '<p class=\"attr-list-hd tm-clear\" data-spm-anchor-id=\"a220o.1000855.0.i0.72463d31C9JcZ2\"><em><span data-spm-anchor-id=\"a220o.1000855.0.i4.72463d31C9JcZ2\">Th&ocirc;ng số sản phẩm:</span></em></p>\r\n<ul id=\"J_AttrUL\" data-spm-anchor-id=\"a220o.1000855.0.i3.72463d31C9JcZ2\">\r\n<li id=\"J_attrBrandName\" title=\"&nbsp;Starling\"><span data-spm-anchor-id=\"a220o.1000855.0.i1.72463d31C9JcZ2\">Thương hiệu: Starling</span></li>\r\n<li title=\"&nbsp;Tho&aacute;ng kh&iacute;\">Chức năng: Thở</li>\r\n<li title=\"&nbsp;Ren\">C&aacute;ch k&iacute;n: buộc</li>\r\n<li title=\"&nbsp;39 40 41 42 43 44\">K&iacute;ch thước: 39 40 41 42 43 44</li>\r\n<li title=\"&nbsp;M&agrave;u đặc\">Hoa văn: m&agrave;u đặc</li>\r\n<li title=\"&nbsp;Giải tr&iacute;\">Phong c&aacute;ch: Giải tr&iacute;</li>\r\n<li title=\"&nbsp;Giải tr&iacute; h&agrave;ng ng&agrave;y\">Ph&acirc;n khu theo phong c&aacute;ch: giải tr&iacute; h&agrave;ng ng&agrave;y</li>\r\n<li title=\"&nbsp;Chỉ may\">C&aacute;c yếu tố phổ biến: chỉ may</li>\r\n<li title=\"&nbsp;G&oacute;t thấp (1-3cm)\">Chiều cao g&oacute;t: g&oacute;t thấp (1-3cm)</li>\r\n<li title=\"&nbsp;[Trắng] [Trắng x&aacute;m] [Đen] [Đen v&agrave; Trắng] [Đỏ]\">Ph&acirc;n loại m&agrave;u sắc: 【Trắng】 【Trắng x&aacute;m】 【Đen】 【Đen v&agrave; Trắng】 【Đỏ】</li>\r\n<li title=\"&nbsp;ODXB18531\">Mục số: ODXB18531</li>\r\n<li title=\"&nbsp;Gi&agrave;y thể thao\"><span data-spm-anchor-id=\"a220o.1000855.0.i2.72463d31C9JcZ2\">T&ecirc;n gi&agrave;y thấp: gi&agrave;y</span></li>\r\n<li title=\"&nbsp;M&ugrave;a xu&acirc;n v&agrave; m&ugrave;a thu\">M&ugrave;a: Xu&acirc;n thu</li>\r\n<li title=\"&nbsp;M&ugrave;a thu 2018\">M&ugrave;a ni&ecirc;m yết: M&ugrave;a thu 2018</li>\r\n<li title=\"&nbsp;Đầu tr&ograve;n\">Kiểu ng&oacute;n ch&acirc;n: đầu tr&ograve;n</li>\r\n<li title=\"&nbsp;Mỗi ng&agrave;y\">Nh&acirc;n dịp: H&agrave;ng ng&agrave;y</li>\r\n<li title=\"&nbsp;G&oacute;t ch&acirc;n phẳng\">Với kiểu d&aacute;ng dưới: phẳng với</li>\r\n<li title=\"&nbsp;Cao su\">Chất liệu duy nhất: cao su</li>\r\n<li title=\"&nbsp;Vải\">Chất liệu l&oacute;t tr&ecirc;n: vải</li>\r\n<li title=\"&nbsp;Thanh ni&ecirc;n (18-40 tuổi)\">&Aacute;p dụng cho: Thanh ni&ecirc;n (18-40 tuổi)</li>\r\n<li title=\"&nbsp;Da hạt\">Quy tr&igrave;nh chất liệu da: da hạt</li>\r\n<li title=\"&nbsp;Gi&agrave;y d&iacute;nh\">Quy tr&igrave;nh l&agrave;m gi&agrave;y: gi&agrave;y d&iacute;nh</li>\r\n<li title=\"&nbsp;Sợi nhỏ\">Vật liệu tr&ecirc;n: Microfiber</li>\r\n<li title=\"&nbsp;Vải\" data-spm-anchor-id=\"a220o.1000855.0.i5.72463d31C9JcZ2\">Chất liệu đế: vải</li>\r\n</ul>', 'https://detail.tmall.com/item.htm?id=576705289049', 0, 6, 309, 119, 39, 416500, 'a:6:{i:0;s:2:\"39\";i:1;s:2:\"40\";i:2;s:2:\"41\";i:3;s:2:\"42\";i:4;s:2:\"43\";i:5;s:2:\"44\";}', 'a:5:{i:0;s:81:\"assets/images/products_color/O1CN011yXo95mV5oo62Rw_!!469256589.jpg_500x500q90.jpg\";i:1;s:81:\"assets/images/products_color/O1CN011yXo9DnPaa0PcXD_!!469256589.jpg_500x500q90.jpg\";i:2;s:81:\"assets/images/products_color/O1CN011yXo9DnSsQWZcRG_!!469256589.jpg_500x500q90.jpg\";i:3;s:81:\"assets/images/products_color/O1CN011yXo9AZeBRnVR6Z_!!469256589.jpg_500x500q90.jpg\";i:4;s:83:\"assets/images/products_color/O1CN01tT3EO41yXo9sJpo7I_!!469256589.jpg_500x500q90.jpg\";}', 1, 1, 1544667521);
 
 -- --------------------------------------------------------
 
@@ -221,25 +234,25 @@ ALTER TABLE `dong_user`
 -- AUTO_INCREMENT cho bảng `dong_category`
 --
 ALTER TABLE `dong_category`
-  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT cho bảng `dong_media`
 --
 ALTER TABLE `dong_media`
-  MODIFY `media_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `media_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT cho bảng `dong_metadata`
 --
 ALTER TABLE `dong_metadata`
-  MODIFY `metadata_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `metadata_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT cho bảng `dong_product`
 --
 ALTER TABLE `dong_product`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT cho bảng `dong_user`
