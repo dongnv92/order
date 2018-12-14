@@ -16,7 +16,8 @@ class orderFunction{
     }
 
     // Function hiển thị chuyên mục đệ quy
-    function showCategories($categories, $parent_id = 0, $char = '', $display = 'table'){
+    function showCategories($categories, $parent_id = 0, $char = '', $display = 'table', $option = ''){
+        global $db;
         foreach ($categories as $key => $item) {
             if ($item['category_parent'] == $parent_id){
                 if($display == 'table'){
@@ -26,11 +27,26 @@ class orderFunction{
                     </td>
                     </tr>';
                 }else if($display == 'select'){
-                    echo '<option value="'. $item['category_id'] .'" id="option_'. $item['category_id'] .'">'. $char . $item['category_name'] .'</option>';
+                    if($option['product_update_selected']){
+                        $db->select('metadata_id')->from(_TABLE_METADATA)->where(array('metadata_type' => 'category_product', 'metadata_suorce' => $option['product_update_selected'], 'metadata_value' => $item['category_id']))->execute();
+                        if($db->affected_rows > 0){
+                            $selected = 'selected';
+                        }
+                    }
+                    echo '<option '. $selected .' value="'. $item['category_id'] .'" id="option_'. $item['category_id'] .'">'. $char . $item['category_name'] .'</option>';
                 }
                 unset($categories[$key]);
-                $this->showCategories($categories, $item['category_id'], $char.' |--- ',$display);
+                $this->showCategories($categories, $item['category_id'], $char.' |--- ', $display, $option);
             }
+        }
+    }
+
+    // Kiểm tra xem đã bấm File Upload chưa
+    public function checkUpload($name_input_file){
+        if(!file_exists($_FILES[$name_input_file]['tmp_name']) || !is_uploaded_file($_FILES[$name_input_file]['tmp_name'])) {
+            return false;
+        }else{
+            return true;
         }
     }
 

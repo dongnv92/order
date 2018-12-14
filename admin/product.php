@@ -6,6 +6,7 @@
  * Time: 10:06
  */
 require_once '../includes/core.php';
+require_once '../includes/lib/class.uploader.php';
 
 // Kiểm tra đã đăng nhập chưa
 if(!$user){$function->redirect(_URL_LOGIN);}
@@ -30,13 +31,12 @@ switch ($act){
         $product_price_vn           = isset($_POST['product_price_vn'])         && !empty($_POST['product_price_vn'])           ? $_POST['product_price_vn']            : $product['product_price_vn'];
         $product_brand              = isset($_POST['product_brand'])            && !empty($_POST['product_brand'])              ? $_POST['product_brand']               : $product['product_brand'];
         $product_quality            = isset($_POST['product_quality'])          && !empty($_POST['product_quality'])            ? $_POST['product_quality']             : $product['product_quality'];
-        $product_size               = isset($_POST['product_size'])             && !empty($_POST['product_size'])               ? $_POST['product_size']                : $product['product_size'];
-        $product_color              = isset($_POST['product_color'])            && !empty($_POST['product_color'])              ? $_POST['product_color']               : $product['product_color'];
+        $product_size               = isset($_POST['product_size'])             && !empty($_POST['product_size'])               ? $_POST['product_size']                : unserialize($product['product_size']);
+        $product_color              = isset($_POST['product_color'])            && !empty($_POST['product_color'])              ? $_POST['product_color']               : unserialize($product['product_color']);
+        $product_category           = isset($_POST['product_category'])         && !empty($_POST['product_category'])           ? $_POST['product_category']            : '';
         $product_sale               = ceil(($product_price_promotion/$product_price_default)*100);
 
         if($submit){
-            $product_category           = isset($_POST['product_category'])         && !empty($_POST['product_category'])           ? $_POST['product_category']            : '';
-
             $error = array();
             if(!$product_name){
                 $error['product_name']  = 'Bạn cần nhập tên sản phẩm';
@@ -61,19 +61,9 @@ switch ($act){
             }
 
             if(!$error){
-                $list_color = array();
-                foreach ($product_color as $color){
-                    if(filter_var($color, FILTER_VALIDATE_URL)){
-                        if(copy($color, '../'._CONGIF_FOLDER_IMAGES_PRODUCT_COLOR.'/'.basename($color))){
-                            $list_color[] = _CONGIF_FOLDER_IMAGES_PRODUCT_COLOR.'/'.basename($color);
-                        }
-                    }
-                }
-
                 $data_product = array(
                     'product_name'              => $product_name,
                     'product_content'           => $product_content,
-                    'product_suorce'            => $product_suorce,
                     'product_brand'             => $product_brand,
                     'product_quality'           => $product_quality,
                     'product_price_default'     => $product_price_default,
@@ -81,24 +71,27 @@ switch ($act){
                     'product_sale'              => $product_sale,
                     'product_price_vn'          => $product_price_vn,
                     'product_size'              => serialize($product_size),
-                    'product_color'             => serialize($list_color),
-                    'product_user'              => $user['user_id'],
+                    'product_color'             => serialize($product_color),
                     'product_status'            => $product_status,
                     'product_time'              => _CONGIF_TIME
                 );
-                $product_id = $db->insert(_TABLE_PRODUCT, $data_product);
+                $product_update = $db->where('product_id', $id)->update(_TABLE_PRODUCT, $data_product);
                 // nếu thêm dữ liệu lỗi thì break
-                if(!$product_id){
+                if(!$product_update){
                     require_once 'header.php';
-                    echo $function->getPanelError(array('title' => $header['title'], 'content' => 'Thêm sản phẩm không thành công. Lỗi MYSQLI !'));
+                    echo $function->getPanelError(array('title' => $header['title'], 'content' => 'Update sản phẩm không thành công. Lỗi MYSQLI !'));
                     require_once 'footer.php';
                     break;
                 }
-                // thêm chuyên mục của sản phẩm vào bảng metadata
+
+                // Xóa danh mục trước khi thêm lại
+                $db->delete()->from(_TABLE_METADATA)->where(array('metadata_type' => 'category_product', 'metadata_suorce' => $id))->execute();
+
+                // Thêm chuyên mục của sản phẩm vào bảng metadata
                 foreach ($product_category as $category){
                     $data_category = array(
                         'metadata_type'     => 'category_product',
-                        'metadata_suorce'   => $product_id,
+                        'metadata_suorce'   => $id,
                         'metadata_value'    => $category,
                         'metadata_user'     => $user['user_id'],
                         'metadata_time'     => _CONGIF_TIME
@@ -110,46 +103,52 @@ switch ($act){
                         break;
                     }
                 }
-                // thêm ảnh vào bảng media
-                foreach ($product_images as $images){
-                    $data_images = array(
-                        'media_type'    => 'images_product',
-                        'media_store'   => 'remote',
-                        'media_name'    => basename($images),
-                        'media_source'  => $images,
-                        'media_user'    => $user['user_id'],
-                        'media_parent'  => $product_id,
-                        'media_time'    => _CONGIF_TIME
-                    );
-                    if(!$db->insert(_TABLE_MEDIA, $data_images)){
-                        require_once 'header.php';
-                        echo $function->getPanelError(array('title' => $header['title'], 'content' => 'Thêm ảnh không thành công. Lỗi MYSQLI !'));
-                        require_once 'footer.php';
-                        break;
-                    }
-                    $images_location = '../'._CONGIF_FOLDER_IMAGES_PRODUCT.'/'.basename($images);
-                    copy($images, $images_location);
-                    $data_images = array(
-                        'media_type'    => 'images_product',
-                        'media_store'   => 'local',
-                        'media_name'    => basename($images),
-                        'media_source'  => _CONGIF_FOLDER_IMAGES_PRODUCT.'/'.basename($images),
-                        'media_user'    => $user['user_id'],
-                        'media_parent'  => $product_id,
-                        'media_time'    => _CONGIF_TIME
-                    );
-                    if(!$db->insert(_TABLE_MEDIA, $data_images)){
-                        require_once 'header.php';
-                        echo $function->getPanelError(array('title' => $header['title'], 'content' => 'Thêm ảnh không thành công. Lỗi MYSQLI !'));
-                        require_once 'footer.php';
-                        break;
+
+                // Upload ảnh
+                $uploader = new Uploader();
+                $data = $uploader->upload($_FILES['product_images_upload'], array(
+                    'limit' => 10, //Maximum Limit of files. {null, Number}
+                    'maxSize' => 10, //Maximum Size of files {null, Number(in MB's)}
+                    'extensions' => null, //Whitelist for file extension. {null, Array(ex: array('jpg', 'png'))}
+                    'required' => false, //Minimum one file is required for upload {Boolean}
+                    'uploadDir' => '../'._CONGIF_FOLDER_IMAGES_PRODUCT.'/', //Upload directory {String}
+                    'title' => array('auto', 10), //New file name {null, String, Array} *please read documentation in README.md
+                    'removeFiles' => true, //Enable file exclusion {Boolean(extra for jQuery.filer), String($_POST field name containing json data with file names)}
+                    'replace' => false, //Replace the file if it already exists {Boolean}
+                    'perms' => null, //Uploaded file permisions {null, Number}
+                    'onCheck' => null, //A callback function name to be called by checking a file for errors (must return an array) | ($file) | Callback
+                    'onError' => null, //A callback function name to be called if an error occured (must return an array) | ($errors, $file) | Callback
+                    'onSuccess' => null, //A callback function name to be called if all files were successfully uploaded | ($files, $metas) | Callback
+                    'onUpload' => null, //A callback function name to be called if all files were successfully uploaded (must return an array) | ($file) | Callback
+                    'onComplete' => null, //A callback function name to be called when upload is complete | ($file) | Callback
+                    'onRemove' => 'onFilesRemoveCallback' //A callback function name to be called by removing files (must return an array) | ($removed_files) | Callback
+                ));
+
+                if($data['isComplete']){
+                    foreach ($data['data']['files'] as $images_upload){
+                        $images_upload = str_replace('../', '', $images_upload);
+                        $data_images = array(
+                            'media_type'    => 'images_product',
+                            'media_store'   => 'local',
+                            'media_name'    => basename($images_upload),
+                            'media_source'  => $images_upload,
+                            'media_user'    => $user['user_id'],
+                            'media_parent'  => $id,
+                            'media_time'    => _CONGIF_TIME
+                        );
+                        if(!$db->insert(_TABLE_MEDIA, $data_images)){
+                            $admin_title = 'Sửa sảm phẩm';
+                            require_once 'header.php';
+                            echo $function->getPanelError(array('title' => 'Thêm sản phẩm', 'content' => 'Thêm ảnh không thành công. Lỗi MYSQLI !'));
+                            require_once 'footer.php';
+                            break;
+                        }
                     }
                 }
             }
         }
 
         $header['breadcrumbs']  = array(_URL_ADMIN.'/product.php' => 'Sản phẩm', _URL_ADMIN.'/product.php?act=add' => 'Thêm sản phẩm');
-        $header['title']        = 'Thêm sản phẩm';
         $css_plus       = array(
             'app-assets/vendors/css/forms/icheck/icheck.css',
             'app-assets/vendors/css/forms/icheck/custom.css',
@@ -178,7 +177,7 @@ switch ($act){
         require_once 'header.php';
         echo $function->breadcrumbs($header['title'], $header['breadcrumbs']);
         ?>
-        <form action="" class="form form-horizontal" method="post">
+        <form action="" class="form form-horizontal" method="post" enctype="multipart/form-data">
             <div class="row">
                 <div class="col-lg-9">
                     <div class="card border-left-blue border-right-blue">
@@ -191,15 +190,9 @@ switch ($act){
                                 <textarea class="tinymce round" name="product_content"><?=$product_content?></textarea>
                             </div>
                             <div class="form-group">
-                                <div class="row">
-                                    <div class="col-md-10">
-                                        <input type="text" class="form-control round border-blue" name="product_suorce" value="<?=$product_suorce?>" placeholder="Link sản phẩm gốc, VD: https://detail.tmall.com/item.htm?id=574580973041">
-                                    </div>
-                                    <div class="col-md-2 text-right">
-                                        <button class="btn round btn-outline-blue" id="connect_ajax">Lấy thông tin</button>
-                                    </div>
-                                    <?php echo $error['product_suorce'] ? $function->getAlert('help_error', $error['product_suorce']) : '';?>
-                                </div>
+                                <label class="label">Link gốc sản phẩm</label>
+                                <input type="text" class="form-control round border-blue" disabled value="<?=$product_suorce?>" placeholder="Link sản phẩm gốc, VD: https://detail.tmall.com/item.htm?id=574580973041">
+                                <?php echo $error['product_suorce'] ? $function->getAlert('help_error', $error['product_suorce']) : '';?>
                             </div>
                         </div>
                     </div>
@@ -242,7 +235,7 @@ switch ($act){
                                 </fieldset>
                             </div>
                             <div class="text-center">
-                                <input class="btn round btn-outline-blue" type="submit" name="submit" value="Thêm sản phẩm">
+                               <button class="btn btn-outline-danger round">Xóa</button> <input class="btn round btn-outline-blue" type="submit" name="submit" value="Chỉnh sửa">
                             </div>
                         </div>
                     </div>
@@ -292,17 +285,17 @@ switch ($act){
                     <!-- Ảnh Sản Phẩm -->
                     <div class="card border-left-blue border-right-blue">
                         <div class="card-body">
-                            <h4 class="card-title">Ảnh sản phẩm</h4>
+                            <h4 class="card-title">Ảnh sản phẩm <small>Click vào ảnh để xóa ảnh</small></h4>
                             <hr>
                             <div class="row" id="ajax_images">
                                 <?php
                                 foreach ($db->from(_TABLE_MEDIA)->where(array('media_type' => 'images_product', 'media_store' => 'local', 'media_parent' => $id))->fetch() as $images){
-                                    echo '<img src="'. _URL_HOME.'/'.$images['media_source'] .'" class="col-md-4 text-center" style="height: 85px">';
+                                    echo '<div class="col-md-4 text-center" id="images_'. $images['media_id'] .'"><img data-hover="delete_images" data-num="'. $images['media_id'] .'" src="'. _URL_HOME.'/'.$images['media_source'] .'" style="height: 85px"></div>';
                                 }
                                 ?>
                             </div>
                             <hr />
-                            <input type="file" id="product_images_upload" class="round" name="product_images_upload">
+                            <input type="file" id="product_images_upload" class="round" name="product_images_upload[]" multiple>
                         </div>
                     </div>
                     <div class="card border-left-blue border-right-blue">
@@ -311,7 +304,7 @@ switch ($act){
                             <fieldset class="form-group">
                                 <label><strong class="text-danger">(*)</strong> Chuyên Mục</label><br />
                                 <select name="product_category[]" id="category_select" class="select2 form-control border-grey-blue" multiple="multiple" required>
-                                    <?php $function->showCategories($db->select('category_id, category_name, category_parent')->from(_TABLE_CATEGORY)->where(array('category_type' => 'shop'))->fetch(), 0, '','select'); ?>
+                                    <?php $function->showCategories($db->select('category_id, category_name, category_parent')->from(_TABLE_CATEGORY)->where(array('category_type' => 'shop'))->fetch(), 0, '','select', array('product_update_selected' => $id)); ?>
                                 </select>
                                 <?php echo $error['product_category'] ? $function->getAlert('help_error', $error['product_category']) : '';?>
                             </fieldset>
@@ -347,7 +340,7 @@ switch ($act){
                             <div class="row skin skin-flat">
                                 <div class="col-md-6 col-sm-12" id="ajax_size">
                                     <?php
-                                    foreach (unserialize($product_size) as $size){
+                                    foreach ($product_size as $size){
                                         echo '<fieldset>
                                         <div class="row">
                                             <div class="col-6 text-center"><input type="checkbox" checked name="product_size[]" id="'. $size .'" value="'. $size .'"></div>
@@ -366,7 +359,7 @@ switch ($act){
                             <div class="row skin skin-flat">
                                 <div class="col-md-6 col-sm-12" id="ajax_color">
                                 <?php
-                                foreach (unserialize($product_color) as $color){
+                                foreach ($product_color as $color){
                                     echo '<fieldset>
                                     <div class="row">
                                         <div class="col-6 text-left"><input type="checkbox" checked name="product_color[]" id="'. $color .'" value="'. $color .'"></div>
@@ -384,55 +377,48 @@ switch ($act){
         </form>
         <!-- Javascript -->
         <script language="JavaScript">
-            function ValidURL(str) {
-                var regex = /(http|https):\/\/(\w+:{0,1}\w*)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%!\-\/]))?/;
-                if(!regex .test(str)) {
-                    return false;
-                } else {
-                    return true;
-                }
-            }
             $(document).ready(function () {
-                $('#connect_ajax').click(function () {
-                    var product_suorce = $('input[name=product_suorce]').val();
-                    if(!product_suorce){
-                        swal("Thông báo!", "Bạn chưa nhập link nguồn sản phẩm", "warning");
-                        return false;
-                    }
-                    if(ValidURL(product_suorce) == false){
-                        swal("Thông báo!", "Link nguồn sản phẩm đúng định dạng","warning");
-                        return false;
-                    }
-
-                    $.ajax({
-                        url         : '<?=_URL_HOME;?>/api/ajax.php',
-                        method      : 'POST',
-                        dataType    : 'json',
-                        data        : {'act' : 'add_product', 'url' : product_suorce},
-                        beforeSend  : function () {
-                            $('#connect_ajax').html('Vui lòng chờ <i class="la-refresh la spinner"></i>');
-                        },
-                        success     : function (data) {
-                            $('input[name=product_price_default]').val(data.product_price_default);
-                            $('input[name=product_price_promotion]').val(data.product_price_promotion);
-                            $('input[name=product_price_vn]').val(data.product_price_vn);
-                            $('input[name=product_suorce]').val(data.product_url);
-                            $('#ajax_images').html(data.images);
-                            $('#ajax_size').html(data.size);
-                            $('#ajax_color').html(data.color);
-                            $('#connect_ajax').html('Lấy thông tin');
-                        },
-                        error: function(jqXHR, textStatus){
-                            if(textStatus == 'timeout')
-                            {
-                                swal("Thông báo!", "Không lấy được dữ liệu, vui lòng thử lại","error");
-                                $('#connect_ajax').html('Lấy thông tin');
-                                return false;
+                // Xóa ảnh sản phẩm
+                $('img[data-hover=delete_images]').click(function () {
+                    var images_id = $(this).attr('data-num');
+                    swal({
+                        title: "Bạn có chắc chắn muốn xóa ảnh này?",
+                        text: "Sau khi xóa sẽ không khôi phục được!",
+                        icon: "warning",
+                        buttons: {
+                            cancel: {
+                                text: "Quay Lại",
+                                value: null,
+                                visible: true,
+                                className: "",
+                                closeModal: true,
+                            },
+                            confirm: {
+                                text: "Xóa Ngay",
+                                value: true,
+                                visible: true,
+                                className: "",
+                                closeModal: false
                             }
-                        },
-                        timeout: 20000
+                        }
+                    }).then((isConfirm) => {
+                        if (isConfirm) {
+                            $.ajax({
+                                url     : '<?=_URL_HOME?>/api/ajax.php',
+                                method  : 'POST',
+                                dataType: 'json',
+                                data    : {'act' : 'delete_media', 'id' : images_id},
+                                success : function (data) {
+                                    if(data.response == 200){
+                                        $('#images_'+images_id).remove();
+                                        swal("Deleted!", data.message, "success");
+                                    }else{
+                                        swal("Error!", data.message, "error");
+                                    }
+                                }
+                            });
+                        }
                     });
-                    return false;
                 });
             });
         </script>
@@ -462,6 +448,9 @@ switch ($act){
             }
             if($product_suorce && !filter_var($product_suorce, FILTER_VALIDATE_URL)){
                 $error['product_suorce']= 'Nguồn sản phẩm không đúng định dạng URL';
+            }
+            if($db->select('product_id')->from(_TABLE_PRODUCT)->where('product_suorce', $product_suorce)->execute()->affected_rows > 0){
+                $error['product_suorce']= 'Nguồn này đã được sử dụng';
             }
             if(!$product_price_vn){
                 $error['product_price_vn']  = 'Bạn cần nhập giá Việt Nam';
@@ -568,7 +557,50 @@ switch ($act){
                         break;
                     }
                 }
-                echo 'OK'; exit();
+
+                // Upload ảnh
+                $uploader = new Uploader();
+                $data = $uploader->upload($_FILES['product_images_upload'], array(
+                    'limit' => 10, //Maximum Limit of files. {null, Number}
+                    'maxSize' => 10, //Maximum Size of files {null, Number(in MB's)}
+                    'extensions' => null, //Whitelist for file extension. {null, Array(ex: array('jpg', 'png'))}
+                    'required' => false, //Minimum one file is required for upload {Boolean}
+                    'uploadDir' => '../'._CONGIF_FOLDER_IMAGES_PRODUCT.'/', //Upload directory {String}
+                    'title' => array('auto', 10), //New file name {null, String, Array} *please read documentation in README.md
+                    'removeFiles' => true, //Enable file exclusion {Boolean(extra for jQuery.filer), String($_POST field name containing json data with file names)}
+                    'replace' => false, //Replace the file if it already exists {Boolean}
+                    'perms' => null, //Uploaded file permisions {null, Number}
+                    'onCheck' => null, //A callback function name to be called by checking a file for errors (must return an array) | ($file) | Callback
+                    'onError' => null, //A callback function name to be called if an error occured (must return an array) | ($errors, $file) | Callback
+                    'onSuccess' => null, //A callback function name to be called if all files were successfully uploaded | ($files, $metas) | Callback
+                    'onUpload' => null, //A callback function name to be called if all files were successfully uploaded (must return an array) | ($file) | Callback
+                    'onComplete' => null, //A callback function name to be called when upload is complete | ($file) | Callback
+                    'onRemove' => 'onFilesRemoveCallback' //A callback function name to be called by removing files (must return an array) | ($removed_files) | Callback
+                ));
+
+                if($data['isComplete']){
+                    foreach ($data['data']['files'] as $images_upload){
+                        $images_upload = str_replace('../', '', $images_upload);
+                        $data_images = array(
+                            'media_type'    => 'images_product',
+                            'media_store'   => 'local',
+                            'media_name'    => basename($images_upload),
+                            'media_source'  => $images_upload,
+                            'media_user'    => $user['user_id'],
+                            'media_parent'  => $product_id,
+                            'media_time'    => _CONGIF_TIME
+                        );
+                        if(!$db->insert(_TABLE_MEDIA, $data_images)){
+                            $admin_title = 'Sửa sảm phẩm';
+                            require_once 'header.php';
+                            echo $function->getPanelError(array('title' => 'Thêm sản phẩm', 'content' => 'Thêm ảnh không thành công. Lỗi MYSQLI !'));
+                            require_once 'footer.php';
+                            break;
+                        }
+                    }
+                }
+
+                $function->redirect(_URL_HOME.'/product.php?act=update&id='.$product_id);
             }
         }
 
@@ -602,7 +634,7 @@ switch ($act){
         require_once 'header.php';
         echo $function->breadcrumbs($header['title'], $header['breadcrumbs']);
         ?>
-        <form action="" class="form form-horizontal" method="post">
+        <form action="" class="form form-horizontal" method="post" enctype="multipart/form-data">
             <div class="row">
                 <div class="col-lg-9">
                     <div class="card border-left-blue border-right-blue">
@@ -722,7 +754,7 @@ switch ($act){
 
                             </div>
                             <hr />
-                            <input type="file" id="product_images_upload" class="round" name="product_images_upload">
+                            <input type="file" id="product_images_upload" class="round" name="product_images_upload[]" multiple>
                         </div>
                     </div>
                     <div class="card border-left-blue border-right-blue">
@@ -891,12 +923,12 @@ switch ($act){
                             foreach ($data as $row){
                                 $product_user   = $db->select()->from(_TABLE_USER)->where('user_id', $row['product_user'])->fetch_first();
                                 $product_images = $db->select()->from(_TABLE_MEDIA)->where(array('media_store' => 'remote', 'media_type' => 'images_product', 'media_parent' => $row['product_id']))->fetch_first();
-                                echo '<tr>';
+                                echo '<tr id="tr_'. $row['product_id'] .'">';
                                     echo '<td><img class="rounded" src="'. $product_images['media_source'] .'" height="50" /></td>';
                                     echo '<td data-hover="product_name" data-content="'. $row['product_id'] .'">
                                             <a href="product.php?act=update&id='. $row['product_id'] .'"><strong>'. $row['product_name'] .'</strong></a>
                                             <span style="display: none" id="product_manager_'. $row['product_id'] .'"><br />
-                                            <a href="">Xem</a> - <a href="">Chỉnh sửa</a> - <a href="" class="text-danger">Xóa</a></span>
+                                            <a href="">Xem</a> - <a href="product.php?act=update&id='. $row['product_id'] .'">Chỉnh sửa</a> - <a href="javascript:;" data-hover="product_delete" data-num="'. $row['product_id'] .'" class="text-danger">Xóa</a></span>
                                          </td>';
                                     echo '<td>'. $row['product_price_default'] .' ¥</td>';
                                     echo '<td>'. $row['product_price_promotion'] .' ¥</td>';
@@ -916,6 +948,50 @@ switch ($act){
         </div>
         <script language="JavaScript">
             $(document).ready(function () {
+                // Xóa bài viết
+                $('a[data-hover=product_delete]').click(function () {
+                    var id = $(this).attr('data-num');
+                    swal({
+                        title: "Bạn có chắc chắn muốn xóa bài viết này?" + id,
+                        text: "Sau khi xóa sẽ không khôi phục được!",
+                        icon: "warning",
+                        buttons: {
+                            cancel: {
+                                text: "Quay Lại",
+                                value: null,
+                                visible: true,
+                                className: "",
+                                closeModal: true,
+                            },
+                            confirm: {
+                                text: "Xóa Ngay",
+                                value: true,
+                                visible: true,
+                                className: "",
+                                closeModal: false
+                            }
+                        }
+                    }).then((isConfirm) => {
+                        if (isConfirm) {
+                            $.ajax({
+                            url     : '<?=_URL_HOME?>/api/ajax.php',
+                            method  : 'POST',
+                            dataType: 'json',
+                            data    : {'act' : 'trash_product', 'id' : id},
+                            success : function (data) {
+                            if(data.response == 200){
+                                $('#tr_'+id).remove();
+                                swal("Deleted!", data.message, "success");
+                            }else{
+                                swal("Error!", data.message, "error");
+                                }
+                                }
+                            });
+                        }
+                    });
+                });
+
+                // Sử lý hover
                 $('td[data-hover=product_name]').hover(function () {
                     var data_content = $(this).attr('data-content');
                     $('#product_manager_'+data_content).show().fadeIn(1000);
@@ -924,6 +1000,7 @@ switch ($act){
                     $('#product_manager_'+data_content).hide().fadeOut(1000);
                 });
 
+                // Update trạng thái sản phẩm
                 $('input[name=product_status]').change(function () {
                     var product_id = $(this).attr('data-content');
                     if(this.checked){

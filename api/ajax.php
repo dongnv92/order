@@ -7,6 +7,48 @@
  */
 require_once '../includes/core.php';
 switch ($act){
+    case 'delete_media':
+        // Check id media
+        $media = $db->select('media_source, media_store')->from(_TABLE_MEDIA)->where('media_id', $id)->fetch_first();
+        if(!$media){
+            $response['response']   = 404;
+            $response['message']    = 'Thư viện không tồn tại';
+            echo json_encode($response);
+            break;
+        }
+        // Xóa Media
+        if($media['media_store'] == 'local'){
+            unlink('../'.$media['media_source']);
+        }
+        if(!$db->delete()->from(_TABLE_MEDIA)->where('media_id', $id)->execute()){
+            $response['response']   = 400;
+            $response['message']    = 'Lỗi SQL không xóa được media';
+            echo json_encode($response);
+            break;
+        }
+        $response['response']   = 200;
+        $response['message']    = 'Xóa Media thành công';
+        echo json_encode($response);
+        break;
+    case 'trash_product':
+        // Check id product
+        if(!$id || $db->select('product_id')->from(_TABLE_PRODUCT)->where('product_id', $id)->execute()->affected_rows == 0){
+            $response['response']   = 404;
+            $response['message']    = 'Sản phẩm không tồn tại';
+            echo json_encode($response);
+            break;
+        }
+        // Update Product
+        if(!$db->where('product_id', $id)->update(_TABLE_PRODUCT, array('product_status' => 0))){
+            $response['response']   = 400;
+            $response['message']    = 'Có lỗi SQL';
+            echo json_encode($response);
+            break;
+        }
+        $response['response']   = 200;
+        $response['message']    = 'Đưa sản phẩm vào thùng rác thành công';
+        echo json_encode($response);
+        break;
     case 'add_product':
         $product                                = file_get_contents(_URL_HOME.'/api/?act=get_tmall&url='.urlencode($url));
         $product                                = json_decode($product, true);
