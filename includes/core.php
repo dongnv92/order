@@ -34,6 +34,7 @@ define('_URL_LOGOUT',_URL_HOME.'/logout.php');
 define('_URL_ADMIN',_URL_HOME.'/admin');
 define('_URL_BACK', isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : _URL_ADMIN);
 define('_URL_STYLE', _URL_HOME.'/style/social');
+define('_URL_PRODUCT', _URL_HOME.'/product');
 
 // Đặt các giá trị hằng số cho tên các bảng
 define('_TABLE_USER','dong_user');

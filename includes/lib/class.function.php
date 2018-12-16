@@ -15,6 +15,15 @@ class orderFunction{
         header('location:'.$url);
     }
 
+    function getUrlProduct($id){
+        global $db;
+        $product    = $db->select('product_url')->from(_TABLE_PRODUCT)->where('product_id', $id)->fetch_first();
+        if(!$product){
+            return false;
+        }
+        return _URL_PRODUCT.'/'.$product['product_url'].'.html';
+    }
+
     // Function hiển thị chuyên mục đệ quy
     function showCategories($categories, $parent_id = 0, $char = '', $display = 'table', $option = ''){
         global $db;
@@ -48,6 +57,12 @@ class orderFunction{
         }else{
             return true;
         }
+    }
+
+    // Tạo ngẫu nhiên các ký tự
+    public function randomString($length = 10){
+        $random_string = substr(str_shuffle("_0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, $length);
+        return $random_string;
     }
 
     // Function tạo đường dẫn từ 1 đoạn text

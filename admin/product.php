@@ -194,6 +194,9 @@ switch ($act){
                                 <input type="text" class="form-control round border-blue" disabled value="<?=$product_suorce?>" placeholder="Link sản phẩm gốc, VD: https://detail.tmall.com/item.htm?id=574580973041">
                                 <?php echo $error['product_suorce'] ? $function->getAlert('help_error', $error['product_suorce']) : '';?>
                             </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control round border-blue" disabled value="<?=_URL_HOME.'/'.$product['product_url'].'.html'?>" placeholder="URL sản phẩm">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -235,7 +238,9 @@ switch ($act){
                                 </fieldset>
                             </div>
                             <div class="text-center">
-                               <button class="btn btn-outline-danger round">Xóa</button> <input class="btn round btn-outline-blue" type="submit" name="submit" value="Chỉnh sửa">
+                                <button class="btn btn-outline-danger round">Xóa</button>
+                                <a href="<?=$function->getUrlProduct($id)?>" target="_blank" class="btn btn-outline-blue round">Xem</a>
+                                <input class="btn round btn-outline-blue" type="submit" name="submit" value="Chỉnh sửa">
                             </div>
                         </div>
                     </div>
@@ -429,6 +434,7 @@ switch ($act){
         if($submit){
             $product_name               = isset($_POST['product_name'])             && !empty($_POST['product_name'])               ? $_POST['product_name']                : '';
             $product_content            = isset($_POST['product_content'])          && !empty($_POST['product_content'])            ? $_POST['product_content']             : '';
+            $product_url                = isset($_POST['product_url'])              && !empty($_POST['product_url'])                ? $_POST['product_url']                 : '';
             $product_suorce             = isset($_POST['product_suorce'])           && !empty($_POST['product_suorce'])             ? $_POST['product_suorce']              : '';
             $product_status             = isset($_POST['product_status'])           && !empty($_POST['product_status'])             ? $_POST['product_status']              : 0;
             $product_price_default      = isset($_POST['product_price_default'])    && !empty($_POST['product_price_default'])      ? $_POST['product_price_default']       : '';
@@ -467,6 +473,12 @@ switch ($act){
             if($product_price_vn && !is_numeric($product_price_vn)){
                 $error['product_price_vn']  = 'Số tiền phải là dạng số';
             }
+            if(!$product_url){
+                $product_url = $function->makeSlug($product_name);
+                if($db->select()->from(_TABLE_PRODUCT)->where('product_url', $product_url)->execute()->affected_rows > 0 || !$product_url){
+                    $product_url = $function->makeSlug($product_name).$function->randomString(4);
+                }
+            }
 
             if(!$error){
                 $list_color = array();
@@ -480,6 +492,7 @@ switch ($act){
 
                 $data_product = array(
                     'product_name'              => $product_name,
+                    'product_url'               => $product_url,
                     'product_content'           => $product_content,
                     'product_suorce'            => $product_suorce,
                     'product_brand'             => $product_brand,
@@ -656,6 +669,9 @@ switch ($act){
                                     </div>
                                     <?php echo $error['product_suorce'] ? $function->getAlert('help_error', $error['product_suorce']) : '';?>
                                 </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" name="product_url" class="form-control round border-blue" placeholder="URL bài viết">
                             </div>
                         </div>
                     </div>
