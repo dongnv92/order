@@ -39,7 +39,7 @@ $header['title'] = isset($header['title']) && !empty($header['title']) ? $header
                 <li class="nav-item mobile-menu d-md-none mr-auto"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="ft-menu font-large-1"></i></a></li>
                 <li class="nav-item">
                     <a class="navbar-brand" href="<?php echo _URL_ADMIN;?>">
-                        <img class="brand-logo" alt="modern admin logo" src="../media/images/system/logo.png">
+                        <img class="brand-logo" alt="modern admin logo" src="<?=_URL_HOME?>/assets/images/system/logo.png">
                         <h3 class="brand-text">SHOP ORDER</h3>
                     </a>
                 </li>

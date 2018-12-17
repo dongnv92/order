@@ -195,7 +195,7 @@ switch ($act){
                                 <?php echo $error['product_suorce'] ? $function->getAlert('help_error', $error['product_suorce']) : '';?>
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control round border-blue" disabled value="<?=_URL_HOME.'/'.$product['product_url'].'.html'?>" placeholder="URL sản phẩm">
+                                <input type="text" class="form-control round border-blue" disabled value="<?=_URL_PRODUCT.'/'.$product['product_url'].'.html'?>" placeholder="URL sản phẩm">
                             </div>
                         </div>
                     </div>
@@ -612,8 +612,7 @@ switch ($act){
                         }
                     }
                 }
-
-                $function->redirect(_URL_HOME.'/product.php?act=update&id='.$product_id);
+                $function->redirect(_URL_ADMIN.'/product.php?act=update&id='.$product_id);
             }
         }
 
