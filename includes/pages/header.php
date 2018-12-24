@@ -5,1541 +5,1317 @@
  * Date: 2018-12-17
  * Time: 10:06
  */
+require_once '../core.php';
 ?>
-
 <!DOCTYPE html>
-<html lang="en-US" itemscope="itemscope" itemtype="http://schema.org/WebPage">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
-    <title><?=$header['title'] ? $header['title'] : 'SHOP ORDER'?></title>
-    <link rel="stylesheet" type="text/css" href="<?=_URL_HOME?>/assets/css/bootstrap.min.css" media="all" />
-    <link rel="stylesheet" type="text/css" href="<?=_URL_HOME?>/assets/css/font-awesome.min.css" media="all" />
-    <link rel="stylesheet" type="text/css" href="<?=_URL_HOME?>/assets/css/bootstrap-grid.min.css" media="all" />
-    <link rel="stylesheet" type="text/css" href="<?=_URL_HOME?>/assets/css/bootstrap-reboot.min.css" media="all" />
-    <link rel="stylesheet" type="text/css" href="<?=_URL_HOME?>/assets/css/font-techmarket.css" media="all" />
-    <link rel="stylesheet" type="text/css" href="<?=_URL_HOME?>/assets/css/slick.css" media="all" />
-    <link rel="stylesheet" type="text/css" href="<?=_URL_HOME?>/assets/css/techmarket-font-awesome.css" media="all" />
-    <link rel="stylesheet" type="text/css" href="<?=_URL_HOME?>/assets/css/slick-style.css" media="all" />
-    <link rel="stylesheet" type="text/css" href="<?=_URL_HOME?>/assets/css/animate.min.css" media="all" />
-    <link rel="stylesheet" type="text/css" href="<?=_URL_HOME?>/assets/css/style.css" media="all" />
-    <link rel="stylesheet" type="text/css" href="<?=_URL_HOME?>/assets/css/colors/blue.css" media="all" />
-    <!-- Demo Purpose Only. Should be removed in production -->
-    <link rel="stylesheet" href="<?=_URL_HOME?>/assets/css/config.css">
-    <link href="<?=_URL_HOME?>/assets/css/colors/blue.css" rel="alternate stylesheet" title="Blue color">
-    <link href="<?=_URL_HOME?>/assets/css/colors/flat-green.css" rel="alternate stylesheet" title="Flat Green color">
-    <link href="<?=_URL_HOME?>/assets/css/colors/green.css" rel="alternate stylesheet" title="Green color">
-    <link href="<?=_URL_HOME?>/assets/css/colors/orange.css" rel="alternate stylesheet" title="Orange color">
-    <link href="<?=_URL_HOME?>/assets/css/colors/red.css" rel="alternate stylesheet" title="Red color">
-    <link href="<?=_URL_HOME?>/assets/css/colors/yellow.css" rel="alternate stylesheet" title="Yellow color">
-    <!-- Demo Purpose Only. Should be removed in production : END -->
-    <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,900" rel="stylesheet">
-    <link rel="shortcut icon" href="<?=_URL_HOME?>/assets/images/fav-icon.png">
+    <meta charset="utf-8">
+    <title><?=$header['title']?$header['title']:'Chi tiết sản phẩm'?></title>
+    <meta name="keywords" content="HTML5 Template">
+    <meta name="description" content="Wokiee - Responsive HTML5 Template">
+    <meta name="author" content="wokiee">
+    <link rel="shortcut icon" href="favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="<?=_URL_STYLE?>/css/theme.css">
 </head>
-<body class="woocommerce-active single-product full-width normal">
-<div id="page" class="hfeed site">
-    <div class="top-bar top-bar-v1">
-        <div class="col-full">
-            <ul id="menu-top-bar-left" class="nav justify-content-center">
-                <li class="menu-item animate-dropdown">
-                    <a title="TechMarket eCommerce - Always free delivery" href="contact-v1.html">TechMarket eCommerce &#8211; Always free delivery</a>
-                </li>
-                <li class="menu-item animate-dropdown">
-                    <a title="Quality Guarantee of products" href="shop.html">Quality Guarantee of products</a>
-                </li>
-                <li class="menu-item animate-dropdown">
-                    <a title="Fast returnings program" href="track-your-order.html">Fast returnings program</a>
-                </li>
-                <li class="menu-item animate-dropdown">
-                    <a title="No additional fees" href="contact-v2.html">No additional fees</a>
-                </li>
-            </ul>
-            <!-- .nav -->
-        </div>
-        <!-- .col-full -->
+<body class="tt-page-product-single">
+<div id="loader-wrapper">
+    <div id="loader">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
     </div>
-    <!-- .top-bar-v1 -->
-    <header id="masthead" class="site-header header-v1" style="background-image: none; ">
-        <div class="col-full desktop-only">
-            <div class="techmarket-sticky-wrap">
-                <div class="row">
-                    <div class="site-branding">
-                        <a href="home-v1.html" class="custom-logo-link" rel="home">
-                            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 176 28">
-                                <defs>
-                                    <style>
-                                        .cls-1,
-                                        .cls-2 {
-                                            fill: #333e48;
-                                        }
-
-                                        .cls-1 {
-                                            fill-rule: evenodd;
-                                        }
-
-                                        .cls-3 {
-                                            fill: #3265b0;
-                                        }
-                                    </style>
-                                </defs>
-                                <polygon class="cls-1" points="171.63 0.91 171.63 11 170.63 11 170.63 0.91 170.63 0.84 170.63 0.06 176 0.06 176 0.91 171.63 0.91" />
-                                <rect class="cls-2" x="166.19" y="0.06" width="3.47" height="0.84" />
-                                <rect class="cls-2" x="159.65" y="4.81" width="3.51" height="0.84" />
-                                <polygon class="cls-1" points="158.29 11 157.4 11 157.4 0.06 158.26 0.06 158.36 0.06 164.89 0.06 164.89 0.87 158.36 0.87 158.36 10.19 164.99 10.19 164.99 11 158.36 11 158.29 11" />
-                                <polygon class="cls-1" points="149.54 6.61 150.25 5.95 155.72 10.98 154.34 10.98 149.54 6.61" />
-                                <polygon class="cls-1" points="147.62 10.98 146.65 10.98 146.65 0.05 147.62 0.05 147.62 5.77 153.6 0.33 154.91 0.33 147.62 7.05 147.62 10.98" />
-                                <path class="cls-1" d="M156.39,24h-1.25s-0.49-.39-0.71-0.59l-1.35-1.25c-0.25-.23-0.68-0.66-0.68-0.66s0-.46,0-0.72a3.56,3.56,0,0,0,3.54-2.87,3.36,3.36,0,0,0-3.22-4H148.8V24h-1V13.06h5c2.34,0.28,4,1.72,4.12,4a4.26,4.26,0,0,1-3.38,4.34C154.48,22.24,156.39,24,156.39,24Z" transform="translate(-12 -13)" />
-                                <polygon class="cls-1" points="132.04 2.09 127.09 7.88 130.78 7.88 130.78 8.69 126.4 8.69 124.42 11 123.29 11 132.65 0 133.04 0 133.04 11 132.04 11 132.04 2.09" />
-                                <polygon class="cls-1" points="120.97 2.04 116.98 6.15 116.98 6.19 116.97 6.17 116.95 6.19 116.95 6.15 112.97 2.04 112.97 11 112 11 112 0 112.32 0 116.97 4.8 121.62 0 121.94 0 121.94 11 120.97 11 120.97 2.04" />
-                                <ellipse class="cls-3" cx="116.3" cy="22.81" rx="5.15" ry="5.18" />
-                                <rect class="cls-2" x="99.13" y="0.44" width="5.87" height="27.12" />
-                                <polygon class="cls-1" points="85.94 27.56 79.92 27.56 79.92 0.44 85.94 0.44 85.94 16.86 96.35 16.86 96.35 21.84 85.94 21.84 85.94 27.56" />
-                                <path class="cls-1" d="M77.74,36.07a9,9,0,0,0,6.41-2.68L88,37c-2.6,2.74-6.71,4-10.89,4A13.94,13.94,0,0,1,62.89,27.15,14.19,14.19,0,0,1,77.11,13c4.38,0,8.28,1.17,10.89,4,0,0-3.89,3.82-3.91,3.8A9,9,0,1,0,77.74,36.07Z" transform="translate(-12 -13)" />
-                                <rect class="cls-2" x="37.4" y="11.14" width="7.63" height="4.98" />
-                                <polygon class="cls-1" points="32.85 27.56 28.6 27.56 28.6 5.42 28.6 3.96 28.6 0.44 47.95 0.44 47.95 5.42 34.46 5.42 34.46 22.72 48.25 22.72 48.25 27.56 34.46 27.56 32.85 27.56" />
-                                <polygon class="cls-1" points="15.4 27.56 9.53 27.56 9.53 5.57 9.53 0.59 9.53 0.44 24.93 0.44 24.93 5.57 15.4 5.57 15.4 27.56" />
-                                <rect class="cls-2" y="0.44" width="7.19" height="5.13" />
-                            </svg>
-                        </a>
-                        <!-- /.custom-logo-link -->
-                    </div>
-                    <!-- /.site-branding -->
-                    <!-- ============================================================= End Header Logo ============================================================= -->
-                    <nav id="primary-navigation" class="primary-navigation" aria-label="Primary Navigation" data-nav="flex-menu">
-                        <ul id="menu-primary-menu" class="nav yamm">
-                            <li class="sale-clr yamm-fw menu-item animate-dropdown">
-                                <a title="Super deals" href="product-category.html">Super deals</a>
-                            </li>
-                            <li class="menu-item menu-item-has-children animate-dropdown dropdown">
-                                <a title="Mother`s Day" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true" href="#">Mother`s Day <span class="caret"></span></a>
-                                <ul role="menu" class=" dropdown-menu">
-                                    <li class="menu-item animate-dropdown">
-                                        <a title="Wishlist" href="wishlist.html">Wishlist</a>
-                                    </li>
-                                    <li class="menu-item animate-dropdown">
-                                        <a title="Add to compare" href="compare.html">Add to compare</a>
-                                    </li>
-                                    <li class="menu-item animate-dropdown">
-                                        <a title="About Us" href="about.html">About Us</a>
-                                    </li>
-                                    <li class="menu-item animate-dropdown">
-                                        <a title="Track Order" href="track-your-order.html">Track Order</a>
-                                    </li>
-                                </ul>
-                                <!-- .dropdown-menu -->
-                            </li>
-                            <li class="yamm-fw menu-item menu-item-has-children animate-dropdown dropdown">
-                                <a title="Pages" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true" href="#">Pages <span class="caret"></span></a>
-                                <ul role="menu" class=" dropdown-menu">
-                                    <li class="menu-item menu-item-object-static_block animate-dropdown">
-                                        <div class="yamm-content">
-                                            <div class="tm-mega-menu">
-                                                <div class="widget widget_nav_menu">
-                                                    <ul class="menu">
-                                                        <li class="nav-title menu-item">
-                                                            <a href="#">Home Pages</a>
-                                                        </li>
-                                                        <li class="menu-item">
-                                                            <a href="home-v1.html">Home v1</a>
-                                                        </li>
-                                                        <li class="menu-item">
-                                                            <a href="home-v2.html">Home v2</a>
-                                                        </li>
-                                                        <li class="menu-item">
-                                                            <a href="home-v3.html">Home v3</a>
-                                                        </li>
-                                                        <li class="menu-item">
-                                                            <a href="home-v4.html">Home v4</a>
-                                                        </li>
-                                                        <li class="menu-item">
-                                                            <a href="home-v5.html">Home v5</a>
-                                                        </li>
-                                                        <li class="menu-item">
-                                                            <a href="home-v6.html">Home v6</a>
-                                                        </li>
-                                                        <li class="menu-item">
-                                                            <a href="home-v7.html">Home v7</a>
-                                                        </li>
-                                                        <li class="menu-item">
-                                                            <a href="home-v8.html">Home v8</a>
-                                                        </li>
-                                                        <li class="menu-item">
-                                                            <a href="home-v9.html">Home v9</a>
-                                                        </li>
-                                                        <li class="menu-item">
-                                                            <a href="home-v10.html">Home v10</a>
-                                                        </li>
-                                                        <li class="menu-item">
-                                                            <a href="home-v11.html">Home v11</a>
-                                                        </li>
-                                                        <li class="menu-item">
-                                                            <a href="home-v12.html">Home v12</a>
-                                                        </li>
-                                                        <li class="menu-item">
-                                                            <a href="home-v13.html">Home v13</a>
-                                                        </li>
-                                                        <li class="menu-item">
-                                                            <a href="home-v14.html">Home v14</a>
-                                                        </li>
-                                                    </ul>
-                                                    <!-- .menu -->
-                                                </div>
-                                                <!-- .widget_nav_menu -->
-                                                <div class="widget widget_nav_menu">
-                                                    <ul class="menu">
-                                                        <li class="nav-title menu-item">
-                                                            <a href="#">Landing Pages</a>
-                                                        </li>
-                                                        <li class="menu-item">
-                                                            <a href="landing-page-v1.html">Landing v1</a>
-                                                        </li>
-                                                        <li class="menu-item">
-                                                            <a href="landing-page-v2.html">Landing v2</a>
-                                                        </li>
-                                                        <li class="nav-title menu-item">
-                                                            <a href="#">Shop Pages</a>
-                                                        </li>
-                                                        <li class="menu-item">
-                                                            <a href="shop.html">Shop</a>
-                                                        </li>
-                                                        <li class="menu-item">
-                                                            <a href="shop-extended.html">Shop Extended</a>
-                                                        </li>
-                                                        <li class="menu-item">
-                                                            <a href="shop-listing.html">Shop Listing</a>
-                                                        </li>
-                                                        <li class="menu-item">
-                                                            <a href="shop-listing-large.html">Shop Listing Large</a>
-                                                        </li>
-                                                        <li class="menu-item">
-                                                            <a href="shop-listing-with-product-sidebar.html">Shop Listing with Product Sidebar</a>
-                                                        </li>
-                                                        <li class="menu-item">
-                                                            <a href="product-category.html">Categories</a>
-                                                        </li>
-                                                        <li class="menu-item">
-                                                            <a href="shop-right-sidebar.html">Shop Right Sidebar</a>
-                                                        </li>
-                                                        <li class="menu-item">
-                                                            <a href="shop-fullwidth.html">Shop Full Width</a>
-                                                        </li>
-                                                    </ul>
-                                                    <!-- .menu -->
-                                                </div>
-                                                <!-- .widget_nav_menu -->
-                                                <div class="widget widget_nav_menu">
-                                                    <ul class="menu">
-                                                        <li class="nav-title menu-item">
-                                                            <a href="#">Single Product Pages</a>
-                                                        </li>
-                                                        <li class="menu-item menu-item-object-product">
-                                                            <a href="single-product-sidebar.html">Single Product Sidebar</a>
-                                                        </li>
-                                                        <li class="menu-item menu-item-object-product">
-                                                            <a href="single-product-fullwidth.html">Single Product Fullwidth</a>
-                                                        </li>
-                                                        <li class="menu-item menu-item-object-product">
-                                                            <a href="single-product-extended.html">Single Product Extended</a>
-                                                        </li>
-                                                        <li class="nav-title menu-item">
-                                                            <a href="#">Ecommerce Pages</a>
-                                                        </li>
-                                                        <li class="menu-item">
-                                                            <a href="cart.html">Cart</a>
-                                                        </li>
-                                                        <li class="menu-item">
-                                                            <a href="checkout.html">Checkout</a>
-                                                        </li>
-                                                        <li class="menu-item">
-                                                            <a href="login-and-register.html">My Account</a>
-                                                        </li>
-                                                        <li class="menu-item">
-                                                            <a href="compare.html">Compare</a>
-                                                        </li>
-                                                        <li class="menu-item">
-                                                            <a href="wishlist.html">Wishlist</a>
-                                                        </li>
-                                                        <li class="menu-item">
-                                                            <a href="track-your-order.html">Track Order</a>
-                                                        </li>
-                                                        <li class="menu-item">
-                                                            <a href="terms-and-conditions.html">Terms and Conditions</a>
-                                                        </li>
-                                                    </ul>
-                                                    <!-- .menu -->
-                                                </div>
-                                                <!-- .widget_nav_menu -->
-                                                <div class="widget widget_nav_menu">
-                                                    <ul class="menu">
-                                                        <li class="nav-title menu-item">
-                                                            <a href="#">Blog Pages</a>
-                                                        </li>
-                                                        <li class="menu-item">
-                                                            <a href="blog-v1.html">Blog v1</a>
-                                                        </li>
-                                                        <li class="menu-item">
-                                                            <a href="blog-v2.html">Blog v2</a>
-                                                        </li>
-                                                        <li class="menu-item">
-                                                            <a href="blog-v3.html">Blog v3</a>
-                                                        </li>
-                                                        <li class="menu-item">
-                                                            <a href="blog-fullwidth.html">Blog Full Width</a>
-                                                        </li>
-                                                        <li class="menu-item">
-                                                            <a href="blog-single.html">Single Blog Post</a>
-                                                        </li>
-                                                        <li class="nav-title menu-item">
-                                                            <a href="#">Other Pages</a>
-                                                        </li>
-                                                        <li class="menu-item">
-                                                            <a href="about.html">About Us</a>
-                                                        </li>
-                                                        <li class="menu-item">
-                                                            <a href="contact-v1.html">Contact v1</a>
-                                                        </li>
-                                                        <li class="menu-item">
-                                                            <a href="contact-v2.html">Contact v2</a>
-                                                        </li>
-                                                        <li class="menu-item">
-                                                            <a href="faq.html">FAQ</a>
-                                                        </li>
-                                                        <li class="menu-item">
-                                                            <a href="404.html">404</a>
-                                                        </li>
-                                                    </ul>
-                                                    <!-- .menu -->
-                                                </div>
-                                                <!-- .widget_nav_menu -->
-                                            </div>
-                                            <!-- .tm-mega-menu -->
-                                        </div>
-                                        <!-- .yamm-content -->
-                                    </li>
-                                    <!-- .menu-item -->
-                                </ul>
-                                <!-- .dropdown-menu -->
-                            </li>
-                            <li class="menu-item animate-dropdown">
-                                <a title="Logitech Sale" href="product-category.html">Logitech Sale</a>
-                            </li>
-                            <li class="menu-item animate-dropdown">
-                                <a title="Headphones Sale" href="product-category.html">Headphones Sale</a>
-                            </li>
-                            <li class="techmarket-flex-more-menu-item dropdown">
-                                <a title="..." href="#" data-toggle="dropdown" class="dropdown-toggle">...</a>
-                                <ul class="overflow-items dropdown-menu"></ul>
-                                <!-- . -->
-                            </li>
+</div>
+<header>
+    <!-- tt-mobile menu -->
+    <nav class="panel-menu mobile-main-menu">
+        <ul>
+            <li>
+                <a href="<?=_URL_HOME?>">TRANG CHỦ</a>
+                <ul>
+                    <li>
+                        <a href="index.html">HOME STYLES</a>
+                        <ul>
+                            <li><a href="index.html">Home — Example 1 <span class="tt-badge tt-fatured">Popular</span></a></li>
+                            <li><a href="index-02.html">Home — Example 2</a></li>
+                            <li><a href="index-03.html">Home — Example 3</a></li>
+                            <li><a href="index-04.html">Home — Example 4 <span class="tt-badge tt-fatured">Popular</span></a></li>
+                            <li><a href="index-05.html">Home — Example 5</a></li>
+                            <li><a href="index-06.html">Home — Example 6</a></li>
+                            <li><a href="index-07.html">Home — Example 7</a></li>
+                            <li><a href="index-08.html">Home — Example 8</a></li>
+                            <li><a href="index-09.html">Home — Example 9</a></li>
                         </ul>
-                        <!-- .nav -->
-                    </nav>
-                    <!-- .primary-navigation -->
-                    <nav id="secondary-navigation" class="secondary-navigation" aria-label="Secondary Navigation" data-nav="flex-menu">
-                        <ul id="menu-secondary-menu" class="nav">
-                            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2802 animate-dropdown">
-                                <a title="Track Your Order" href="track-your-order.html">
-                                    <i class="tm tm-order-tracking"></i>Track Your Order</a>
-                            </li>
-                            <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-487 animate-dropdown dropdown">
-                                <a title="Dollar (US)" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true" href="#">
-                                    <i class="tm tm-dollar"></i>Dollar (US)
-                                    <span class="caret"></span>
-                                </a>
-                                <ul role="menu" class=" dropdown-menu">
-                                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-489 animate-dropdown">
-                                        <a title="AUD" href="#">AUD</a>
-                                    </li>
-                                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-490 animate-dropdown">
-                                        <a title="INR" href="#">INR</a>
-                                    </li>
-                                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-491 animate-dropdown">
-                                        <a title="AED" href="#">AED</a>
-                                    </li>
-                                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-492 animate-dropdown">
-                                        <a title="SGD" href="#">SGD</a>
-                                    </li>
-                                </ul>
-                                <!-- .dropdown-menu -->
-                            </li>
-                            <li class="menu-item">
-                                <a title="My Account" href="login-and-register.html">
-                                    <i class="tm tm-login-register"></i>Register or Sign in</a>
-                            </li>
-                            <li class="techmarket-flex-more-menu-item dropdown">
-                                <a title="..." href="#" data-toggle="dropdown" class="dropdown-toggle">...</a>
-                                <ul class="overflow-items dropdown-menu"></ul>
-                            </li>
+                    </li>
+                    <li>
+                        <a href="index.html">HOME STYLES</a>
+                        <ul>
+                            <li><a href="index-10.html">Home — Example 10</a></li>
+                            <li><a href="index-11.html">Home — Example 11</a></li>
+                            <li><a href="index-12.html">Home — Example 12</a></li>
+                            <li><a href="index-13.html">Home — Example 13</a></li>
+                            <li><a href="index-14.html">Home — Example 14</a></li>
+                            <li><a href="index-15.html">Home — Example 15</a></li>
+                            <li><a href="index-16.html">Home — Example 16 <span class="tt-badge tt-fatured">Popular</span></a></li>
+                            <li><a href="index-17.html">Home — Example 17</a></li>
+                            <li><a href="index-18.html">Home — Example 18</a></li>
                         </ul>
-                        <!-- .nav -->
-                    </nav>
-                    <!-- .secondary-navigation -->
-                </div>
-                <!-- /.row -->
-            </div>
-            <!-- .techmarket-sticky-wrap -->
-            <div class="row align-items-center">
-                <div id="departments-menu" class="dropdown departments-menu">
-                    <button class="btn dropdown-toggle btn-block" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="tm tm-departments-thin"></i>
-                        <span>All Departments</span>
-                    </button>
-                    <ul id="menu-departments-menu" class="dropdown-menu yamm departments-menu-dropdown">
-                        <li class="highlight menu-item animate-dropdown">
-                            <a title="Value of the Day" href="home-v2.html">Value of the Day</a>
-                        </li>
-                        <li class="highlight menu-item animate-dropdown">
-                            <a title="Top 100 Offers" href="home-v3.html">Top 100 Offers</a>
-                        </li>
-                        <li class="highlight menu-item animate-dropdown">
-                            <a title="New Arrivals" href="home-v4.html">New Arrivals</a>
-                        </li>
-                        <li class="yamm-tfw menu-item menu-item-has-children animate-dropdown dropdown-submenu">
-                            <a title="Computers &amp; Laptops" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true" href="#">Computers &#038; Laptops <span class="caret"></span></a>
-                            <ul role="menu" class=" dropdown-menu">
-                                <li class="menu-item menu-item-object-static_block animate-dropdown">
-                                    <div class="yamm-content">
-                                        <div class="bg-yamm-content bg-yamm-content-bottom bg-yamm-content-right">
-                                            <div class="kc-col-container">
-                                                <div class="kc_single_image">
-                                                    <img src="assets/images/megamenu.jpg" class="" alt="" />
-                                                </div>
-                                                <!-- .kc_single_image -->
-                                            </div>
-                                            <!-- .kc-col-container -->
-                                        </div>
-                                        <!-- .bg-yamm-content -->
-                                        <div class="row yamm-content-row">
-                                            <div class="col-md-6 col-sm-12">
-                                                <div class="kc-col-container">
-                                                    <div class="kc_text_block">
-                                                        <ul>
-                                                            <li class="nav-title">Computers &amp; Accessories</li>
-                                                            <li><a href="shop.html">All Computers &amp; Accessories</a></li>
-                                                            <li><a href="shop.html">Laptops, Desktops &amp; Monitors</a></li>
-                                                            <li><a href="shop.html">Pen Drives, Hard Drives &amp; Memory Cards</a></li>
-                                                            <li><a href="shop.html">Printers &amp; Ink</a></li>
-                                                            <li><a href="shop.html">Networking &amp; Internet Devices</a></li>
-                                                            <li><a href="shop.html">Computer Accessories</a></li>
-                                                            <li><a href="shop.html">Software</a></li>
-                                                            <li class="nav-divider"></li>
-                                                            <li>
-                                                                <a href="shop.html">
-                                                                    <span class="nav-text">All Electronics</span>
-                                                                    <span class="nav-subtext">Discover more products</span>
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <!-- .kc_text_block -->
-                                                </div>
-                                                <!-- .kc-col-container -->
-                                            </div>
-                                            <!-- .kc_column -->
-                                            <div class="col-md-6 col-sm-12">
-                                                <div class="kc-col-container">
-                                                    <div class="kc_text_block">
-                                                        <ul>
-                                                            <li class="nav-title">Office &amp; Stationery</li>
-                                                            <li><a href="shop.html">All Office &amp; Stationery</a></li>
-                                                            <li><a href="shop.html">Pens &amp; Writing</a></li>
-                                                        </ul>
-                                                    </div>
-                                                    <!-- .kc_text_block -->
-                                                </div>
-                                                <!-- .kc-col-container -->
-                                            </div>
-                                            <!-- .kc_column -->
-                                        </div>
-                                        <!-- .kc_row -->
-                                    </div>
-                                    <!-- .yamm-content -->
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="yamm-tfw menu-item menu-item-has-children animate-dropdown dropdown-submenu">
-                            <a title="Cameras &amp; Photo" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true" href="#">Cameras &#038; Photo <span class="caret"></span></a>
-                            <ul role="menu" class=" dropdown-menu">
-                                <li class="menu-item menu-item-object-static_block animate-dropdown">
-                                    <div class="yamm-content">
-                                        <div class="bg-yamm-content bg-yamm-content-bottom bg-yamm-content-right">
-                                            <div class="kc-col-container">
-                                                <div class="kc_single_image">
-                                                    <img src="assets/images/megamenu-1.jpg" class="" alt="" />
-                                                </div>
-                                                <!-- .kc_single_image -->
-                                            </div>
-                                            <!-- .kc-col-container -->
-                                        </div>
-                                        <!-- .bg-yamm-content -->
-                                        <div class="row yamm-content-row">
-                                            <div class="col-md-6 col-sm-12">
-                                                <div class="kc-col-container">
-                                                    <div class="kc_text_block">
-                                                        <ul>
-                                                            <li class="nav-title">Cameras & Photography</li>
-                                                            <li><a href="shop.html">All Cameras & Photography</a></li>
-                                                            <li><a href="shop.html">Point & Shoot Cameras</a></li>
-                                                            <li><a href="shop.html">Lenses</a></li>
-                                                            <li><a href="shop.html">Camera Accessories</a></li>
-                                                            <li><a href="shop.html">Security & Surveillance</a></li>
-                                                            <li><a href="shop.html">Binoculars & Telescopes</a></li>
-                                                            <li><a href="shop.html">Camcorders</a></li>
-                                                            <li class="nav-divider"></li>
-                                                            <li>
-                                                                <a href="shop.html">
-                                                                    <span class="nav-text">All Electronics</span>
-                                                                    <span class="nav-subtext">Discover more products</span>
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <!-- .kc_text_block -->
-                                                </div>
-                                                <!-- .kc-col-container -->
-                                            </div>
-                                            <!-- .kc_column -->
-                                            <div class="col-md-6 col-sm-12">
-                                                <div class="kc-col-container">
-                                                    <div class="kc_text_block">
-                                                        <ul>
-                                                            <li class="nav-title">Audio & Video</li>
-                                                            <li><a href="shop.html">All Audio & Video</a></li>
-                                                            <li><a href="shop.html">Headphones & Speakers</a></li>
-                                                            <li><a href="shop.html">Home Entertainment Systems</a></li>
-                                                            <li><a href="shop.html">MP3 & Media Players</a></li>
-                                                        </ul>
-                                                    </div>
-                                                    <!-- .kc_text_block -->
-                                                </div>
-                                                <!-- .kc-col-container -->
-                                            </div>
-                                            <!-- .kc_column -->
-                                        </div>
-                                        <!-- .kc_row -->
-                                    </div>
-                                    <!-- .yamm-content -->
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="yamm-tfw menu-item menu-item-has-children animate-dropdown dropdown-submenu">
-                            <a title="Smart Phones &amp; Tablets" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true" href="#">Smart Phones &#038; Tablets <span class="caret"></span></a>
-                            <ul role="menu" class=" dropdown-menu">
-                                <li class="menu-item menu-item-object-static_block animate-dropdown">
-                                    <div class="yamm-content">
-                                        <div class="bg-yamm-content bg-yamm-content-bottom bg-yamm-content-right">
-                                            <div class="kc-col-container">
-                                                <div class="kc_single_image">
-                                                    <img src="assets/images/megamenu.jpg" class="" alt="" />
-                                                </div>
-                                                <!-- .kc_single_image -->
-                                            </div>
-                                            <!-- .kc-col-container -->
-                                        </div>
-                                        <!-- .bg-yamm-content -->
-                                        <div class="row yamm-content-row">
-                                            <div class="col-md-6 col-sm-12">
-                                                <div class="kc-col-container">
-                                                    <div class="kc_text_block">
-                                                        <ul>
-                                                            <li class="nav-title">Computers &amp; Accessories</li>
-                                                            <li><a href="shop.html">All Computers &amp; Accessories</a></li>
-                                                            <li><a href="shop.html">Laptops, Desktops &amp; Monitors</a></li>
-                                                            <li><a href="shop.html">Pen Drives, Hard Drives &amp; Memory Cards</a></li>
-                                                            <li><a href="shop.html">Printers &amp; Ink</a></li>
-                                                            <li><a href="shop.html">Networking &amp; Internet Devices</a></li>
-                                                            <li><a href="shop.html">Computer Accessories</a></li>
-                                                            <li><a href="shop.html">Software</a></li>
-                                                            <li class="nav-divider"></li>
-                                                            <li>
-                                                                <a href="shop.html">
-                                                                    <span class="nav-text">All Electronics</span>
-                                                                    <span class="nav-subtext">Discover more products</span>
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <!-- .kc_text_block -->
-                                                </div>
-                                                <!-- .kc-col-container -->
-                                            </div>
-                                            <!-- .kc_column -->
-                                            <div class="col-md-6 col-sm-12">
-                                                <div class="kc-col-container">
-                                                    <div class="kc_text_block">
-                                                        <ul>
-                                                            <li class="nav-title">Office &amp; Stationery</li>
-                                                            <li><a href="shop.html">All Office &amp; Stationery</a></li>
-                                                            <li><a href="shop.html">Pens &amp; Writing</a></li>
-                                                        </ul>
-                                                    </div>
-                                                    <!-- .kc_text_block -->
-                                                </div>
-                                                <!-- .kc-col-container -->
-                                            </div>
-                                            <!-- .kc_column -->
-                                        </div>
-                                        <!-- .kc_row -->
-                                    </div>
-                                    <!-- .yamm-content -->
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="yamm-tfw menu-item menu-item-has-children animate-dropdown dropdown-submenu">
-                            <a title="Video Games &amp; Consoles" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true" href="#">Video Games &#038; Consoles <span class="caret"></span></a>
-                            <ul role="menu" class=" dropdown-menu">
-                                <li class="menu-item menu-item-object-static_block animate-dropdown">
-                                    <div class="yamm-content">
-                                        <div class="bg-yamm-content bg-yamm-content-bottom bg-yamm-content-right">
-                                            <div class="kc-col-container">
-                                                <div class="kc_single_image">
-                                                    <img src="assets/images/megamenu-1.jpg" class="" alt="" />
-                                                </div>
-                                                <!-- .kc_single_image -->
-                                            </div>
-                                            <!-- .kc-col-container -->
-                                        </div>
-                                        <!-- .bg-yamm-content -->
-                                        <div class="row yamm-content-row">
-                                            <div class="col-md-6 col-sm-12">
-                                                <div class="kc-col-container">
-                                                    <div class="kc_text_block">
-                                                        <ul>
-                                                            <li class="nav-title">Cameras & Photography</li>
-                                                            <li><a href="shop.html">All Cameras & Photography</a></li>
-                                                            <li><a href="shop.html">Point & Shoot Cameras</a></li>
-                                                            <li><a href="shop.html">Lenses</a></li>
-                                                            <li><a href="shop.html">Camera Accessories</a></li>
-                                                            <li><a href="shop.html">Security & Surveillance</a></li>
-                                                            <li><a href="shop.html">Binoculars & Telescopes</a></li>
-                                                            <li><a href="shop.html">Camcorders</a></li>
-                                                            <li class="nav-divider"></li>
-                                                            <li>
-                                                                <a href="shop.html">
-                                                                    <span class="nav-text">All Electronics</span>
-                                                                    <span class="nav-subtext">Discover more products</span>
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <!-- .kc_text_block -->
-                                                </div>
-                                                <!-- .kc-col-container -->
-                                            </div>
-                                            <!-- .kc_column -->
-                                            <div class="col-md-6 col-sm-12">
-                                                <div class="kc-col-container">
-                                                    <div class="kc_text_block">
-                                                        <ul>
-                                                            <li class="nav-title">Audio & Video</li>
-                                                            <li><a href="shop.html">All Audio & Video</a></li>
-                                                            <li><a href="shop.html">Headphones & Speakers</a></li>
-                                                            <li><a href="shop.html">Home Entertainment Systems</a></li>
-                                                            <li><a href="shop.html">MP3 & Media Players</a></li>
-                                                        </ul>
-                                                    </div>
-                                                    <!-- .kc_text_block -->
-                                                </div>
-                                                <!-- .kc-col-container -->
-                                            </div>
-                                            <!-- .kc_column -->
-                                        </div>
-                                        <!-- .kc_row -->
-                                    </div>
-                                    <!-- .yamm-content -->
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="yamm-tfw menu-item menu-item-has-children animate-dropdown dropdown-submenu">
-                            <a title="TV &amp; Audio" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true" href="#">TV &#038; Audio <span class="caret"></span></a>
-                            <ul role="menu" class=" dropdown-menu">
-                                <li class="menu-item menu-item-object-static_block animate-dropdown">
-                                    <div class="yamm-content">
-                                        <div class="bg-yamm-content bg-yamm-content-bottom bg-yamm-content-right">
-                                            <div class="kc-col-container">
-                                                <div class="kc_single_image">
-                                                    <img src="assets/images/megamenu.jpg" class="" alt="" />
-                                                </div>
-                                                <!-- .kc_single_image -->
-                                            </div>
-                                            <!-- .kc-col-container -->
-                                        </div>
-                                        <!-- .bg-yamm-content -->
-                                        <div class="row yamm-content-row">
-                                            <div class="col-md-6 col-sm-12">
-                                                <div class="kc-col-container">
-                                                    <div class="kc_text_block">
-                                                        <ul>
-                                                            <li class="nav-title">Computers &amp; Accessories</li>
-                                                            <li><a href="shop.html">All Computers &amp; Accessories</a></li>
-                                                            <li><a href="shop.html">Laptops, Desktops &amp; Monitors</a></li>
-                                                            <li><a href="shop.html">Pen Drives, Hard Drives &amp; Memory Cards</a></li>
-                                                            <li><a href="shop.html">Printers &amp; Ink</a></li>
-                                                            <li><a href="shop.html">Networking &amp; Internet Devices</a></li>
-                                                            <li><a href="shop.html">Computer Accessories</a></li>
-                                                            <li><a href="shop.html">Software</a></li>
-                                                            <li class="nav-divider"></li>
-                                                            <li>
-                                                                <a href="shop.html">
-                                                                    <span class="nav-text">All Electronics</span>
-                                                                    <span class="nav-subtext">Discover more products</span>
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <!-- .kc_text_block -->
-                                                </div>
-                                                <!-- .kc-col-container -->
-                                            </div>
-                                            <!-- .kc_column -->
-                                            <div class="col-md-6 col-sm-12">
-                                                <div class="kc-col-container">
-                                                    <div class="kc_text_block">
-                                                        <ul>
-                                                            <li class="nav-title">Office &amp; Stationery</li>
-                                                            <li><a href="shop.html">All Office &amp; Stationery</a></li>
-                                                            <li><a href="shop.html">Pens &amp; Writing</a></li>
-                                                        </ul>
-                                                    </div>
-                                                    <!-- .kc_text_block -->
-                                                </div>
-                                                <!-- .kc-col-container -->
-                                            </div>
-                                            <!-- .kc_column -->
-                                        </div>
-                                        <!-- .kc_row -->
-                                    </div>
-                                    <!-- .yamm-content -->
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="yamm-tfw menu-item menu-item-has-children animate-dropdown dropdown-submenu">
-                            <a title="Car Electronic &amp; GPS" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true" href="#">Car Electronic &#038; GPS <span class="caret"></span></a>
-                            <ul role="menu" class=" dropdown-menu">
-                                <li class="menu-item menu-item-object-static_block animate-dropdown">
-                                    <div class="yamm-content">
-                                        <div class="bg-yamm-content bg-yamm-content-bottom bg-yamm-content-right">
-                                            <div class="kc-col-container">
-                                                <div class="kc_single_image">
-                                                    <img src="assets/images/megamenu-1.jpg" class="" alt="" />
-                                                </div>
-                                                <!-- .kc_single_image -->
-                                            </div>
-                                            <!-- .kc-col-container -->
-                                        </div>
-                                        <!-- .bg-yamm-content -->
-                                        <div class="row yamm-content-row">
-                                            <div class="col-md-6 col-sm-12">
-                                                <div class="kc-col-container">
-                                                    <div class="kc_text_block">
-                                                        <ul>
-                                                            <li class="nav-title">Cameras & Photography</li>
-                                                            <li><a href="shop.html">All Cameras & Photography</a></li>
-                                                            <li><a href="shop.html">Point & Shoot Cameras</a></li>
-                                                            <li><a href="shop.html">Lenses</a></li>
-                                                            <li><a href="shop.html">Camera Accessories</a></li>
-                                                            <li><a href="shop.html">Security & Surveillance</a></li>
-                                                            <li><a href="shop.html">Binoculars & Telescopes</a></li>
-                                                            <li><a href="shop.html">Camcorders</a></li>
-                                                            <li class="nav-divider"></li>
-                                                            <li>
-                                                                <a href="shop.html">
-                                                                    <span class="nav-text">All Electronics</span>
-                                                                    <span class="nav-subtext">Discover more products</span>
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <!-- .kc_text_block -->
-                                                </div>
-                                                <!-- .kc-col-container -->
-                                            </div>
-                                            <!-- .kc_column -->
-                                            <div class="col-md-6 col-sm-12">
-                                                <div class="kc-col-container">
-                                                    <div class="kc_text_block">
-                                                        <ul>
-                                                            <li class="nav-title">Audio & Video</li>
-                                                            <li><a href="shop.html">All Audio & Video</a></li>
-                                                            <li><a href="shop.html">Headphones & Speakers</a></li>
-                                                            <li><a href="shop.html">Home Entertainment Systems</a></li>
-                                                            <li><a href="shop.html">MP3 & Media Players</a></li>
-                                                        </ul>
-                                                    </div>
-                                                    <!-- .kc_text_block -->
-                                                </div>
-                                                <!-- .kc-col-container -->
-                                            </div>
-                                            <!-- .kc_column -->
-                                        </div>
-                                        <!-- .kc_row -->
-                                    </div>
-                                    <!-- .yamm-content -->
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="yamm-tfw menu-item menu-item-has-children animate-dropdown dropdown-submenu">
-                            <a title="Accesories" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true" href="#">Accesories <span class="caret"></span></a>
-                            <ul role="menu" class=" dropdown-menu">
-                                <li class="menu-item menu-item-object-static_block animate-dropdown">
-                                    <div class="yamm-content">
-                                        <div class="bg-yamm-content bg-yamm-content-bottom bg-yamm-content-right">
-                                            <div class="kc-col-container">
-                                                <div class="kc_single_image">
-                                                    <img src="assets/images/megamenu.jpg" class="" alt="" />
-                                                </div>
-                                                <!-- .kc_single_image -->
-                                            </div>
-                                            <!-- .kc-col-container -->
-                                        </div>
-                                        <!-- .bg-yamm-content -->
-                                        <div class="row yamm-content-row">
-                                            <div class="col-md-6 col-sm-12">
-                                                <div class="kc-col-container">
-                                                    <div class="kc_text_block">
-                                                        <ul>
-                                                            <li class="nav-title">Computers &amp; Accessories</li>
-                                                            <li><a href="shop.html">All Computers &amp; Accessories</a></li>
-                                                            <li><a href="shop.html">Laptops, Desktops &amp; Monitors</a></li>
-                                                            <li><a href="shop.html">Pen Drives, Hard Drives &amp; Memory Cards</a></li>
-                                                            <li><a href="shop.html">Printers &amp; Ink</a></li>
-                                                            <li><a href="shop.html">Networking &amp; Internet Devices</a></li>
-                                                            <li><a href="shop.html">Computer Accessories</a></li>
-                                                            <li><a href="shop.html">Software</a></li>
-                                                            <li class="nav-divider"></li>
-                                                            <li>
-                                                                <a href="shop.html">
-                                                                    <span class="nav-text">All Electronics</span>
-                                                                    <span class="nav-subtext">Discover more products</span>
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <!-- .kc_text_block -->
-                                                </div>
-                                                <!-- .kc-col-container -->
-                                            </div>
-                                            <!-- .kc_column -->
-                                            <div class="col-md-6 col-sm-12">
-                                                <div class="kc-col-container">
-                                                    <div class="kc_text_block">
-                                                        <ul>
-                                                            <li class="nav-title">Office &amp; Stationery</li>
-                                                            <li><a href="shop.html">All Office &amp; Stationery</a></li>
-                                                            <li><a href="shop.html">Pens &amp; Writing</a></li>
-                                                        </ul>
-                                                    </div>
-                                                    <!-- .kc_text_block -->
-                                                </div>
-                                                <!-- .kc-col-container -->
-                                            </div>
-                                            <!-- .kc_column -->
-                                        </div>
-                                        <!-- .kc_row -->
-                                    </div>
-                                    <!-- .yamm-content -->
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="menu-item menu-item-type-custom animate-dropdown">
-                            <a title="Gadgets" href="landing-page-v1.html">Gadgets</a>
-                        </li>
-                        <li class="menu-item menu-item-type-custom animate-dropdown">
-                            <a title="Virtual Reality" href="landing-page-v2.html">Virtual Reality</a>
-                        </li>
-                    </ul>
-                </div>
-                <!-- .departments-menu -->
-                <form class="navbar-search" method="get" action="home-v1.html">
-                    <label class="sr-only screen-reader-text" for="search">Search for:</label>
-                    <div class="input-group">
-                        <input type="text" id="search" class="form-control search-field product-search-field" dir="ltr" value="" name="s" placeholder="Search for products" />
-                        <div class="input-group-addon search-categories">
-                            <select name='product_cat' id='product_cat' class='postform resizeselect'>
-                                <option value='0' selected='selected'>All Categories</option>
-                                <option class="level-0" value="television">Televisions</option>
-                                <option class="level-0" value="home-theater-audio">Home Theater &amp; Audio</option>
-                                <option class="level-0" value="headphones">Headphones</option>
-                                <option class="level-0" value="digital-cameras">Digital Cameras</option>
-                                <option class="level-0" value="cells-tablets">Cells &amp; Tablets</option>
-                                <option class="level-0" value="smartwatches">Smartwatches</option>
-                                <option class="level-0" value="games-consoles">Games &amp; Consoles</option>
-                                <option class="level-0" value="printer">Printer</option>
-                                <option class="level-0" value="tv-video">TV &amp; Video</option>
-                                <option class="level-0" value="home-entertainment">Home Entertainment</option>
-                                <option class="level-0" value="tvs">TVs</option>
-                                <option class="level-0" value="speakers">Speakers</option>
-                                <option class="level-0" value="computers-laptops">Computers &amp; Laptops</option>
-                                <option class="level-0" value="laptops">Laptops</option>
-                                <option class="level-0" value="ultrabooks">Ultrabooks</option>
-                                <option class="level-0" value="notebooks">Notebooks</option>
-                                <option class="level-0" value="desktop-pcs">Desktop PCs</option>
-                                <option class="level-0" value="mac-computers">Mac Computers</option>
-                                <option class="level-0" value="all-in-one-pc">All in One PC</option>
-                                <option class="level-0" value="audio-music">Audio &amp; Music</option>
-                                <option class="level-0" value="pc-components">PC Components</option>
-                            </select>
-                        </div>
-                        <!-- .input-group-addon -->
-                        <div class="input-group-btn">
-                            <input type="hidden" id="search-param" name="post_type" value="product" />
-                            <button type="submit" class="btn btn-primary">
-                                <i class="fa fa-search"></i>
-                                <span class="search-btn">Search</span>
-                            </button>
-                        </div>
-                        <!-- .input-group-btn -->
-                    </div>
-                    <!-- .input-group -->
-                </form>
-                <!-- .navbar-search -->
-                <ul class="header-compare nav navbar-nav">
-                    <li class="nav-item">
-                        <a href="compare.html" class="nav-link">
-                            <i class="tm tm-compare"></i>
-                            <span id="top-cart-compare-count" class="value">3</span>
-                        </a>
+                    </li>
+                    <li>
+                        <a href="index.html">HOME SKINS <span class="tt-badge tt-sale">HOT</span></a>
+                        <ul>
+                            <li><a href="index-skin-snowboards.html">Snowboards Shop <span class="tt-badge tt-fatured">Popular</span></a></li>
+                            <li><a href="index-skin-phones.html">Phones Shop <span class="tt-badge tt-fatured">Popular</span></a></li>
+                            <li><a href="index-skin-bikes.html">Bikes Shop <span class="tt-badge tt-fatured">Popular</span></a></li>
+                            <li><a href="index-skin-lingerie.html">Lingerie Shop</a></li>
+                            <li><a href="index-skin-furniture.html">Furniture Shop</a></li>
+                            <li><a href="index-skin-books.html">Books Shop <span class="tt-badge tt-new">New</span></a></li>
+                        </ul>
                     </li>
                 </ul>
-                <!-- .header-compare -->
-                <ul class="header-wishlist nav navbar-nav">
-                    <li class="nav-item">
-                        <a href="wishlist.html" class="nav-link">
-                            <i class="tm tm-favorites"></i>
-                            <span id="top-cart-wishlist-count" class="value">3</span>
-                        </a>
+            </li>
+            <li>
+                <a href="listing-left-column.html">SHOP</a>
+                <ul>
+                    <li>
+                        <a href="listing-left-column.html">LISTING STYLES</a>
+                        <ul>
+                            <li><a href="listing-left-column.html">Listing With Left Sidebar</a></li>
+                            <li><a href="listing-right-column.html">Listing With Right Sidebar</a></li>
+                            <li><a href="listing-not-sidebar.html">Listing Not Sidebar</a></li>
+                            <li><a href="listing-not-sidebar-full-width.html">Listing Not Sidebar Full Width</a></li>
+                            <li><a href="listing-metro.html">Listing Metro</a></li>
+                            <li><a href="listing-left-column-with-block.html">Listing With Custom HTML Block</a></li>
+                            <li><a href="listing-collection.html">Listing Collection</a></li>
+                            <li><a href="lookbook.html">Look Book</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="product.html">PRODUCT PAGE STYLES</a>
+                        <ul>
+                            <li><a href="product.html">Product Example 1</a></li>
+                            <li><a href="product-02.html">Product Example 2</a></li>
+                            <li><a href="product-03.html">Product Example 3</a></li>
+                            <li><a href="product-04.html">Product Example 4</a></li>
+                            <li><a href="product-variable.html">Product Layout</a></li>
+                            <li><a href="product-three-columns.html">Three Columns</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="product-variable.html">PRODUCT PAGE TYPES</a>
+                        <ul>
+                            <li><a href="product.html">Standard Product</a></li>
+                            <li><a href="product-variable.html">Variable Product</a></li>
+                            <li><a href="product-04.html">Grouped Product</a></li>
+                            <li><a href="product-label-new.html">New Product</a></li>
+                            <li><a href="product-label-sale.html">Sale Product</a></li>
+                            <li><a href="product-label-out-of-stock.html">Out Of Stock Product</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="shopping_cart_02.html">OTHER PAGES</a>
+                        <ul>
+                            <li><a href="shopping_cart_02.html">Cart</a></li>
+                            <li><a href="shopping_cart_01.html">Cart With Right Col</a></li>
+                            <li><a href="account.html">Account</a></li>
+                            <li><a href="account_address.html">Account Address</a></li>
+                            <li><a href="account_address_fields.html">Account Address Fields</a></li>
+                        </ul>
                     </li>
                 </ul>
-                <!-- .header-wishlist -->
-                <ul id="site-header-cart" class="site-header-cart menu">
-                    <li class="animate-dropdown dropdown ">
-                        <a class="cart-contents" href="cart.html" data-toggle="dropdown" title="View your shopping cart">
-                            <i class="tm tm-shopping-bag"></i>
-                            <span class="count">2</span>
-                            <span class="amount">
-                                        <span class="price-label">Your Cart</span>&#036;136.99</span>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-mini-cart">
+            </li>
+            <li>
+                <a href="blog-listing-without-col.html">BLOG</a>
+                <ul>
+                    <li>
+                        <a href="blog-listing-without-col.html">BLOG STYLE</a>
+                        <ul>
+                            <li><a href="blog-listing-without-col.html">Standard Without Sidebar</a></li>
+                            <li><a href="blog-listing-col-left.html">Standard With Left Sidebar</a></li>
+                            <li><a href="blog-listing-col-right.html">Standard With Right Sidebar</a></li>
+                            <li><a href="blog-masonry-col-2.html">Two Colums</a></li>
+                            <li><a href="blog-masonry-col-3.html">Three Colums</a></li>
+                            <li><a href="blog-masonry-col-3-filter.html">Three Colums With Filter</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="blog-single-post.html">POST TYPE</a>
+                        <ul>
+                            <li><a href="blog-single-post.html">Standard</a></li>
+                            <li><a href="blog-single-post-gallery.html">Gallery</a></li>
+                            <li><a href="blog-single-post-link.html">Link</a></li>
+                            <li><a href="blog-single-post-quote.html">Quote</a></li>
+                            <li><a href="blog-single-post-video.html">Video</a></li>
+                            <li><a href="blog-single-post-audio.html">Audio</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="portfolio-col-grid-four.html">PORTFOLIO</a>
+                <ul>
+                    <li>
+                        <a href="portfolio-col-grid-four.html">BOXED GRID</a>
+                        <ul>
+                            <li><a href="portfolio-col-grid-two.html">Two Colums</a></li>
+                            <li><a href="portfolio-col-grid-three.html">Three Colums</a></li>
+                            <li><a href="portfolio-col-grid-four.html">Four Colums</a></li>
+                            <li><a href="portfolio-col-grid-four-without-filter.html">Four Colums Without Filter</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="portfolio-col-wide-three.html">BOXED STYLES</a>
+                        <ul>
+                            <li><a href="portfolio-col-wide-two.html">Two Colums</a></li>
+                            <li><a href="portfolio-col-wide-three.html">Three Colums</a></li>
+                            <li><a href="portfolio-col-wide-four.html">Four Colums</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="about.html">PAGES</a>
+                <ul>
+                    <li><a href="about.html">About Example 1</a>
+                        <ul>
+                            <li><a href="about.html">Link Level 1</a></li>
                             <li>
-                                <div class="widget woocommerce widget_shopping_cart">
-                                    <div class="widget_shopping_cart_content">
-                                        <ul class="woocommerce-mini-cart cart_list product_list_widget ">
-                                            <li class="woocommerce-mini-cart-item mini_cart_item">
-                                                <a href="#" class="remove" aria-label="Remove this item" data-product_id="65" data-product_sku="">×</a>
-                                                <a href="single-product-sidebar.html">
-                                                    <img src="assets/images/products/mini-cart1.jpg" class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image" alt="">XONE Wireless Controller&nbsp;
-                                                </a>
-                                                <span class="quantity">1 ×
-                                                            <span class="woocommerce-Price-amount amount">
-                                                                <span class="woocommerce-Price-currencySymbol">$</span>64.99</span>
-                                                        </span>
+                                <a href="about.html">Link Level 1</a>
+                                <ul>
+                                    <li><a href="about.html">Link Level 2</a></li>
+                                    <li>
+                                        <a href="about.html">Link Level 2</a>
+                                        <ul>
+                                            <li><a href="about.html">Link Level 3</a></li>
+                                            <li><a href="about.html">Link Level 3</a></li>
+                                            <li><a href="about.html">Link Level 3</a></li>
+                                            <li>
+                                                <a href="about.html">Link Level 3</a>
+                                                <ul>
+                                                    <li>
+                                                        <a href="about.html">Link Level 4</a>
+                                                        <ul>
+                                                            <li><a href="about.html">Link Level 5</a></li>
+                                                            <li><a href="about.html">Link Level 5</a></li>
+                                                            <li><a href="about.html">Link Level 5</a></li>
+                                                            <li><a href="about.html">Link Level 5</a></li>
+                                                            <li><a href="about.html">Link Level 5</a></li>
+                                                        </ul>
+                                                    </li>
+                                                    <li><a href="about.html">Link Level 4</a></li>
+                                                </ul>
                                             </li>
-                                            <li class="woocommerce-mini-cart-item mini_cart_item">
-                                                <a href="#" class="remove" aria-label="Remove this item" data-product_id="27" data-product_sku="">×</a>
-                                                <a href="single-product-sidebar.html">
-                                                    <img src="assets/images/products/mini-cart2.jpg" class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image" alt="">Gear Virtual Reality 3D with Bluetooth Glasses&nbsp;
-                                                </a>
-                                                <span class="quantity">1 ×
-                                                            <span class="woocommerce-Price-amount amount">
-                                                                <span class="woocommerce-Price-currencySymbol">$</span>72.00</span>
-                                                        </span>
-                                            </li>
+                                            <li><a href="about.html">Link Level 3</a></li>
                                         </ul>
-                                        <!-- .cart_list -->
-                                        <p class="woocommerce-mini-cart__total total">
-                                            <strong>Subtotal:</strong>
-                                            <span class="woocommerce-Price-amount amount">
-                                                        <span class="woocommerce-Price-currencySymbol">$</span>136.99</span>
-                                        </p>
-                                        <p class="woocommerce-mini-cart__buttons buttons">
-                                            <a href="cart.html" class="button wc-forward">View cart</a>
-                                            <a href="checkout.html" class="button checkout wc-forward">Checkout</a>
-                                        </p>
-                                    </div>
-                                    <!-- .widget_shopping_cart_content -->
-                                </div>
-                                <!-- .widget_shopping_cart -->
+                                    </li>
+                                    <li><a href="about.html">Link Level 2</a></li>
+                                    <li><a href="about.html">Link Level 2</a></li>
+                                </ul>
                             </li>
+                            <li><a href="about.html">Link Level 1</a></li>
+                            <li><a href="about.html">Link Level 1</a></li>
+                            <li><a href="about.html">Link Level 1</a></li>
                         </ul>
-                        <!-- .dropdown-menu-mini-cart -->
+                    </li>
+                    <li><a href="about-02.html">About Example 2</a></li>
+                    <li><a href="contact.html">Contacts Example 1</a></li>
+                    <li><a href="contact-02.html">Contacts Example 2</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="coming-soon.html">Coming Soon</a></li>
+                    <li><a href="page404.html">Page 404</a></li>
+                    <li><a href="typography.html">Typography</a></li>
+                    <li><a href="gift-cart.html">Gift Cart</a></li>
+                    <li>
+                        <a href="compare.html">Compare</a>
+                        <ul>
+                            <li><a href="compare.html">Compare 01</a></li>
+                            <li><a href="compare-02.html">Compare 02</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="wishlist.html">Wishlist</a></li>
+                    <li>
+                        <a href="empty-search.html">Empty</a>
+                        <ul>
+                            <li><a href="empty-cart.html">Empty Cart</a></li>
+                            <li><a href="empty-search.html">Empty Search</a></li>
+                            <li><a href="empty-wishlist.html">Empty Wishlist</a></li>
+                        </ul>
                     </li>
                 </ul>
-                <!-- .site-header-cart -->
-            </div>
-            <!-- /.row -->
-        </div>
-        <!-- .col-full -->
-        <div class="col-full handheld-only">
-            <div class="handheld-header">
-                <div class="row">
-                    <div class="site-branding">
-                        <a href="home-v1.html" class="custom-logo-link" rel="home">
-                            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 176 28">
-                                <defs>
-                                    <style>
-                                        .cls-1,
-                                        .cls-2 {
-                                            fill: #333e48;
-                                        }
-
-                                        .cls-1 {
-                                            fill-rule: evenodd;
-                                        }
-
-                                        .cls-3 {
-                                            fill: #3265b0;
-                                        }
-                                    </style>
-                                </defs>
-                                <polygon class="cls-1" points="171.63 0.91 171.63 11 170.63 11 170.63 0.91 170.63 0.84 170.63 0.06 176 0.06 176 0.91 171.63 0.91" />
-                                <rect class="cls-2" x="166.19" y="0.06" width="3.47" height="0.84" />
-                                <rect class="cls-2" x="159.65" y="4.81" width="3.51" height="0.84" />
-                                <polygon class="cls-1" points="158.29 11 157.4 11 157.4 0.06 158.26 0.06 158.36 0.06 164.89 0.06 164.89 0.87 158.36 0.87 158.36 10.19 164.99 10.19 164.99 11 158.36 11 158.29 11" />
-                                <polygon class="cls-1" points="149.54 6.61 150.25 5.95 155.72 10.98 154.34 10.98 149.54 6.61" />
-                                <polygon class="cls-1" points="147.62 10.98 146.65 10.98 146.65 0.05 147.62 0.05 147.62 5.77 153.6 0.33 154.91 0.33 147.62 7.05 147.62 10.98" />
-                                <path class="cls-1" d="M156.39,24h-1.25s-0.49-.39-0.71-0.59l-1.35-1.25c-0.25-.23-0.68-0.66-0.68-0.66s0-.46,0-0.72a3.56,3.56,0,0,0,3.54-2.87,3.36,3.36,0,0,0-3.22-4H148.8V24h-1V13.06h5c2.34,0.28,4,1.72,4.12,4a4.26,4.26,0,0,1-3.38,4.34C154.48,22.24,156.39,24,156.39,24Z" transform="translate(-12 -13)" />
-                                <polygon class="cls-1" points="132.04 2.09 127.09 7.88 130.78 7.88 130.78 8.69 126.4 8.69 124.42 11 123.29 11 132.65 0 133.04 0 133.04 11 132.04 11 132.04 2.09" />
-                                <polygon class="cls-1" points="120.97 2.04 116.98 6.15 116.98 6.19 116.97 6.17 116.95 6.19 116.95 6.15 112.97 2.04 112.97 11 112 11 112 0 112.32 0 116.97 4.8 121.62 0 121.94 0 121.94 11 120.97 11 120.97 2.04" />
-                                <ellipse class="cls-3" cx="116.3" cy="22.81" rx="5.15" ry="5.18" />
-                                <rect class="cls-2" x="99.13" y="0.44" width="5.87" height="27.12" />
-                                <polygon class="cls-1" points="85.94 27.56 79.92 27.56 79.92 0.44 85.94 0.44 85.94 16.86 96.35 16.86 96.35 21.84 85.94 21.84 85.94 27.56" />
-                                <path class="cls-1" d="M77.74,36.07a9,9,0,0,0,6.41-2.68L88,37c-2.6,2.74-6.71,4-10.89,4A13.94,13.94,0,0,1,62.89,27.15,14.19,14.19,0,0,1,77.11,13c4.38,0,8.28,1.17,10.89,4,0,0-3.89,3.82-3.91,3.8A9,9,0,1,0,77.74,36.07Z" transform="translate(-12 -13)" />
-                                <rect class="cls-2" x="37.4" y="11.14" width="7.63" height="4.98" />
-                                <polygon class="cls-1" points="32.85 27.56 28.6 27.56 28.6 5.42 28.6 3.96 28.6 0.44 47.95 0.44 47.95 5.42 34.46 5.42 34.46 22.72 48.25 22.72 48.25 27.56 34.46 27.56 32.85 27.56" />
-                                <polygon class="cls-1" points="15.4 27.56 9.53 27.56 9.53 5.57 9.53 0.59 9.53 0.44 24.93 0.44 24.93 5.57 15.4 5.57 15.4 27.56" />
-                                <rect class="cls-2" y="0.44" width="7.19" height="5.13" />
-                            </svg>
-                        </a>
-                        <!-- /.custom-logo-link -->
-                    </div>
-                    <!-- /.site-branding -->
-                    <!-- ============================================================= End Header Logo ============================================================= -->
-                    <div class="handheld-header-links">
-                        <ul class="columns-3">
-                            <li class="my-account">
-                                <a href="login-and-register.html" class="has-icon">
-                                    <i class="tm tm-login-register"></i>
-                                </a>
+            </li>
+            <li>
+                <a href="listing-left-column.html">WOMEN</a>
+                <ul>
+                    <li>
+                        <a href="listing-left-column.html">TOPS</a>
+                        <ul>
+                            <li><a href="listing-left-column.html">Blouses &amp; Shirts</a></li>
+                            <li><a href="listing-left-column.html">Dresses <span class="tt-badge tt-new">New</span></a></li>
+                            <li>
+                                <a href="listing-left-column.html">Tops &amp; T-shirts</a>
+                                <ul>
+                                    <li><a href="listing-left-column.html">Link Level 1</a></li>
+                                    <li>
+                                        <a href="listing-left-column.html">Link Level 1</a>
+                                        <ul>
+                                            <li><a href="listing-left-column.html">Link Level 2</a></li>
+                                            <li>
+                                                <a href="listing-left-column.html">Link Level 2</a>
+                                                <ul>
+                                                    <li><a href="listing-left-column.html">Link Level 3</a></li>
+                                                    <li><a href="listing-left-column.html">Link Level 3</a></li>
+                                                    <li><a href="listing-left-column.html">Link Level 3</a></li>
+                                                    <li>
+                                                        <a href="listing-left-column.html">Link Level 3</a>
+                                                        <ul>
+                                                            <li>
+                                                                <a href="listing-left-column.html">Link Level 4</a>
+                                                                <ul>
+                                                                    <li><a href="listing-left-column.html">Link Level 5</a></li>
+                                                                    <li><a href="listing-left-column.html">Link Level 5</a></li>
+                                                                    <li><a href="listing-left-column.html">Link Level 5</a></li>
+                                                                    <li><a href="listing-left-column.html">Link Level 5</a></li>
+                                                                    <li><a href="listing-left-column.html">Link Level 5</a></li>
+                                                                </ul>
+                                                            </li>
+                                                            <li><a href="listing-left-column.html">Link Level 4</a></li>
+                                                            <li><a href="listing-left-column.html">Link Level 4</a></li>
+                                                            <li><a href="listing-left-column.html">Link Level 4</a></li>
+                                                            <li><a href="listing-left-column.html">Link Level 4</a></li>
+                                                        </ul>
+                                                    </li>
+                                                    <li><a href="listing-left-column.html">Link Level 3</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="listing-left-column.html">Link Level 2</a></li>
+                                            <li><a href="listing-left-column.html">Link Level 2</a></li>
+                                            <li><a href="listing-left-column.html">Link Level 2</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="listing-left-column.html">Link Level 1</a></li>
+                                    <li><a href="listing-left-column.html">Link Level 1</a></li>
+                                    <li><a href="listing-left-column.html">Link Level 1</a></li>
+                                </ul>
                             </li>
-                            <li class="wishlist">
-                                <a href="wishlist.html" class="has-icon">
-                                    <i class="tm tm-favorites"></i>
-                                    <span class="count">3</span>
-                                </a>
-                            </li>
-                            <li class="compare">
-                                <a href="compare.html" class="has-icon">
-                                    <i class="tm tm-compare"></i>
-                                    <span class="count">3</span>
-                                </a>
-                            </li>
+                            <li><a href="listing-left-column.html">Sleeveless Tops</a></li>
+                            <li><a href="listing-left-column.html">Sweaters</a></li>
+                            <li><a href="listing-left-column.html">Jackets</a></li>
+                            <li><a href="listing-left-column.html">Outerwear</a></li>
                         </ul>
-                        <!-- .columns-3 -->
+                    </li>
+                    <li>
+                        <a href="listing-left-column.html">BOTTOMS</a>
+                        <ul>
+                            <li><a href="listing-left-column.html">Trousers <span class="tt-badge tt-fatured">Fatured</span></a></li>
+                            <li><a href="listing-left-column.html">Jeans</a></li>
+                            <li><a href="listing-left-column.html">Leggings</a></li>
+                            <li><a href="listing-left-column.html">Jumpsuit &amp; Shorts</a></li>
+                            <li><a href="listing-left-column.html">Skirts</a></li>
+                            <li><a href="listing-left-column.html">Tights</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="listing-left-column.html">ACCESSORIES</a>
+                        <ul>
+                            <li><a href="listing-left-column.html">Jewellery</a></li>
+                            <li><a href="listing-left-column.html">Hats</a></li>
+                            <li><a href="listing-left-column.html">Scarves &amp; Snoods</a></li>
+                            <li><a href="listing-left-column.html">Belts</a></li>
+                            <li><a href="listing-left-column.html">Bags</a></li>
+                            <li><a href="listing-left-column.html">Shoes</a></li>
+                            <li><a href="listing-left-column.html">Sunglasses <span class="tt-badge tt-sale">Sale 15%</span></a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="listing-left-column.html">SPECIALS</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="listing-right-column.html">MEN</a>
+                <ul>
+                    <li>
+                        <a href="listing-right-column.html">TOPS</a>
+                        <ul>
+                            <li><a href="listing-right-column.html">Blouses &amp; Shirts</a></li>
+                            <li><a href="listing-right-column.html">Dresses <span class="tt-badge tt-new">New</span></a></li>
+                            <li>
+                                <a href="listing-right-column.html">Tops &amp; T-shirts</a>
+                                <ul>
+                                    <li><a href="listing-right-column.html">Link Level 1</a></li>
+                                    <li>
+                                        <a href="listing-right-column.html">Link Level 1</a>
+                                        <ul>
+                                            <li><a href="listing-right-column.html">Link Level 2</a></li>
+                                            <li>
+                                                <a href="listing-right-column.html">Link Level 2</a>
+                                                <ul>
+                                                    <li><a href="listing-right-column.html">Link Level 3</a></li>
+                                                    <li><a href="listing-right-column.html">Link Level 3</a></li>
+                                                    <li><a href="listing-right-column.html">Link Level 3</a></li>
+                                                    <li>
+                                                        <a href="listing-right-column.html">Link Level 3</a>
+                                                        <ul>
+                                                            <li>
+                                                                <a href="listing-right-column.html">Link Level 4</a>
+                                                                <ul>
+                                                                    <li><a href="listing-right-column.html">Link Level 5</a></li>
+                                                                    <li><a href="listing-right-column.html">Link Level 5</a></li>
+                                                                    <li><a href="listing-right-column.html">Link Level 5</a></li>
+                                                                    <li><a href="listing-right-column.html">Link Level 5</a></li>
+                                                                    <li><a href="listing-right-column.html">Link Level 5</a></li>
+                                                                </ul>
+                                                            </li>
+                                                            <li><a href="listing-right-column.html">Link Level 4</a></li>
+                                                            <li><a href="listing-right-column.html">Link Level 4</a></li>
+                                                            <li><a href="listing-right-column.html">Link Level 4</a></li>
+                                                            <li><a href="listing-right-column.html">Link Level 4</a></li>
+                                                        </ul>
+                                                    </li>
+                                                    <li><a href="listing-right-column.html">Link Level 3</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="listing-right-column.html">Link Level 2</a></li>
+                                            <li><a href="listing-right-column.html">Link Level 2</a></li>
+                                            <li><a href="listing-right-column.html">Link Level 2</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="listing-right-column.html">Link Level 1</a></li>
+                                    <li><a href="listing-right-column.html">Link Level 1</a></li>
+                                    <li><a href="listing-right-column.html">Link Level 1</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="listing-right-column.html">Sleeveless Tops</a></li>
+                            <li><a href="listing-right-column.html">Sweaters</a></li>
+                            <li><a href="listing-right-column.html">Jackets</a></li>
+                            <li><a href="listing-right-column.html">Outerwear</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="listing-right-column.html">BOTTOMS</a>
+                        <ul>
+                            <li><a href="listing-right-column.html">Trousers <span class="tt-badge tt-fatured">Fatured</span></a></li>
+                            <li><a href="listing-right-column.html">Jeans</a></li>
+                            <li><a href="listing-right-column.html">Leggings</a></li>
+                            <li><a href="listing-right-column.html">Jumpsuit &amp; shorts</a></li>
+                            <li><a href="listing-right-column.html">Skirts</a></li>
+                            <li><a href="listing-right-column.html">Tights</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="listing-right-column.html">ACCESSORIES</a>
+                        <ul>
+                            <li><a href="listing-right-column.html">Jewellery</a></li>
+                            <li><a href="listing-right-column.html">Hats</a></li>
+                            <li><a href="listing-right-column.html">Scarves &amp; Snoods</a></li>
+                            <li><a href="listing-right-column.html">Belts</a></li>
+                            <li><a href="listing-right-column.html">Bags</a></li>
+                            <li><a href="listing-right-column.html">Shoes</a></li>
+                            <li><a href="listing-right-column.html">Sunglasses <span class="tt-badge tt-sale">Sale 15%</span></a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li><a href="index-rtl.html">RTL</a></li>
+        </ul>
+        <div class="mm-navbtn-names">
+            <div class="mm-closebtn">Close</div>
+            <div class="mm-backbtn">Back</div>
+        </div>
+    </nav>
+    <!-- tt-mobile-header -->
+    <div class="tt-mobile-header">
+        <div class="container-fluid">
+            <div class="tt-header-row">
+                <div class="tt-mobile-parent-menu">
+                    <div class="tt-menu-toggle">
+                        <i class="icon-03"></i>
                     </div>
-                    <!-- .handheld-header-links -->
                 </div>
-                <!-- /.row -->
-                <div class="techmarket-sticky-wrap">
-                    <div class="row">
-                        <nav id="handheld-navigation" class="handheld-navigation" aria-label="Handheld Navigation">
-                            <button class="btn navbar-toggler" type="button">
-                                <i class="tm tm-departments-thin"></i>
-                                <span>Menu</span>
-                            </button>
-                            <div class="handheld-navigation-menu">
-                                <span class="tmhm-close">Close</span>
-                                <ul id="menu-departments-menu-1" class="nav">
-                                    <li class="highlight menu-item animate-dropdown">
-                                        <a title="Value of the Day" href="shop.html">Value of the Day</a>
-                                    </li>
-                                    <li class="highlight menu-item animate-dropdown">
-                                        <a title="Top 100 Offers" href="shop.html">Top 100 Offers</a>
-                                    </li>
-                                    <li class="highlight menu-item animate-dropdown">
-                                        <a title="New Arrivals" href="shop.html">New Arrivals</a>
-                                    </li>
-                                    <li class="yamm-tfw menu-item menu-item-has-children animate-dropdown dropdown-submenu">
-                                        <a title="Computers &amp; Laptops" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true" href="#">Computers &#038; Laptops <span class="caret"></span></a>
-                                        <ul role="menu" class=" dropdown-menu">
-                                            <li class="menu-item menu-item-object-static_block animate-dropdown">
-                                                <div class="yamm-content">
-                                                    <div class="bg-yamm-content bg-yamm-content-bottom bg-yamm-content-right">
-                                                        <div class="kc-col-container">
-                                                            <div class="kc_single_image">
-                                                                <img src="assets/images/megamenu.jpg" class="" alt="" />
-                                                            </div>
-                                                            <!-- .kc_single_image -->
-                                                        </div>
-                                                        <!-- .kc-col-container -->
-                                                    </div>
-                                                    <!-- .bg-yamm-content -->
-                                                    <div class="row yamm-content-row">
-                                                        <div class="col-md-6 col-sm-12">
-                                                            <div class="kc-col-container">
-                                                                <div class="kc_text_block">
-                                                                    <ul>
-                                                                        <li class="nav-title">Computers &amp; Accessories</li>
-                                                                        <li><a href="shop.html">All Computers &amp; Accessories</a></li>
-                                                                        <li><a href="shop.html">Laptops, Desktops &amp; Monitors</a></li>
-                                                                        <li><a href="shop.html">Pen Drives, Hard Drives &amp; Memory Cards</a></li>
-                                                                        <li><a href="shop.html">Printers &amp; Ink</a></li>
-                                                                        <li><a href="shop.html">Networking &amp; Internet Devices</a></li>
-                                                                        <li><a href="shop.html">Computer Accessories</a></li>
-                                                                        <li><a href="shop.html">Software</a></li>
-                                                                        <li class="nav-divider"></li>
-                                                                        <li>
-                                                                            <a href="#">
-                                                                                <span class="nav-text">All Electronics</span>
-                                                                                <span class="nav-subtext">Discover more products</span>
-                                                                            </a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                                <!-- .kc_text_block -->
-                                                            </div>
-                                                            <!-- .kc-col-container -->
-                                                        </div>
-                                                        <!-- .kc_column -->
-                                                        <div class="col-md-6 col-sm-12">
-                                                            <div class="kc-col-container">
-                                                                <div class="kc_text_block">
-                                                                    <ul>
-                                                                        <li class="nav-title">Office &amp; Stationery</li>
-                                                                        <li><a href="shop.html">All Office &amp; Stationery</a></li>
-                                                                        <li><a href="shop.html">Pens &amp; Writing</a></li>
-                                                                    </ul>
-                                                                </div>
-                                                                <!-- .kc_text_block -->
-                                                            </div>
-                                                            <!-- .kc-col-container -->
-                                                        </div>
-                                                        <!-- .kc_column -->
-                                                    </div>
-                                                    <!-- .kc_row -->
+                <!-- search -->
+                <div class="tt-mobile-parent-search tt-parent-box"></div>
+                <!-- /search -->
+                <!-- cart -->
+                <div class="tt-mobile-parent-cart tt-parent-box"></div>
+                <!-- /cart -->
+                <!-- account -->
+                <div class="tt-mobile-parent-account tt-parent-box"></div>
+                <!-- /account -->
+                <!-- currency -->
+                <div class="tt-mobile-parent-multi tt-parent-box"></div>
+                <!-- /currency -->
+            </div>
+        </div>
+        <div class="container-fluid tt-top-line">
+            <div class="row">
+                <div class="tt-logo-container">
+                    <!-- mobile logo -->
+                    <a class="tt-logo tt-logo-alignment" href="index.html"><img src="images/custom/logo.png" alt=""></a>
+                    <!-- /mobile logo -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- tt-desktop-header -->
+    <div class="tt-desktop-header">
+        <div class="container">
+            <div class="tt-header-holder">
+                <div class="tt-col-obj tt-obj-logo">
+                    <!-- logo -->
+                    <a class="tt-logo tt-logo-alignment" href="index.html"><img src="images/custom/logo.png" alt=""></a>
+                    <!-- /logo -->
+                </div>
+                <div class="tt-col-obj tt-obj-menu">
+                    <!-- tt-menu -->
+                    <div class="tt-desctop-parent-menu tt-parent-box">
+                        <div class="tt-desctop-menu">
+                            <nav>
+                                <ul>
+                                    <li class="dropdown tt-megamenu-col-02 selected">
+                                        <a href="<?=_URL_HOME?>">TRANG CHỦ</a>
+                                        <div class="dropdown-menu">
+                                            <div class="row tt-col-list">
+                                                <div class="col">
+                                                    <h6 class="tt-title-submenu"><a href="index.html">HOME STYLES</a></h6>
+                                                    <ul class="tt-megamenu-submenu">
+                                                        <li><a href="index.html">Home — Example 1
+                                                                <img src="images/loader.svg" data-src="images/custom/tt-layout-img-01.png" alt="Example 1">
+                                                                <span class="tt-badge tt-fatured">Popular</span>
+                                                            </a></li>
+                                                        <li><a href="index-02.html">Home — Example 2 <img  src="images/loader.svg" data-src="images/custom/tt-layout-img-02.png" alt="Example 2"></a></li>
+                                                        <li><a href="index-03.html">Home — Example 3 <img  src="images/loader.svg" data-src="images/custom/tt-layout-img-03.png" alt="Example 3"></a></li>
+                                                        <li><a href="index-04.html">Home — Example 4
+                                                                <img  src="images/loader.svg" data-src="images/custom/tt-layout-img-04.png" alt="Example 4">
+                                                                <span class="tt-badge tt-fatured">Popular</span>
+                                                            </a></li>
+                                                        <li><a href="index-05.html">Home — Example 5 <img  src="images/loader.svg" data-src="images/custom/tt-layout-img-05.png" alt="Example 5"></a></li>
+                                                        <li><a href="index-06.html">Home — Example 6 <img  src="images/loader.svg" data-src="images/custom/tt-layout-img-06.png" alt="Example 6"></a></li>
+                                                        <li><a href="index-07.html">Home — Example 7 <img  src="images/loader.svg" data-src="images/custom/tt-layout-img-07.png" alt="Example 7"></a></li>
+                                                        <li><a href="index-08.html">Home — Example 8 <img  src="images/loader.svg" data-src="images/custom/tt-layout-img-08.png" alt="Example 8"></a></li>
+                                                        <li><a href="index-09.html">Home — Example 9 <img  src="images/loader.svg" data-src="images/custom/tt-layout-img-09.png" alt="Example 9"></a></li>
+                                                    </ul>
                                                 </div>
-                                                <!-- .yamm-content -->
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li class="yamm-tfw menu-item menu-item-has-children animate-dropdown dropdown-submenu">
-                                        <a title="Cameras &amp; Photo" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true" href="#">Cameras &#038; Photo <span class="caret"></span></a>
-                                        <ul role="menu" class=" dropdown-menu">
-                                            <li class="menu-item menu-item-object-static_block animate-dropdown">
-                                                <div class="yamm-content">
-                                                    <div class="bg-yamm-content bg-yamm-content-bottom bg-yamm-content-right">
-                                                        <div class="kc-col-container">
-                                                            <div class="kc_single_image">
-                                                                <img src="assets/images/megamenu-1.jpg" class="" alt="" />
-                                                            </div>
-                                                            <!-- .kc_single_image -->
-                                                        </div>
-                                                        <!-- .kc-col-container -->
-                                                    </div>
-                                                    <!-- .bg-yamm-content -->
-                                                    <div class="row yamm-content-row">
-                                                        <div class="col-md-6 col-sm-12">
-                                                            <div class="kc-col-container">
-                                                                <div class="kc_text_block">
-                                                                    <ul>
-                                                                        <li class="nav-title">Cameras & Photography</li>
-                                                                        <li><a href="shop.html">All Cameras & Photography</a></li>
-                                                                        <li><a href="shop.html">Point & Shoot Cameras</a></li>
-                                                                        <li><a href="shop.html">Lenses</a></li>
-                                                                        <li><a href="shop.html">Camera Accessories</a></li>
-                                                                        <li><a href="shop.html">Security & Surveillance</a></li>
-                                                                        <li><a href="shop.html">Binoculars & Telescopes</a></li>
-                                                                        <li><a href="shop.html">Camcorders</a></li>
-                                                                        <li class="nav-divider"></li>
-                                                                        <li>
-                                                                            <a href="#">
-                                                                                <span class="nav-text">All Electronics</span>
-                                                                                <span class="nav-subtext">Discover more products</span>
-                                                                            </a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                                <!-- .kc_text_block -->
-                                                            </div>
-                                                            <!-- .kc-col-container -->
-                                                        </div>
-                                                        <!-- .kc_column -->
-                                                        <div class="col-md-6 col-sm-12">
-                                                            <div class="kc-col-container">
-                                                                <div class="kc_text_block">
-                                                                    <ul>
-                                                                        <li class="nav-title">Audio & Video</li>
-                                                                        <li><a href="shop.html">All Audio & Video</a></li>
-                                                                        <li><a href="shop.html">Headphones & Speakers</a></li>
-                                                                        <li><a href="shop.html">Home Entertainment Systems</a></li>
-                                                                        <li><a href="shop.html">MP3 & Media Players</a></li>
-                                                                    </ul>
-                                                                </div>
-                                                                <!-- .kc_text_block -->
-                                                            </div>
-                                                            <!-- .kc-col-container -->
-                                                        </div>
-                                                        <!-- .kc_column -->
-                                                    </div>
-                                                    <!-- .kc_row -->
+                                                <div class="col">
+                                                    <h6 class="tt-title-submenu"><a href="index.html">HOME STYLES</a></h6>
+                                                    <ul class="tt-megamenu-submenu">
+                                                        <li><a href="index-10.html">Home — Example 10 <img  src="images/loader.svg" data-src="images/custom/tt-layout-img-10.png" alt="Example 10"></a></li>
+                                                        <li><a href="index-11.html">Home — Example 11 <img  src="images/loader.svg" data-src="images/custom/tt-layout-img-11.png" alt="Example 11"></a></li>
+                                                        <li><a href="index-12.html">Home — Example 12 <img  src="images/loader.svg" data-src="images/custom/tt-layout-img-12.png" alt="Example 12"></a></li>
+                                                        <li><a href="index-13.html">Home — Example 13 <img  src="images/loader.svg" data-src="images/custom/tt-layout-img-13.png" alt="Example 13"></a></li>
+                                                        <li><a href="index-14.html">Home — Example 14 <img  src="images/loader.svg" data-src="images/custom/tt-layout-img-14.png" alt="Example 14"></a></li>
+                                                        <li><a href="index-15.html">Home — Example 15 <img  src="images/loader.svg" data-src="images/custom/tt-layout-img-15.png" alt="Example 15"></a></li>
+                                                        <li><a href="index-16.html">Home — Example 16
+                                                                <img  src="images/loader.svg" data-src="images/custom/tt-layout-img-16.png" alt="Example 16">
+                                                                <span class="tt-badge tt-fatured">Popular</span>
+                                                            </a></li>
+                                                        <li><a href="index-17.html">Home — Example 17 <img  src="images/loader.svg" data-src="images/custom/tt-layout-img-17.png" alt="Example 17"></a></li>
+                                                        <li><a href="index-18.html">Home — Example 18 <img  src="images/loader.svg" data-src="images/custom/tt-layout-img-18.png" alt="Example 18"></a></li>
+                                                    </ul>
                                                 </div>
-                                                <!-- .yamm-content -->
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li class="yamm-tfw menu-item menu-item-has-children animate-dropdown dropdown-submenu">
-                                        <a title="Smart Phones &amp; Tablets" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true" href="#">Smart Phones &#038; Tablets 	<span class="caret"></span></a>
-                                        <ul role="menu" class=" dropdown-menu">
-                                            <li class="menu-item menu-item-object-static_block animate-dropdown">
-                                                <div class="yamm-content">
-                                                    <div class="bg-yamm-content bg-yamm-content-bottom bg-yamm-content-right">
-                                                        <div class="kc-col-container">
-                                                            <div class="kc_single_image">
-                                                                <img src="assets/images/megamenu.jpg" class="" alt="" />
-                                                            </div>
-                                                            <!-- .kc_single_image -->
-                                                        </div>
-                                                        <!-- .kc-col-container -->
-                                                    </div>
-                                                    <!-- .bg-yamm-content -->
-                                                    <div class="row yamm-content-row">
-                                                        <div class="col-md-6 col-sm-12">
-                                                            <div class="kc-col-container">
-                                                                <div class="kc_text_block">
-                                                                    <ul>
-                                                                        <li class="nav-title">Computers &amp; Accessories</li>
-                                                                        <li><a href="shop.html">All Computers &amp; Accessories</a></li>
-                                                                        <li><a href="shop.html">Laptops, Desktops &amp; Monitors</a></li>
-                                                                        <li><a href="shop.html">Pen Drives, Hard Drives &amp; Memory Cards</a></li>
-                                                                        <li><a href="shop.html">Printers &amp; Ink</a></li>
-                                                                        <li><a href="shop.html">Networking &amp; Internet Devices</a></li>
-                                                                        <li><a href="shop.html">Computer Accessories</a></li>
-                                                                        <li><a href="shop.html">Software</a></li>
-                                                                        <li class="nav-divider"></li>
-                                                                        <li>
-                                                                            <a href="#">
-                                                                                <span class="nav-text">All Electronics</span>
-                                                                                <span class="nav-subtext">Discover more products</span>
-                                                                            </a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                                <!-- .kc_text_block -->
-                                                            </div>
-                                                            <!-- .kc-col-container -->
-                                                        </div>
-                                                        <!-- .kc_column -->
-                                                        <div class="col-md-6 col-sm-12">
-                                                            <div class="kc-col-container">
-                                                                <div class="kc_text_block">
-                                                                    <ul>
-                                                                        <li class="nav-title">Office &amp; Stationery</li>
-                                                                        <li><a href="shop.html">All Office &amp; Stationery</a></li>
-                                                                        <li><a href="shop.html">Pens &amp; Writing</a></li>
-                                                                    </ul>
-                                                                </div>
-                                                                <!-- .kc_text_block -->
-                                                            </div>
-                                                            <!-- .kc-col-container -->
-                                                        </div>
-                                                        <!-- .kc_column -->
-                                                    </div>
-                                                    <!-- .kc_row -->
+                                                <div class="col">
+                                                    <h6 class="tt-title-submenu"><a href="index-skin-snowboards.html">
+                                                            <span>HOME SKINS</span>
+                                                            <span class="tt-badge tt-sale">HOT</span>
+                                                        </a></h6>
+                                                    <ul class="tt-megamenu-submenu">
+                                                        <li><a href="index-skin-snowboards.html">Snowboards Shop
+                                                                <img src="images/loader.svg" data-src="images/custom/tt-skins-img-01.png" alt="Snowboards Shop">
+                                                                <span class="tt-badge tt-fatured">Popular</span>
+                                                            </a></li>
+                                                        <li><a href="index-skin-phones.html">Phones Shop
+                                                                <img  src="images/loader.svg" data-src="images/custom/tt-skins-img-02.png" alt="Phones Shop">
+                                                                <span class="tt-badge tt-fatured">Popular</span>
+                                                            </a></li>
+                                                        <li><a href="index-skin-bikes.html">Bikes Shop
+                                                                <img  src="images/loader.svg" data-src="images/custom/tt-skins-img-03.png" alt="Bikes Shop">
+                                                                <span class="tt-badge tt-fatured">Popular</span>
+                                                            </a></li>
+                                                        <li><a href="index-skin-lingerie.html">Lingerie Shop <img  src="images/loader.svg" data-src="images/custom/tt-skins-img-04.png" alt="Lingerie Shop"></a></li>
+                                                        <li><a href="index-skin-furniture.html">Furniture Shop <img  src="images/loader.svg" data-src="images/custom/tt-skins-img-05.png" alt="Furniture Shop"></a></li>
+                                                        <li><a href="index-skin-books.html">Books shop
+                                                                <img  src="images/loader.svg" data-src="images/custom/tt-skins-img-06.png" alt="Books Shop">
+                                                                <span class="tt-badge tt-new">New</span>
+                                                            </a></li>
+                                                    </ul>
                                                 </div>
-                                                <!-- .yamm-content -->
-                                            </li>
-                                        </ul>
+                                            </div>
+                                        </div>
                                     </li>
-                                    <li class="yamm-tfw menu-item menu-item-has-children animate-dropdown dropdown-submenu">
-                                        <a title="Video Games &amp; Consoles" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true" href="#">Video Games &#038; Consoles <span class="caret"></span></a>
-                                        <ul role="menu" class=" dropdown-menu">
-                                            <li class="menu-item menu-item-object-static_block animate-dropdown">
-                                                <div class="yamm-content">
-                                                    <div class="bg-yamm-content bg-yamm-content-bottom bg-yamm-content-right">
-                                                        <div class="kc-col-container">
-                                                            <div class="kc_single_image">
-                                                                <img src="assets/images/megamenu-1.jpg" class="" alt="" />
-                                                            </div>
-                                                            <!-- .kc_single_image -->
-                                                        </div>
-                                                        <!-- .kc-col-container -->
-                                                    </div>
-                                                    <!-- .bg-yamm-content -->
-                                                    <div class="row yamm-content-row">
-                                                        <div class="col-md-6 col-sm-12">
-                                                            <div class="kc-col-container">
-                                                                <div class="kc_text_block">
-                                                                    <ul>
-                                                                        <li class="nav-title">Cameras & Photography</li>
-                                                                        <li><a href="shop.html">All Cameras & Photography</a></li>
-                                                                        <li><a href="shop.html">Point & Shoot Cameras</a></li>
-                                                                        <li><a href="shop.html">Lenses</a></li>
-                                                                        <li><a href="shop.html">Camera Accessories</a></li>
-                                                                        <li><a href="shop.html">Security & Surveillance</a></li>
-                                                                        <li><a href="shop.html">Binoculars & Telescopes</a></li>
-                                                                        <li><a href="shop.html">Camcorders</a></li>
-                                                                        <li class="nav-divider"></li>
-                                                                        <li>
-                                                                            <a href="#">
-                                                                                <span class="nav-text">All Electronics</span>
-                                                                                <span class="nav-subtext">Discover more products</span>
-                                                                            </a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                                <!-- .kc_text_block -->
-                                                            </div>
-                                                            <!-- .kc-col-container -->
-                                                        </div>
-                                                        <!-- .kc_column -->
-                                                        <div class="col-md-6 col-sm-12">
-                                                            <div class="kc-col-container">
-                                                                <div class="kc_text_block">
-                                                                    <ul>
-                                                                        <li class="nav-title">Audio & Video</li>
-                                                                        <li><a href="shop.html">All Audio & Video</a></li>
-                                                                        <li><a href="shop.html">Headphones & Speakers</a></li>
-                                                                        <li><a href="shop.html">Home Entertainment Systems</a></li>
-                                                                        <li><a href="shop.html">MP3 & Media Players</a></li>
-                                                                    </ul>
-                                                                </div>
-                                                                <!-- .kc_text_block -->
-                                                            </div>
-                                                            <!-- .kc-col-container -->
-                                                        </div>
-                                                        <!-- .kc_column -->
-                                                    </div>
-                                                    <!-- .kc_row -->
+                                    <li class="dropdown megamenu">
+                                        <a href="listing-collection.html">SHOP</a>
+                                        <div class="dropdown-menu">
+                                            <div class="row tt-col-list">
+                                                <div class="col">
+                                                    <h6 class="tt-title-submenu"><a href="listing-left-column.html">LISTING STYLES</a></h6>
+                                                    <ul class="tt-megamenu-submenu">
+                                                        <li><a href="listing-left-column.html">Listing With Left Sidebar</a></li>
+                                                        <li><a href="listing-right-column.html">Listing With Right Sidebar</a></li>
+                                                        <li><a href="listing-not-sidebar.html">Listing Not Sidebar</a></li>
+                                                        <li><a href="listing-not-sidebar-full-width.html">Listing Not Sidebar Full Width</a></li>
+                                                        <li><a href="listing-metro.html">Listing Metro</a></li>
+                                                        <li><a href="listing-left-column-with-block.html">Listing With Custom HTML Block</a></li>
+                                                        <li><a href="listing-collection.html">Listing Collection</a></li>
+                                                        <li><a href="lookbook.html">Look Book</a></li>
+                                                    </ul>
                                                 </div>
-                                                <!-- .yamm-content -->
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li class="yamm-tfw menu-item menu-item-has-children animate-dropdown dropdown-submenu">
-                                        <a title="TV &amp; Audio" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true" href="#">TV &#038; Audio <span class="caret"></span></a>
-                                        <ul role="menu" class=" dropdown-menu">
-                                            <li class="menu-item menu-item-object-static_block animate-dropdown">
-                                                <div class="yamm-content">
-                                                    <div class="bg-yamm-content bg-yamm-content-bottom bg-yamm-content-right">
-                                                        <div class="kc-col-container">
-                                                            <div class="kc_single_image">
-                                                                <img src="assets/images/megamenu.jpg" class="" alt="" />
-                                                            </div>
-                                                            <!-- .kc_single_image -->
-                                                        </div>
-                                                        <!-- .kc-col-container -->
-                                                    </div>
-                                                    <!-- .bg-yamm-content -->
-                                                    <div class="row yamm-content-row">
-                                                        <div class="col-md-6 col-sm-12">
-                                                            <div class="kc-col-container">
-                                                                <div class="kc_text_block">
-                                                                    <ul>
-                                                                        <li class="nav-title">Computers &amp; Accessories</li>
-                                                                        <li><a href="shop.html">All Computers &amp; Accessories</a></li>
-                                                                        <li><a href="shop.html">Laptops, Desktops &amp; Monitors</a></li>
-                                                                        <li><a href="shop.html">Pen Drives, Hard Drives &amp; Memory Cards</a></li>
-                                                                        <li><a href="shop.html">Printers &amp; Ink</a></li>
-                                                                        <li><a href="shop.html">Networking &amp; Internet Devices</a></li>
-                                                                        <li><a href="shop.html">Computer Accessories</a></li>
-                                                                        <li><a href="shop.html">Software</a></li>
-                                                                        <li class="nav-divider"></li>
-                                                                        <li>
-                                                                            <a href="#">
-                                                                                <span class="nav-text">All Electronics</span>
-                                                                                <span class="nav-subtext">Discover more products</span>
-                                                                            </a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                                <!-- .kc_text_block -->
-                                                            </div>
-                                                            <!-- .kc-col-container -->
-                                                        </div>
-                                                        <!-- .kc_column -->
-                                                        <div class="col-md-6 col-sm-12">
-                                                            <div class="kc-col-container">
-                                                                <div class="kc_text_block">
-                                                                    <ul>
-                                                                        <li class="nav-title">Office &amp; Stationery</li>
-                                                                        <li><a href="shop.html">All Office &amp; Stationery</a></li>
-                                                                        <li><a href="shop.html">Pens &amp; Writing</a></li>
-                                                                    </ul>
-                                                                </div>
-                                                                <!-- .kc_text_block -->
-                                                            </div>
-                                                            <!-- .kc-col-container -->
-                                                        </div>
-                                                        <!-- .kc_column -->
-                                                    </div>
-                                                    <!-- .kc_row -->
+                                                <div class="col">
+                                                    <h6 class="tt-title-submenu"><a href="product.html">PRODUCT PAGE STYLES</a></h6>
+                                                    <ul class="tt-megamenu-submenu">
+                                                        <li><a href="product.html">Product Example 1</a></li>
+                                                        <li><a href="product-02.html">Product Example 2</a></li>
+                                                        <li><a href="product-03.html">Product Example 3</a></li>
+                                                        <li><a href="product-04.html">Product Example 4</a></li>
+                                                        <li><a href="product-variable.html">Product Layout</a></li>
+                                                        <li><a href="product-three-columns.html">Three Columns</a></li>
+                                                    </ul>
                                                 </div>
-                                                <!-- .yamm-content -->
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li class="yamm-tfw menu-item menu-item-has-children animate-dropdown dropdown-submenu">
-                                        <a title="Car Electronic &amp; GPS" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true" href="#">Car Electronic &#038; GPS <span class="caret"></span></a>
-                                        <ul role="menu" class=" dropdown-menu">
-                                            <li class="menu-item menu-item-object-static_block animate-dropdown">
-                                                <div class="yamm-content">
-                                                    <div class="bg-yamm-content bg-yamm-content-bottom bg-yamm-content-right">
-                                                        <div class="kc-col-container">
-                                                            <div class="kc_single_image">
-                                                                <img src="assets/images/megamenu-1.jpg" class="" alt="" />
-                                                            </div>
-                                                            <!-- .kc_single_image -->
-                                                        </div>
-                                                        <!-- .kc-col-container -->
-                                                    </div>
-                                                    <!-- .bg-yamm-content -->
-                                                    <div class="row yamm-content-row">
-                                                        <div class="col-md-6 col-sm-12">
-                                                            <div class="kc-col-container">
-                                                                <div class="kc_text_block">
-                                                                    <ul>
-                                                                        <li class="nav-title">Cameras & Photography</li>
-                                                                        <li><a href="shop.html">All Cameras & Photography</a></li>
-                                                                        <li><a href="shop.html">Point & Shoot Cameras</a></li>
-                                                                        <li><a href="shop.html">Lenses</a></li>
-                                                                        <li><a href="shop.html">Camera Accessories</a></li>
-                                                                        <li><a href="shop.html">Security & Surveillance</a></li>
-                                                                        <li><a href="shop.html">Binoculars & Telescopes</a></li>
-                                                                        <li><a href="shop.html">Camcorders</a></li>
-                                                                        <li class="nav-divider"></li>
-                                                                        <li>
-                                                                            <a href="#">
-                                                                                <span class="nav-text">All Electronics</span>
-                                                                                <span class="nav-subtext">Discover more products</span>
-                                                                            </a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                                <!-- .kc_text_block -->
-                                                            </div>
-                                                            <!-- .kc-col-container -->
-                                                        </div>
-                                                        <!-- .kc_column -->
-                                                        <div class="col-md-6 col-sm-12">
-                                                            <div class="kc-col-container">
-                                                                <div class="kc_text_block">
-                                                                    <ul>
-                                                                        <li class="nav-title">Audio & Video</li>
-                                                                        <li><a href="shop.html">All Audio & Video</a></li>
-                                                                        <li><a href="shop.html">Headphones & Speakers</a></li>
-                                                                        <li><a href="shop.html">Home Entertainment Systems</a></li>
-                                                                        <li><a href="shop.html">MP3 & Media Players</a></li>
-                                                                    </ul>
-                                                                </div>
-                                                                <!-- .kc_text_block -->
-                                                            </div>
-                                                            <!-- .kc-col-container -->
-                                                        </div>
-                                                        <!-- .kc_column -->
-                                                    </div>
-                                                    <!-- .kc_row -->
+                                                <div class="col">
+                                                    <h6 class="tt-title-submenu"><a href="product-variable.html">PRODUCT PAGE TYPES</a></h6>
+                                                    <ul class="tt-megamenu-submenu">
+                                                        <li><a href="product.html">Standard Product</a></li>
+                                                        <li><a href="product-variable.html">Variable Product</a></li>
+                                                        <li><a href="product-04.html">Grouped Product</a></li>
+                                                        <li><a href="product-label-new.html">New Product</a></li>
+                                                        <li><a href="product-label-sale.html">Sale Product</a></li>
+                                                        <li><a href="product-label-out-of-stock.html">Out Of Stock Product</a></li>
+                                                    </ul>
                                                 </div>
-                                                <!-- .yamm-content -->
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li class="yamm-tfw menu-item menu-item-has-children animate-dropdown dropdown-submenu">
-                                        <a title="Accesories" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true" href="#">Accesories <span class="caret"></span></a>
-                                        <ul role="menu" class=" dropdown-menu">
-                                            <li class="menu-item menu-item-object-static_block animate-dropdown">
-                                                <div class="yamm-content">
-                                                    <div class="bg-yamm-content bg-yamm-content-bottom bg-yamm-content-right">
-                                                        <div class="kc-col-container">
-                                                            <div class="kc_single_image">
-                                                                <img src="assets/images/megamenu.jpg" class="" alt="" />
-                                                            </div>
-                                                            <!-- .kc_single_image -->
-                                                        </div>
-                                                        <!-- .kc-col-container -->
-                                                    </div>
-                                                    <!-- .bg-yamm-content -->
-                                                    <div class="row yamm-content-row">
-                                                        <div class="col-md-6 col-sm-12">
-                                                            <div class="kc-col-container">
-                                                                <div class="kc_text_block">
-                                                                    <ul>
-                                                                        <li class="nav-title">Computers &amp; Accessories</li>
-                                                                        <li><a href="shop.html">All Computers &amp; Accessories</a></li>
-                                                                        <li><a href="shop.html">Laptops, Desktops &amp; Monitors</a></li>
-                                                                        <li><a href="shop.html">Pen Drives, Hard Drives &amp; Memory Cards</a></li>
-                                                                        <li><a href="shop.html">Printers &amp; Ink</a></li>
-                                                                        <li><a href="shop.html">Networking &amp; Internet Devices</a></li>
-                                                                        <li><a href="shop.html">Computer Accessories</a></li>
-                                                                        <li><a href="shop.html">Software</a></li>
-                                                                        <li class="nav-divider"></li>
-                                                                        <li>
-                                                                            <a href="#">
-                                                                                <span class="nav-text">All Electronics</span>
-                                                                                <span class="nav-subtext">Discover more products</span>
-                                                                            </a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                                <!-- .kc_text_block -->
-                                                            </div>
-                                                            <!-- .kc-col-container -->
-                                                        </div>
-                                                        <!-- .kc_column -->
-                                                        <div class="col-md-6 col-sm-12">
-                                                            <div class="kc-col-container">
-                                                                <div class="kc_text_block">
-                                                                    <ul>
-                                                                        <li class="nav-title">Office &amp; Stationery</li>
-                                                                        <li><a href="shop.html">All Office &amp; Stationery</a></li>
-                                                                        <li><a href="shop.html">Pens &amp; Writing</a></li>
-                                                                    </ul>
-                                                                </div>
-                                                                <!-- .kc_text_block -->
-                                                            </div>
-                                                            <!-- .kc-col-container -->
-                                                        </div>
-                                                        <!-- .kc_column -->
-                                                    </div>
-                                                    <!-- .kc_row -->
+                                                <div class="col">
+                                                    <h6 class="tt-title-submenu"><a href="shopping_cart_02.html">OTHER PAGES</a></h6>
+                                                    <ul class="tt-megamenu-submenu">
+                                                        <li><a href="shopping_cart_02.html">Cart</a></li>
+                                                        <li><a href="shopping_cart_01.html">Cart With Right Col</a></li>
+                                                        <li><a href="account.html">Account</a></li>
+                                                        <li><a href="account_address.html">Account Address</a></li>
+                                                        <li><a href="account_address_fields.html">Account Address Fields</a></li>
+                                                    </ul>
                                                 </div>
-                                                <!-- .yamm-content -->
-                                            </li>
-                                        </ul>
+                                            </div>
+                                        </div>
                                     </li>
-                                    <li class="menu-item animate-dropdown">
-                                        <a title="Gadgets" href="shop.html">Gadgets</a>
+                                    <li class="dropdown tt-megamenu-col-01">
+                                        <a href="blog-listing-without-col.html">BLOG</a>
+                                        <div class="dropdown-menu">
+                                            <div class="row tt-col-list">
+                                                <div class="col">
+                                                    <h6 class="tt-title-submenu"><a href="blog-listing-without-col.html">BLOG STYLES</a></h6>
+                                                    <ul class="tt-megamenu-submenu">
+                                                        <li><a href="blog-listing-without-col.html">Standard Without Sidebar</a></li>
+                                                        <li><a href="blog-listing-col-left.html">Standard With Left Sidebar</a></li>
+                                                        <li><a href="blog-listing-col-right.html">Standard With Right Sidebar</a></li>
+                                                        <li><a href="blog-masonry-col-2.html">Two Colums</a></li>
+                                                        <li><a href="blog-masonry-col-3.html">Three Colums</a></li>
+                                                        <li><a href="blog-masonry-col-3-filter.html">Three Colums With Filter</a></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col">
+                                                    <h6 class="tt-title-submenu"><a href="blog-single-post.html">POST TYPES</a></h6>
+                                                    <ul class="tt-megamenu-submenu">
+                                                        <li><a href="blog-single-post.html">Standard</a></li>
+                                                        <li><a href="blog-single-post-gallery.html">Gallery</a></li>
+                                                        <li><a href="blog-single-post-link.html">Link</a></li>
+                                                        <li><a href="blog-single-post-quote.html">Quote</a></li>
+                                                        <li><a href="blog-single-post-video.html">Video</a></li>
+                                                        <li><a href="blog-single-post-audio.html">Audio</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </li>
-                                    <li class="menu-item animate-dropdown">
-                                        <a title="Virtual Reality" href="shop.html">Virtual Reality</a>
+                                    <li class="dropdown tt-megamenu-col-01">
+                                        <a href="portfolio-col-wide-four.html">PORTFOLIO</a>
+                                        <div class="dropdown-menu">
+                                            <div class="row tt-col-list">
+                                                <div class="col">
+                                                    <h6 class="tt-title-submenu"><a href="portfolio-col-grid-two.html">BOXED GRID</a></h6>
+                                                    <ul class="tt-megamenu-submenu">
+                                                        <li><a href="portfolio-col-grid-two.html">Two Colums</a></li>
+                                                        <li><a href="portfolio-col-grid-three.html">Three Colums</a></li>
+                                                        <li><a href="portfolio-col-grid-four.html">Four Colums</a></li>
+                                                        <li><a href="portfolio-col-grid-four-without-filter.html">Four Colums Without Filter</a></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col">
+                                                    <h6 class="tt-title-submenu"><a href="portfolio-col-wide-three.html">BOXED WIDE</a></h6>
+                                                    <ul class="tt-megamenu-submenu">
+                                                        <li><a href="portfolio-col-wide-two.html">Two Colums</a></li>
+                                                        <li><a href="portfolio-col-wide-three.html">Three Colums</a></li>
+                                                        <li><a href="portfolio-col-wide-four.html">Four Colums</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="dropdown tt-megamenu-col-01">
+                                        <a href="about.html">PAGES</a>
+                                        <div class="dropdown-menu">
+                                            <div class="row tt-col-list">
+                                                <div class="col">
+                                                    <h6 class="tt-title-submenu"><a href="about.html">PAGES</a></h6>
+                                                    <ul class="tt-megamenu-submenu">
+                                                        <li><a href="about.html">About Example 1</a>
+                                                            <ul>
+                                                                <li><a href="about.html">Link Level 1</a></li>
+                                                                <li>
+                                                                    <a href="about.html">Link Level 1</a>
+                                                                    <ul>
+                                                                        <li><a href="about.html">Link Level 2</a></li>
+                                                                        <li>
+                                                                            <a href="about.html">Link Level 2</a>
+                                                                            <ul>
+                                                                                <li><a href="about.html">Link Level 3</a></li>
+                                                                                <li><a href="about.html">Link Level 3</a></li>
+                                                                                <li><a href="about.html">Link Level 3</a></li>
+                                                                                <li>
+                                                                                    <a href="about.html">Link Level 3</a>
+                                                                                    <ul>
+                                                                                        <li>
+                                                                                            <a href="about.html">Link Level 4</a>
+                                                                                            <ul>
+                                                                                                <li><a href="about.html">Link Level 5</a></li>
+                                                                                                <li><a href="about.html">Link Level 5</a></li>
+                                                                                                <li><a href="about.html">Link Level 5</a></li>
+                                                                                                <li><a href="about.html">Link Level 5</a></li>
+                                                                                                <li><a href="about.html">Link Level 5</a></li>
+                                                                                            </ul>
+                                                                                        </li>
+                                                                                        <li><a href="about.html">Link Level 4</a></li>
+                                                                                    </ul>
+                                                                                </li>
+                                                                                <li><a href="about.html">Link Level 3</a></li>
+                                                                            </ul>
+                                                                        </li>
+                                                                        <li><a href="about.html">Link Level 2</a></li>
+                                                                        <li><a href="about.html">Link Level 2</a></li>
+                                                                    </ul>
+                                                                </li>
+                                                                <li><a href="about.html">Link Level 1</a></li>
+                                                                <li><a href="about.html">Link Level 1</a></li>
+                                                                <li><a href="about.html">Link Level 1</a></li>
+                                                            </ul>
+                                                        </li>
+                                                        <li><a href="about-02.html">About Example 2</a></li>
+                                                        <li><a href="contact.html">Contacts Example 1</a></li>
+                                                        <li><a href="contact-02.html">Contacts Example 2</a></li>
+                                                        <li><a href="services.html">Services</a></li>
+                                                        <li><a href="faq.html">FAQ</a></li>
+                                                        <li><a href="coming-soon.html">Coming Soon</a></li>
+                                                        <li><a href="page404.html">Page 404</a></li>
+                                                        <li><a href="typography.html">Typography</a></li>
+                                                        <li><a href="gift-cart.html">Gift Cart</a></li>
+                                                        <li>
+                                                            <a href="compare.html">Compare</a>
+                                                            <ul>
+                                                                <li><a href="compare.html">Compare 01</a></li>
+                                                                <li><a href="compare-02.html">Compare 02</a></li>
+                                                            </ul>
+                                                        </li>
+                                                        <li><a href="wishlist.html">Wishlist</a></li>
+                                                        <li>
+                                                            <a href="account.html">Account</a>
+                                                            <ul>
+                                                                <li><a href="account.html">Account</a></li>
+                                                                <li><a href="account_address.html">Account Address</a></li>
+                                                                <li><a href="account_address_fields.html">Account Address Fields</a></li>
+                                                            </ul>
+                                                        </li>
+                                                        <li>
+                                                            <a href="empty-search.html">Empty</a>
+                                                            <ul>
+                                                                <li><a href="empty-cart.html">Empty Cart</a></li>
+                                                                <li><a href="empty-search.html">Empty Search</a></li>
+                                                                <li><a href="empty-wishlist.html">Empty Wishlist</a></li>
+                                                            </ul>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="dropdown megamenu">
+                                        <a href="listing-left-column.html">WOMEN</a>
+                                        <div class="dropdown-menu">
+                                            <div class="row">
+                                                <div class="col-sm-8">
+                                                    <div class="row tt-col-list">
+                                                        <div class="col-sm-3">
+                                                            <a class="tt-title-submenu" href="listing-left-column.html">
+                                                                TOPS
+                                                            </a>
+                                                            <ul class="tt-megamenu-submenu">
+                                                                <li><a href="listing-left-column.html">Blouses &amp; Shirts</a></li>
+                                                                <li><a href="listing-left-column.html">Dresses <span class="tt-badge tt-new">New</span></a></li>
+                                                                <li>
+                                                                    <a href="listing-left-column.html">Tops &amp; T-shirts</a>
+                                                                    <ul>
+                                                                        <li><a href="listing-left-column.html">Link Level 1</a></li>
+                                                                        <li>
+                                                                            <a href="listing-left-column.html">Link Level 1</a>
+                                                                            <ul>
+                                                                                <li><a href="listing-left-column.html">Link Level 2</a></li>
+                                                                                <li>
+                                                                                    <a href="listing-left-column.html">Link Level 2</a>
+                                                                                    <ul>
+                                                                                        <li><a href="listing-left-column.html">Link Level 3</a></li>
+                                                                                        <li><a href="listing-left-column.html">Link Level 3</a></li>
+                                                                                        <li><a href="listing-left-column.html">Link Level 3</a></li>
+                                                                                        <li>
+                                                                                            <a href="listing-left-column.html">Link Level 3</a>
+                                                                                            <ul>
+                                                                                                <li>
+                                                                                                    <a href="listing-left-column.html">Link Level 4</a>
+                                                                                                    <ul>
+                                                                                                        <li><a href="listing-left-column.html">Link Level 5</a></li>
+                                                                                                        <li><a href="listing-left-column.html">Link Level 5</a></li>
+                                                                                                        <li><a href="listing-left-column.html">Link Level 5</a></li>
+                                                                                                        <li><a href="listing-left-column.html">Link Level 5</a></li>
+                                                                                                        <li><a href="listing-left-column.html">Link Level 5</a></li>
+                                                                                                    </ul>
+                                                                                                </li>
+                                                                                                <li><a href="listing-left-column.html">Link Level 4</a></li>
+                                                                                            </ul>
+                                                                                        </li>
+                                                                                        <li><a href="listing-left-column.html">Link Level 3</a></li>
+                                                                                    </ul>
+                                                                                </li>
+                                                                                <li><a href="listing-left-column.html">Link Level 2</a></li>
+                                                                                <li><a href="listing-left-column.html">Link Level 2</a></li>
+                                                                            </ul>
+                                                                        </li>
+                                                                        <li><a href="listing-left-column.html">Link Level 1</a></li>
+                                                                        <li><a href="listing-left-column.html">Link Level 1</a></li>
+                                                                        <li><a href="listing-left-column.html">Link Level 1</a></li>
+                                                                    </ul>
+                                                                </li>
+                                                                <li><a href="listing-left-column.html">Sleeveless Tops</a></li>
+                                                                <li><a href="listing-left-column.html">Sweaters</a></li>
+                                                                <li><a href="listing-left-column.html">Jackets</a></li>
+                                                                <li><a href="listing-left-column.html">Outerwear</a></li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="col-sm-3">
+                                                            <a class="tt-title-submenu" href="listing-left-column.html">
+                                                                BOTTOMS
+                                                            </a>
+                                                            <ul class="tt-megamenu-submenu">
+                                                                <li><a href="listing-left-column.html">Trousers <span class="tt-badge tt-fatured">Fatured</span></a></li>
+                                                                <li>
+                                                                    <a href="listing-left-column.html">Jeans</a>
+                                                                </li>
+                                                                <li><a href="listing-left-column.html">Leggings</a></li>
+                                                                <li><a href="listing-left-column.html">Jumpsuit &amp; Shorts</a></li>
+                                                                <li><a href="listing-left-column.html">Skirts</a></li>
+                                                                <li><a href="listing-left-column.html">Tights</a></li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="col-sm-3">
+                                                            <a class="tt-title-submenu" href="listing-left-column.html">
+                                                                ACCESSORIES
+                                                            </a>
+                                                            <ul class="tt-megamenu-submenu">
+                                                                <li><a href="listing-left-column.html">Jewellery</a></li>
+                                                                <li><a href="listing-left-column.html">Hats</a></li>
+                                                                <li><a href="listing-left-column.html">Scarves &amp; Snoods</a></li>
+                                                                <li><a href="listing-left-column.html">Belts</a></li>
+                                                                <li><a href="listing-left-column.html">Bags</a></li>
+                                                                <li><a href="listing-left-column.html">Shoes <span class="tt-badge tt-sale">Sale 15%</span></a></li>
+                                                                <li><a href="listing-left-column.html">Sunglasses</a></li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="col-sm-3">
+                                                            <a class="tt-title-submenu" href="listing-left-column.html">
+                                                                TOP BRANDS
+                                                            </a>
+                                                            <ul class="tt-listing-01">
+                                                                <li><a href="#" target="_blank"><img src="images/loader.svg" data-src="images/custom/brand-img-01.png" alt=""></a></li>
+                                                                <li><a href="#" target="_blank"><img src="images/loader.svg" data-src="images/custom/brand-img-02.png" alt=""></a></li>
+                                                                <li><a href="#" target="_blank"><img src="images/loader.svg" data-src="images/custom/brand-img-03.png" alt=""></a></li>
+                                                                <li><a href="#" target="_blank"><img src="images/loader.svg" data-src="images/custom/brand-img-04.png" alt=""></a></li>
+                                                                <li><a href="#" target="_blank"><img src="images/loader.svg" data-src="images/custom/brand-img-05.png" alt=""></a></li>
+                                                                <li><a href="#" target="_blank"><img src="images/loader.svg" data-src="images/custom/brand-img-06.png" alt=""></a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <a href="listing-left-column.html" class="tt-title-submenu">SPECIALS</a>
+                                                    <div class="tt-menu-slider header-menu-product arrow-location-03 row">
+                                                        <div class="col-2">
+                                                            <div class="tt-product thumbprod-center">
+                                                                <a href="product.html">
+                                                                    <div class="tt-image-box">
+                                                                        <span class="tt-img"><img src="images/product/product-01.jpg" alt=""></span>
+                                                                        <span class="tt-img-roll-over"><img src="images/product/product-01-02.jpg" alt=""></span>
+                                                                    </div>
+                                                                    <div class="tt-description">
+                                                                        <h2 class="tt-title">Flared Shift Dress</h2>
+                                                                        <div class="tt-price">
+                                                                            <span class="new-price">$14</span>
+                                                                            <span class="old-price">$24</span>
+                                                                        </div>
+                                                                        <div class="tt-product-inside-hover">
+                                                                            <div class="tt-btn-addtocart" data-toggle="modal" data-target="#modalAddToCartProduct">ADD TO CART</div>
+                                                                            <div class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-2">
+                                                            <div class="tt-product thumbprod-center">
+                                                                <a href="product.html">
+                                                                    <div class="tt-image-box">
+                                                                        <span class="tt-img"><img src="images/product/product-02.jpg" alt=""></span>
+                                                                        <span class="tt-img-roll-over"><img src="images/product/product-02-02.jpg" alt=""></span>
+                                                                    </div>
+                                                                    <div class="tt-description">
+                                                                        <h2 class="tt-title">Flared Shift Dress</h2>
+                                                                        <div class="tt-price">
+                                                                            $17
+                                                                        </div>
+                                                                        <div class="tt-product-inside-hover">
+                                                                            <div class="tt-btn-addtocart" data-toggle="modal" data-target="#modalAddToCartProduct">ADD TO CART</div>
+                                                                            <div class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-2">
+                                                            <div class="tt-product thumbprod-center">
+                                                                <a href="product.html">
+                                                                    <div class="tt-image-box">
+                                                                        <span class="tt-img"><img src="images/product/product-04.jpg" alt=""></span>
+                                                                        <span class="tt-img-roll-over"><img src="images/product/product-04-01.jpg" alt=""></span>
+                                                                    </div>
+                                                                    <div class="tt-description">
+                                                                        <h2 class="tt-title">Flared Shift Dress</h2>
+                                                                        <div class="tt-price">
+                                                                            $14
+                                                                        </div>
+                                                                        <div class="tt-product-inside-hover">
+                                                                            <div class="tt-btn-addtocart" data-toggle="modal" data-target="#modalAddToCartProduct">ADD TO CART</div>
+                                                                            <div class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-2">
+                                                            <div class="tt-product thumbprod-center">
+                                                                <a href="product.html">
+                                                                    <div class="tt-image-box">
+                                                                        <span class="tt-img"><img src="images/product/product-05.jpg" alt=""></span>
+                                                                        <span class="tt-img-roll-over"><img src="images/product/product-05-02.jpg" alt=""></span>
+                                                                    </div>
+                                                                    <div class="tt-description">
+                                                                        <h2 class="tt-title">Flared Shift Dress</h2>
+                                                                        <div class="tt-price">
+                                                                            <span class="new-price">$14</span>
+                                                                            <span class="old-price">$24</span>
+                                                                        </div>
+                                                                        <div class="tt-product-inside-hover">
+                                                                            <div class="tt-btn-addtocart" data-toggle="modal" data-target="#modalAddToCartProduct">ADD TO CART</div>
+                                                                            <div class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <a href="listing-left-column.html" class="tt-promo-02">
+                                                        <img src="images/custom/header-promo-01.jpg" alt="">
+                                                        <div class="tt-description tt-point-h-l">
+                                                            <div class="tt-description-wrapper">
+                                                                <div class="tt-title-small">SUMMER <span class="tt-base-color">2018</span></div>
+                                                                <div class="tt-title-large">NEW ARRIVALS</div>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <a href="listing-left-column.html" class="tt-promo-02">
+                                                        <img src="images/custom/header-promo-02.jpg" alt="">
+                                                        <div class="tt-description tt-point-h-l">
+                                                            <div class="tt-description-wrapper">
+                                                                <div class="tt-title-small"><span class="tt-white-color">CLEARANCE SALES</span></div>
+                                                                <div class="tt-title-large"><span class="tt-white-color">GET UP TO 20% OFF</span></div>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="dropdown megamenu">
+                                        <a href="listing-right-column.html">MEN</a>
+                                        <div class="dropdown-menu">
+                                            <div class="row">
+                                                <div class="col-sm-9">
+                                                    <div class="row tt-col-list">
+                                                        <div class="col-sm-4">
+                                                            <a href="listing-right-column.html" class="tt-title-submenu">
+                                                                TOPS
+                                                                <img  src="images/loader.svg" data-src="images/custom/header-category-01.jpg" alt="">
+                                                            </a>
+                                                            <ul class="tt-megamenu-submenu">
+                                                                <li><a href="listing-right-column.html">Shirts</a></li>
+                                                                <li><a href="listing-right-column.html">Sweaters  <span class="tt-badge tt-new">New</span></a></li>
+                                                                <li>
+                                                                    <a href="listing-right-column.html">Tops &amp; T-shirts</a>
+                                                                    <ul>
+                                                                        <li><a href="listing-right-column.html">Link Level 1</a></li>
+                                                                        <li>
+                                                                            <a href="listing-right-column.html">Link Level 1</a>
+                                                                            <ul>
+                                                                                <li><a href="listing-right-column.html">Link Level 2</a></li>
+                                                                                <li>
+                                                                                    <a href="listing-right-column.html">Link Level 2</a>
+                                                                                    <ul>
+                                                                                        <li><a href="listing-right-column.html">Link Level 3</a></li>
+                                                                                        <li><a href="listing-right-column.html">Link Level 3</a></li>
+                                                                                        <li><a href="listing-right-column.html">Link Level 3</a></li>
+                                                                                        <li>
+                                                                                            <a href="listing-right-column.html">Link Level 3</a>
+                                                                                            <ul>
+                                                                                                <li>
+                                                                                                    <a href="listing-right-column.html">Link Level 4</a>
+                                                                                                    <ul>
+                                                                                                        <li><a href="listing-right-column.html">Link Level 5</a></li>
+                                                                                                        <li><a href="listing-right-column.html">Link Level 5</a></li>
+                                                                                                        <li><a href="listing-right-column.html">Link Level 5</a></li>
+                                                                                                        <li><a href="listing-right-column.html">Link Level 5</a></li>
+                                                                                                        <li><a href="listing-right-column.html">Link Level 5</a></li>
+                                                                                                    </ul>
+                                                                                                </li>
+                                                                                                <li><a href="listing-right-column.html">Link Level 4</a></li>
+                                                                                                <li><a href="listing-right-column.html">Link Level 4</a></li>
+                                                                                                <li><a href="listing-right-column.html">Link Level 4</a></li>
+                                                                                                <li><a href="listing-right-column.html">Link Level 4</a></li>
+                                                                                            </ul>
+                                                                                        </li>
+                                                                                        <li><a href="listing-right-column.html">Link Level 3</a></li>
+                                                                                    </ul>
+                                                                                </li>
+                                                                                <li><a href="listing-right-column.html">Link Level 2</a></li>
+                                                                                <li><a href="listing-right-column.html">Link Level 2</a></li>
+                                                                                <li><a href="listing-right-column.html">Link Level 2</a></li>
+                                                                            </ul>
+                                                                        </li>
+                                                                        <li><a href="listing-right-column.html">Link Level 1</a></li>
+                                                                        <li><a href="listing-right-column.html">Link Level 1</a></li>
+                                                                        <li><a href="listing-right-column.html">Link Level 1</a></li>
+                                                                    </ul>
+                                                                </li>
+                                                                <li><a href="listing-right-column.html">Sleeveless Tops</a></li>
+                                                                <li><a href="listing-right-column.html">Jackets</a></li>
+                                                                <li><a href="listing-right-column.html">Outerwear</a></li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <a class="tt-title-submenu" href="listing-right-column.html">
+                                                                BOTTOMS
+                                                                <img  src="images/loader.svg" data-src="images/custom/header-category-02.jpg" alt="">
+                                                            </a>
+                                                            <ul class="tt-megamenu-submenu">
+                                                                <li><a href="listing-right-column.html">Trousers <span class="tt-badge tt-fatured">Fatured</span></a></li>
+                                                                <li><a href="listing-right-column.html">Jeans</a></li>
+                                                                <li><a href="listing-right-column.html">Jumpsuit &amp; Shorts</a></li>
+                                                                <li><a href="listing-right-column.html">Skirts</a></li>
+                                                                <li><a href="listing-right-column.html">Tights</a></li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <a class="tt-title-submenu" href="listing-right-column.html">
+                                                                ACCESSORIES
+                                                                <img  src="images/loader.svg" data-src="images/custom/header-category-03.jpg" alt="">
+                                                            </a>
+                                                            <ul class="tt-megamenu-submenu">
+                                                                <li><a href="listing-right-column.html">Hats</a></li>
+                                                                <li><a href="listing-right-column.html">Scarves &amp; Snoods</a></li>
+                                                                <li><a href="listing-right-column.html">Belts</a></li>
+                                                                <li><a href="listing-right-column.html">Bags</a></li>
+                                                                <li><a href="listing-right-column.html">Shoes</a></li>
+                                                                <li><a href="listing-right-column.html">Sunglasses <span class="tt-badge tt-sale">Sale 15%</span></a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <div class="tt-offset-7">
+                                                        <a href="listing-left-column.html" class="tt-promo-02">
+                                                            <img  src="images/loader.svg" data-src="images/custom/header-promo-03.jpg" alt="">
+                                                            <div class="tt-description tt-point-h-l tt-point-v-t">
+                                                                <div class="tt-description-wrapper">
+                                                                    <div class="tt-title-small tt-white-color">SALE</div>
+                                                                    <div class="tt-title-xlarge tt-white-color">70% OFF</div>
+                                                                    <p class="tt-white-color">Free shipping on all US order or order above $99</p>
+                                                                    <span class="btn-underline tt-obj-bottom tt-white-color">SHOP NOW!</span>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="dropdown">
+                                        <a href="index-rtl.html">RTL</a>
                                     </li>
                                 </ul>
-                            </div>
-                            <!-- .handheld-navigation-menu -->
-                        </nav>
-                        <!-- .handheld-navigation -->
-                        <div class="site-search">
-                            <div class="widget woocommerce widget_product_search">
-                                <form role="search" method="get" class="woocommerce-product-search" action="home-v1.html">
-                                    <label class="screen-reader-text" for="woocommerce-product-search-field-0">Search for:</label>
-                                    <input type="search" id="woocommerce-product-search-field-0" class="search-field" placeholder="Search products&hellip;" value="" name="s" />
-                                    <input type="submit" value="Search" />
-                                    <input type="hidden" name="post_type" value="product" />
-                                </form>
-                            </div>
-                            <!-- .widget -->
+                            </nav>
                         </div>
-                        <!-- .site-search -->
-                        <a class="handheld-header-cart-link has-icon" href="cart.html" title="View your shopping cart">
-                            <i class="tm tm-shopping-bag"></i>
-                            <span class="count">2</span>
-                        </a>
                     </div>
-                    <!-- /.row -->
+                    <!-- /tt-menu -->
                 </div>
-                <!-- .techmarket-sticky-wrap -->
+                <div class="tt-col-obj tt-obj-options obj-move-right">
+                    <!-- tt-search -->
+                    <div class="tt-desctop-parent-search tt-parent-box">
+                        <div class="tt-search tt-dropdown-obj">
+                            <button class="tt-dropdown-toggle" data-tooltip="Search" data-tposition="bottom">
+                                <i class="icon-f-85"></i>
+                            </button>
+                            <div class="tt-dropdown-menu">
+                                <div class="container">
+                                    <form>
+                                        <div class="tt-col">
+                                            <input type="text" class="tt-search-input" placeholder="Search Products...">
+                                            <button class="tt-btn-search" type="submit"></button>
+                                        </div>
+                                        <div class="tt-col">
+                                            <button class="tt-btn-close icon-g-80"></button>
+                                        </div>
+                                        <div class="tt-info-text">
+                                            What are you Looking for?
+                                        </div>
+                                        <div class="search-results">
+                                            <ul>
+                                                <li>
+                                                    <a href="product.html">
+                                                        <div class="thumbnail"><img src="images/loader.svg" data-src="images/product/product-03.jpg" alt=""></div>
+                                                        <div class="tt-description">
+                                                            <div class="tt-title">Flared Shift Bag</div>
+                                                            <div class="tt-price">
+                                                                <span class="new-price">$14</span>
+                                                                <span class="old-price">$24</span>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="product.html">
+                                                        <div class="thumbnail"><img src="images/loader.svg" data-src="images/product/product-02.jpg" alt=""></div>
+                                                        <div class="tt-description">
+                                                            <div class="tt-title">Flared Shift Bag</div>
+                                                            <div class="tt-price">
+                                                                $24
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="product.html">
+                                                        <div class="thumbnail"><img src="images/loader.svg" data-src="images/product/product-01.jpg" alt=""></div>
+                                                        <div class="tt-description">
+                                                            <div class="tt-title">Flared Shift Bag</div>
+                                                            <div class="tt-price">
+                                                                $14
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="product.html">
+                                                        <div class="thumbnail"><img src="images/loader.svg" data-src="images/product/product-04.jpg" alt=""></div>
+                                                        <div class="tt-description">
+                                                            <div class="tt-title">Flared Shift Bag</div>
+                                                            <div class="tt-price">
+                                                                $24
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="product.html">
+                                                        <div class="thumbnail"><img src="images/loader.svg" data-src="images/product/product-05.jpg" alt=""></div>
+                                                        <div class="tt-description">
+                                                            <div class="tt-title">Flared Shift Bag</div>
+                                                            <div class="tt-price">
+                                                                $17
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="product.html">
+                                                        <div class="thumbnail"><img src="images/loader.svg" data-src="images/product/product-06.jpg" alt=""></div>
+                                                        <div class="tt-description">
+                                                            <div class="tt-title">Flared Shift Bag</div>
+                                                            <div class="tt-price">
+                                                                $20
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                            <button type="button" class="tt-view-all">View all products</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /tt-search -->
+                    <!-- tt-cart -->
+                    <div class="tt-desctop-parent-cart tt-parent-box">
+                        <div class="tt-cart tt-dropdown-obj" data-tooltip="Cart" data-tposition="bottom">
+                            <button class="tt-dropdown-toggle">
+                                <i class="icon-f-39"></i>
+                                <span class="tt-badge-cart">3</span>
+                            </button>
+                            <div class="tt-dropdown-menu">
+                                <div class="tt-mobile-add">
+                                    <h6 class="tt-title">SHOPPING CART</h6>
+                                    <button class="tt-close">Close</button>
+                                </div>
+                                <div class="tt-dropdown-inner">
+                                    <div class="tt-cart-layout">
+                                        <!-- layout emty cart -->
+                                        <!-- <a href="empty-cart.html" class="tt-cart-empty">
+                                            <i class="icon-f-39"></i>
+                                            <p>No Products in the Cart</p>
+                                        </a> -->
+                                        <div class="tt-cart-content">
+                                            <div class="tt-cart-list">
+                                                <div class="tt-item">
+                                                    <a href="product.html">
+                                                        <div class="tt-item-img">
+                                                            <img src="images/loader.svg" data-src="images/product/product-01.jpg" alt="">
+                                                        </div>
+                                                        <div class="tt-item-descriptions">
+                                                            <h2 class="tt-title">Flared Shift Dress</h2>
+                                                            <ul class="tt-add-info">
+                                                                <li>Yellow, Material 2, Size 58,</li>
+                                                                <li>Vendor: Addidas</li>
+                                                            </ul>
+                                                            <div class="tt-quantity">1 X</div> <div class="tt-price">$12</div>
+                                                        </div>
+                                                    </a>
+                                                    <div class="tt-item-close">
+                                                        <a href="#" class="tt-btn-close"></a>
+                                                    </div>
+                                                </div>
+                                                <div class="tt-item">
+                                                    <a href="product.html">
+                                                        <div class="tt-item-img">
+                                                            <img src="images/loader.svg" data-src="images/product/product-02.jpg" alt="">
+                                                        </div>
+                                                        <div class="tt-item-descriptions">
+                                                            <h2 class="tt-title">Flared Shift Dress</h2>
+                                                            <ul class="tt-add-info">
+                                                                <li>Yellow, Material 2, Size 58,</li>
+                                                                <li>Vendor: Addidas</li>
+                                                            </ul>
+                                                            <div class="tt-quantity">1 X</div> <div class="tt-price">$18</div>
+                                                        </div>
+                                                    </a>
+                                                    <div class="tt-item-close">
+                                                        <a href="#" class="tt-btn-close"></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tt-cart-total-row">
+                                                <div class="tt-cart-total-title">SUBTOTAL:</div>
+                                                <div class="tt-cart-total-price">$324</div>
+                                            </div>
+                                            <div class="tt-cart-btn">
+                                                <div class="tt-item">
+                                                    <a href="#" class="btn">PROCEED TO CHECKOUT</a>
+                                                </div>
+                                                <div class="tt-item">
+                                                    <a href="shopping_cart_02.html" class="btn-link-02 tt-hidden-mobile">View Cart</a>
+                                                    <a href="shopping_cart_02.html" class="btn btn-border tt-hidden-desctope">VIEW CART</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /tt-cart -->
+                    <!-- tt-account -->
+                    <div class="tt-desctop-parent-account tt-parent-box">
+                        <div class="tt-account tt-dropdown-obj">
+                            <button class="tt-dropdown-toggle"  data-tooltip="My Account" data-tposition="bottom"><i class="icon-f-94"></i></button>
+                            <div class="tt-dropdown-menu">
+                                <div class="tt-mobile-add">
+                                    <button class="tt-close">Close</button>
+                                </div>
+                                <div class="tt-dropdown-inner">
+                                    <ul>
+                                        <li><a href="login.html"><i class="icon-f-94"></i>Account</a></li>
+                                        <li><a href="wishlist.html"><i class="icon-n-072"></i>Wishlist</a></li>
+                                        <li><a href="compare.html"><i class="icon-n-08"></i>Compare</a></li>
+                                        <li><a href="page404.html"><i class="icon-f-68"></i>Check Out</a></li>
+                                        <li><a href="login.html"><i class="icon-f-76"></i>Sign In</a></li>
+                                        <li><a href="page404.html"><i class="icon-f-77"></i>Sign Out</a></li>
+                                        <li><a href="create-account.html"><i class="icon-f-94"></i>Register</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /tt-account -->
+                    <!-- tt-langue and tt-currency -->
+                    <div class="tt-desctop-parent-multi tt-parent-box">
+                        <div class="tt-multi-obj tt-dropdown-obj">
+                            <button class="tt-dropdown-toggle" data-tooltip="Settings" data-tposition="bottom"><i class="icon-f-79"></i></button>
+                            <div class="tt-dropdown-menu">
+                                <div class="tt-mobile-add">
+                                    <button class="tt-close">Close</button>
+                                </div>
+                                <div class="tt-dropdown-inner">
+                                    <ul>
+                                        <li class="active"><a href="#">English</a></li>
+                                        <li><a href="#">Deutsch</a></li>
+                                        <li><a href="#">Español</a></li>
+                                        <li><a href="#">Français</a></li>
+                                    </ul>
+                                    <ul>
+                                        <li class="active"><a href="#"><i class="icon-h-59"></i>USD - US Dollar</a></li>
+                                        <li><a href="#"><i class="icon-h-60"></i>EUR - Euro</a></li>
+                                        <li><a href="#"><i class="icon-h-61"></i>GBP - British Pound Sterling</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /tt-langue and tt-currency -->
+                </div>
             </div>
-            <!-- .handheld-header -->
         </div>
-        <!-- .handheld-only -->
-    </header>
-    <!-- .header-v1 -->
-    <!-- ============================================================= Header End ============================================================= -->
+    </div>
+    <!-- stuck nav -->
+    <div class="tt-stuck-nav">
+        <div class="container">
+            <div class="tt-header-row ">
+                <div class="tt-stuck-parent-menu"></div>
+                <div class="tt-stuck-parent-search tt-parent-box"></div>
+                <div class="tt-stuck-parent-cart tt-parent-box"></div>
+                <div class="tt-stuck-parent-account tt-parent-box"></div>
+                <div class="tt-stuck-parent-multi tt-parent-box"></div>
+            </div>
+        </div>
+    </div>
+</header>

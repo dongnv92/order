@@ -1,1346 +1,868 @@
 <?php
 require_once '../../includes/core.php';
-$product = $db->from(_TABLE_PRODUCT)->where('product_url', $url)->fetch_first();
-$header['title'] = $product['product_name'];
+$product            = $db->from(_TABLE_PRODUCT)->where('product_url', $url)->fetch_first();
+$header['title']    = $product['product_name'];
+$images_first       = $db->select('media_source')->from(_TABLE_MEDIA)->where(array('media_type' => 'images_product', 'media_store' => 'local', 'media_parent' => $product['product_id']))->fetch_first();
 require_once 'header.php';
 ?>
-    <div id="content" class="site-content" tabindex="-1">
-        <div class="col-full">
-            <div class="row">
-                <nav class="woocommerce-breadcrumb">
-                    <a href="home-v1.html">Home</a>
-                    <span class="delimiter">
-                                <i class="tm tm-breadcrumbs-arrow-right"></i>
-                            </span><a href="product-category.html">TV & Video</a>
-                    <span class="delimiter">
-                                <i class="tm tm-breadcrumbs-arrow-right"></i>
-                            </span><?=$product['product_name']?>
-                </nav>
-                <!-- .woocommerce-breadcrumb -->
-                <div id="primary" class="content-area">
-                    <main id="main" class="site-main">
-                        <div class="product product-type-simple">
-                            <div class="single-product-wrapper">
-                                <div class="product-images-wrapper thumb-count-4">
-                                            <!--<span class="onsale">-
-                                                <span class="woocommerce-Price-amount amount">
-                                                    <span class="woocommerce-Price-currencySymbol">$</span>242.99</span>
-                                            </span>-->
-                                    <!-- .onsale -->
-                                    <div id="techmarket-single-product-gallery" class="techmarket-single-product-gallery techmarket-single-product-gallery--with-images techmarket-single-product-gallery--columns-4 images" data-columns="4">
-                                        <div class="techmarket-single-product-gallery-images" data-ride="tm-slick-carousel" data-wrap=".woocommerce-product-gallery__wrapper" data-slick="{&quot;infinite&quot;:false,&quot;slidesToShow&quot;:1,&quot;slidesToScroll&quot;:1,&quot;dots&quot;:false,&quot;arrows&quot;:false,&quot;asNavFor&quot;:&quot;#techmarket-single-product-gallery .techmarket-single-product-gallery-thumbnails__wrapper&quot;}">
-                                            <div class="woocommerce-product-gallery woocommerce-product-gallery--with-images woocommerce-product-gallery--columns-4 images" data-columns="4">
-                                                <a href="#" class="woocommerce-product-gallery__trigger">🔍</a>
-                                                <figure class="woocommerce-product-gallery__wrapper ">
-                                                    <?php
-                                                    $images_product = $db->select('media_source')->from(_TABLE_MEDIA)->where(array('media_type' => 'images_product', 'media_store' => 'local', 'media_parent' => $product['product_id']))->fetch();
-                                                    foreach ($images_product as $image_product){
-                                                    ?>
-                                                    <div data-thumb="<?=_URL_HOME.'/'.$image_product['media_source']?>" class="woocommerce-product-gallery__image">
-                                                        <a href="<?=_URL_HOME.'/'.$image_product['media_source']?>" tabindex="0">
-                                                            <img width="600" height="600" src="<?=_URL_HOME.'/'.$image_product['media_source']?>" class="attachment-shop_single size-shop_single wp-post-image" alt="">
-                                                        </a>
-                                                    </div>
-                                                    <?php
-                                                    }
-                                                    ?>
-                                                </figure>
-                                            </div>
-                                            <!-- .woocommerce-product-gallery -->
-                                        </div>
-                                        <!-- .techmarket-single-product-gallery-images -->
-                                        <div class="techmarket-single-product-gallery-thumbnails" data-ride="tm-slick-carousel" data-wrap=".techmarket-single-product-gallery-thumbnails__wrapper" data-slick="{&quot;infinite&quot;:false,&quot;slidesToShow&quot;:4,&quot;slidesToScroll&quot;:1,&quot;dots&quot;:false,&quot;arrows&quot;:true,&quot;vertical&quot;:true,&quot;verticalSwiping&quot;:true,&quot;focusOnSelect&quot;:true,&quot;touchMove&quot;:true,&quot;prevArrow&quot;:&quot;&lt;a href=\&quot;#\&quot;&gt;&lt;i class=\&quot;tm tm-arrow-up\&quot;&gt;&lt;\/i&gt;&lt;\/a&gt;&quot;,&quot;nextArrow&quot;:&quot;&lt;a href=\&quot;#\&quot;&gt;&lt;i class=\&quot;tm tm-arrow-down\&quot;&gt;&lt;\/i&gt;&lt;\/a&gt;&quot;,&quot;asNavFor&quot;:&quot;#techmarket-single-product-gallery .woocommerce-product-gallery__wrapper&quot;,&quot;responsive&quot;:[{&quot;breakpoint&quot;:765,&quot;settings&quot;:{&quot;vertical&quot;:false,&quot;horizontal&quot;:true,&quot;verticalSwiping&quot;:false,&quot;slidesToShow&quot;:4}}]}">
-                                            <figure class="techmarket-single-product-gallery-thumbnails__wrapper">
-                                                <?php
-                                                foreach ($images_product as $image_product){
-                                                    ?>
-                                                    <figure data-thumb="<?=_URL_HOME.'/'.$image_product['media_source']?>" class="techmarket-wc-product-gallery__image">
-                                                        <img width="180" height="180" src="<?=_URL_HOME.'/'.$image_product['media_source']?>" class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image" alt="">
-                                                    </figure>
-                                                    <?php
-                                                }
-                                                ?>
-                                            </figure>
-                                            <!-- .techmarket-single-product-gallery-thumbnails__wrapper -->
-                                        </div>
-                                        <!-- .techmarket-single-product-gallery-thumbnails -->
-                                    </div>
-                                    <!-- .techmarket-single-product-gallery -->
-                                </div>
-                                <!-- .product-images-wrapper -->
-                                <div class="summary entry-summary">
-                                    <div class="single-product-header">
-                                        <h1 class="product_title entry-title"><?=$product['product_name']?></h1>
-                                        <a class="add-to-wishlist" href="wishlist.html"> Add to Wishlist</a>
-                                    </div>
-                                    <div class="product-actions-wrapper">
-                                        <div class="product-actions">
-                                    <p class="price">
-                                        <ins><span class="woocommerce-Price-amount amount"><?=number_format($product['product_price_vn'], 0,'', '.')?>₫</span></ins>
-                                    </p>
-                                        </div></div>
-                                    <div class="rating-and-sharing-wrapper">
-                                        <div class="woocommerce-product-rating">
-                                            <div class="star-rating">
-                                                        <span style="width:100%">Rated
-                                                            <strong class="rating">5.00</strong> out of 5 based on
-                                                            <span class="rating">1</span> customer rating</span>
-                                            </div>
-                                            <a rel="nofollow" class="woocommerce-review-link" href="#reviews">(<span class="count">1</span> customer review)</a>
-                                        </div>
-                                    </div>
-                                    <!-- .rating-and-sharing-wrapper -->
-                                    <div class="woocommerce-product-details__short-description">
-                                        <!-- Content -->
-                                    </div>
-                                    <!-- .woocommerce-product-details__short-description -->
-                                    <div class="product-actions-wrapper">
-                                        <div class="product-actions">
-                                            <!-- .single-product-header -->
-                                            <form enctype="multipart/form-data" method="post" class="cart">
-                                                <div class="quantity">
-                                                    <label for="quantity-input">Số lượng</label>
-                                                    <input type="number" size="4" class="input-text qty text" title="Qty" value="1" name="quantity" id="quantity-input">
-                                                </div>
-                                                <!-- .quantity -->
-                                                <button class="single_add_to_cart_button button alt" value="185" name="add-to-cart" type="submit">Thêm vào giỏ hàng</button>
-                                            </form>
-                                            <!-- .cart -->
-                                        </div>
-                                        <!-- .product-actions -->
-                                    </div>
-                                    <!-- .product-actions-wrapper -->
-                                </div>
-                                <!-- .entry-summary -->
-                            </div>
-                            <!-- .single-product-wrapper -->
-                            <div class="tm-related-products-carousel section-products-carousel" id="tm-related-products-carousel" data-ride="tm-slick-carousel" data-wrap=".products" data-slick="{&quot;slidesToShow&quot;:7,&quot;slidesToScroll&quot;:7,&quot;dots&quot;:true,&quot;arrows&quot;:true,&quot;prevArrow&quot;:&quot;&lt;a href=\&quot;#\&quot;&gt;&lt;i class=\&quot;tm tm-arrow-left\&quot;&gt;&lt;\/i&gt;&lt;\/a&gt;&quot;,&quot;nextArrow&quot;:&quot;&lt;a href=\&quot;#\&quot;&gt;&lt;i class=\&quot;tm tm-arrow-right\&quot;&gt;&lt;\/i&gt;&lt;\/a&gt;&quot;,&quot;appendArrows&quot;:&quot;#tm-related-products-carousel .custom-slick-nav&quot;,&quot;responsive&quot;:[{&quot;breakpoint&quot;:767,&quot;settings&quot;:{&quot;slidesToShow&quot;:1,&quot;slidesToScroll&quot;:1}},{&quot;breakpoint&quot;:780,&quot;settings&quot;:{&quot;slidesToShow&quot;:3,&quot;slidesToScroll&quot;:3}},{&quot;breakpoint&quot;:1200,&quot;settings&quot;:{&quot;slidesToShow&quot;:4,&quot;slidesToScroll&quot;:4}},{&quot;breakpoint&quot;:1400,&quot;settings&quot;:{&quot;slidesToShow&quot;:5,&quot;slidesToScroll&quot;:5}}]}">
-                                <section class="related">
-                                    <header class="section-header">
-                                        <h2 class="section-title">Related products</h2>
-                                        <nav class="custom-slick-nav"></nav>
-                                    </header>
-                                    <!-- .section-header -->
-                                    <div class="products">
-                                        <div class="product">
-                                            <div class="yith-wcwl-add-to-wishlist">
-                                                <a href="wishlist.html" rel="nofollow" class="add_to_wishlist"> Add to Wishlist</a>
-                                            </div>
-                                            <a href="single-product-fullwidth.html" class="woocommerce-LoopProduct-link">
-                                                <img src="assets/images/products/5.jpg" width="224" height="197" class="wp-post-image" alt="">
-                                                <span class="price">
-                                                            <ins>
-                                                                <span class="amount"> </span>
-                                                            </ins>
-                                                            <span class="amount"> 456.00</span>
-                                                        </span>
-                                                <!-- /.price -->
-                                                <h2 class="woocommerce-loop-product__title">XONE Wireless Controller</h2>
-                                            </a>
-                                            <div class="hover-area">
-                                                <a class="button add_to_cart_button" href="cart.html" rel="nofollow">Add to cart</a>
-                                                <a class="add-to-compare-link" href="compare.html">Add to compare</a>
-                                            </div>
-                                        </div>
-                                        <!-- /.product-outer -->
-                                        <div class="product">
-                                            <div class="yith-wcwl-add-to-wishlist">
-                                                <a href="wishlist.html" rel="nofollow" class="add_to_wishlist"> Add to Wishlist</a>
-                                            </div>
-                                            <a href="single-product-fullwidth.html" class="woocommerce-LoopProduct-link">
-                                                <img src="assets/images/products/16.jpg" width="224" height="197" class="wp-post-image" alt="">
-                                                <span class="price">
-                                                            <ins>
-                                                                <span class="amount"> </span>
-                                                            </ins>
-                                                            <span class="amount"> 262.81</span>
-                                                        </span>
-                                                <!-- /.price -->
-                                                <h2 class="woocommerce-loop-product__title">Band Fitbit Flex</h2>
-                                            </a>
-                                            <div class="hover-area">
-                                                <a class="button add_to_cart_button" href="cart.html" rel="nofollow">Add to cart</a>
-                                                <a class="add-to-compare-link" href="compare.html">Add to compare</a>
-                                            </div>
-                                        </div>
-                                        <!-- /.product-outer -->
-                                        <div class="product">
-                                            <div class="yith-wcwl-add-to-wishlist">
-                                                <a href="wishlist.html" rel="nofollow" class="add_to_wishlist"> Add to Wishlist</a>
-                                            </div>
-                                            <a href="single-product-fullwidth.html" class="woocommerce-LoopProduct-link">
-                                                <img src="assets/images/products/8.jpg" width="224" height="197" class="wp-post-image" alt="">
-                                                <span class="price">
-                                                            <ins>
-                                                                <span class="amount"> </span>
-                                                            </ins>
-                                                            <span class="amount"> 456.00</span>
-                                                        </span>
-                                                <!-- /.price -->
-                                                <h2 class="woocommerce-loop-product__title">Video & Air Quality Monitor</h2>
-                                            </a>
-                                            <div class="hover-area">
-                                                <a class="button add_to_cart_button" href="cart.html" rel="nofollow">Add to cart</a>
-                                                <a class="add-to-compare-link" href="compare.html">Add to compare</a>
-                                            </div>
-                                        </div>
-                                        <!-- /.product-outer -->
-                                        <div class="product">
-                                            <div class="yith-wcwl-add-to-wishlist">
-                                                <a href="wishlist.html" rel="nofollow" class="add_to_wishlist"> Add to Wishlist</a>
-                                            </div>
-                                            <a href="single-product-fullwidth.html" class="woocommerce-LoopProduct-link">
-                                                <img src="assets/images/products/11.jpg" width="224" height="197" class="wp-post-image" alt="">
-                                                <span class="price">
-                                                            <ins>
-                                                                <span class="amount"> </span>
-                                                            </ins>
-                                                            <span class="amount"> 456.00</span>
-                                                        </span>
-                                                <!-- /.price -->
-                                                <h2 class="woocommerce-loop-product__title">Xtreme ultimate splashproof portable speaker</h2>
-                                            </a>
-                                            <div class="hover-area">
-                                                <a class="button add_to_cart_button" href="cart.html" rel="nofollow">Add to cart</a>
-                                                <a class="add-to-compare-link" href="compare.html">Add to compare</a>
-                                            </div>
-                                        </div>
-                                        <!-- /.product-outer -->
-                                        <div class="product">
-                                            <div class="yith-wcwl-add-to-wishlist">
-                                                <a href="wishlist.html" rel="nofollow" class="add_to_wishlist"> Add to Wishlist</a>
-                                            </div>
-                                            <a href="single-product-fullwidth.html" class="woocommerce-LoopProduct-link">
-                                                <img src="assets/images/products/10.jpg" width="224" height="197" class="wp-post-image" alt="">
-                                                <span class="price">
-                                                            <ins>
-                                                                <span class="amount"> </span>
-                                                            </ins>
-                                                            <span class="amount"> 456.00</span>
-                                                        </span>
-                                                <!-- /.price -->
-                                                <h2 class="woocommerce-loop-product__title">Xtreme ultimate splashproof portable speaker</h2>
-                                            </a>
-                                            <div class="hover-area">
-                                                <a class="button add_to_cart_button" href="cart.html" rel="nofollow">Add to cart</a>
-                                                <a class="add-to-compare-link" href="compare.html">Add to compare</a>
-                                            </div>
-                                        </div>
-                                        <!-- /.product-outer -->
-                                        <div class="product">
-                                            <div class="yith-wcwl-add-to-wishlist">
-                                                <a href="wishlist.html" rel="nofollow" class="add_to_wishlist"> Add to Wishlist</a>
-                                            </div>
-                                            <a href="single-product-fullwidth.html" class="woocommerce-LoopProduct-link">
-                                                <img src="assets/images/products/15.jpg" width="224" height="197" class="wp-post-image" alt="">
-                                                <span class="price">
-                                                            <ins>
-                                                                <span class="amount"> </span>
-                                                            </ins>
-                                                            <span class="amount"> 399.00</span>
-                                                        </span>
-                                                <!-- /.price -->
-                                                <h2 class="woocommerce-loop-product__title">Band Fitbit Flex</h2>
-                                            </a>
-                                            <div class="hover-area">
-                                                <a class="button add_to_cart_button" href="cart.html" rel="nofollow">Add to cart</a>
-                                                <a class="add-to-compare-link" href="compare.html">Add to compare</a>
-                                            </div>
-                                        </div>
-                                        <!-- /.product-outer -->
-                                        <div class="product">
-                                            <div class="yith-wcwl-add-to-wishlist">
-                                                <a href="wishlist.html" rel="nofollow" class="add_to_wishlist"> Add to Wishlist</a>
-                                            </div>
-                                            <a href="single-product-fullwidth.html" class="woocommerce-LoopProduct-link">
-                                                <img src="assets/images/products/6.jpg" width="224" height="197" class="wp-post-image" alt="">
-                                                <span class="price">
-                                                            <ins>
-                                                                <span class="amount"> </span>
-                                                            </ins>
-                                                            <span class="amount"> 456.00</span>
-                                                        </span>
-                                                <!-- /.price -->
-                                                <h2 class="woocommerce-loop-product__title">Gear Virtual Reality 3D with Bluetooth Glasses</h2>
-                                            </a>
-                                            <div class="hover-area">
-                                                <a class="button add_to_cart_button" href="cart.html" rel="nofollow">Add to cart</a>
-                                                <a class="add-to-compare-link" href="compare.html">Add to compare</a>
-                                            </div>
-                                        </div>
-                                        <!-- /.product-outer -->
-                                        <div class="product">
-                                            <div class="yith-wcwl-add-to-wishlist">
-                                                <a href="wishlist.html" rel="nofollow" class="add_to_wishlist"> Add to Wishlist</a>
-                                            </div>
-                                            <a href="single-product-fullwidth.html" class="woocommerce-LoopProduct-link">
-                                                        <span class="onsale">
-                                                            <span class="woocommerce-Price-amount amount">
-                                                                <span class="woocommerce-Price-currencySymbol">$</span>150.04</span>
-                                                        </span>
-                                                <img src="assets/images/products/14.jpg" width="224" height="197" class="wp-post-image" alt="">
-                                                <span class="price">
-                                                            <ins>
-                                                                <span class="amount"> 262.81</span>
-                                                            </ins>
-                                                            <del>
-                                                                <span class="amount">399.00</span>
-                                                            </del>
-                                                            <span class="amount"> </span>
-                                                        </span>
-                                                <!-- /.price -->
-                                                <h2 class="woocommerce-loop-product__title">Band Fitbit Flex</h2>
-                                            </a>
-                                            <div class="hover-area">
-                                                <a class="button add_to_cart_button" href="cart.html" rel="nofollow">Add to cart</a>
-                                                <a class="add-to-compare-link" href="compare.html">Add to compare</a>
-                                            </div>
-                                        </div>
-                                        <!-- /.product-outer -->
-                                        <div class="product">
-                                            <div class="yith-wcwl-add-to-wishlist">
-                                                <a href="wishlist.html" rel="nofollow" class="add_to_wishlist"> Add to Wishlist</a>
-                                            </div>
-                                            <a href="single-product-fullwidth.html" class="woocommerce-LoopProduct-link">
-                                                        <span class="onsale">
-                                                            <span class="woocommerce-Price-amount amount">
-                                                                <span class="woocommerce-Price-currencySymbol">$</span>150.04</span>
-                                                        </span>
-                                                <img src="assets/images/products/2.jpg" width="224" height="197" class="wp-post-image" alt="">
-                                                <span class="price">
-                                                            <ins>
-                                                                <span class="amount"> 309.95</span>
-                                                            </ins>
-                                                            <del>
-                                                                <span class="amount">459.00</span>
-                                                            </del>
-                                                            <span class="amount"> </span>
-                                                        </span>
-                                                <!-- /.price -->
-                                                <h2 class="woocommerce-loop-product__title">ZenBook 3 Ultrabook 8GB 512SSD W10</h2>
-                                            </a>
-                                            <div class="hover-area">
-                                                <a class="button add_to_cart_button" href="cart.html" rel="nofollow">Add to cart</a>
-                                                <a class="add-to-compare-link" href="compare.html">Add to compare</a>
-                                            </div>
-                                        </div>
-                                        <!-- /.product-outer -->
-                                        <div class="product">
-                                            <div class="yith-wcwl-add-to-wishlist">
-                                                <a href="wishlist.html" rel="nofollow" class="add_to_wishlist"> Add to Wishlist</a>
-                                            </div>
-                                            <a href="single-product-fullwidth.html" class="woocommerce-LoopProduct-link">
-                                                        <span class="onsale">
-                                                            <span class="woocommerce-Price-amount amount">
-                                                                <span class="woocommerce-Price-currencySymbol">$</span>150.04</span>
-                                                        </span>
-                                                <img src="assets/images/products/7.jpg" width="224" height="197" class="wp-post-image" alt="">
-                                                <span class="price">
-                                                            <ins>
-                                                                <span class="amount"> 789.95</span>
-                                                            </ins>
-                                                            <del>
-                                                                <span class="amount">999.00</span>
-                                                            </del>
-                                                            <span class="amount"> </span>
-                                                        </span>
-                                                <!-- /.price -->
-                                                <h2 class="woocommerce-loop-product__title">Bluetooth on-ear PureBass Headphones</h2>
-                                            </a>
-                                            <div class="hover-area">
-                                                <a class="button add_to_cart_button" href="cart.html" rel="nofollow">Add to cart</a>
-                                                <a class="add-to-compare-link" href="compare.html">Add to compare</a>
-                                            </div>
-                                        </div>
-                                        <!-- /.product-outer -->
-                                        <div class="product">
-                                            <div class="yith-wcwl-add-to-wishlist">
-                                                <a href="wishlist.html" rel="nofollow" class="add_to_wishlist"> Add to Wishlist</a>
-                                            </div>
-                                            <a href="single-product-fullwidth.html" class="woocommerce-LoopProduct-link">
-                                                <img src="assets/images/products/4.jpg" width="224" height="197" class="wp-post-image" alt="">
-                                                <span class="price">
-                                                            <ins>
-                                                                <span class="amount"> </span>
-                                                            </ins>
-                                                            <span class="amount"> 456.00</span>
-                                                        </span>
-                                                <!-- /.price -->
-                                                <h2 class="woocommerce-loop-product__title">4K Action Cam with Wi-Fi & GPS</h2>
-                                            </a>
-                                            <div class="hover-area">
-                                                <a class="button add_to_cart_button" href="cart.html" rel="nofollow">Add to cart</a>
-                                                <a class="add-to-compare-link" href="compare.html">Add to compare</a>
-                                            </div>
-                                        </div>
-                                        <!-- /.product-outer -->
-                                        <div class="product">
-                                            <div class="yith-wcwl-add-to-wishlist">
-                                                <a href="wishlist.html" rel="nofollow" class="add_to_wishlist"> Add to Wishlist</a>
-                                            </div>
-                                            <a href="single-product-fullwidth.html" class="woocommerce-LoopProduct-link">
-                                                <img src="assets/images/products/3.jpg" width="224" height="197" class="wp-post-image" alt="">
-                                                <span class="price">
-                                                            <ins>
-                                                                <span class="amount"> </span>
-                                                            </ins>
-                                                            <span class="amount"> 456.00</span>
-                                                        </span>
-                                                <!-- /.price -->
-                                                <h2 class="woocommerce-loop-product__title">On-ear Wireless NXTG</h2>
-                                            </a>
-                                            <div class="hover-area">
-                                                <a class="button add_to_cart_button" href="cart.html" rel="nofollow">Add to cart</a>
-                                                <a class="add-to-compare-link" href="compare.html">Add to compare</a>
-                                            </div>
-                                        </div>
-                                        <!-- /.product-outer -->
-                                        <div class="product">
-                                            <div class="yith-wcwl-add-to-wishlist">
-                                                <a href="wishlist.html" rel="nofollow" class="add_to_wishlist"> Add to Wishlist</a>
-                                            </div>
-                                            <a href="single-product-fullwidth.html" class="woocommerce-LoopProduct-link">
-                                                <img src="assets/images/products/13.jpg" width="224" height="197" class="wp-post-image" alt="">
-                                                <span class="price">
-                                                            <ins>
-                                                                <span class="amount"> </span>
-                                                            </ins>
-                                                            <span class="amount"> 456.00</span>
-                                                        </span>
-                                                <!-- /.price -->
-                                                <h2 class="woocommerce-loop-product__title">Drone WIFI FPV With 4K</h2>
-                                            </a>
-                                            <div class="hover-area">
-                                                <a class="button add_to_cart_button" href="cart.html" rel="nofollow">Add to cart</a>
-                                                <a class="add-to-compare-link" href="compare.html">Add to compare</a>
-                                            </div>
-                                        </div>
-                                        <!-- /.product-outer -->
-                                        <div class="product">
-                                            <div class="yith-wcwl-add-to-wishlist">
-                                                <a href="wishlist.html" rel="nofollow" class="add_to_wishlist"> Add to Wishlist</a>
-                                            </div>
-                                            <a href="single-product-fullwidth.html" class="woocommerce-LoopProduct-link">
-                                                <img src="assets/images/products/9.jpg" width="224" height="197" class="wp-post-image" alt="">
-                                                <span class="price">
-                                                            <ins>
-                                                                <span class="amount"> </span>
-                                                            </ins>
-                                                            <span class="amount"> 456.00</span>
-                                                        </span>
-                                                <!-- /.price -->
-                                                <h2 class="woocommerce-loop-product__title">Watch Stainless with Grey Suture Leather Strap</h2>
-                                            </a>
-                                            <div class="hover-area">
-                                                <a class="button add_to_cart_button" href="cart.html" rel="nofollow">Add to cart</a>
-                                                <a class="add-to-compare-link" href="compare.html">Add to compare</a>
-                                            </div>
-                                        </div>
-                                        <!-- /.product-outer -->
-                                        <div class="product">
-                                            <div class="yith-wcwl-add-to-wishlist">
-                                                <a href="wishlist.html" rel="nofollow" class="add_to_wishlist"> Add to Wishlist</a>
-                                            </div>
-                                            <a href="single-product-fullwidth.html" class="woocommerce-LoopProduct-link">
-                                                <img src="assets/images/products/1.jpg" width="224" height="197" class="wp-post-image" alt="">
-                                                <span class="price">
-                                                            <ins>
-                                                                <span class="amount"> </span>
-                                                            </ins>
-                                                            <span class="amount"> 456.00</span>
-                                                        </span>
-                                                <!-- /.price -->
-                                                <h2 class="woocommerce-loop-product__title">Smart Watches 3 SWR50</h2>
-                                            </a>
-                                            <div class="hover-area">
-                                                <a class="button add_to_cart_button" href="cart.html" rel="nofollow">Add to cart</a>
-                                                <a class="add-to-compare-link" href="compare.html">Add to compare</a>
-                                            </div>
-                                        </div>
-                                        <!-- /.product-outer -->
-                                        <div class="product">
-                                            <div class="yith-wcwl-add-to-wishlist">
-                                                <a href="wishlist.html" rel="nofollow" class="add_to_wishlist"> Add to Wishlist</a>
-                                            </div>
-                                            <a href="single-product-fullwidth.html" class="woocommerce-LoopProduct-link">
-                                                <img src="assets/images/products/12.jpg" width="224" height="197" class="wp-post-image" alt="">
-                                                <span class="price">
-                                                            <ins>
-                                                                <span class="amount"> </span>
-                                                            </ins>
-                                                            <span class="amount"> 456.00</span>
-                                                        </span>
-                                                <!-- /.price -->
-                                                <h2 class="woocommerce-loop-product__title">Bbd 23-Inch Screen LED-Lit Monitorss Buds</h2>
-                                            </a>
-                                            <div class="hover-area">
-                                                <a class="button add_to_cart_button" href="cart.html" rel="nofollow">Add to cart</a>
-                                                <a class="add-to-compare-link" href="compare.html">Add to compare</a>
-                                            </div>
-                                        </div>
-                                        <!-- /.product-outer -->
-                                    </div>
-                                </section>
-                                <!-- .single-product-wrapper -->
-                            </div>
-                            <!-- .tm-related-products-carousel -->
-                            <div class="woocommerce-tabs wc-tabs-wrapper">
-                                <ul role="tablist" class="nav tabs wc-tabs">
-                                    <li class="nav-item accessories_tab">
-                                        <a class="nav-link active" data-toggle="tab" role="tab" aria-controls="tab-accessories" href="#tab-accessories">Accessories</a>
-                                    </li>
-                                    <li class="nav-item description_tab">
-                                        <a class="nav-link" data-toggle="tab" role="tab" aria-controls="tab-description" href="#tab-description">Description</a>
-                                    </li>
-                                    <li class="nav-item specification_tab">
-                                        <a class="nav-link" data-toggle="tab" role="tab" aria-controls="tab-specification" href="#tab-specification">Specification</a>
-                                    </li>
-                                    <li class="nav-item reviews_tab">
-                                        <a class="nav-link" data-toggle="tab" role="tab" aria-controls="tab-reviews" href="#tab-reviews">Reviews (1)</a>
-                                    </li>
-                                </ul>
-                                <!-- /.ec-tabs -->
-                                <div class="tab-content">
-                                    <div class="tab-pane active" id="tab-accessories" role="tabpanel">
-                                        <div class="accessories">
-                                            <div class="accessories-wrapper">
-                                                <div class="accessories-product columns-4">
-                                                    <div class="products">
-                                                        <div class="product">
-                                                            <a class="woocommerce-LoopProduct-link woocommerce-loop-product__link" href="single-product-fullwidth.html">
-                                                                <img width="224" height="197" alt="" class="attachment-shop_catalog size-shop_catalog wp-post-image" src="assets/images/products/8.jpg">
-                                                                <span class="price">
-                                                                            <del>
-                                                                                <span class="woocommerce-Price-amount amount">
-                                                                                    <span class="woocommerce-Price-currencySymbol">$</span>1,239.99</span>
-                                                                            </del>
-                                                                            <ins>
-                                                                                <span class="woocommerce-Price-amount amount">
-                                                                                    <span class="woocommerce-Price-currencySymbol">$</span>997.00</span>
-                                                                            </ins>
-                                                                        </span>
-                                                                <h2 class="woocommerce-loop-product__title">60UH6150 60-Inch 4K Ultra HD Smart LED TV</h2>
-                                                            </a>
-                                                            <div class="checkbox accessory-checkbox">
-                                                                <label>
-                                                                    <input type="checkbox" data-product-type="simple" data-product-id="185" data-price="997.00" class="product-check" checked=""> Remove
-                                                                </label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="product">
-                                                            <a class="woocommerce-LoopProduct-link woocommerce-loop-product__link" href="single-product-fullwidth.html">
-                                                                <img width="224" height="197" alt="" class="attachment-shop_catalog size-shop_catalog wp-post-image" src="assets/images/products/16.jpg">
-                                                                <span class="price">
-                                                                            <del>
-                                                                                <span class="woocommerce-Price-amount amount">
-                                                                                    <span class="woocommerce-Price-currencySymbol">$</span>1,239.99</span>
-                                                                            </del>
-                                                                            <ins>
-                                                                                <span class="woocommerce-Price-amount amount">
-                                                                                    <span class="woocommerce-Price-currencySymbol">$</span>997.00</span>
-                                                                            </ins>
-                                                                        </span>
-                                                                <h2 class="woocommerce-loop-product__title">60UH6150 60-Inch 4K Ultra HD Smart LED TV</h2>
-                                                            </a>
-                                                            <div class="checkbox accessory-checkbox">
-                                                                <label>
-                                                                    <input type="checkbox" data-product-type="simple" data-product-id="185" data-price="997.00" class="product-check" checked=""> Remove
-                                                                </label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="product">
-                                                            <a class="woocommerce-LoopProduct-link woocommerce-loop-product__link" href="single-product-fullwidth.html">
-                                                                <img width="224" height="197" alt="" class="attachment-shop_catalog size-shop_catalog wp-post-image" src="assets/images/products/14.jpg">
-                                                                <span class="price">
-                                                                            <del>
-                                                                                <span class="woocommerce-Price-amount amount">
-                                                                                    <span class="woocommerce-Price-currencySymbol">$</span>1,239.99</span>
-                                                                            </del>
-                                                                            <ins>
-                                                                                <span class="woocommerce-Price-amount amount">
-                                                                                    <span class="woocommerce-Price-currencySymbol">$</span>997.00</span>
-                                                                            </ins>
-                                                                        </span>
-                                                                <h2 class="woocommerce-loop-product__title">60UH6150 60-Inch 4K Ultra HD Smart LED TV</h2>
-                                                            </a>
-                                                            <div class="checkbox accessory-checkbox">
-                                                                <label>
-                                                                    <input type="checkbox" data-product-type="simple" data-product-id="185" data-price="997.00" class="product-check" checked=""> Remove
-                                                                </label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="product">
-                                                            <a class="woocommerce-LoopProduct-link woocommerce-loop-product__link" href="single-product-fullwidth.html">
-                                                                <img width="224" height="197" alt="" class="attachment-shop_catalog size-shop_catalog wp-post-image" src="assets/images/products/4.jpg">
-                                                                <span class="price">
-                                                                            <del>
-                                                                                <span class="woocommerce-Price-amount amount">
-                                                                                    <span class="woocommerce-Price-currencySymbol">$</span>1,239.99</span>
-                                                                            </del>
-                                                                            <ins>
-                                                                                <span class="woocommerce-Price-amount amount">
-                                                                                    <span class="woocommerce-Price-currencySymbol">$</span>997.00</span>
-                                                                            </ins>
-                                                                        </span>
-                                                                <h2 class="woocommerce-loop-product__title">60UH6150 60-Inch 4K Ultra HD Smart LED TV</h2>
-                                                            </a>
-                                                            <div class="checkbox accessory-checkbox">
-                                                                <label>
-                                                                    <input type="checkbox" data-product-type="simple" data-product-id="185" data-price="997.00" class="product-check" checked=""> Remove
-                                                                </label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <!-- /.products -->
-                                                </div>
-                                                <!-- .row -->
-                                                <div class="accessories-product-total-price">
-                                                    <div class="total-price">
-                                                                <span class="total-price-html price">
-                                                                    <span class="woocommerce-Price-amount amount">
-                                                                        <span class="woocommerce-Price-currencySymbol">$</span>1,666.94
-                                                                    </span>
-                                                                </span>
-                                                        <!-- .total-price-html -->
-                                                        <span>Bundle Price for Selected items</span>
-                                                    </div>
-                                                    <!-- .total-price -->
-                                                    <div class="accessories-add-all-to-cart">
-                                                        <button class="button btn btn-primary add-all-to-cart" type="button">Add Bundle to cart</button>
-                                                    </div>
-                                                    <!-- .accessories-add-all-to-cart -->
-                                                </div>
-                                                <!-- .accessories-product-total-price -->
-                                            </div>
-                                            <!-- .accessories-wrapper -->
-                                        </div>
-                                        <!-- .accessories -->
-                                    </div>
-                                    <div class="tab-pane panel wc-tab" id="tab-description" role="tabpanel">
-                                        <h2>Description</h2>
-                                        <h1 style="text-align: center;">Exceptional color. Authentic images.</h1>
-                                        <p style="text-align: center;max-width: 1160px;margin: auto auto 60px;">Nullam dignissim elit ut urna rutrum, a fermentum mi auctor. Mauris efficitur magna orci, et dignissim lacus scelerisque sit amet. Proin malesuada tincidunt nisl ac commodo. Vivamus eleifend porttitor ex sit amet suscipit. Vestibulum at ullamcorper lacus, vel facilisis arcu. Aliquam erat volutpat.</p>
-                                        <div style="text-align: center;">
-                                            <iframe width="854" height="480" allowfullscreen="allowfullscreen" src="https://www.youtube.com/embed/K5OGs8a3vlM?ecver=1"></iframe>
-                                        </div>
-                                        <div class="outer-wrap">
-                                            <div class="content-info">
-                                                <h1 style="text-align: left;">Dynamic brightness
-                                                    <br> reveals hidden details</h1>
-                                                <p style="text-align: left;">Nullam dignissim elit ut urna rutrum, a fermentum mi auctor. Mauris efficitur magna orci, et dignissim lacus
-                                                    <br> scelerisque sit amet. Proin malesuada tincidunt nisl ac commodo. Vivamus eleifend porttitor ex sit amet suscipit.
-                                                    <br> Vestibulum at ullamcorper lacus, vel facilisis arcu. Aliquam erat volutpat.</p>
-                                            </div>
-                                            <!-- .content-info -->
-                                            <div class="image-info">
-                                                <img src="assets/images/products/des1.png" alt="">
-                                            </div>
-                                            <!-- .image-info -->
-                                        </div>
-                                        <!-- .outer-wrap -->
-                                        <div class="outer-wrap">
-                                            <div class="image-info">
-                                                <img src="assets/images/products/des2.png" class="alignnone" alt="">
-                                            </div>
-                                            <!-- .image-info -->
-                                            <div class="content-info">
-                                                <h1 style="text-align: right;">An incredible view,
-                                                    <br> wherever you sit</h1>
-                                                <p style="text-align: right;">Nullam dignissim elit ut urna rutrum, a fermentum mi auctor. Mauris efficitur magna orci, et dignissim lacus
-                                                    <br> scelerisque sit amet. Proin malesuada tincidunt nisl ac commodo. Vivamus eleifend porttitor ex sit amet suscipit. Vestibulum at ullamcorper lacus, vel facilisis arcu. Aliquam erat volutpat.</p>
-                                            </div>
-                                            <!-- .content-info -->
-                                        </div>
-                                        <!-- .outer-wrap -->
-                                    </div>
-                                    <div class="tab-pane" id="tab-specification" role="tabpanel">
-                                        <div class="tm-shop-attributes-detail like-column columns-3">
-                                            <h3 class="tm-attributes-title">General</h3>
-                                            <table class="shop_attributes">
-                                                <tbody>
-                                                <tr>
-                                                    <th>Brand</th>
-                                                    <td>
-                                                        <p><a href="#" rel="tag">Galaxy</a></p>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Label</th>
-                                                    <td>
-                                                        <p><a href="#" rel="tag">A+</a></p>
-                                                    </td>
-                                                </tr>
-                                                </tbody>
-                                            </table>
-                                            <!-- /.shop_attributes -->
-                                            <h3 class="tm-attributes-title">Technical Specs</h3>
-                                            <table class="shop_attributes">
-                                                <tbody>
-                                                <tr>
-                                                    <th>Screen Size</th>
-                                                    <td>40″</td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Aspect Ratio</th>
-                                                    <td>16:9</td>
-                                                </tr>
-                                                <tr>
-                                                    <th>3DTV</th>
-                                                    <td>No</td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Recommended Resolution</th>
-                                                    <td>1080p</td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Panel</th>
-                                                    <td>LED</td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Tuner</th>
-                                                    <td>ATSC/Clear QAM Tuners</td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Refresh Rate</th>
-                                                    <td>120Hz</td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Refresh Rate</th>
-                                                    <td>120Hz</td>
-                                                </tr>
-                                                </tbody>
-                                            </table>
-                                            <!-- /.shop_attributes -->
-                                            <h3 class="tm-attributes-title">Connectivity</h3>
-                                            <table class="shop_attributes">
-                                                <tbody>
-                                                <tr>
-                                                    <th>HDMI</th>
-                                                    <td>2 In</td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Digital Audio</th>
-                                                    <td>1 Optical Out</td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Other Connectors</th>
-                                                    <td>1 x RF In</td>
-                                                    <td>1 x Audio Out (Mini Jack)</td>
-                                                    <td>1 x RS232C</td>
-                                                </tr>
-                                                <tr>
-                                                    <th>LAN</th>
-                                                    <td>1</td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Composite A/V</th>
-                                                    <td>1 In</td>
-                                                </tr>
-                                                <tr>
-                                                    <th>USB</th>
-                                                    <td>2</td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Component Video</th>
-                                                    <td>1 in
-                                                    </td>
-                                                </tr>
-                                                </tbody>
-                                            </table>
-                                            <!-- /.shop_attributes -->
-                                        </div>
-                                        <!-- /.tm-shop-attributes-detail -->
-                                    </div>
-                                    <div class="tab-pane" id="tab-reviews" role="tabpanel">
-                                        <div class="techmarket-advanced-reviews" id="reviews">
-                                            <div class="advanced-review row">
-                                                <div class="advanced-review-rating">
-                                                    <h2 class="based-title">Review (1)</h2>
-                                                    <div class="avg-rating">
-                                                        <span class="avg-rating-number">5.0</span>
-                                                        <div title="Rated 5.0 out of 5" class="star-rating">
-                                                            <span style="width:100%"></span>
-                                                        </div>
-                                                    </div>
-                                                    <!-- /.avg-rating -->
-                                                    <div class="rating-histogram">
-                                                        <div class="rating-bar">
-                                                            <div title="Rated 5 out of 5" class="star-rating">
-                                                                <span style="width:100%"></span>
-                                                            </div>
-                                                            <div class="rating-count">1</div>
-                                                            <div class="rating-percentage-bar">
-                                                                <span class="rating-percentage" style="width:100%"></span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="rating-bar">
-                                                            <div title="Rated 4 out of 5" class="star-rating">
-                                                                <span style="width:80%"></span>
-                                                            </div>
-                                                            <div class="rating-count zero">0</div>
-                                                            <div class="rating-percentage-bar">
-                                                                <span class="rating-percentage" style="width:0%"></span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="rating-bar">
-                                                            <div title="Rated 3 out of 5" class="star-rating">
-                                                                <span style="width:60%"></span>
-                                                            </div>
-                                                            <div class="rating-count zero">0</div>
-                                                            <div class="rating-percentage-bar">
-                                                                <span class="rating-percentage" style="width:0%"></span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="rating-bar">
-                                                            <div title="Rated 2 out of 5" class="star-rating">
-                                                                <span style="width:40%"></span>
-                                                            </div>
-                                                            <div class="rating-count zero">0</div>
-                                                            <div class="rating-percentage-bar">
-                                                                <span class="rating-percentage" style="width:0%"></span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="rating-bar">
-                                                            <div title="Rated 1 out of 5" class="star-rating">
-                                                                <span style="width:20%"></span>
-                                                            </div>
-                                                            <div class="rating-count zero">0</div>
-                                                            <div class="rating-percentage-bar">
-                                                                <span class="rating-percentage" style="width:0%"></span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <!-- /.rating-histogram -->
-                                                </div>
-                                                <!-- /.advanced-review-rating -->
-                                                <div class="advanced-review-comment">
-                                                    <div id="review_form_wrapper">
-                                                        <div id="review_form">
-                                                            <div class="comment-respond" id="respond">
-                                                                <h3 class="comment-reply-title" id="reply-title">Add a review</h3>
-                                                                <form novalidate="" class="comment-form" id="commentform" method="post" action="#">
-                                                                    <div class="comment-form-rating">
-                                                                        <label>Your Rating</label>
-                                                                        <p class="stars">
-                                                                            <span><a href="#" class="star-1">1</a><a href="#" class="star-2">2</a><a href="#" class="star-3">3</a><a href="#" class="star-4">4</a><a href="#" class="star-5">5</a></span>
-                                                                        </p>
-                                                                    </div>
-                                                                    <p class="comment-form-comment">
-                                                                        <label for="comment">Your Review</label>
-                                                                        <textarea aria-required="true" rows="8" cols="45" name="comment" id="comment"></textarea>
-                                                                    </p>
-                                                                    <p class="comment-form-author">
-                                                                        <label for="author">Name
-                                                                            <span class="required">*</span>
-                                                                        </label>
-                                                                        <input type="text" aria-required="true" size="30" value="" name="author" id="author">
-                                                                    </p>
-                                                                    <p class="comment-form-email">
-                                                                        <label for="email">Email
-                                                                            <span class="required">*</span>
-                                                                        </label>
-                                                                        <input type="text" aria-required="true" size="30" value="" name="email" id="email">
-                                                                    </p>
-                                                                    <p class="form-submit">
-                                                                        <input type="submit" value="Add Review" class="submit" id="submit" name="submit">
-                                                                        <input type="hidden" id="comment_post_ID" value="185" name="comment_post_ID">
-                                                                        <input type="hidden" value="0" id="comment_parent" name="comment_parent">
-                                                                    </p>
-                                                                </form>
-                                                                <!-- /.comment-form -->
-                                                            </div>
-                                                            <!-- /.comment-respond -->
-                                                        </div>
-                                                        <!-- /#review_form -->
-                                                    </div>
-                                                    <!-- /#review_form_wrapper -->
-                                                </div>
-                                                <!-- /.advanced-review-comment -->
-                                            </div>
-                                            <!-- /.advanced-review -->
-                                            <div id="comments">
-                                                <ol class="commentlist">
-                                                    <li id="li-comment-83" class="comment byuser comment-author-admin bypostauthor even thread-even depth-1">
-                                                        <div class="comment_container" id="comment-83">
-                                                            <div class="comment-text">
-                                                                <div class="star-rating">
-                                                                            <span style="width:100%">Rated
-                                                                                <strong class="rating">5</strong> out of 5</span>
-                                                                </div>
-                                                                <p class="meta">
-                                                                    <strong itemprop="author" class="woocommerce-review__author">first last</strong>
-                                                                    <span class="woocommerce-review__dash">&ndash;</span>
-                                                                    <time datetime="2017-06-21T08:05:40+00:00" itemprop="datePublished" class="woocommerce-review__published-date">June 21, 2017</time>
-                                                                </p>
-                                                                <div class="description">
-                                                                    <p>Wow great product</p>
-                                                                </div>
-                                                                <!-- /.description -->
-                                                            </div>
-                                                            <!-- /.comment-text -->
-                                                        </div>
-                                                        <!-- /.comment_container -->
-                                                    </li>
-                                                    <!-- /.comment -->
-                                                </ol>
-                                                <!-- /.commentlist -->
-                                            </div>
-                                            <!-- /#comments -->
-                                        </div>
-                                        <!-- /.techmarket-advanced-reviews -->
-                                    </div>
-                                </div>
-                            </div>
-                            <section class="section-landscape-products-carousel recently-viewed" id="recently-viewed">
-                                <header class="section-header">
-                                    <h2 class="section-title">Recently viewed products</h2>
-                                    <nav class="custom-slick-nav"></nav>
-                                </header>
-                                <div class="products-carousel" data-ride="tm-slick-carousel" data-wrap=".products" data-slick="{&quot;slidesToShow&quot;:5,&quot;slidesToScroll&quot;:2,&quot;dots&quot;:true,&quot;arrows&quot;:true,&quot;prevArrow&quot;:&quot;&lt;a href=\&quot;#\&quot;&gt;&lt;i class=\&quot;tm tm-arrow-left\&quot;&gt;&lt;\/i&gt;&lt;\/a&gt;&quot;,&quot;nextArrow&quot;:&quot;&lt;a href=\&quot;#\&quot;&gt;&lt;i class=\&quot;tm tm-arrow-right\&quot;&gt;&lt;\/i&gt;&lt;\/a&gt;&quot;,&quot;appendArrows&quot;:&quot;#recently-viewed .custom-slick-nav&quot;,&quot;responsive&quot;:[{&quot;breakpoint&quot;:992,&quot;settings&quot;:{&quot;slidesToShow&quot;:2,&quot;slidesToScroll&quot;:2}},{&quot;breakpoint&quot;:1200,&quot;settings&quot;:{&quot;slidesToShow&quot;:3,&quot;slidesToScroll&quot;:3}},{&quot;breakpoint&quot;:1400,&quot;settings&quot;:{&quot;slidesToShow&quot;:3,&quot;slidesToScroll&quot;:3}},{&quot;breakpoint&quot;:1700,&quot;settings&quot;:{&quot;slidesToShow&quot;:4,&quot;slidesToScroll&quot;:4}}]}">
-                                    <div class="container-fluid">
-                                        <div class="woocommerce columns-5">
-                                            <div class="products">
-                                                <div class="landscape-product product">
-                                                    <a class="woocommerce-LoopProduct-link" href="single-product-fullwidth.html">
-                                                        <div class="media">
-                                                            <img class="wp-post-image" src="assets/images/products/card-6.jpg" alt="">
-                                                            <div class="media-body">
-                                                                        <span class="price">
-                                                                            <ins>
-                                                                                <span class="amount"> </span>
-                                                                            </ins>
-                                                                            <span class="amount"> $600</span>
-                                                                        </span>
-                                                                <!-- .price -->
-                                                                <h2 class="woocommerce-loop-product__title">ZenBook 3 Ultrabook 8GB 512SSD W10</h2>
-                                                                <div class="techmarket-product-rating">
-                                                                    <div title="Rated 0 out of 5" class="star-rating">
-                                                                                <span style="width:0%">
-                                                                                    <strong class="rating">0</strong> out of 5</span>
-                                                                    </div>
-                                                                    <span class="review-count">(0)</span>
-                                                                </div>
-                                                                <!-- .techmarket-product-rating -->
-                                                            </div>
-                                                            <!-- .media-body -->
-                                                        </div>
-                                                        <!-- .media -->
-                                                    </a>
-                                                    <!-- .woocommerce-LoopProduct-link -->
-                                                </div>
-                                                <!-- .landscape-product -->
-                                                <div class="landscape-product product">
-                                                    <a class="woocommerce-LoopProduct-link" href="single-product-fullwidth.html">
-                                                        <div class="media">
-                                                            <img class="wp-post-image" src="assets/images/products/card-3.jpg" alt="">
-                                                            <div class="media-body">
-                                                                        <span class="price">
-                                                                            <ins>
-                                                                                <span class="amount"> $3,788.00</span>
-                                                                            </ins>
-                                                                            <del>
-                                                                                <span class="amount">$4,780.00</span>
-                                                                            </del>
-                                                                            <span class="amount"> </span>
-                                                                        </span>
-                                                                <!-- .price -->
-                                                                <h2 class="woocommerce-loop-product__title">PowerBank 4400</h2>
-                                                                <div class="techmarket-product-rating">
-                                                                    <div title="Rated 0 out of 5" class="star-rating">
-                                                                                <span style="width:0%">
-                                                                                    <strong class="rating">0</strong> out of 5</span>
-                                                                    </div>
-                                                                    <span class="review-count">(0)</span>
-                                                                </div>
-                                                                <!-- .techmarket-product-rating -->
-                                                            </div>
-                                                            <!-- .media-body -->
-                                                        </div>
-                                                        <!-- .media -->
-                                                    </a>
-                                                    <!-- .woocommerce-LoopProduct-link -->
-                                                </div>
-                                                <!-- .landscape-product -->
-                                                <div class="landscape-product product">
-                                                    <a class="woocommerce-LoopProduct-link" href="single-product-fullwidth.html">
-                                                        <div class="media">
-                                                            <img class="wp-post-image" src="assets/images/products/card-4.jpg" alt="">
-                                                            <div class="media-body">
-                                                                        <span class="price">
-                                                                            <ins>
-                                                                                <span class="amount"> </span>
-                                                                            </ins>
-                                                                            <span class="amount"> $800</span>
-                                                                        </span>
-                                                                <!-- .price -->
-                                                                <h2 class="woocommerce-loop-product__title">Snap White Instant Digital Camera in White</h2>
-                                                                <div class="techmarket-product-rating">
-                                                                    <div title="Rated 0 out of 5" class="star-rating">
-                                                                                <span style="width:0%">
-                                                                                    <strong class="rating">0</strong> out of 5</span>
-                                                                    </div>
-                                                                    <span class="review-count">(0)</span>
-                                                                </div>
-                                                                <!-- .techmarket-product-rating -->
-                                                            </div>
-                                                            <!-- .media-body -->
-                                                        </div>
-                                                        <!-- .media -->
-                                                    </a>
-                                                    <!-- .woocommerce-LoopProduct-link -->
-                                                </div>
-                                                <!-- .landscape-product -->
-                                                <div class="landscape-product product">
-                                                    <a class="woocommerce-LoopProduct-link" href="single-product-fullwidth.html">
-                                                        <div class="media">
-                                                            <img class="wp-post-image" src="assets/images/products/card-5.jpg" alt="">
-                                                            <div class="media-body">
-                                                                        <span class="price">
-                                                                            <ins>
-                                                                                <span class="amount"> $3,788.00</span>
-                                                                            </ins>
-                                                                            <del>
-                                                                                <span class="amount">$4,780.00</span>
-                                                                            </del>
-                                                                            <span class="amount"> </span>
-                                                                        </span>
-                                                                <!-- .price -->
-                                                                <h2 class="woocommerce-loop-product__title">Smart Watches 3 SWR50</h2>
-                                                                <div class="techmarket-product-rating">
-                                                                    <div title="Rated 0 out of 5" class="star-rating">
-                                                                                <span style="width:0%">
-                                                                                    <strong class="rating">0</strong> out of 5</span>
-                                                                    </div>
-                                                                    <span class="review-count">(0)</span>
-                                                                </div>
-                                                                <!-- .techmarket-product-rating -->
-                                                            </div>
-                                                            <!-- .media-body -->
-                                                        </div>
-                                                        <!-- .media -->
-                                                    </a>
-                                                    <!-- .woocommerce-LoopProduct-link -->
-                                                </div>
-                                                <!-- .landscape-product -->
-                                                <div class="landscape-product product">
-                                                    <a class="woocommerce-LoopProduct-link" href="single-product-fullwidth.html">
-                                                        <div class="media">
-                                                            <img class="wp-post-image" src="assets/images/products/card-3.jpg" alt="">
-                                                            <div class="media-body">
-                                                                        <span class="price">
-                                                                            <ins>
-                                                                                <span class="amount"> $3,788.00</span>
-                                                                            </ins>
-                                                                            <del>
-                                                                                <span class="amount">$4,780.00</span>
-                                                                            </del>
-                                                                            <span class="amount"> </span>
-                                                                        </span>
-                                                                <!-- .price -->
-                                                                <h2 class="woocommerce-loop-product__title">PowerBank 4400</h2>
-                                                                <div class="techmarket-product-rating">
-                                                                    <div title="Rated 0 out of 5" class="star-rating">
-                                                                                <span style="width:0%">
-                                                                                    <strong class="rating">0</strong> out of 5</span>
-                                                                    </div>
-                                                                    <span class="review-count">(0)</span>
-                                                                </div>
-                                                                <!-- .techmarket-product-rating -->
-                                                            </div>
-                                                            <!-- .media-body -->
-                                                        </div>
-                                                        <!-- .media -->
-                                                    </a>
-                                                    <!-- .woocommerce-LoopProduct-link -->
-                                                </div>
-                                                <!-- .landscape-product -->
-                                                <div class="landscape-product product">
-                                                    <a class="woocommerce-LoopProduct-link" href="single-product-fullwidth.html">
-                                                        <div class="media">
-                                                            <img class="wp-post-image" src="assets/images/products/card-2.jpg" alt="">
-                                                            <div class="media-body">
-                                                                        <span class="price">
-                                                                            <ins>
-                                                                                <span class="amount"> </span>
-                                                                            </ins>
-                                                                            <span class="amount"> $500</span>
-                                                                        </span>
-                                                                <!-- .price -->
-                                                                <h2 class="woocommerce-loop-product__title">Headset 3D Glasses VR for Android</h2>
-                                                                <div class="techmarket-product-rating">
-                                                                    <div title="Rated 0 out of 5" class="star-rating">
-                                                                                <span style="width:0%">
-                                                                                    <strong class="rating">0</strong> out of 5</span>
-                                                                    </div>
-                                                                    <span class="review-count">(0)</span>
-                                                                </div>
-                                                                <!-- .techmarket-product-rating -->
-                                                            </div>
-                                                            <!-- .media-body -->
-                                                        </div>
-                                                        <!-- .media -->
-                                                    </a>
-                                                    <!-- .woocommerce-LoopProduct-link -->
-                                                </div>
-                                                <!-- .landscape-product -->
-                                                <div class="landscape-product product">
-                                                    <a class="woocommerce-LoopProduct-link" href="single-product-fullwidth.html">
-                                                        <div class="media">
-                                                            <img class="wp-post-image" src="assets/images/products/card-4.jpg" alt="">
-                                                            <div class="media-body">
-                                                                        <span class="price">
-                                                                            <ins>
-                                                                                <span class="amount"> </span>
-                                                                            </ins>
-                                                                            <span class="amount"> $800</span>
-                                                                        </span>
-                                                                <!-- .price -->
-                                                                <h2 class="woocommerce-loop-product__title">Snap White Instant Digital Camera in White</h2>
-                                                                <div class="techmarket-product-rating">
-                                                                    <div title="Rated 0 out of 5" class="star-rating">
-                                                                                <span style="width:0%">
-                                                                                    <strong class="rating">0</strong> out of 5</span>
-                                                                    </div>
-                                                                    <span class="review-count">(0)</span>
-                                                                </div>
-                                                                <!-- .techmarket-product-rating -->
-                                                            </div>
-                                                            <!-- .media-body -->
-                                                        </div>
-                                                        <!-- .media -->
-                                                    </a>
-                                                    <!-- .woocommerce-LoopProduct-link -->
-                                                </div>
-                                                <!-- .landscape-product -->
-                                                <div class="landscape-product product">
-                                                    <a class="woocommerce-LoopProduct-link" href="single-product-fullwidth.html">
-                                                        <div class="media">
-                                                            <img class="wp-post-image" src="assets/images/products/card-1.jpg" alt="">
-                                                            <div class="media-body">
-                                                                        <span class="price">
-                                                                            <ins>
-                                                                                <span class="amount"> $3,788.00</span>
-                                                                            </ins>
-                                                                            <del>
-                                                                                <span class="amount">$4,780.00</span>
-                                                                            </del>
-                                                                            <span class="amount"> </span>
-                                                                        </span>
-                                                                <!-- .price -->
-                                                                <h2 class="woocommerce-loop-product__title">Unlocked Android 6″ Inch 4.4.2 Dual Core</h2>
-                                                                <div class="techmarket-product-rating">
-                                                                    <div title="Rated 0 out of 5" class="star-rating">
-                                                                                <span style="width:0%">
-                                                                                    <strong class="rating">0</strong> out of 5</span>
-                                                                    </div>
-                                                                    <span class="review-count">(0)</span>
-                                                                </div>
-                                                                <!-- .techmarket-product-rating -->
-                                                            </div>
-                                                            <!-- .media-body -->
-                                                        </div>
-                                                        <!-- .media -->
-                                                    </a>
-                                                    <!-- .woocommerce-LoopProduct-link -->
-                                                </div>
-                                                <!-- .landscape-product -->
-                                            </div>
-                                        </div>
-                                        <!-- .woocommerce -->
-                                    </div>
-                                    <!-- .container-fluid -->
-                                </div>
-                                <!-- .products-carousel -->
-                            </section>
-                            <!-- .section-landscape-products-carousel -->
-                            <section class="brands-carousel">
-                                <h2 class="sr-only">Brands Carousel</h2>
-                                <div class="col-full" data-ride="tm-slick-carousel" data-wrap=".brands" data-slick="{&quot;slidesToShow&quot;:6,&quot;slidesToScroll&quot;:1,&quot;dots&quot;:false,&quot;arrows&quot;:true,&quot;responsive&quot;:[{&quot;breakpoint&quot;:400,&quot;settings&quot;:{&quot;slidesToShow&quot;:1,&quot;slidesToScroll&quot;:1}},{&quot;breakpoint&quot;:800,&quot;settings&quot;:{&quot;slidesToShow&quot;:3,&quot;slidesToScroll&quot;:3}},{&quot;breakpoint&quot;:992,&quot;settings&quot;:{&quot;slidesToShow&quot;:3,&quot;slidesToScroll&quot;:3}},{&quot;breakpoint&quot;:1200,&quot;settings&quot;:{&quot;slidesToShow&quot;:4,&quot;slidesToScroll&quot;:4}},{&quot;breakpoint&quot;:1400,&quot;settings&quot;:{&quot;slidesToShow&quot;:5,&quot;slidesToScroll&quot;:5}}]}">
-                                    <div class="brands">
-                                        <div class="item">
-                                            <a href="shop.html">
-                                                <figure>
-                                                    <figcaption class="text-overlay">
-                                                        <div class="info">
-                                                            <h4>apple</h4>
-                                                        </div>
-                                                        <!-- /.info -->
-                                                    </figcaption>
-                                                    <img width="145" height="50" class="img-responsive desaturate" alt="apple" src="assets/images/brands/1.png">
-                                                </figure>
-                                            </a>
-                                        </div>
-                                        <!-- .item -->
-                                        <div class="item">
-                                            <a href="shop.html">
-                                                <figure>
-                                                    <figcaption class="text-overlay">
-                                                        <div class="info">
-                                                            <h4>bosch</h4>
-                                                        </div>
-                                                        <!-- /.info -->
-                                                    </figcaption>
-                                                    <img width="145" height="50" class="img-responsive desaturate" alt="bosch" src="assets/images/brands/2.png">
-                                                </figure>
-                                            </a>
-                                        </div>
-                                        <!-- .item -->
-                                        <div class="item">
-                                            <a href="shop.html">
-                                                <figure>
-                                                    <figcaption class="text-overlay">
-                                                        <div class="info">
-                                                            <h4>cannon</h4>
-                                                        </div>
-                                                        <!-- /.info -->
-                                                    </figcaption>
-                                                    <img width="145" height="50" class="img-responsive desaturate" alt="cannon" src="assets/images/brands/3.png">
-                                                </figure>
-                                            </a>
-                                        </div>
-                                        <!-- .item -->
-                                        <div class="item">
-                                            <a href="shop.html">
-                                                <figure>
-                                                    <figcaption class="text-overlay">
-                                                        <div class="info">
-                                                            <h4>connect</h4>
-                                                        </div>
-                                                        <!-- /.info -->
-                                                    </figcaption>
-                                                    <img width="145" height="50" class="img-responsive desaturate" alt="connect" src="assets/images/brands/4.png">
-                                                </figure>
-                                            </a>
-                                        </div>
-                                        <!-- .item -->
-                                        <div class="item">
-                                            <a href="shop.html">
-                                                <figure>
-                                                    <figcaption class="text-overlay">
-                                                        <div class="info">
-                                                            <h4>galaxy</h4>
-                                                        </div>
-                                                        <!-- /.info -->
-                                                    </figcaption>
-                                                    <img width="145" height="50" class="img-responsive desaturate" alt="galaxy" src="assets/images/brands/5.png">
-                                                </figure>
-                                            </a>
-                                        </div>
-                                        <!-- .item -->
-                                        <div class="item">
-                                            <a href="shop.html">
-                                                <figure>
-                                                    <figcaption class="text-overlay">
-                                                        <div class="info">
-                                                            <h4>gopro</h4>
-                                                        </div>
-                                                        <!-- /.info -->
-                                                    </figcaption>
-                                                    <img width="145" height="50" class="img-responsive desaturate" alt="gopro" src="assets/images/brands/6.png">
-                                                </figure>
-                                            </a>
-                                        </div>
-                                        <!-- .item -->
-                                        <div class="item">
-                                            <a href="shop.html">
-                                                <figure>
-                                                    <figcaption class="text-overlay">
-                                                        <div class="info">
-                                                            <h4>handspot</h4>
-                                                        </div>
-                                                        <!-- /.info -->
-                                                    </figcaption>
-                                                    <img width="145" height="50" class="img-responsive desaturate" alt="handspot" src="assets/images/brands/7.png">
-                                                </figure>
-                                            </a>
-                                        </div>
-                                        <!-- .item -->
-                                        <div class="item">
-                                            <a href="shop.html">
-                                                <figure>
-                                                    <figcaption class="text-overlay">
-                                                        <div class="info">
-                                                            <h4>kinova</h4>
-                                                        </div>
-                                                        <!-- /.info -->
-                                                    </figcaption>
-                                                    <img width="145" height="50" class="img-responsive desaturate" alt="kinova" src="assets/images/brands/8.png">
-                                                </figure>
-                                            </a>
-                                        </div>
-                                        <!-- .item -->
-                                        <div class="item">
-                                            <a href="shop.html">
-                                                <figure>
-                                                    <figcaption class="text-overlay">
-                                                        <div class="info">
-                                                            <h4>nespresso</h4>
-                                                        </div>
-                                                        <!-- /.info -->
-                                                    </figcaption>
-                                                    <img width="145" height="50" class="img-responsive desaturate" alt="nespresso" src="assets/images/brands/9.png">
-                                                </figure>
-                                            </a>
-                                        </div>
-                                        <!-- .item -->
-                                        <div class="item">
-                                            <a href="shop.html">
-                                                <figure>
-                                                    <figcaption class="text-overlay">
-                                                        <div class="info">
-                                                            <h4>samsung</h4>
-                                                        </div>
-                                                        <!-- /.info -->
-                                                    </figcaption>
-                                                    <img width="145" height="50" class="img-responsive desaturate" alt="samsung" src="assets/images/brands/10.png">
-                                                </figure>
-                                            </a>
-                                        </div>
-                                        <!-- .item -->
-                                        <div class="item">
-                                            <a href="shop.html">
-                                                <figure>
-                                                    <figcaption class="text-overlay">
-                                                        <div class="info">
-                                                            <h4>speedway</h4>
-                                                        </div>
-                                                        <!-- /.info -->
-                                                    </figcaption>
-                                                    <img width="145" height="50" class="img-responsive desaturate" alt="speedway" src="assets/images/brands/11.png">
-                                                </figure>
-                                            </a>
-                                        </div>
-                                        <!-- .item -->
-                                        <div class="item">
-                                            <a href="shop.html">
-                                                <figure>
-                                                    <figcaption class="text-overlay">
-                                                        <div class="info">
-                                                            <h4>yoko</h4>
-                                                        </div>
-                                                        <!-- /.info -->
-                                                    </figcaption>
-                                                    <img width="145" height="50" class="img-responsive desaturate" alt="yoko" src="assets/images/brands/12.png">
-                                                </figure>
-                                            </a>
-                                        </div>
-                                        <!-- .item -->
-                                    </div>
-                                </div>
-                                <!-- .col-full -->
-                            </section>
-                            <!-- .brands-carousel -->
-                        </div>
-                        <!-- .product -->
-                    </main>
-                    <!-- #main -->
-                </div>
-                <!-- #primary -->
-            </div>
-            <!-- .row -->
+
+    <div class="tt-breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Trang chủ</a></li>
+                <li><a href="listing-left-column.html">Shop</a></li>
+                <li>T-Shirt</li>
+            </ul>
         </div>
-        <!-- .col-full -->
     </div>
-    <!-- #content -->
+    <div id="tt-pageContent">
+        <div class="container-indent">
+            <!-- mobile product slider  -->
+            <div class="tt-mobile-product-slider visible-xs arrow-location-center slick-animated-show-js">
+                <?php
+                foreach ($db->select('media_source')->from(_TABLE_MEDIA)->where(array('media_type' => 'images_product', 'media_store' => 'local', 'media_parent' => $product['product_id']))->fetch() as $images_mobile){
+                    echo '<div><img src="'. _URL_HOME .'/'. $images_mobile['media_source'] .'" alt="'. $product['product_name'] .'"></div>';
+                }
+                ?>
+            </div>
+            <!-- /mobile product slider  -->
+            <div class="container container-fluid-mobile">
+                <div class="row">
+                    <div class="col-6 hidden-xs">
+                        <div class="tt-product-vertical-layout">
+                            <div class="tt-product-single-img">
+                                <div>
+                                    <img class="zoom-product" src='<?=_URL_HOME.'/'.$images_first['media_source']?>' data-zoom-image="<?=_URL_HOME.'/'.$images_first['media_source']?>" alt="<?=$product['product_name']?>">
+                                    <button class="tt-btn-zomm tt-top-right"><i class="icon-f-86"></i></button>
+                                </div>
+                            </div>
+                            <div class="tt-product-single-carousel-vertical">
+                                <ul id="smallGallery" class="tt-slick-button-vertical slick-animated-show-js">
+                                    <?php
+                                    $i = 0;
+                                    foreach ($db->select('media_source')->from(_TABLE_MEDIA)->where(array('media_type' => 'images_product', 'media_store' => 'local', 'media_parent' => $product['product_id']))->fetch() as $images_mobile){
+                                        $i++;
+                                        if($i == 1){
+                                            echo '<li><a class="zoomGalleryActive" href="#" data-image="'. _URL_HOME .'/'. $images_mobile['media_source'] .'" data-zoom-image="'. _URL_HOME .'/'. $images_mobile['media_source'] .'"><img src="'. _URL_HOME .'/'. $images_mobile['media_source'] .'" alt="'. $product['product_name'] .'"></a></li>';
+                                        }else{
+                                            echo '<li><a href="#" data-image="'. _URL_HOME .'/'. $images_mobile['media_source'] .'" data-zoom-image="'. _URL_HOME .'/'. $images_mobile['media_source'] .'"><img src="'. _URL_HOME .'/'. $images_mobile['media_source'] .'" alt="'. $product['product_name'] .'"></a></li>';
+                                        }
+                                    }
+                                    foreach (unserialize($product['product_color']) as $product_color){
+                                        echo '<li><a href="#" data-image="'. _URL_HOME .'/'. $product_color .'" data-zoom-image="'. _URL_HOME .'/'. $product_color .'"><img src="'. _URL_HOME .'/'. $product_color .'" alt="'. $product['product_name'] .'"></a></li>';
+                                    }
+                                    ?>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="tt-product-single-info">
+                            <h3 class="tt-title"><?=$product['product_name']?></h3>
+                            <div class="tt-price">
+                                <span class="new-price"><?=$product['product_price_vn']?>₫</span>
+                                <!--<span class="old-price" style="color: #D81B60"><small><?/*=$product['product_price_default']*/?>¥</small></span>
+                                <span class="new-price"><small><?/*=$product['product_price_promotion']*/?>¥</small></span>-->
+                            </div>
+                            <div class="tt-swatches-container">
+                                <div class="tt-wrapper">
+                                    <div class="tt-title-options">SIZE:</div>
+                                    <ul class="tt-options-swatch options-large">
+                                        <?php
+                                        foreach (unserialize($product['product_size']) as $product_size){
+                                            echo '<li><a href="#">'. $product_size .'</a></li>';
+                                        }
+                                        ?>
+                                    </ul>
+                                </div>
+                                <div class="tt-wrapper product-information-buttons">
+                                    <a data-toggle="modal" data-target="#modalProductInfo" href="#">Size Guide</a>
+                                    <a data-toggle="modal" data-target="#modalProductInfo-02" href="#">Shipping</a>
+                                </div>
+                                <div class="tt-wrapper">
+                                    <div class="tt-title-options">Màu:</div>
+                                    <ul class="tt-options-swatch options-large">
+                                        <?php
+                                        foreach (unserialize($product['product_color']) as $product_color){
+                                            echo '<li>
+                                            <a class="options-color" href="#">
+										        <span class="swatch-img">
+											        <img src="'. _URL_HOME .'/'. $product_color .'" alt="">
+										        </span>
+                                                <span class="swatch-label color-black"></span>
+                                            </a>
+                                            </li>';
+                                        }
+                                        ?>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="tt-wrapper">
+                                <div class="tt-row-custom-01">
+                                    <div class="col-item">
+                                        <div class="tt-input-counter style-01">
+                                            <span class="minus-btn"></span>
+                                            <input type="text" value="1" size="5">
+                                            <span class="plus-btn"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-item">
+                                        <a href="#" class="btn btn-lg"><i class="icon-f-39"></i>THÊM VÀO GIỎ HÀNG</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tt-wrapper">
+                                <ul class="tt-list-btn">
+                                    <li><a class="btn-link" href="#"><i class="icon-n-072"></i>THÊM VÀO YÊU THÍCH</a></li>
+                                    <li><a class="btn-link" href="#"><i class="icon-n-08"></i>LINK SẢN PHẨM GỐC</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-indent">
+            <div class="container container-fluid-custom-mobile-padding">
+                <div class="tt-block-title text-left">
+                    <h3 class="tt-title-small">SẢN PHẨM TƯƠNG TỰ</h3>
+                </div>
+                <div class="tt-carousel-products row arrow-location-right-top tt-alignment-img tt-layout-product-item slick-animated-show-js">
+                    <div class="col-2 col-md-4 col-lg-3">
+                        <div class="tt-product thumbprod-center">
+                            <div class="tt-image-box">
+                                <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"	data-tooltip="Quick View" data-tposition="left"></a>
+                                <a href="#" class="tt-btn-wishlist" data-tooltip="Add to Wishlist" data-tposition="left"></a>
+                                <a href="#" class="tt-btn-compare" data-tooltip="Add to Compare" data-tposition="left"></a>
+                                <a href="product.html">
+                                    <span class="tt-img"><img src="images/product/product-16.jpg" alt=""></span>
+                                    <span class="tt-img-roll-over"><img src="images/product/product-16-02.jpg" alt=""></span>
+                                </a>
+                            </div>
+                            <div class="tt-description">
+                                <div class="tt-row">
+                                    <ul class="tt-add-info">
+                                        <li><a href="#">T-SHIRTS</a></li>
+                                    </ul>
+                                </div>
+                                <h2 class="tt-title"><a href="product.html">Flared Shift Dress</a></h2>
+                                <div class="tt-price">
+                                    $24
+                                </div>
+                                <div class="tt-product-inside-hover">
+                                    <div class="tt-row-btn">
+                                        <a href="#" class="tt-btn-addtocart thumbprod-button-bg" data-toggle="modal" data-target="#modalAddToCartProduct">ADD TO CART</a>
+                                    </div>
+                                    <div class="tt-row-btn">
+                                        <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"></a>
+                                        <a href="#" class="tt-btn-wishlist"></a>
+                                        <a href="#" class="tt-btn-compare"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2 col-md-4 col-lg-3">
+                        <div class="tt-product thumbprod-center">
+                            <div class="tt-image-box">
+                                <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"	data-tooltip="Quick View" data-tposition="left"></a>
+                                <a href="#" class="tt-btn-wishlist" data-tooltip="Add to Wishlist" data-tposition="left"></a>
+                                <a href="#" class="tt-btn-compare" data-tooltip="Add to Compare" data-tposition="left"></a>
+                                <a href="product.html">
+                                    <span class="tt-img"><img src="images/product/product-17.jpg" alt=""></span>
+                                    <span class="tt-img-roll-over"><img src="images/product/product-17-01.jpg" alt=""></span>
+                                </a>
+                            </div>
+                            <div class="tt-description">
+                                <div class="tt-row">
+                                    <ul class="tt-add-info">
+                                        <li><a href="#">T-SHIRTS</a></li>
+                                    </ul>
+                                    <div class="tt-rating">
+                                        <i class="icon-star"></i>
+                                        <i class="icon-star"></i>
+                                        <i class="icon-star"></i>
+                                        <i class="icon-star-half"></i>
+                                        <i class="icon-star-empty"></i>
+                                    </div>
+                                </div>
+                                <h2 class="tt-title"><a href="product.html">Flared Shift Dress</a></h2>
+                                <div class="tt-price">
+                                    $8
+                                </div>
+                                <div class="tt-product-inside-hover">
+                                    <div class="tt-row-btn">
+                                        <a href="#" class="tt-btn-addtocart thumbprod-button-bg" data-toggle="modal" data-target="#modalAddToCartProduct">ADD TO CART</a>
+                                    </div>
+                                    <div class="tt-row-btn">
+                                        <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"></a>
+                                        <a href="#" class="tt-btn-wishlist"></a>
+                                        <a href="#" class="tt-btn-compare"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2 col-md-4 col-lg-3">
+                        <div class="tt-product thumbprod-center">
+                            <div class="tt-image-box">
+                                <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"	data-tooltip="Quick View" data-tposition="left"></a>
+                                <a href="#" class="tt-btn-wishlist" data-tooltip="Add to Wishlist" data-tposition="left"></a>
+                                <a href="#" class="tt-btn-compare" data-tooltip="Add to Compare" data-tposition="left"></a>
+                                <a href="product.html">
+                                    <span class="tt-img"><img src="images/product/product-18.jpg" alt=""></span>
+                                    <span class="tt-img-roll-over"><img src="images/product/product-18-02.jpg" alt=""></span>
+                                </a>
+                            </div>
+                            <div class="tt-description">
+                                <div class="tt-row">
+                                    <ul class="tt-add-info">
+                                        <li><a href="#">T-SHIRTS</a></li>
+                                    </ul>
+                                </div>
+                                <h2 class="tt-title"><a href="product.html">Flared Shift Dress</a></h2>
+                                <div class="tt-price">
+                                    $46
+                                </div>
+                                <div class="tt-option-block">
+                                    <ul class="tt-options-swatch">
+                                        <li><a class="options-color tt-color-bg-01" href="#"></a></li>
+                                        <li><a class="options-color tt-color-bg-02" href="#"></a></li>
+                                    </ul>
+                                </div>
+                                <div class="tt-product-inside-hover">
+                                    <div class="tt-row-btn">
+                                        <a href="#" class="tt-btn-addtocart thumbprod-button-bg" data-toggle="modal" data-target="#modalAddToCartProduct">ADD TO CART</a>
+                                    </div>
+                                    <div class="tt-row-btn">
+                                        <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"></a>
+                                        <a href="#" class="tt-btn-wishlist"></a>
+                                        <a href="#" class="tt-btn-compare"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2 col-md-4 col-lg-3">
+                        <div class="tt-product thumbprod-center">
+                            <div class="tt-image-box">
+                                <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"	data-tooltip="Quick View" data-tposition="left"></a>
+                                <a href="#" class="tt-btn-wishlist" data-tooltip="Add to Wishlist" data-tposition="left"></a>
+                                <a href="#" class="tt-btn-compare" data-tooltip="Add to Compare" data-tposition="left"></a>
+                                <a href="product.html">
+                                    <span class="tt-img"><img src="images/product/product-19.jpg" alt=""></span>
+                                    <span class="tt-img-roll-over"><img src="images/product/product-19-02.jpg" alt=""></span>
+                                </a>
+                            </div>
+                            <div class="tt-description">
+                                <div class="tt-row">
+                                    <ul class="tt-add-info">
+                                        <li><a href="#">T-SHIRTS</a></li>
+                                    </ul>
+                                    <div class="tt-rating">
+                                        <i class="icon-star"></i>
+                                        <i class="icon-star"></i>
+                                        <i class="icon-star"></i>
+                                        <i class="icon-star"></i>
+                                        <i class="icon-star"></i>
+                                    </div>
+                                </div>
+                                <h2 class="tt-title"><a href="product.html">Flared Shift Dress</a></h2>
+                                <div class="tt-price">
+                                    $35
+                                </div>
+                                <div class="tt-product-inside-hover">
+                                    <div class="tt-row-btn">
+                                        <a href="#" class="tt-btn-addtocart thumbprod-button-bg" data-toggle="modal" data-target="#modalAddToCartProduct">ADD TO CART</a>
+                                    </div>
+                                    <div class="tt-row-btn">
+                                        <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"></a>
+                                        <a href="#" class="tt-btn-wishlist"></a>
+                                        <a href="#" class="tt-btn-compare"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2 col-md-4 col-lg-3">
+                        <div class="tt-product thumbprod-center">
+                            <div class="tt-image-box">
+                                <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"	data-tooltip="Quick View" data-tposition="left"></a>
+                                <a href="#" class="tt-btn-wishlist" data-tooltip="Add to Wishlist" data-tposition="left"></a>
+                                <a href="#" class="tt-btn-compare" data-tooltip="Add to Compare" data-tposition="left"></a>
+                                <a href="product.html">
+                                    <span class="tt-img"><img src="images/product/product-14.jpg" alt=""></span>
+                                    <span class="tt-img-roll-over"><img src="images/product/product-14-02.jpg" alt=""></span>
+                                </a>
+                            </div>
+                            <div class="tt-description">
+                                <div class="tt-row">
+                                    <ul class="tt-add-info">
+                                        <li><a href="#">T-SHIRTS</a></li>
+                                    </ul>
+                                </div>
+                                <h2 class="tt-title"><a href="product.html">Flared Shift Dress</a></h2>
+                                <div class="tt-price">
+                                    $12
+                                </div>
+                                <div class="tt-product-inside-hover">
+                                    <div class="tt-row-btn">
+                                        <a href="#" class="tt-btn-addtocart thumbprod-button-bg" data-toggle="modal" data-target="#modalAddToCartProduct">ADD TO CART</a>
+                                    </div>
+                                    <div class="tt-row-btn">
+                                        <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"></a>
+                                        <a href="#" class="tt-btn-wishlist"></a>
+                                        <a href="#" class="tt-btn-compare"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="tt-footer-default tt-color-scheme-02">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-md-9">
+                        <div class="tt-newsletter-layout-01">
+                            <div class="tt-newsletter">
+                                <div class="tt-mobile-collapse">
+                                    <h4 class="tt-collapse-title">
+                                        BE IN TOUCH WITH US:
+                                    </h4>
+                                    <div class="tt-collapse-content">
+                                        <form id="newsletterform" class="form-inline form-default" method="post" novalidate="novalidate" action="#">
+                                            <div class="form-group">
+                                                <input type="text" name="email" class="form-control" placeholder="Enter your e-mail">
+                                                <button type="submit" class="btn">JOIN US</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-auto">
+                        <ul class="tt-social-icon">
+                            <li><a class="icon-g-64" target="_blank" href="http://www.facebook.com/"></a></li>
+                            <li><a class="icon-h-58" target="_blank" href="http://www.facebook.com/"></a></li>
+                            <li><a class="icon-g-66" target="_blank" href="http://www.twitter.com/"></a></li>
+                            <li><a class="icon-g-67" target="_blank" href="http://www.google.com/"></a></li>
+                            <li><a class="icon-g-70" target="_blank" href="https://instagram.com/"></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tt-footer-col tt-color-scheme-01">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-lg-2 col-xl-3">
+                        <div class="tt-mobile-collapse">
+                            <h4 class="tt-collapse-title">
+                                CATEGORIES
+                            </h4>
+                            <div class="tt-collapse-content">
+                                <ul class="tt-list">
+                                    <li><a href="listing-collection.html">Women</a></li>
+                                    <li><a href="listing-collection.html">Men</a></li>
+                                    <li><a href="listing-collection.html">Accessories</a></li>
+                                    <li><a href="listing-collection.html">Shoes</a></li>
+                                    <li><a href="listing-collection.html">New Arrivals</a></li>
+                                    <li><a href="listing-collection.html">Clearence</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-2 col-xl-3">
+                        <div class="tt-mobile-collapse">
+                            <h4 class="tt-collapse-title">
+                                MY ACCOUNT
+                            </h4>
+                            <div class="tt-collapse-content">
+                                <ul class="tt-list">
+                                    <li><a href="account_order.html">Orders</a></li>
+                                    <li><a href="page404.html">Compare</a></li>
+                                    <li><a href="page404.html">Wishlist</a></li>
+                                    <li><a href="login.html">Log In</a></li>
+                                    <li><a href="create-account.html">Register</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4 col-xl-3">
+                        <div class="tt-mobile-collapse">
+                            <h4 class="tt-collapse-title">
+                                ABOUT
+                            </h4>
+                            <div class="tt-collapse-content">
+                                <p>
+                                    Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore. Lorem ipsum dolor sit amet conse ctetur adipisicing elit, seddo eiusmod tempor incididunt ut labore etdolore.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4 col-xl-3">
+                        <div class="tt-newsletter">
+                            <div class="tt-mobile-collapse">
+                                <h4 class="tt-collapse-title">
+                                    CONTACTS
+                                </h4>
+                                <div class="tt-collapse-content">
+                                    <address>
+                                        <p><span>Address:</span> 2548 Broaddus Maple Court Avenue, Madisonville KY 4783, United States of America</p>
+                                        <p><span>Phone:</span> +777 2345 7885;  +777 2345 7886</p>
+                                        <p><span>Hours:</span> 7 Days a week from 10 am to 6 pm</p>
+                                        <p><span>E-mail:</span> <a href="mailto:info@mydomain.com">info@mydomain.com</a></p>
+                                    </address>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tt-footer-custom">
+            <div class="container">
+                <div class="tt-row">
+                    <div class="tt-col-left">
+                        <div class="tt-col-item tt-logo-col">
+                            <!-- logo -->
+                            <a class="tt-logo tt-logo-alignment" href="index.html">
+                                <img  src="images/custom/logo.png" alt="">
+                            </a>
+                            <!-- /logo -->
+                        </div>
+                        <div class="tt-col-item">
+                            <!-- copyright -->
+                            <div class="tt-box-copyright">
+                                &copy; Wokiee 2018. All Rights Reserved
+                            </div>
+                            <!-- /copyright -->
+                        </div>
+                    </div>
+                    <div class="tt-col-right">
+                        <div class="tt-col-item">
+                            <!-- payment-list -->
+                            <ul class="tt-payment-list">
+                                <li><a href="page404.html"><span class="icon-Stripe"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span><span class="path6"></span><span class="path7"></span><span class="path8"></span><span class="path9"></span><span class="path10"></span><span class="path11"></span><span class="path12"></span>
+			                </span></a></li>
+                                <li><a href="page404.html"> <span class="icon-paypal-2">
+			                <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span><span class="path6"></span>
+			                </span></a></li>
+                                <li><a href="page404.html"><span class="icon-visa">
+			                <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span>
+			                </span></a></li>
+                                <li><a href="page404.html"><span class="icon-mastercard">
+			                <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span><span class="path6"></span><span class="path7"></span><span class="path8"></span><span class="path9"></span><span class="path10"></span><span class="path11"></span><span class="path12"></span><span class="path13"></span>
+			                </span></a></li>
+                                <li><a href="page404.html"><span class="icon-discover">
+			                <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span><span class="path6"></span><span class="path7"></span><span class="path8"></span><span class="path9"></span><span class="path10"></span><span class="path11"></span><span class="path12"></span><span class="path13"></span><span class="path14"></span><span class="path15"></span><span class="path16"></span>
+			                </span></a></li>
+                                <li><a href="page404.html"><span class="icon-american-express">
+			                <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span><span class="path6"></span><span class="path7"></span><span class="path8"></span><span class="path9"></span><span class="path10"></span><span class="path11"></span>
+			                </span></a></li>
+                            </ul>
+                            <!-- /payment-list -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <a href="#" class="tt-back-to-top">BACK TO TOP</a>
+    <!-- modal (AddToCartProduct) -->
+    <div class="modal  fade"  id="modalAddToCartProduct" tabindex="-1" role="dialog" aria-label="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content ">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="icon icon-clear"></span></button>
+                </div>
+                <div class="modal-body">
+                    <div class="tt-modal-addtocart mobile">
+                        <div class="tt-modal-messages">
+                            <i class="icon-f-68"></i> Added to cart successfully!
+                        </div>
+                        <a href="#" class="btn-link btn-close-popup">CONTINUE SHOPPING</a>
+                        <a href="shopping_cart_02.html" class="btn-link">VIEW CART</a>
+                        <a href="page404.html" class="btn-link">PROCEED TO CHECKOUT</a>
+                    </div>
+                    <div class="tt-modal-addtocart desctope">
+                        <div class="row">
+                            <div class="col-12 col-lg-6">
+                                <div class="tt-modal-messages">
+                                    <i class="icon-f-68"></i> Added to cart successfully!
+                                </div>
+                                <div class="tt-modal-product">
+                                    <div class="tt-img">
+                                        <img src="images/loader.svg" data-src="images/product/product-01.jpg" alt="">
+                                    </div>
+                                    <h2 class="tt-title"><a href="product.html">Flared Shift Dress</a></h2>
+                                    <div class="tt-qty">
+                                        QTY: <span>1</span>
+                                    </div>
+                                </div>
+                                <div class="tt-product-total">
+                                    <div class="tt-total">
+                                        TOTAL: <span class="tt-price">$324</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6">
+                                <a href="#" class="tt-cart-total">
+                                    There are 1 items in your cart
+                                    <div class="tt-total">
+                                        TOTAL: <span class="tt-price">$324</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="btn btn-border btn-close-popup">CONTINUE SHOPPING</a>
+                                <a href="shopping_cart_02.html" class="btn btn-border">VIEW CART</a>
+                                <a href="#" class="btn">PROCEED TO CHECKOUT</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- modal (quickViewModal) -->
+    <div class="modal  fade"  id="ModalquickView" tabindex="-1" role="dialog" aria-label="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content ">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="icon icon-clear"></span></button>
+                </div>
+                <div class="modal-body">
+                    <div class="tt-modal-quickview desctope">
+                        <div class="row">
+                            <div class="col-12 col-md-5 col-lg-6">
+                                <div class="tt-mobile-product-slider arrow-location-center">
+                                    <div><img src="images/loader.svg" data-src="images/product/product-01.jpg" alt=""></div>
+                                    <div><img src="images/loader.svg" data-src="images/product/product-01-02.jpg" alt=""></div>
+                                    <div><img src="images/loader.svg" data-src="images/product/product-01-03.jpg" alt=""></div>
+                                    <div><img src="images/loader.svg" data-src="images/product/product-01-04.jpg" alt=""></div>
+                                    <div>
+                                        <div class="tt-video-block">
+                                            <a href="#" class="link-video"></a>
+                                            <video class="movie" src="video/video.mp4" poster="video/video_img.jpg"></video>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-7 col-lg-6">
+                                <div class="tt-product-single-info">
+                                    <div class="tt-add-info">
+                                        <ul>
+                                            <li><span>SKU:</span> 001</li>
+                                            <li><span>Availability:</span> 40 in Stock</li>
+                                        </ul>
+                                    </div>
+                                    <h2 class="tt-title">Cotton Blend Fleece Hoodie</h2>
+                                    <div class="tt-price">
+                                        <span class="new-price">$29</span>
+                                        <span class="old-price"></span>
+                                    </div>
+                                    <div class="tt-review">
+                                        <div class="tt-rating">
+                                            <i class="icon-star"></i>
+                                            <i class="icon-star"></i>
+                                            <i class="icon-star"></i>
+                                            <i class="icon-star-half"></i>
+                                            <i class="icon-star-empty"></i>
+                                        </div>
+                                        <a href="#">(1 Customer Review)</a>
+                                    </div>
+                                    <div class="tt-wrapper">
+                                        Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+                                    </div>
+                                    <div class="tt-swatches-container">
+                                        <div class="tt-wrapper">
+                                            <div class="tt-title-options">SIZE</div>
+                                            <form class="form-default">
+                                                <div class="form-group">
+                                                    <select class="form-control">
+                                                        <option>21</option>
+                                                        <option>25</option>
+                                                        <option>36</option>
+                                                    </select>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="tt-wrapper">
+                                            <div class="tt-title-options">COLOR</div>
+                                            <form class="form-default">
+                                                <div class="form-group">
+                                                    <select class="form-control">
+                                                        <option>Red</option>
+                                                        <option>Green</option>
+                                                        <option>Brown</option>
+                                                    </select>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="tt-wrapper">
+                                            <div class="tt-title-options">TEXTURE:</div>
+                                            <ul class="tt-options-swatch options-large">
+                                                <li><a class="options-color" href="#">
+												<span class="swatch-img">
+													<img src="images/loader.svg" data-src="images/custom/texture-img-01.jpg" alt="">
+												</span>
+                                                        <span class="swatch-label color-black"></span>
+                                                    </a></li>
+                                                <li class="active"><a class="options-color" href="#">
+												<span class="swatch-img">
+													<img src="images/loader.svg" data-src="images/custom/texture-img-02.jpg" alt="">
+												</span>
+                                                        <span class="swatch-label color-black"></span>
+                                                    </a></li>
+                                                <li><a class="options-color" href="#">
+												<span class="swatch-img">
+													<img src="images/loader.svg" data-src="images/custom/texture-img-03.jpg" alt="">
+												</span>
+                                                        <span class="swatch-label color-black"></span>
+                                                    </a></li>
+                                                <li><a class="options-color" href="#">
+												<span class="swatch-img">
+													<img src="images/loader.svg" data-src="images/custom/texture-img-04.jpg" alt="">
+												</span>
+                                                        <span class="swatch-label color-black"></span>
+                                                    </a></li>
+                                                <li><a class="options-color" href="#">
+												<span class="swatch-img">
+													<img src="images/loader.svg" data-src="images/custom/texture-img-05.jpg" alt="">
+												</span>
+                                                        <span class="swatch-label color-black"></span>
+                                                    </a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="tt-wrapper">
+                                        <div class="tt-row-custom-01">
+                                            <div class="col-item">
+                                                <div class="tt-input-counter style-01">
+                                                    <span class="minus-btn"></span>
+                                                    <input type="text" value="1" size="5">
+                                                    <span class="plus-btn"></span>
+                                                </div>
+                                            </div>
+                                            <div class="col-item">
+                                                <a href="#" class="btn btn-lg"><i class="icon-f-39"></i>ADD TO CART</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- modal (ModalSubsribeGood) -->
+    <div class="modal  fade"  id="ModalSubsribeGood" tabindex="-1" role="dialog" aria-label="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xs">
+            <div class="modal-content ">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="icon icon-clear"></span></button>
+                </div>
+                <div class="modal-body">
+                    <div class="tt-modal-subsribe-good">
+                        <i class="icon-f-68"></i> You have successfully signed!
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- modal (size guid) -->
+    <div class="modal  fade"  id="modalProductInfo" tabindex="-1" role="dialog" aria-label="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content ">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="icon icon-clear"></span></button>
+                </div>
+                <div class="modal-body">
+                    <div class="tt-layout-product-info">
+                        <h6 class="tt-title">SIZE GUIDE</h6>
+                        This is an approximate conversion table to help you find your size.
+                        <div class="tt-table-responsive-md">
+                            <table class="tt-table-modal-info">
+                                <thead>
+                                <tr>
+                                    <th>Italian</th>
+                                    <th>Spanish</th>
+                                    <th>German</th>
+                                    <th>UK</th>
+                                    <th>US</th>
+                                    <th>Japanese</th>
+                                    <th>Chinese</th>
+                                    <th>Russian</th>
+                                    <th>Korean</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>34</td>
+                                    <td>30</td>
+                                    <td>28</td>
+                                    <td>4</td>
+                                    <td>00</td>
+                                    <td>3</td>
+                                    <td>155/75A</td>
+                                    <td>36</td>
+                                    <td>44</td>
+                                </tr>
+                                <tr>
+                                    <td>36</td>
+                                    <td>32</td>
+                                    <td>30</td>
+                                    <td>6</td>
+                                    <td>0</td>
+                                    <td>5</td>
+                                    <td>155/80A</td>
+                                    <td>38</td>
+                                    <td>44</td>
+                                </tr>
+                                <tr>
+                                    <td>38</td>
+                                    <td>34</td>
+                                    <td>32</td>
+                                    <td>8</td>
+                                    <td>2</td>
+                                    <td>7</td>
+                                    <td>160/84A</td>
+                                    <td>40</td>
+                                    <td>55</td>
+                                </tr>
+                                <tr>
+                                    <td>40</td>
+                                    <td>36</td>
+                                    <td>34</td>
+                                    <td>10</td>
+                                    <td>4</td>
+                                    <td>9</td>
+                                    <td>165/88A</td>
+                                    <td>42</td>
+                                    <td>55</td>
+                                </tr>
+                                <tr>
+                                    <td>42</td>
+                                    <td>38</td>
+                                    <td>36</td>
+                                    <td>12</td>
+                                    <td>6</td>
+                                    <td>11</td>
+                                    <td>170/92A</td>
+                                    <td>44</td>
+                                    <td>66</td>
+                                </tr>
+                                <tr>
+                                    <td>44</td>
+                                    <td>40</td>
+                                    <td>38</td>
+                                    <td>14</td>
+                                    <td>8</td>
+                                    <td>13</td>
+                                    <td>175/96A</td>
+                                    <td>46</td>
+                                    <td>66</td>
+                                </tr>
+                                <tr>
+                                    <td>46</td>
+                                    <td>42</td>
+                                    <td>40</td>
+                                    <td>16</td>
+                                    <td>10</td>
+                                    <td>15</td>
+                                    <td>170/98A</td>
+                                    <td>48</td>
+                                    <td>77</td>
+                                </tr>
+                                <tr>
+                                    <td>48</td>
+                                    <td>44</td>
+                                    <td>42</td>
+                                    <td>18</td>
+                                    <td>12</td>
+                                    <td>17</td>
+                                    <td>170/100B</td>
+                                    <td>50</td>
+                                    <td>77</td>
+                                </tr>
+                                <tr>
+                                    <td>50</td>
+                                    <td>46</td>
+                                    <td>44</td>
+                                    <td>20</td>
+                                    <td>14</td>
+                                    <td>19</td>
+                                    <td>175/100B</td>
+                                    <td>52</td>
+                                    <td>88</td>
+                                </tr>
+                                <tr>
+                                    <td>52</td>
+                                    <td>48</td>
+                                    <td>46</td>
+                                    <td>22</td>
+                                    <td>16</td>
+                                    <td>21</td>
+                                    <td>180/104B</td>
+                                    <td>54</td>
+                                    <td>88</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- modal (size guid) -->
+    <div class="modal  fade"  id="modalProductInfo-02" tabindex="-1" role="dialog" aria-label="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content ">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="icon icon-clear"></span></button>
+                </div>
+                <div class="modal-body">
+                    <div class="tt-layout-product-info-02">
+                        <h6 class="tt-title">SHIPPING</h6>
+                        <ul>
+                            <li>Complimentary ground shipping within 1 to 7 business days</li>
+                            <li>In-store collection available within 1 to 7 business days</li>
+                            <li>Next-day and Express delivery options also available</li>
+                            <li>Purchases are delivered in an orange box tied with a Bolduc ribbon, with the exception of certain items</li>
+                            <li>See the delivery FAQs for details on shipping methods, costs and delivery times</li>
+                        </ul>
+                        <h6 class="tt-title">RETURNS AND EXCHANGES</h6>
+                        <ul>
+                            <li>Easy and complimentary, within 14 days</li>
+                            <li>See conditions and procedure in our return FAQs</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="<?=_URL_STYLE?>/external/jquery/jquery.min.js"></script>
+    <script src="<?=_URL_STYLE?>/external/bootstrap/js/bootstrap.min.js"></script>
+    <script src="<?=_URL_STYLE?>/external/elevatezoom/jquery.elevatezoom.js"></script>
+    <script src="<?=_URL_STYLE?>/external/slick/slick.min.js"></script>
+    <script src="<?=_URL_STYLE?>/external/panelmenu/panelmenu.js"></script>
+    <script src="<?=_URL_STYLE?>/external/countdown/jquery.plugin.min.js"></script>
+    <script src="<?=_URL_STYLE?>/external/countdown/jquery.countdown.min.js"></script>
+    <script src="<?=_URL_STYLE?>/external/magnific-popup/jquery.magnific-popup.min.js"></script>
+    <script src="<?=_URL_STYLE?>/external/lazyLoad/lazyload.min.js"></script>
+    <script src="<?=_URL_STYLE?>/js/main.js"></script>
+    <!-- form validation and sending to mail -->
+    <script src="<?=_URL_STYLE?>/external/form/jquery.form.js"></script>
+    <script src="<?=_URL_STYLE?>/external/form/jquery.validate.min.js"></script>
+    <script src="<?=_URL_STYLE?>/external/form/jquery.form-init.js"></script>
+    </body>
+    </html>
 <?php
-require_once 'footer.php';
+//require_once 'footer.php';

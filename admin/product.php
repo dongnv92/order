@@ -446,6 +446,7 @@ switch ($act){
             $product_size               = isset($_POST['product_size'])             && !empty($_POST['product_size'])               ? $_POST['product_size']                : '';
             $product_color              = isset($_POST['product_color'])            && !empty($_POST['product_color'])              ? $_POST['product_color']               : '';
             $product_images             = isset($_POST['product_images'])           && !empty($_POST['product_images'])             ? $_POST['product_images']              : '';
+            $product_gender             = isset($_POST['product_gender'])           && !empty($_POST['product_gender'])             ? $_POST['product_gender']              : '';
             $product_sale               = ceil(($product_price_promotion/$product_price_default)*100);
             $error = array();
 
@@ -505,6 +506,7 @@ switch ($act){
                     'product_color'             => serialize($list_color),
                     'product_user'              => $user['user_id'],
                     'product_status'            => $product_status,
+                    'product_gender'            => $product_gender,
                     'product_time'              => _CONGIF_TIME
                 );
                 $product_id = $db->insert(_TABLE_PRODUCT, $data_product);
@@ -708,6 +710,30 @@ switch ($act){
                                         </div>
                                         <div class="col-6 text-right">
                                             <label for="product_status_0">Ẩn</label>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                            <h4 class="card-title">Giới tính</h4>
+                            <hr>
+                            <div class="form-group">
+                                <fieldset>
+                                    <div class="row skin skin-flat">
+                                        <div class="col-6 text-left">
+                                            <input type="radio" <?php echo ($submit && $product_gender == 1) ? 'checked' : '';?> name="product_gender" id="product_gender_1" value="1">
+                                        </div>
+                                        <div class="col-6 text-right">
+                                            <label for="product_gender_1">NAM</label>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <fieldset>
+                                    <div class="row skin skin-flat">
+                                        <div class="col-6 text-left">
+                                            <input type="radio" <?php echo ($submit && $product_gender == 2) ? 'checked' : '';?> name="product_gender" id="product_gender_2" value="2">
+                                        </div>
+                                        <div class="col-6 text-right">
+                                            <label for="product_gender_2">NỮ</label>
                                         </div>
                                     </div>
                                 </fieldset>

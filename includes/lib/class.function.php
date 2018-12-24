@@ -7,6 +7,12 @@
  */
 
 class orderFunction{
+
+    // Function hiển thị tiền thêm dấu chấm
+    function convertNumberMoney($number){
+        return number_format($number, 0,'', '.');
+    }
+
     // Function chuyển hướng đến trang khác
     function redirect($url){
         if(!$url){
