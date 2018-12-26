@@ -16,8 +16,8 @@ $header['title'] = isset($header['title']) && !empty($header['title']) ? $header
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
     <meta name="author" content="DONG NGUYN">
     <title><?=$header['title']?></title>
-    <link rel="apple-touch-icon" href="../media/images/system/favicon.ico">
-    <link rel="shortcut icon" type="image/x-icon" href="../media/images/system/favicon.ico">
+    <link rel="apple-touch-icon" href="<?=_URL_HOME?>/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="<?=_URL_HOME?>/favicon.ico">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Quicksand:300,400,500,700" rel="stylesheet">
     <link href="https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="app-assets/css/vendors.css">

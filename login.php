@@ -8,6 +8,7 @@
 require_once 'includes/core.php';
 if($user){
     $function->redirect(_URL_ADMIN);
+    exit();
 }
 if($submit){
     $username 	= $_REQUEST['username'] 	? trim($_REQUEST['username']) : '';
@@ -39,7 +40,7 @@ if($submit){
                 $_SESSION['user'] = $row['user_id'];
                 $_SESSION['pass'] = $row['user_password'];
             }
-            $funcion->redirectUrl(_URL_ADMIN);
+            $function->redirect(_URL_ADMIN);
             exit();
         }
     }
@@ -86,7 +87,7 @@ if($submit){
                             <div class="card-header border-0">
                                 <div class="card-title text-center">
                                     <div class="p-1">
-                                        <img src="<?=_URL_HOME?>/media/images/system/logo.png" alt="branding logo">
+                                        <img src="<?=_URL_STYLE?>/images/system/logo.png" alt="branding logo">
                                     </div>
                                 </div>
                                 <h6 class="card-subtitle line-on-side text-muted text-center font-small-3 pt-2">

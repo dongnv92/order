@@ -29,8 +29,8 @@ define('_CONFIG_PAGINATION', 50);
 
 // Đặt các giá trị hằng số các đường dẫn
 define('_URL_HOME','http://localhost/dong/order');
-define('_URL_LOGIN',_URL_HOME.'/login.php');
-define('_URL_LOGOUT',_URL_HOME.'/logout.php');
+define('_URL_LOGIN',_URL_HOME.'/login');
+define('_URL_LOGOUT',_URL_HOME.'/logout');
 define('_URL_ADMIN',_URL_HOME.'/admin');
 define('_URL_BACK', isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : _URL_ADMIN);
 define('_URL_STYLE', _URL_HOME.'/assets');
