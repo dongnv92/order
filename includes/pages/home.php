@@ -17,34 +17,33 @@ require_once 'header.php';
                     <div class="row">
                         <div class="col-sm-6">
                             <a href="listing-left-column.html" class="tt-promo-box tt-one-child hover-type-2">
-                                <img src="<?=_URL_STYLE?>/images/loader.svg" data-src="<?=_URL_STYLE?>/images/promo/index04-promo-img-02.jpg" alt="">
+                                <img src="<?=_URL_STYLE?>/images/banner/3.png" data-src="<?=_URL_STYLE?>/images/banner/3.png" alt="">
                                 <div class="tt-description">
                                     <div class="tt-description-wrapper">
                                         <div class="tt-background"></div>
-                                        <div class="tt-title-small">WOMEN</div>
+                                        <div class="tt-title-small">GIÀY NAM</div>
                                     </div>
                                 </div>
                             </a>
                         </div>
                         <div class="col-sm-6">
                             <a href="listing-left-column.html" class="tt-promo-box tt-one-child hover-type-2">
-                                <img src="<?=_URL_STYLE?>/images/loader.svg" data-src="<?=_URL_STYLE?>/images/promo/index04-promo-img-03.jpg" alt="">
+                                <img src="<?=_URL_STYLE?>/images/banner/4.png" data-src="<?=_URL_STYLE?>/images/banner/4.png" alt="">
                                 <div class="tt-description">
                                     <div class="tt-description-wrapper">
                                         <div class="tt-background"></div>
-                                        <div class="tt-title-small">MEN</div>
+                                        <div class="tt-title-small">GIÀY NỮ</div>
                                     </div>
                                 </div>
                             </a>
                         </div>
                         <div class="col-sm-12">
                             <a href="listing-left-column.html" class="tt-promo-box tt-one-child">
-                                <img src="<?=_URL_STYLE?>/images/loader.svg" data-src="<?=_URL_STYLE?>/images/promo/index04-promo-img-04.jpg" alt="">
+                                <img src="<?=_URL_STYLE?>/images/banner/4.jpg" data-src="<?=_URL_STYLE?>/images/banner/4.jpg" alt="">
                                 <div class="tt-description">
                                     <div class="tt-description-wrapper">
                                         <div class="tt-background"></div>
-                                        <div class="tt-title-small">READY TO</div>
-                                        <div class="tt-title-large">USE UNIQUE DEMOS</div>
+                                        <div class="tt-title-small">DÉP NAM - NỮ</div>
                                     </div>
                                 </div>
                             </a>
@@ -53,12 +52,11 @@ require_once 'header.php';
                 </div>
                 <div class="col-sm-12 col-md-6">
                     <a href="listing-left-column.html" class="tt-promo-box">
-                        <img src="<?=_URL_STYLE?>/images/loader.svg" data-src="<?=_URL_STYLE?>/images/promo/index04-promo-img-01.jpg" alt="">
+                        <img src="<?=_URL_STYLE?>/images/banner/1.jpg" data-src="<?=_URL_STYLE?>/images/banner/1.jpg" alt="">
                         <div class="tt-description">
                             <div class="tt-description-wrapper">
                                 <div class="tt-background"></div>
-                                <div class="tt-title-small">MULTI-PURPOSE</div>
-                                <div class="tt-title-large">SHOPIFY THEME</div>
+                                <div class="tt-title-small">GIÀY THỂ THAO</div>
                             </div>
                         </div>
                     </a>
@@ -66,1200 +64,405 @@ require_once 'header.php';
             </div>
         </div>
     </div>
-    <div class="container-indent1">
+    <div class="container-indent">
         <div class="container container-fluid-custom-mobile-padding">
-            <div class="tt-block-title text-left">
-                <h1 class="tt-title">WOMEN’S</h1>
-            </div>
-            <div class="tt-tab-wrapper">
-                <ul class="nav nav-tabs tt-tabs-default" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link show active" data-toggle="tab" href="#tt-tab-01" role="tab">NEW ARRIVALS</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#tt-tab-02" role="tab">SPECIALS</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#tt-tab-03" role="tab">BESTSELLERS</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#tt-tab-04" role="tab">MOST VIEWED</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#tt-tab-05" role="tab">FEATURED PRODUCTS</a>
-                    </li>
-                </ul>
-                <div class="tab-content">
-                    <div class="tab-pane active fade" id="tt-tab-01" role="tabpanel">
-                        <div class="tt-carousel-products row arrow-location-tab tt-alignment-img tt-collection-listing slick-animated-show-js">
-                            <div class="col-2 col-md-4 col-lg-3">
-                                <a href="#" class="tt-collection-item">
-                                    <div class="tt-image-box"><img src="<?=_URL_STYLE?>/images/product/product-14.jpg" alt=""></div>
-                                    <div class="tt-description">
-                                        <h2 class="tt-title">Shirts &amp; Tops</h2>
-                                        <ul class="tt-add-info">
-                                            <li>45 PRODUCTS</li>
-                                        </ul>
+            <ul class="nav nav-tabs tt-tabs-default" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#tt-tab02-01">GIÀY NAM</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#tt-tab02-02">GIÀY NỮ</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active" id="tt-tab02-01">
+                    <div class="row tt-layout-product-item">
+                        <?php
+                        $db->from(_TABLE_PRODUCT)->where(array('product_gender' => 1, 'product_status <>' => 0));
+                        $db->order_by('product_id', 'DESC');
+                        $db->limit(10);
+                        foreach ($db->fetch() as $product_list) {
+                            $db->select('media_source')->from(_TABLE_MEDIA)->where(array('media_type' => 'images_product', 'media_store' => 'local', 'media_parent' => $product_list['product_id']));
+                            $db->limit(1);
+                            $images_1 = $db->fetch_first();
+                            $db->select('media_source')->from(_TABLE_MEDIA)->where(array('media_type' => 'images_product', 'media_store' => 'local', 'media_parent' => $product_list['product_id']));
+                            $db->limit(2);
+                            $images_2 = $db->fetch_first();
+                            ?>
+                            <div class="col-6 col-md-4 col-lg-3">
+                                <div class="tt-product thumbprod-center">
+                                    <div class="tt-image-box">
+                                        <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView" data-tooltip="Quick View" data-tposition="left"></a>
+                                        <a href="#" class="tt-btn-wishlist" data-tooltip="Add to Wishlist" data-tposition="left"></a>
+                                        <a href="#" class="tt-btn-compare" data-tooltip="Add to Compare" data-tposition="left"></a>
+                                        <a href="<?=$function->getUrlProduct($product_list['product_id'])?>">
+                                            <span class="tt-img"><img src="<?= _URL_HOME.'/'.$images_1['media_source']?>" alt=""></span>
+                                            <span class="tt-img-roll-over"><img src="<?= _URL_HOME.'/'.$images_2['media_source']?>" alt=""></span>
+                                            <?=$product_list['product_sale'] > 0 ? '<span class="tt-label-location"><span class="tt-label-new">Giảm giá '. $product_list['product_sale'] .'%</span></span>' : ''?>
+                                        </a>
                                     </div>
-                                </a>
-                            </div>
-                            <div class="col-2 col-md-4 col-lg-3">
-                                <a href="#" class="tt-collection-item">
-                                    <div class="tt-image-box"><img src="<?=_URL_STYLE?>/images/product/product-46.jpg" alt=""></div>
                                     <div class="tt-description">
-                                        <h2 class="tt-title">Jackets &amp; Outerwear</h2>
-                                        <ul class="tt-add-info">
-                                            <li>35 PRODUCTS</li>
-                                        </ul>
+                                        <div class="tt-row"><ul class="tt-add-info"><li><a href="#">T-SHIRTS</a></li></ul></div>
+                                        <h2 class="tt-title"><a href="<?=$function->getUrlProduct($product_list['product_id'])?>"><?=$product_list['product_name']?></a></h2>
+                                        <div class="tt-price"><?=$function->convertNumberMoney($product_list['product_price_vn'])?>₫</div>
+                                        <div class="tt-product-inside-hover">
+                                            <div class="tt-row-btn">
+                                                <a href="#" class="tt-btn-addtocart thumbprod-button-bg"
+                                                   data-toggle="modal" data-target="#modalAddToCartProduct">THÊM VÀO GIỎ HÀNG</a>
+                                            </div>
+                                            <div class="tt-row-btn">
+                                                <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"></a>
+                                                <a href="#" class="tt-btn-wishlist"></a>
+                                                <a href="#" class="tt-btn-compare"></a>
+                                            </div>
+                                        </div>
                                     </div>
-                                </a>
+                                </div>
                             </div>
-                            <div class="col-2 col-md-4 col-lg-3">
-                                <a href="#" class="tt-collection-item">
-                                    <div class="tt-image-box"><img src="<?=_URL_STYLE?>/images/product/product-45.jpg" alt=""></div>
-                                    <div class="tt-description">
-                                        <h2 class="tt-title">Sweaters</h2>
-                                        <ul class="tt-add-info">
-                                            <li>28 PRODUCTS</li>
-                                        </ul>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-2 col-md-4 col-lg-3">
-                                <a href="#" class="tt-collection-item">
-                                    <div class="tt-image-box"><img src="<?=_URL_STYLE?>/images/product/product-23.jpg" alt=""></div>
-                                    <div class="tt-description">
-                                        <h2 class="tt-title">Pants</h2>
-                                        <ul class="tt-add-info">
-                                            <li>22 PRODUCTS</li>
-                                        </ul>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-2 col-md-4 col-lg-3">
-                                <a href="#" class="tt-collection-item">
-                                    <div class="tt-image-box"><img src="<?=_URL_STYLE?>/images/product/product-14.jpg" alt=""></div>
-                                    <div class="tt-description">
-                                        <h2 class="tt-title">Sweaters</h2>
-                                        <ul class="tt-add-info">
-                                            <li>26 PRODUCTS</li>
-                                        </ul>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane" id="tt-tab-02" role="tabpanel">
-                        <div class="tt-carousel-products row arrow-location-tab tt-alignment-img tt-collection-listing slick-animated-show-js">
-                            <div class="col-2 col-md-4 col-lg-3">
-                                <a href="#" class="tt-collection-item">
-                                    <div class="tt-image-box"><img src="<?=_URL_STYLE?>/images/product/product-26.jpg" alt=""></div>
-                                    <div class="tt-description">
-                                        <h2 class="tt-title">Pants</h2>
-                                        <ul class="tt-add-info">
-                                            <li>22 PRODUCTS</li>
-                                        </ul>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-2 col-md-4 col-lg-3">
-                                <a href="#" class="tt-collection-item">
-                                    <div class="tt-image-box"><img src="<?=_URL_STYLE?>/images/product/product-14.jpg" alt=""></div>
-                                    <div class="tt-description">
-                                        <h2 class="tt-title">Sweaters</h2>
-                                        <ul class="tt-add-info">
-                                            <li>26 PRODUCTS</li>
-                                        </ul>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-2 col-md-4 col-lg-3">
-                                <a href="#" class="tt-collection-item">
-                                    <div class="tt-image-box"><img src="<?=_URL_STYLE?>/images/product/product-23.jpg" alt=""></div>
-                                    <div class="tt-description">
-                                        <h2 class="tt-title">Shirts &amp; Tops</h2>
-                                        <ul class="tt-add-info">
-                                            <li>45 PRODUCTS</li>
-                                        </ul>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-2 col-md-4 col-lg-3">
-                                <a href="#" class="tt-collection-item">
-                                    <div class="tt-image-box"><img src="<?=_URL_STYLE?>/images/product/product-45.jpg" alt=""></div>
-                                    <div class="tt-description">
-                                        <h2 class="tt-title">Jackets &amp; Outerwear</h2>
-                                        <ul class="tt-add-info">
-                                            <li>35 PRODUCTS</li>
-                                        </ul>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-2 col-md-4 col-lg-3">
-                                <a href="#" class="tt-collection-item">
-                                    <div class="tt-image-box"><img src="<?=_URL_STYLE?>/images/product/product-11.jpg" alt=""></div>
-                                    <div class="tt-description">
-                                        <h2 class="tt-title">Sweaters</h2>
-                                        <ul class="tt-add-info">
-                                            <li>28 PRODUCTS</li>
-                                        </ul>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="tt-tab-03" role="tabpanel">
-                        <div class="tt-carousel-products row arrow-location-tab tt-alignment-img tt-collection-listing slick-animated-show-js">
-                            <div class="col-2 col-md-4 col-lg-3">
-                                <a href="#" class="tt-collection-item">
-                                    <div class="tt-image-box"><img src="<?=_URL_STYLE?>/images/product/product-10.jpg" alt=""></div>
-                                    <div class="tt-description">
-                                        <h2 class="tt-title">Jackets &amp; Outerwear</h2>
-                                        <ul class="tt-add-info">
-                                            <li>35 PRODUCTS</li>
-                                        </ul>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-2 col-md-4 col-lg-3">
-                                <a href="#" class="tt-collection-item">
-                                    <div class="tt-image-box"><img src="<?=_URL_STYLE?>/images/product/product-11.jpg" alt=""></div>
-                                    <div class="tt-description">
-                                        <h2 class="tt-title">Sweaters</h2>
-                                        <ul class="tt-add-info">
-                                            <li>28 PRODUCTS</li>
-                                        </ul>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-2 col-md-4 col-lg-3">
-                                <a href="#" class="tt-collection-item">
-                                    <div class="tt-image-box"><img src="<?=_URL_STYLE?>/images/product/product-23.jpg" alt=""></div>
-                                    <div class="tt-description">
-                                        <h2 class="tt-title">Pants</h2>
-                                        <ul class="tt-add-info">
-                                            <li>22 PRODUCTS</li>
-                                        </ul>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-2 col-md-4 col-lg-3">
-                                <a href="#" class="tt-collection-item">
-                                    <div class="tt-image-box"><img src="<?=_URL_STYLE?>/images/product/product-14.jpg" alt=""></div>
-                                    <div class="tt-description">
-                                        <h2 class="tt-title">Sweaters</h2>
-                                        <ul class="tt-add-info">
-                                            <li>26 PRODUCTS</li>
-                                        </ul>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-2 col-md-4 col-lg-3">
-                                <a href="#" class="tt-collection-item">
-                                    <div class="tt-image-box"><img src="<?=_URL_STYLE?>/images/product/product-16.jpg" alt=""></div>
-                                    <div class="tt-description">
-                                        <h2 class="tt-title">Shirts &amp; Tops</h2>
-                                        <ul class="tt-add-info">
-                                            <li>45 PRODUCTS</li>
-                                        </ul>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="tt-tab-04" role="tabpanel">
-                        <div class="tt-carousel-products row arrow-location-tab tt-alignment-img tt-collection-listing slick-animated-show-js">
-                            <div class="col-2 col-md-4 col-lg-3">
-                                <a href="#" class="tt-collection-item">
-                                    <div class="tt-image-box"><img src="<?=_URL_STYLE?>/images/product/product-14.jpg" alt=""></div>
-                                    <div class="tt-description">
-                                        <h2 class="tt-title">Shirts &amp; Tops</h2>
-                                        <ul class="tt-add-info">
-                                            <li>45 PRODUCTS</li>
-                                        </ul>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-2 col-md-4 col-lg-3">
-                                <a href="#" class="tt-collection-item">
-                                    <div class="tt-image-box"><img src="<?=_URL_STYLE?>/images/product/product-10.jpg" alt=""></div>
-                                    <div class="tt-description">
-                                        <h2 class="tt-title">Jackets &amp; Outerwear</h2>
-                                        <ul class="tt-add-info">
-                                            <li>35 PRODUCTS</li>
-                                        </ul>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-2 col-md-4 col-lg-3">
-                                <a href="#" class="tt-collection-item">
-                                    <div class="tt-image-box"><img src="<?=_URL_STYLE?>/images/product/product-11.jpg" alt=""></div>
-                                    <div class="tt-description">
-                                        <h2 class="tt-title">Sweaters</h2>
-                                        <ul class="tt-add-info">
-                                            <li>28 PRODUCTS</li>
-                                        </ul>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-2 col-md-4 col-lg-3">
-                                <a href="#" class="tt-collection-item">
-                                    <div class="tt-image-box"><img src="<?=_URL_STYLE?>/images/product/product-23.jpg" alt=""></div>
-                                    <div class="tt-description">
-                                        <h2 class="tt-title">Pants</h2>
-                                        <ul class="tt-add-info">
-                                            <li>22 PRODUCTS</li>
-                                        </ul>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-2 col-md-4 col-lg-3">
-                                <a href="#" class="tt-collection-item">
-                                    <div class="tt-image-box"><img src="<?=_URL_STYLE?>/images/product/product-14.jpg" alt=""></div>
-                                    <div class="tt-description">
-                                        <h2 class="tt-title">Sweaters</h2>
-                                        <ul class="tt-add-info">
-                                            <li>26 PRODUCTS</li>
-                                        </ul>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="tt-tab-05" role="tabpanel">
-                        <div class="tt-carousel-products row arrow-location-tab tt-alignment-img tt-collection-listing slick-animated-show-js">
-                            <div class="col-2 col-md-4 col-lg-3">
-                                <a href="#" class="tt-collection-item">
-                                    <div class="tt-image-box"><img src="<?=_URL_STYLE?>/images/product/product-11.jpg" alt=""></div>
-                                    <div class="tt-description">
-                                        <h2 class="tt-title">Sweaters</h2>
-                                        <ul class="tt-add-info">
-                                            <li>28 PRODUCTS</li>
-                                        </ul>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-2 col-md-4 col-lg-3">
-                                <a href="#" class="tt-collection-item">
-                                    <div class="tt-image-box"><img src="<?=_URL_STYLE?>/images/product/product-23.jpg" alt=""></div>
-                                    <div class="tt-description">
-                                        <h2 class="tt-title">Pants</h2>
-                                        <ul class="tt-add-info">
-                                            <li>22 PRODUCTS</li>
-                                        </ul>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-2 col-md-4 col-lg-3">
-                                <a href="#" class="tt-collection-item">
-                                    <div class="tt-image-box"><img src="<?=_URL_STYLE?>/images/product/product-27.jpg" alt=""></div>
-                                    <div class="tt-description">
-                                        <h2 class="tt-title">Shirts &amp; Tops</h2>
-                                        <ul class="tt-add-info">
-                                            <li>45 PRODUCTS</li>
-                                        </ul>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-2 col-md-4 col-lg-3">
-                                <a href="#" class="tt-collection-item">
-                                    <div class="tt-image-box"><img src="<?=_URL_STYLE?>/images/product/product-10.jpg" alt=""></div>
-                                    <div class="tt-description">
-                                        <h2 class="tt-title">Jackets &amp; Outerwear</h2>
-                                        <ul class="tt-add-info">
-                                            <li>35 PRODUCTS</li>
-                                        </ul>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-2 col-md-4 col-lg-3">
-                                <a href="#" class="tt-collection-item">
-                                    <div class="tt-image-box"><img src="<?=_URL_STYLE?>/images/product/product-14.jpg" alt=""></div>
-                                    <div class="tt-description">
-                                        <h2 class="tt-title">Sweaters</h2>
-                                        <ul class="tt-add-info">
-                                            <li>26 PRODUCTS</li>
-                                        </ul>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
+                            <?php
+                        }
+                        ?>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-    <div class="container-indent1">
-        <div class="container container-fluid-custom-mobile-padding">
-            <div class="tt-block-title text-left">
-                <h2 class="tt-title">GIÀY</h2>
-            </div>
-            <div class="tt-tab-wrapper">
-                <ul class="nav nav-tabs tt-tabs-default" role="tablist">
-                    <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#tt-tab01-01">Giày Nam</a></li>
-                    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#tt-tab01-02">Giày Nữ</a></li>
-                    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#tt-tab01-03">BESTSELLERS</a></li>
-                    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#tt-tab01-04">MOST VIEWED</a></li>
-                    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#tt-tab01-05">FEATURED PRODUCTS</a></li>
-                </ul>
-                <div class="tab-content">
-                    <div class="tab-pane active" id="tt-tab01-01">
-                        <div class="tt-carousel-products row arrow-location-tab tt-alignment-img tt-layout-product-item slick-animated-show-js">
-                            <?php
-                            $db->from(_TABLE_PRODUCT)->where(array('product_gender' => 1, 'product_status <>' => 0));
-                            $db->order_by('product_id', 'DESC');
-                            $db->limit(10);
-                            foreach ($db->fetch() as $product_list) {
-                                $db->select('media_source')->from(_TABLE_MEDIA)->where(array('media_type' => 'images_product', 'media_store' => 'local', 'media_parent' => $product_list['product_id']));
-                                $db->limit(1);
-                                $images_1 = $db->fetch_first();
-                                $db->select('media_source')->from(_TABLE_MEDIA)->where(array('media_type' => 'images_product', 'media_store' => 'local', 'media_parent' => $product_list['product_id']));
-                                $db->limit(2);
-                                $images_2 = $db->fetch_first();
-                                ?>
-                                <div class="col-2 col-md-4 col-lg-3">
-                                    <div class="tt-product thumbprod-center">
-                                        <div class="tt-image-box">
-                                            <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView" data-tooltip="Quick View" data-tposition="left"></a>
-                                            <a href="#" class="tt-btn-wishlist" data-tooltip="Add to Wishlist" data-tposition="left"></a>
-                                            <a href="#" class="tt-btn-compare" data-tooltip="Add to Compare" data-tposition="left"></a>
-                                            <a href="<?=$function->getUrlProduct($product_list['product_id'])?>">
-                                                <span class="tt-img"><img src="<?= _URL_HOME.'/'.$images_1['media_source']?>" alt=""></span>
-                                                <span class="tt-img-roll-over"><img src="<?= _URL_HOME.'/'.$images_2['media_source']?>" alt=""></span>
-                                                <?=$product_list['product_sale'] > 0 ? '<span class="tt-label-location"><span class="tt-label-new">Giảm giá '. $product_list['product_sale'] .'%</span></span>' : ''?>
-                                            </a>
-                                        </div>
-                                        <div class="tt-description">
-                                            <div class="tt-row"><ul class="tt-add-info"><li><a href="#">T-SHIRTS</a></li></ul></div>
-                                            <h2 class="tt-title"><a href="<?=$function->getUrlProduct($product_list['product_id'])?>"><?=$product_list['product_name']?></a></h2>
-                                            <div class="tt-price"><?=$function->convertNumberMoney($product_list['product_price_vn'])?>₫</div>
-                                            <div class="tt-product-inside-hover">
-                                                <div class="tt-row-btn">
-                                                    <a href="#" class="tt-btn-addtocart thumbprod-button-bg"
-                                                       data-toggle="modal" data-target="#modalAddToCartProduct">THÊM VÀO GIỎ HÀNG</a>
-                                                </div>
-                                                <div class="tt-row-btn">
-                                                    <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"></a>
-                                                    <a href="#" class="tt-btn-wishlist"></a>
-                                                    <a href="#" class="tt-btn-compare"></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                <div class="tab-pane" id="tt-tab02-02">
+                    <div class="row tt-layout-product-item">
+                        <div class="col-6 col-md-4 col-lg-3">
+                            <div class="tt-product thumbprod-center">
+                                <div class="tt-image-box">
+                                    <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"	data-tooltip="Quick View" data-tposition="left"></a>
+                                    <a href="#" class="tt-btn-wishlist" data-tooltip="Add to Wishlist" data-tposition="left"></a>
+                                    <a href="#" class="tt-btn-compare" data-tooltip="Add to Compare" data-tposition="left"></a>
+                                    <a href="product.html">
+                                        <span class="tt-img"><img src="images/loader.svg" data-src="images/product/product-22.jpg" alt=""></span>
+                                        <span class="tt-img-roll-over"><img src="images/loader.svg" data-src="images/product/product-22-02.jpg" alt=""></span>
+                                    </a>
                                 </div>
-                                <?php
-                            }
-                            ?>
-                        </div>
-                    </div>
-                    <div class="tab-pane" id="tt-tab01-02">
-                        <div class="tt-carousel-products row arrow-location-tab tt-alignment-img tt-layout-product-item slick-animated-show-js">
-                            <div class="col-2 col-md-4 col-lg-3">
-                                <div class="tt-product thumbprod-center">
-                                    <div class="tt-image-box">
-                                        <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"	data-tooltip="Quick View" data-tposition="left"></a>
-                                        <a href="#" class="tt-btn-wishlist" data-tooltip="Add to Wishlist" data-tposition="left"></a>
-                                        <a href="#" class="tt-btn-compare" data-tooltip="Add to Compare" data-tposition="left"></a>
-                                        <a href="product.html">
-                                            <span class="tt-img"><img src="<?=_URL_STYLE?>/images/product/product-24.jpg" alt=""></span>
-                                            <span class="tt-img-roll-over"><img src="<?=_URL_STYLE?>/images/product/product-24-01.jpg" alt=""></span>
-                                            <span class="tt-label-location">
-												<span class="tt-label-sale">Sale 15%</span>
-											</span>
-                                        </a>
+                                <div class="tt-description">
+                                    <div class="tt-row">
+                                        <ul class="tt-add-info">
+                                            <li><a href="#">T-SHIRTS</a></li>
+                                        </ul>
                                     </div>
-                                    <div class="tt-description">
-                                        <div class="tt-row">
-                                            <ul class="tt-add-info">
-                                                <li><a href="#">T-SHIRTS</a></li>
-                                            </ul>
-                                            <div class="tt-rating">
-                                                <i class="icon-star"></i>
-                                                <i class="icon-star"></i>
-                                                <i class="icon-star"></i>
-                                                <i class="icon-star-half"></i>
-                                                <i class="icon-star-empty"></i>
-                                            </div>
-                                        </div>
-                                        <h2 class="tt-title"><a href="product.html">Flared Shift Dress</a></h2>
-                                        <div class="tt-product-inside-hover">
-                                            <div class="tt-row-btn">
-                                                <a href="#" class="tt-btn-addtocart thumbprod-button-bg" data-toggle="modal" data-target="#modalAddToCartProduct">ADD TO CART</a>
-                                            </div>
-                                            <div class="tt-row-btn">
-                                                <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"></a>
-                                                <a href="#" class="tt-btn-wishlist"></a>
-                                                <a href="#" class="tt-btn-compare"></a>
-                                            </div>
-                                        </div>
+                                    <h2 class="tt-title"><a href="product.html">Flared Shift Dress</a></h2>
+                                    <div class="tt-price">
+                                        $124
                                     </div>
-                                </div>
-                            </div>
-                            <div class="col-2 col-md-4 col-lg-3">
-                                <div class="tt-product thumbprod-center">
-                                    <div class="tt-image-box">
-                                        <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"	data-tooltip="Quick View" data-tposition="left"></a>
-                                        <a href="#" class="tt-btn-wishlist" data-tooltip="Add to Wishlist" data-tposition="left"></a>
-                                        <a href="#" class="tt-btn-compare" data-tooltip="Add to Compare" data-tposition="left"></a>
-                                        <a href="product.html">
-                                            <span class="tt-img"><img src="<?=_URL_STYLE?>/images/product/product-17.jpg" alt=""></span>
-                                            <span class="tt-img-roll-over"><img src="<?=_URL_STYLE?>/images/product/product-17-01.jpg" alt=""></span>
-                                            <span class="tt-label-location">
-												<span class="tt-label-new">New</span>
-											</span>
-                                        </a>
-                                    </div>
-                                    <div class="tt-description">
-                                        <div class="tt-row">
-                                            <ul class="tt-add-info">
-                                                <li><a href="#">T-SHIRTS</a></li>
-                                            </ul>
-                                            <div class="tt-rating">
-                                                <i class="icon-star"></i>
-                                                <i class="icon-star"></i>
-                                                <i class="icon-star"></i>
-                                                <i class="icon-star-half"></i>
-                                                <i class="icon-star-empty"></i>
-                                            </div>
+                                    <div class="tt-product-inside-hover">
+                                        <div class="tt-row-btn">
+                                            <a href="#" class="tt-btn-addtocart thumbprod-button-bg" data-toggle="modal" data-target="#modalAddToCartProduct">ADD TO CART</a>
                                         </div>
-                                        <h2 class="tt-title"><a href="product.html">Flared Shift Dress</a></h2>
-                                        <div class="tt-product-inside-hover">
-                                            <div class="tt-row-btn">
-                                                <a href="#" class="tt-btn-addtocart thumbprod-button-bg" data-toggle="modal" data-target="#modalAddToCartProduct">ADD TO CART</a>
-                                            </div>
-                                            <div class="tt-row-btn">
-                                                <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"></a>
-                                                <a href="#" class="tt-btn-wishlist"></a>
-                                                <a href="#" class="tt-btn-compare"></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-2 col-md-4 col-lg-3">
-                                <div class="tt-product thumbprod-center">
-                                    <div class="tt-image-box">
-                                        <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"	data-tooltip="Quick View" data-tposition="left"></a>
-                                        <a href="#" class="tt-btn-wishlist" data-tooltip="Add to Wishlist" data-tposition="left"></a>
-                                        <a href="#" class="tt-btn-compare" data-tooltip="Add to Compare" data-tposition="left"></a>
-                                        <a href="product.html">
-                                            <span class="tt-img"><img src="<?=_URL_STYLE?>/images/product/product-20.jpg" alt=""></span>
-                                            <span class="tt-img-roll-over"><img src="<?=_URL_STYLE?>/images/product/product-20-01.jpg" alt=""></span>
-                                            <span class="tt-label-location">
-												<span class="tt-label-new">New</span>
-											</span>
-                                        </a>
-                                    </div>
-                                    <div class="tt-description">
-                                        <div class="tt-row">
-                                            <ul class="tt-add-info">
-                                                <li><a href="#">T-SHIRTS</a></li>
-                                            </ul>
-                                            <div class="tt-rating">
-                                                <i class="icon-star"></i>
-                                                <i class="icon-star"></i>
-                                                <i class="icon-star"></i>
-                                                <i class="icon-star-half"></i>
-                                                <i class="icon-star-empty"></i>
-                                            </div>
-                                        </div>
-                                        <h2 class="tt-title"><a href="product.html">Flared Shift Dress</a></h2>
-                                        <div class="tt-product-inside-hover">
-                                            <div class="tt-row-btn">
-                                                <a href="#" class="tt-btn-addtocart thumbprod-button-bg" data-toggle="modal" data-target="#modalAddToCartProduct">ADD TO CART</a>
-                                            </div>
-                                            <div class="tt-row-btn">
-                                                <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"></a>
-                                                <a href="#" class="tt-btn-wishlist"></a>
-                                                <a href="#" class="tt-btn-compare"></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-2 col-md-4 col-lg-3">
-                                <div class="tt-product thumbprod-center">
-                                    <div class="tt-image-box">
-                                        <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"	data-tooltip="Quick View" data-tposition="left"></a>
-                                        <a href="#" class="tt-btn-wishlist" data-tooltip="Add to Wishlist" data-tposition="left"></a>
-                                        <a href="#" class="tt-btn-compare" data-tooltip="Add to Compare" data-tposition="left"></a>
-                                        <a href="product.html">
-                                            <span class="tt-img"><img src="<?=_URL_STYLE?>/images/product/product-02.jpg" alt=""></span>
-                                            <span class="tt-img-roll-over"><img src="<?=_URL_STYLE?>/images/product/product-02-02.jpg" alt=""></span>
-                                        </a>
-                                    </div>
-                                    <div class="tt-description">
-                                        <div class="tt-row">
-                                            <ul class="tt-add-info">
-                                                <li><a href="#">T-SHIRTS</a></li>
-                                            </ul>
-                                            <div class="tt-rating">
-                                                <i class="icon-star"></i>
-                                                <i class="icon-star"></i>
-                                                <i class="icon-star"></i>
-                                                <i class="icon-star-half"></i>
-                                                <i class="icon-star-empty"></i>
-                                            </div>
-                                        </div>
-                                        <h2 class="tt-title"><a href="product.html">Flared Shift Dress</a></h2>
-                                        <div class="tt-product-inside-hover">
-                                            <div class="tt-row-btn">
-                                                <a href="#" class="tt-btn-addtocart thumbprod-button-bg" data-toggle="modal" data-target="#modalAddToCartProduct">ADD TO CART</a>
-                                            </div>
-                                            <div class="tt-row-btn">
-                                                <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"></a>
-                                                <a href="#" class="tt-btn-wishlist"></a>
-                                                <a href="#" class="tt-btn-compare"></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-2 col-md-4 col-lg-3">
-                                <div class="tt-product thumbprod-center">
-                                    <div class="tt-image-box">
-                                        <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"	data-tooltip="Quick View" data-tposition="left"></a>
-                                        <a href="#" class="tt-btn-wishlist" data-tooltip="Add to Wishlist" data-tposition="left"></a>
-                                        <a href="#" class="tt-btn-compare" data-tooltip="Add to Compare" data-tposition="left"></a>
-                                        <a href="product.html">
-                                            <span class="tt-img"><img src="<?=_URL_STYLE?>/images/product/product-22.jpg" alt=""></span>
-                                            <span class="tt-img-roll-over"><img src="<?=_URL_STYLE?>/images/product/product-22-02.jpg" alt=""></span>
-                                        </a>
-                                    </div>
-                                    <div class="tt-description">
-                                        <div class="tt-row">
-                                            <ul class="tt-add-info">
-                                                <li><a href="#">T-SHIRTS</a></li>
-                                            </ul>
-                                            <div class="tt-rating">
-                                                <i class="icon-star"></i>
-                                                <i class="icon-star"></i>
-                                                <i class="icon-star"></i>
-                                                <i class="icon-star-half"></i>
-                                                <i class="icon-star-empty"></i>
-                                            </div>
-                                        </div>
-                                        <h2 class="tt-title"><a href="product.html">Flared Shift Dress</a></h2>
-                                        <div class="tt-product-inside-hover">
-                                            <div class="tt-row-btn">
-                                                <a href="#" class="tt-btn-addtocart thumbprod-button-bg" data-toggle="modal" data-target="#modalAddToCartProduct">ADD TO CART</a>
-                                            </div>
-                                            <div class="tt-row-btn">
-                                                <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"></a>
-                                                <a href="#" class="tt-btn-wishlist"></a>
-                                                <a href="#" class="tt-btn-compare"></a>
-                                            </div>
+                                        <div class="tt-row-btn">
+                                            <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"></a>
+                                            <a href="#" class="tt-btn-wishlist"></a>
+                                            <a href="#" class="tt-btn-compare"></a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="tab-pane" id="tt-tab01-03">
-                        <div class="tt-carousel-products row arrow-location-tab tt-alignment-img tt-layout-product-item slick-animated-show-js">
-                            <div class="col-2 col-md-4 col-lg-3">
-                                <div class="tt-product thumbprod-center">
-                                    <div class="tt-image-box">
-                                        <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"	data-tooltip="Quick View" data-tposition="left"></a>
-                                        <a href="#" class="tt-btn-wishlist" data-tooltip="Add to Wishlist" data-tposition="left"></a>
-                                        <a href="#" class="tt-btn-compare" data-tooltip="Add to Compare" data-tposition="left"></a>
-                                        <a href="product.html">
-                                            <span class="tt-img"><img src="<?=_URL_STYLE?>/images/product/product-02.jpg" alt=""></span>
-                                            <span class="tt-img-roll-over"><img src="<?=_URL_STYLE?>/images/product/product-02-02.jpg" alt=""></span>
-                                        </a>
-                                    </div>
-                                    <div class="tt-description">
-                                        <div class="tt-row">
-                                            <ul class="tt-add-info">
-                                                <li><a href="#">T-SHIRTS</a></li>
-                                            </ul>
-                                            <div class="tt-rating">
-                                                <i class="icon-star"></i>
-                                                <i class="icon-star"></i>
-                                                <i class="icon-star"></i>
-                                                <i class="icon-star-half"></i>
-                                                <i class="icon-star-empty"></i>
-                                            </div>
-                                        </div>
-                                        <h2 class="tt-title"><a href="product.html">Flared Shift Dress</a></h2>
-                                        <div class="tt-product-inside-hover">
-                                            <div class="tt-row-btn">
-                                                <a href="#" class="tt-btn-addtocart thumbprod-button-bg" data-toggle="modal" data-target="#modalAddToCartProduct">ADD TO CART</a>
-                                            </div>
-                                            <div class="tt-row-btn">
-                                                <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"></a>
-                                                <a href="#" class="tt-btn-wishlist"></a>
-                                                <a href="#" class="tt-btn-compare"></a>
-                                            </div>
-                                        </div>
-                                    </div>
+                        <div class="col-6 col-md-4 col-lg-3">
+                            <div class="tt-product thumbprod-center">
+                                <div class="tt-image-box">
+                                    <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"	data-tooltip="Quick View" data-tposition="left"></a>
+                                    <a href="#" class="tt-btn-wishlist" data-tooltip="Add to Wishlist" data-tposition="left"></a>
+                                    <a href="#" class="tt-btn-compare" data-tooltip="Add to Compare" data-tposition="left"></a>
+                                    <a href="product.html">
+                                        <span class="tt-img"><img src="images/loader.svg" data-src="images/product/product-23.jpg" alt=""></span>
+                                        <span class="tt-img-roll-over"><img src="images/loader.svg" data-src="images/product/product-23-02.jpg" alt=""></span>
+                                    </a>
                                 </div>
-                            </div>
-                            <div class="col-2 col-md-4 col-lg-3">
-                                <div class="tt-product thumbprod-center">
-                                    <div class="tt-image-box">
-                                        <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"	data-tooltip="Quick View" data-tposition="left"></a>
-                                        <a href="#" class="tt-btn-wishlist" data-tooltip="Add to Wishlist" data-tposition="left"></a>
-                                        <a href="#" class="tt-btn-compare" data-tooltip="Add to Compare" data-tposition="left"></a>
-                                        <a href="product.html">
-                                            <span class="tt-img"><img src="<?=_URL_STYLE?>/images/product/product-22.jpg" alt=""></span>
-                                            <span class="tt-img-roll-over"><img src="<?=_URL_STYLE?>/images/product/product-22-02.jpg" alt=""></span>
-                                        </a>
-                                    </div>
-                                    <div class="tt-description">
-                                        <div class="tt-row">
-                                            <ul class="tt-add-info">
-                                                <li><a href="#">T-SHIRTS</a></li>
-                                            </ul>
-                                            <div class="tt-rating">
-                                                <i class="icon-star"></i>
-                                                <i class="icon-star"></i>
-                                                <i class="icon-star"></i>
-                                                <i class="icon-star-half"></i>
-                                                <i class="icon-star-empty"></i>
-                                            </div>
-                                        </div>
-                                        <h2 class="tt-title"><a href="product.html">Flared Shift Dress</a></h2>
-                                        <div class="tt-product-inside-hover">
-                                            <div class="tt-row-btn">
-                                                <a href="#" class="tt-btn-addtocart thumbprod-button-bg" data-toggle="modal" data-target="#modalAddToCartProduct">ADD TO CART</a>
-                                            </div>
-                                            <div class="tt-row-btn">
-                                                <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"></a>
-                                                <a href="#" class="tt-btn-wishlist"></a>
-                                                <a href="#" class="tt-btn-compare"></a>
-                                            </div>
+                                <div class="tt-description">
+                                    <div class="tt-row">
+                                        <ul class="tt-add-info">
+                                            <li><a href="#">T-SHIRTS</a></li>
+                                        </ul>
+                                        <div class="tt-rating">
+                                            <i class="icon-star"></i>
+                                            <i class="icon-star"></i>
+                                            <i class="icon-star"></i>
+                                            <i class="icon-star"></i>
+                                            <i class="icon-star"></i>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="col-2 col-md-4 col-lg-3">
-                                <div class="tt-product thumbprod-center">
-                                    <div class="tt-image-box">
-                                        <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"	data-tooltip="Quick View" data-tposition="left"></a>
-                                        <a href="#" class="tt-btn-wishlist" data-tooltip="Add to Wishlist" data-tposition="left"></a>
-                                        <a href="#" class="tt-btn-compare" data-tooltip="Add to Compare" data-tposition="left"></a>
-                                        <a href="product.html">
-                                            <span class="tt-img"><img src="<?=_URL_STYLE?>/images/product/product-24.jpg" alt=""></span>
-                                            <span class="tt-img-roll-over"><img src="<?=_URL_STYLE?>/images/product/product-24-01.jpg" alt=""></span>
-                                            <span class="tt-label-location">
-												<span class="tt-label-sale">Sale 15%</span>
-											</span>
-                                        </a>
+                                    <h2 class="tt-title"><a href="product.html">Flared Shift Dress</a></h2>
+                                    <div class="tt-price">
+                                        $54
                                     </div>
-                                    <div class="tt-description">
-                                        <div class="tt-row">
-                                            <ul class="tt-add-info">
-                                                <li><a href="#">T-SHIRTS</a></li>
-                                            </ul>
-                                            <div class="tt-rating">
-                                                <i class="icon-star"></i>
-                                                <i class="icon-star"></i>
-                                                <i class="icon-star"></i>
-                                                <i class="icon-star-half"></i>
-                                                <i class="icon-star-empty"></i>
-                                            </div>
-                                        </div>
-                                        <h2 class="tt-title"><a href="product.html">Flared Shift Dress</a></h2>
-                                        <div class="tt-product-inside-hover">
-                                            <div class="tt-row-btn">
-                                                <a href="#" class="tt-btn-addtocart thumbprod-button-bg" data-toggle="modal" data-target="#modalAddToCartProduct">ADD TO CART</a>
-                                            </div>
-                                            <div class="tt-row-btn">
-                                                <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"></a>
-                                                <a href="#" class="tt-btn-wishlist"></a>
-                                                <a href="#" class="tt-btn-compare"></a>
-                                            </div>
-                                        </div>
+                                    <div class="tt-option-block">
+                                        <ul class="tt-options-swatch">
+                                            <li><a class="options-color tt-color-bg-03" href="#"></a></li>
+                                            <li><a class="options-color tt-color-bg-04" href="#"></a></li>
+                                            <li><a class="options-color tt-color-bg-05" href="#"></a></li>
+                                        </ul>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="col-2 col-md-4 col-lg-3">
-                                <div class="tt-product thumbprod-center">
-                                    <div class="tt-image-box">
-                                        <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"	data-tooltip="Quick View" data-tposition="left"></a>
-                                        <a href="#" class="tt-btn-wishlist" data-tooltip="Add to Wishlist" data-tposition="left"></a>
-                                        <a href="#" class="tt-btn-compare" data-tooltip="Add to Compare" data-tposition="left"></a>
-                                        <a href="product.html">
-                                            <span class="tt-img"><img src="<?=_URL_STYLE?>/images/product/product-17.jpg" alt=""></span>
-                                            <span class="tt-img-roll-over"><img src="<?=_URL_STYLE?>/images/product/product-17-01.jpg" alt=""></span>
-                                            <span class="tt-label-location">
-												<span class="tt-label-new">New</span>
-											</span>
-                                        </a>
-                                    </div>
-                                    <div class="tt-description">
-                                        <div class="tt-row">
-                                            <ul class="tt-add-info">
-                                                <li><a href="#">T-SHIRTS</a></li>
-                                            </ul>
-                                            <div class="tt-rating">
-                                                <i class="icon-star"></i>
-                                                <i class="icon-star"></i>
-                                                <i class="icon-star"></i>
-                                                <i class="icon-star-half"></i>
-                                                <i class="icon-star-empty"></i>
-                                            </div>
+                                    <div class="tt-product-inside-hover">
+                                        <div class="tt-row-btn">
+                                            <a href="#" class="tt-btn-addtocart thumbprod-button-bg" data-toggle="modal" data-target="#modalAddToCartProduct">ADD TO CART</a>
                                         </div>
-                                        <h2 class="tt-title"><a href="product.html">Flared Shift Dress</a></h2>
-                                        <div class="tt-product-inside-hover">
-                                            <div class="tt-row-btn">
-                                                <a href="#" class="tt-btn-addtocart thumbprod-button-bg" data-toggle="modal" data-target="#modalAddToCartProduct">ADD TO CART</a>
-                                            </div>
-                                            <div class="tt-row-btn">
-                                                <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"></a>
-                                                <a href="#" class="tt-btn-wishlist"></a>
-                                                <a href="#" class="tt-btn-compare"></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-2 col-md-4 col-lg-3">
-                                <div class="tt-product thumbprod-center">
-                                    <div class="tt-image-box">
-                                        <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"	data-tooltip="Quick View" data-tposition="left"></a>
-                                        <a href="#" class="tt-btn-wishlist" data-tooltip="Add to Wishlist" data-tposition="left"></a>
-                                        <a href="#" class="tt-btn-compare" data-tooltip="Add to Compare" data-tposition="left"></a>
-                                        <a href="product.html">
-                                            <span class="tt-img"><img src="<?=_URL_STYLE?>/images/product/product-20.jpg" alt=""></span>
-                                            <span class="tt-img-roll-over"><img src="<?=_URL_STYLE?>/images/product/product-20-01.jpg" alt=""></span>
-                                            <span class="tt-label-location">
-												<span class="tt-label-new">New</span>
-											</span>
-                                        </a>
-                                    </div>
-                                    <div class="tt-description">
-                                        <div class="tt-row">
-                                            <ul class="tt-add-info">
-                                                <li><a href="#">T-SHIRTS</a></li>
-                                            </ul>
-                                            <div class="tt-rating">
-                                                <i class="icon-star"></i>
-                                                <i class="icon-star"></i>
-                                                <i class="icon-star"></i>
-                                                <i class="icon-star-half"></i>
-                                                <i class="icon-star-empty"></i>
-                                            </div>
-                                        </div>
-                                        <h2 class="tt-title"><a href="product.html">Flared Shift Dress</a></h2>
-                                        <div class="tt-product-inside-hover">
-                                            <div class="tt-row-btn">
-                                                <a href="#" class="tt-btn-addtocart thumbprod-button-bg" data-toggle="modal" data-target="#modalAddToCartProduct">ADD TO CART</a>
-                                            </div>
-                                            <div class="tt-row-btn">
-                                                <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"></a>
-                                                <a href="#" class="tt-btn-wishlist"></a>
-                                                <a href="#" class="tt-btn-compare"></a>
-                                            </div>
+                                        <div class="tt-row-btn">
+                                            <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"></a>
+                                            <a href="#" class="tt-btn-wishlist"></a>
+                                            <a href="#" class="tt-btn-compare"></a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="tab-pane" id="tt-tab01-04">
-                        <div class="tt-carousel-products row arrow-location-tab tt-alignment-img tt-layout-product-item slick-animated-show-js">
-                            <div class="col-2 col-md-4 col-lg-3">
-                                <div class="tt-product thumbprod-center">
-                                    <div class="tt-image-box">
-                                        <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"	data-tooltip="Quick View" data-tposition="left"></a>
-                                        <a href="#" class="tt-btn-wishlist" data-tooltip="Add to Wishlist" data-tposition="left"></a>
-                                        <a href="#" class="tt-btn-compare" data-tooltip="Add to Compare" data-tposition="left"></a>
-                                        <a href="product.html">
-                                            <span class="tt-img"><img src="<?=_URL_STYLE?>/images/product/product-22.jpg" alt=""></span>
-                                            <span class="tt-img-roll-over"><img src="<?=_URL_STYLE?>/images/product/product-22-02.jpg" alt=""></span>
-                                        </a>
-                                    </div>
-                                    <div class="tt-description">
-                                        <div class="tt-row">
-                                            <ul class="tt-add-info">
-                                                <li><a href="#">T-SHIRTS</a></li>
-                                            </ul>
-                                            <div class="tt-rating">
-                                                <i class="icon-star"></i>
-                                                <i class="icon-star"></i>
-                                                <i class="icon-star"></i>
-                                                <i class="icon-star-half"></i>
-                                                <i class="icon-star-empty"></i>
-                                            </div>
-                                        </div>
-                                        <h2 class="tt-title"><a href="product.html">Flared Shift Dress</a></h2>
-                                        <div class="tt-product-inside-hover">
-                                            <div class="tt-row-btn">
-                                                <a href="#" class="tt-btn-addtocart thumbprod-button-bg" data-toggle="modal" data-target="#modalAddToCartProduct">ADD TO CART</a>
-                                            </div>
-                                            <div class="tt-row-btn">
-                                                <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"></a>
-                                                <a href="#" class="tt-btn-wishlist"></a>
-                                                <a href="#" class="tt-btn-compare"></a>
-                                            </div>
-                                        </div>
-                                    </div>
+                        <div class="col-6 col-md-4 col-lg-3">
+                            <div class="tt-product thumbprod-center">
+                                <div class="tt-image-box">
+                                    <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"	data-tooltip="Quick View" data-tposition="left"></a>
+                                    <a href="#" class="tt-btn-wishlist" data-tooltip="Add to Wishlist" data-tposition="left"></a>
+                                    <a href="#" class="tt-btn-compare" data-tooltip="Add to Compare" data-tposition="left"></a>
+                                    <a href="product.html">
+                                        <span class="tt-img"><img src="images/loader.svg" data-src="images/product/product-16.jpg" alt=""></span>
+                                        <span class="tt-img-roll-over"><img src="images/loader.svg" data-src="images/product/product-16-01.jpg" alt=""></span>
+                                    </a>
                                 </div>
-                            </div>
-
-                            <div class="col-2 col-md-4 col-lg-3">
-                                <div class="tt-product thumbprod-center">
-                                    <div class="tt-image-box">
-                                        <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"	data-tooltip="Quick View" data-tposition="left"></a>
-                                        <a href="#" class="tt-btn-wishlist" data-tooltip="Add to Wishlist" data-tposition="left"></a>
-                                        <a href="#" class="tt-btn-compare" data-tooltip="Add to Compare" data-tposition="left"></a>
-                                        <a href="product.html">
-                                            <span class="tt-img"><img src="<?=_URL_STYLE?>/images/product/product-02.jpg" alt=""></span>
-                                            <span class="tt-img-roll-over"><img src="<?=_URL_STYLE?>/images/product/product-02-02.jpg" alt=""></span>
-                                        </a>
-                                    </div>
-                                    <div class="tt-description">
-                                        <div class="tt-row">
-                                            <ul class="tt-add-info">
-                                                <li><a href="#">T-SHIRTS</a></li>
-                                            </ul>
-                                            <div class="tt-rating">
-                                                <i class="icon-star"></i>
-                                                <i class="icon-star"></i>
-                                                <i class="icon-star"></i>
-                                                <i class="icon-star-half"></i>
-                                                <i class="icon-star-empty"></i>
-                                            </div>
-                                        </div>
-                                        <h2 class="tt-title"><a href="product.html">Flared Shift Dress</a></h2>
-                                        <div class="tt-product-inside-hover">
-                                            <div class="tt-row-btn">
-                                                <a href="#" class="tt-btn-addtocart thumbprod-button-bg" data-toggle="modal" data-target="#modalAddToCartProduct">ADD TO CART</a>
-                                            </div>
-                                            <div class="tt-row-btn">
-                                                <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"></a>
-                                                <a href="#" class="tt-btn-wishlist"></a>
-                                                <a href="#" class="tt-btn-compare"></a>
-                                            </div>
+                                <div class="tt-description">
+                                    <div class="tt-row">
+                                        <ul class="tt-add-info">
+                                            <li><a href="#">T-SHIRTS</a></li>
+                                        </ul>
+                                        <div class="tt-rating">
+                                            <i class="icon-star"></i>
+                                            <i class="icon-star"></i>
+                                            <i class="icon-star"></i>
+                                            <i class="icon-star-half"></i>
+                                            <i class="icon-star-empty"></i>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-
-                            <div class="col-2 col-md-4 col-lg-3">
-                                <div class="tt-product thumbprod-center">
-                                    <div class="tt-image-box">
-                                        <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"	data-tooltip="Quick View" data-tposition="left"></a>
-                                        <a href="#" class="tt-btn-wishlist" data-tooltip="Add to Wishlist" data-tposition="left"></a>
-                                        <a href="#" class="tt-btn-compare" data-tooltip="Add to Compare" data-tposition="left"></a>
-                                        <a href="product.html">
-                                            <span class="tt-img"><img src="<?=_URL_STYLE?>/images/product/product-24.jpg" alt=""></span>
-                                            <span class="tt-img-roll-over"><img src="<?=_URL_STYLE?>/images/product/product-24-01.jpg" alt=""></span>
-                                            <span class="tt-label-location">
-												<span class="tt-label-sale">Sale 15%</span>
-											</span>
-                                        </a>
+                                    <h2 class="tt-title"><a href="product.html">Flared Shift Dress</a></h2>
+                                    <div class="tt-price">
+                                        $24
                                     </div>
-                                    <div class="tt-description">
-                                        <div class="tt-row">
-                                            <ul class="tt-add-info">
-                                                <li><a href="#">T-SHIRTS</a></li>
-                                            </ul>
-                                            <div class="tt-rating">
-                                                <i class="icon-star"></i>
-                                                <i class="icon-star"></i>
-                                                <i class="icon-star"></i>
-                                                <i class="icon-star-half"></i>
-                                                <i class="icon-star-empty"></i>
-                                            </div>
+                                    <div class="tt-product-inside-hover">
+                                        <div class="tt-row-btn">
+                                            <a href="#" class="tt-btn-addtocart thumbprod-button-bg" data-toggle="modal" data-target="#modalAddToCartProduct">ADD TO CART</a>
                                         </div>
-                                        <h2 class="tt-title"><a href="product.html">Flared Shift Dress</a></h2>
-                                        <div class="tt-product-inside-hover">
-                                            <div class="tt-row-btn">
-                                                <a href="#" class="tt-btn-addtocart thumbprod-button-bg" data-toggle="modal" data-target="#modalAddToCartProduct">ADD TO CART</a>
-                                            </div>
-                                            <div class="tt-row-btn">
-                                                <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"></a>
-                                                <a href="#" class="tt-btn-wishlist"></a>
-                                                <a href="#" class="tt-btn-compare"></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-2 col-md-4 col-lg-3">
-                                <div class="tt-product thumbprod-center">
-                                    <div class="tt-image-box">
-                                        <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"	data-tooltip="Quick View" data-tposition="left"></a>
-                                        <a href="#" class="tt-btn-wishlist" data-tooltip="Add to Wishlist" data-tposition="left"></a>
-                                        <a href="#" class="tt-btn-compare" data-tooltip="Add to Compare" data-tposition="left"></a>
-                                        <a href="product.html">
-                                            <span class="tt-img"><img src="<?=_URL_STYLE?>/images/product/product-20.jpg" alt=""></span>
-                                            <span class="tt-img-roll-over"><img src="<?=_URL_STYLE?>/images/product/product-20-01.jpg" alt=""></span>
-                                            <span class="tt-label-location">
-												<span class="tt-label-new">New</span>
-											</span>
-                                        </a>
-                                    </div>
-                                    <div class="tt-description">
-                                        <div class="tt-row">
-                                            <ul class="tt-add-info">
-                                                <li><a href="#">T-SHIRTS</a></li>
-                                            </ul>
-                                            <div class="tt-rating">
-                                                <i class="icon-star"></i>
-                                                <i class="icon-star"></i>
-                                                <i class="icon-star"></i>
-                                                <i class="icon-star-half"></i>
-                                                <i class="icon-star-empty"></i>
-                                            </div>
-                                        </div>
-                                        <h2 class="tt-title"><a href="product.html">Flared Shift Dress</a></h2>
-                                        <div class="tt-product-inside-hover">
-                                            <div class="tt-row-btn">
-                                                <a href="#" class="tt-btn-addtocart thumbprod-button-bg" data-toggle="modal" data-target="#modalAddToCartProduct">ADD TO CART</a>
-                                            </div>
-                                            <div class="tt-row-btn">
-                                                <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"></a>
-                                                <a href="#" class="tt-btn-wishlist"></a>
-                                                <a href="#" class="tt-btn-compare"></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-2 col-md-4 col-lg-3">
-                                <div class="tt-product thumbprod-center">
-                                    <div class="tt-image-box">
-                                        <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"	data-tooltip="Quick View" data-tposition="left"></a>
-                                        <a href="#" class="tt-btn-wishlist" data-tooltip="Add to Wishlist" data-tposition="left"></a>
-                                        <a href="#" class="tt-btn-compare" data-tooltip="Add to Compare" data-tposition="left"></a>
-                                        <a href="product.html">
-                                            <span class="tt-img"><img src="<?=_URL_STYLE?>/images/product/product-17.jpg" alt=""></span>
-                                            <span class="tt-img-roll-over"><img src="<?=_URL_STYLE?>/images/product/product-17-01.jpg" alt=""></span>
-                                            <span class="tt-label-location">
-												<span class="tt-label-new">New</span>
-											</span>
-                                        </a>
-                                    </div>
-                                    <div class="tt-description">
-                                        <div class="tt-row">
-                                            <ul class="tt-add-info">
-                                                <li><a href="#">T-SHIRTS</a></li>
-                                            </ul>
-                                            <div class="tt-rating">
-                                                <i class="icon-star"></i>
-                                                <i class="icon-star"></i>
-                                                <i class="icon-star"></i>
-                                                <i class="icon-star-half"></i>
-                                                <i class="icon-star-empty"></i>
-                                            </div>
-                                        </div>
-                                        <h2 class="tt-title"><a href="product.html">Flared Shift Dress</a></h2>
-                                        <div class="tt-product-inside-hover">
-                                            <div class="tt-row-btn">
-                                                <a href="#" class="tt-btn-addtocart thumbprod-button-bg" data-toggle="modal" data-target="#modalAddToCartProduct">ADD TO CART</a>
-                                            </div>
-                                            <div class="tt-row-btn">
-                                                <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"></a>
-                                                <a href="#" class="tt-btn-wishlist"></a>
-                                                <a href="#" class="tt-btn-compare"></a>
-                                            </div>
+                                        <div class="tt-row-btn">
+                                            <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"></a>
+                                            <a href="#" class="tt-btn-wishlist"></a>
+                                            <a href="#" class="tt-btn-compare"></a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="tab-pane" id="tt-tab01-05">
-                        <div class="tt-carousel-products row arrow-location-tab tt-alignment-img tt-layout-product-item slick-animated-show-js">
-                            <div class="col-2 col-md-4 col-lg-3">
-                                <div class="tt-product thumbprod-center">
-                                    <div class="tt-image-box">
-                                        <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"	data-tooltip="Quick View" data-tposition="left"></a>
-                                        <a href="#" class="tt-btn-wishlist" data-tooltip="Add to Wishlist" data-tposition="left"></a>
-                                        <a href="#" class="tt-btn-compare" data-tooltip="Add to Compare" data-tposition="left"></a>
-                                        <a href="product.html">
-                                            <span class="tt-img"><img src="<?=_URL_STYLE?>/images/product/product-02.jpg" alt=""></span>
-                                            <span class="tt-img-roll-over"><img src="<?=_URL_STYLE?>/images/product/product-02-02.jpg" alt=""></span>
-                                        </a>
-                                    </div>
-                                    <div class="tt-description">
-                                        <div class="tt-row">
-                                            <ul class="tt-add-info">
-                                                <li><a href="#">T-SHIRTS</a></li>
-                                            </ul>
-                                            <div class="tt-rating">
-                                                <i class="icon-star"></i>
-                                                <i class="icon-star"></i>
-                                                <i class="icon-star"></i>
-                                                <i class="icon-star-half"></i>
-                                                <i class="icon-star-empty"></i>
-                                            </div>
+                        <div class="col-6 col-md-4 col-lg-3">
+                            <div class="tt-product thumbprod-center">
+                                <div class="tt-image-box">
+                                    <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"	data-tooltip="Quick View" data-tposition="left"></a>
+                                    <a href="#" class="tt-btn-wishlist" data-tooltip="Add to Wishlist" data-tposition="left"></a>
+                                    <a href="#" class="tt-btn-compare" data-tooltip="Add to Compare" data-tposition="left"></a>
+                                    <a href="product.html">
+                                        <span class="tt-img"><img src="images/loader.svg" data-src="images/product/product-17.jpg" alt=""></span>
+                                        <span class="tt-img-roll-over"><img src="images/loader.svg" data-src="images/product/product-17-01.jpg" alt=""></span>
+                                    </a>
+                                </div>
+                                <div class="tt-description">
+                                    <div class="tt-row">
+                                        <ul class="tt-add-info">
+                                            <li><a href="#">T-SHIRTS</a></li>
+                                        </ul>
+                                        <div class="tt-rating">
+                                            <i class="icon-star"></i>
+                                            <i class="icon-star"></i>
+                                            <i class="icon-star"></i>
+                                            <i class="icon-star-half"></i>
+                                            <i class="icon-star-empty"></i>
                                         </div>
-                                        <h2 class="tt-title"><a href="product.html">Flared Shift Dress</a></h2>
-                                        <div class="tt-product-inside-hover">
-                                            <div class="tt-row-btn">
-                                                <a href="#" class="tt-btn-addtocart thumbprod-button-bg" data-toggle="modal" data-target="#modalAddToCartProduct">ADD TO CART</a>
-                                            </div>
-                                            <div class="tt-row-btn">
-                                                <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"></a>
-                                                <a href="#" class="tt-btn-wishlist"></a>
-                                                <a href="#" class="tt-btn-compare"></a>
-                                            </div>
+                                    </div>
+                                    <h2 class="tt-title"><a href="product.html">Flared Shift Dress</a></h2>
+                                    <div class="tt-price">
+                                        $8
+                                    </div>
+                                    <div class="tt-option-block">
+                                        <ul class="tt-options-swatch">
+                                            <li><a class="options-color" href="#">
+												<span class="swatch-img">
+													<img src="images/custom/texture-img-06.jpg" alt="">
+												</span>
+                                                    <span class="swatch-label color-black"></span>
+                                                </a></li>
+                                            <li><a class="options-color" href="#">
+												<span class="swatch-img">
+													<img src="images/custom/texture-img-07.jpg" alt="">
+												</span>
+                                                    <span class="swatch-label color-black"></span>
+                                                </a></li>
+                                            <li><a class="options-color" href="#">
+												<span class="swatch-img">
+													<img src="images/custom/texture-img-08.jpg" alt="">
+												</span>
+                                                    <span class="swatch-label color-black"></span>
+                                                </a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="tt-product-inside-hover">
+                                        <div class="tt-row-btn">
+                                            <a href="#" class="tt-btn-addtocart thumbprod-button-bg" data-toggle="modal" data-target="#modalAddToCartProduct">ADD TO CART</a>
+                                        </div>
+                                        <div class="tt-row-btn">
+                                            <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"></a>
+                                            <a href="#" class="tt-btn-wishlist"></a>
+                                            <a href="#" class="tt-btn-compare"></a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-2 col-md-4 col-lg-3">
-                                <div class="tt-product thumbprod-center">
-                                    <div class="tt-image-box">
-                                        <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"	data-tooltip="Quick View" data-tposition="left"></a>
-                                        <a href="#" class="tt-btn-wishlist" data-tooltip="Add to Wishlist" data-tposition="left"></a>
-                                        <a href="#" class="tt-btn-compare" data-tooltip="Add to Compare" data-tposition="left"></a>
-                                        <a href="product.html">
-                                            <span class="tt-img"><img src="<?=_URL_STYLE?>/images/product/product-22.jpg" alt=""></span>
-                                            <span class="tt-img-roll-over"><img src="<?=_URL_STYLE?>/images/product/product-22-02.jpg" alt=""></span>
-                                        </a>
+                        </div>
+                        <div class="col-6 col-md-4 col-lg-3">
+                            <div class="tt-product thumbprod-center">
+                                <div class="tt-image-box">
+                                    <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"	data-tooltip="Quick View" data-tposition="left"></a>
+                                    <a href="#" class="tt-btn-wishlist" data-tooltip="Add to Wishlist" data-tposition="left"></a>
+                                    <a href="#" class="tt-btn-compare" data-tooltip="Add to Compare" data-tposition="left"></a>
+                                    <a href="product.html">
+                                        <span class="tt-img"><img src="images/loader.svg" data-src="images/product/product-18.jpg" alt=""></span>
+                                        <span class="tt-img-roll-over"><img src="images/loader.svg" data-src="images/product/product-18-02.jpg" alt=""></span>
+                                    </a>
+                                </div>
+                                <div class="tt-description">
+                                    <div class="tt-row">
+                                        <ul class="tt-add-info">
+                                            <li><a href="#">T-SHIRTS</a></li>
+                                        </ul>
                                     </div>
-                                    <div class="tt-description">
-                                        <div class="tt-row">
-                                            <ul class="tt-add-info">
-                                                <li><a href="#">T-SHIRTS</a></li>
-                                            </ul>
-                                            <div class="tt-rating">
-                                                <i class="icon-star"></i>
-                                                <i class="icon-star"></i>
-                                                <i class="icon-star"></i>
-                                                <i class="icon-star-half"></i>
-                                                <i class="icon-star-empty"></i>
-                                            </div>
+                                    <h2 class="tt-title"><a href="product.html">Flared Shift Dress</a></h2>
+                                    <div class="tt-price">
+                                        $46
+                                    </div>
+                                    <div class="tt-option-block">
+                                        <ul class="tt-options-swatch">
+                                            <li><a class="options-color tt-color-bg-06" href="#"></a></li>
+                                            <li><a class="options-color tt-color-bg-07" href="#"></a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="tt-product-inside-hover">
+                                        <div class="tt-row-btn">
+                                            <a href="#" class="tt-btn-addtocart thumbprod-button-bg" data-toggle="modal" data-target="#modalAddToCartProduct">ADD TO CART</a>
                                         </div>
-                                        <h2 class="tt-title"><a href="product.html">Flared Shift Dress</a></h2>
-                                        <div class="tt-product-inside-hover">
-                                            <div class="tt-row-btn">
-                                                <a href="#" class="tt-btn-addtocart thumbprod-button-bg" data-toggle="modal" data-target="#modalAddToCartProduct">ADD TO CART</a>
-                                            </div>
-                                            <div class="tt-row-btn">
-                                                <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"></a>
-                                                <a href="#" class="tt-btn-wishlist"></a>
-                                                <a href="#" class="tt-btn-compare"></a>
-                                            </div>
+                                        <div class="tt-row-btn">
+                                            <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"></a>
+                                            <a href="#" class="tt-btn-wishlist"></a>
+                                            <a href="#" class="tt-btn-compare"></a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-2 col-md-4 col-lg-3">
-                                <div class="tt-product thumbprod-center">
-                                    <div class="tt-image-box">
-                                        <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"	data-tooltip="Quick View" data-tposition="left"></a>
-                                        <a href="#" class="tt-btn-wishlist" data-tooltip="Add to Wishlist" data-tposition="left"></a>
-                                        <a href="#" class="tt-btn-compare" data-tooltip="Add to Compare" data-tposition="left"></a>
-                                        <a href="product.html">
-                                            <span class="tt-img"><img src="<?=_URL_STYLE?>/images/product/product-24.jpg" alt=""></span>
-                                            <span class="tt-img-roll-over"><img src="<?=_URL_STYLE?>/images/product/product-24-01.jpg" alt=""></span>
-                                            <span class="tt-label-location">
-												<span class="tt-label-sale">Sale 15%</span>
-											</span>
-                                        </a>
-                                    </div>
-                                    <div class="tt-description">
-                                        <div class="tt-row">
-                                            <ul class="tt-add-info">
-                                                <li><a href="#">T-SHIRTS</a></li>
-                                            </ul>
-                                            <div class="tt-rating">
-                                                <i class="icon-star"></i>
-                                                <i class="icon-star"></i>
-                                                <i class="icon-star"></i>
-                                                <i class="icon-star-half"></i>
-                                                <i class="icon-star-empty"></i>
-                                            </div>
+                        </div>
+                        <div class="col-6 col-md-4 col-lg-3">
+                            <div class="tt-product thumbprod-center">
+                                <div class="tt-image-box">
+                                    <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"	data-tooltip="Quick View" data-tposition="left"></a>
+                                    <a href="#" class="tt-btn-wishlist" data-tooltip="Add to Wishlist" data-tposition="left"></a>
+                                    <a href="#" class="tt-btn-compare" data-tooltip="Add to Compare" data-tposition="left"></a>
+                                    <a href="product.html">
+                                        <span class="tt-img"><img src="images/loader.svg" data-src="images/product/product-19.jpg" alt=""></span>
+                                        <span class="tt-img-roll-over"><img src="images/loader.svg" data-src="images/product/product-19-02.jpg" alt=""></span>
+                                    </a>
+                                </div>
+                                <div class="tt-description">
+                                    <div class="tt-row">
+                                        <ul class="tt-add-info">
+                                            <li><a href="#">T-SHIRTS</a></li>
+                                        </ul>
+                                        <div class="tt-rating">
+                                            <i class="icon-star"></i>
+                                            <i class="icon-star"></i>
+                                            <i class="icon-star"></i>
+                                            <i class="icon-star"></i>
+                                            <i class="icon-star"></i>
                                         </div>
-                                        <h2 class="tt-title"><a href="product.html">Flared Shift Dress</a></h2>
-                                        <div class="tt-product-inside-hover">
-                                            <div class="tt-row-btn">
-                                                <a href="#" class="tt-btn-addtocart thumbprod-button-bg" data-toggle="modal" data-target="#modalAddToCartProduct">ADD TO CART</a>
-                                            </div>
-                                            <div class="tt-row-btn">
-                                                <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"></a>
-                                                <a href="#" class="tt-btn-wishlist"></a>
-                                                <a href="#" class="tt-btn-compare"></a>
-                                            </div>
+                                    </div>
+                                    <h2 class="tt-title"><a href="product.html">Flared Shift Dress</a></h2>
+                                    <div class="tt-price">
+                                        $35
+                                    </div>
+                                    <div class="tt-product-inside-hover">
+                                        <div class="tt-row-btn">
+                                            <a href="#" class="tt-btn-addtocart thumbprod-button-bg" data-toggle="modal" data-target="#modalAddToCartProduct">ADD TO CART</a>
+                                        </div>
+                                        <div class="tt-row-btn">
+                                            <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"></a>
+                                            <a href="#" class="tt-btn-wishlist"></a>
+                                            <a href="#" class="tt-btn-compare"></a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-2 col-md-4 col-lg-3">
-                                <div class="tt-product thumbprod-center">
-                                    <div class="tt-image-box">
-                                        <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"	data-tooltip="Quick View" data-tposition="left"></a>
-                                        <a href="#" class="tt-btn-wishlist" data-tooltip="Add to Wishlist" data-tposition="left"></a>
-                                        <a href="#" class="tt-btn-compare" data-tooltip="Add to Compare" data-tposition="left"></a>
-                                        <a href="product.html">
-                                            <span class="tt-img"><img src="<?=_URL_STYLE?>/images/product/product-20.jpg" alt=""></span>
-                                            <span class="tt-img-roll-over"><img src="<?=_URL_STYLE?>/images/product/product-20-01.jpg" alt=""></span>
-                                            <span class="tt-label-location">
-												<span class="tt-label-new">New</span>
-											</span>
-                                        </a>
-                                    </div>
-                                    <div class="tt-description">
-                                        <div class="tt-row">
-                                            <ul class="tt-add-info">
-                                                <li><a href="#">T-SHIRTS</a></li>
-                                            </ul>
-                                            <div class="tt-rating">
-                                                <i class="icon-star"></i>
-                                                <i class="icon-star"></i>
-                                                <i class="icon-star"></i>
-                                                <i class="icon-star-half"></i>
-                                                <i class="icon-star-empty"></i>
-                                            </div>
+                        </div>
+                        <div class="col-6 col-md-4 col-lg-3">
+                            <div class="tt-product thumbprod-center">
+                                <div class="tt-image-box">
+                                    <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"	data-tooltip="Quick View" data-tposition="left"></a>
+                                    <a href="#" class="tt-btn-wishlist" data-tooltip="Add to Wishlist" data-tposition="left"></a>
+                                    <a href="#" class="tt-btn-compare" data-tooltip="Add to Compare" data-tposition="left"></a>
+                                    <a href="product.html">
+                                        <span class="tt-img"><img src="images/loader.svg" data-src="images/product/product-20.jpg" alt=""></span>
+                                        <span class="tt-img-roll-over"><img src="images/loader.svg" data-src="images/product/product-20-01.jpg" alt=""></span>
+                                    </a>
+                                </div>
+                                <div class="tt-description">
+                                    <div class="tt-row">
+                                        <ul class="tt-add-info">
+                                            <li><a href="#">T-SHIRTS</a></li>
+                                        </ul>
+                                        <div class="tt-rating">
+                                            <i class="icon-star"></i>
+                                            <i class="icon-star"></i>
+                                            <i class="icon-star"></i>
+                                            <i class="icon-star"></i>
+                                            <i class="icon-star"></i>
                                         </div>
-                                        <h2 class="tt-title"><a href="product.html">Flared Shift Dress</a></h2>
-                                        <div class="tt-product-inside-hover">
-                                            <div class="tt-row-btn">
-                                                <a href="#" class="tt-btn-addtocart thumbprod-button-bg" data-toggle="modal" data-target="#modalAddToCartProduct">ADD TO CART</a>
-                                            </div>
-                                            <div class="tt-row-btn">
-                                                <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"></a>
-                                                <a href="#" class="tt-btn-wishlist"></a>
-                                                <a href="#" class="tt-btn-compare"></a>
-                                            </div>
+                                    </div>
+                                    <h2 class="tt-title"><a href="product.html">Flared Shift Dress</a></h2>
+                                    <div class="tt-price">
+                                        $124
+                                    </div>
+                                    <div class="tt-product-inside-hover">
+                                        <div class="tt-row-btn">
+                                            <a href="#" class="tt-btn-addtocart thumbprod-button-bg" data-toggle="modal" data-target="#modalAddToCartProduct">ADD TO CART</a>
+                                        </div>
+                                        <div class="tt-row-btn">
+                                            <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"></a>
+                                            <a href="#" class="tt-btn-wishlist"></a>
+                                            <a href="#" class="tt-btn-compare"></a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-2 col-md-4 col-lg-3">
-                                <div class="tt-product thumbprod-center">
-                                    <div class="tt-image-box">
-                                        <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"	data-tooltip="Quick View" data-tposition="left"></a>
-                                        <a href="#" class="tt-btn-wishlist" data-tooltip="Add to Wishlist" data-tposition="left"></a>
-                                        <a href="#" class="tt-btn-compare" data-tooltip="Add to Compare" data-tposition="left"></a>
-                                        <a href="product.html">
-                                            <span class="tt-img"><img src="<?=_URL_STYLE?>/images/product/product-17.jpg" alt=""></span>
-                                            <span class="tt-img-roll-over"><img src="<?=_URL_STYLE?>/images/product/product-17-01.jpg" alt=""></span>
-                                            <span class="tt-label-location">
-												<span class="tt-label-new">New</span>
-											</span>
-                                        </a>
+                        </div>
+                        <div class="col-6 col-md-4 col-lg-3">
+                            <div class="tt-product thumbprod-center">
+                                <div class="tt-image-box">
+                                    <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"	data-tooltip="Quick View" data-tposition="left"></a>
+                                    <a href="#" class="tt-btn-wishlist" data-tooltip="Add to Wishlist" data-tposition="left"></a>
+                                    <a href="#" class="tt-btn-compare" data-tooltip="Add to Compare" data-tposition="left"></a>
+                                    <a href="product.html">
+                                        <span class="tt-img"><img src="images/loader.svg" data-src="images/product/product-21.jpg" alt=""></span>
+                                        <span class="tt-img-roll-over"><img src="images/loader.svg" data-src="images/product/product-21-01.jpg" alt=""></span>
+                                    </a>
+                                </div>
+                                <div class="tt-description">
+                                    <div class="tt-row">
+                                        <ul class="tt-add-info">
+                                            <li><a href="#">T-SHIRTS</a></li>
+                                        </ul>
                                     </div>
-                                    <div class="tt-description">
-                                        <div class="tt-row">
-                                            <ul class="tt-add-info">
-                                                <li><a href="#">T-SHIRTS</a></li>
-                                            </ul>
-                                            <div class="tt-rating">
-                                                <i class="icon-star"></i>
-                                                <i class="icon-star"></i>
-                                                <i class="icon-star"></i>
-                                                <i class="icon-star-half"></i>
-                                                <i class="icon-star-empty"></i>
-                                            </div>
+                                    <h2 class="tt-title"><a href="product.html">Flared Shift Dress</a></h2>
+                                    <div class="tt-price">
+                                        $43
+                                    </div>
+                                    <div class="tt-product-inside-hover">
+                                        <div class="tt-row-btn">
+                                            <a href="#" class="tt-btn-addtocart thumbprod-button-bg" data-toggle="modal" data-target="#modalAddToCartProduct">ADD TO CART</a>
                                         </div>
-                                        <h2 class="tt-title"><a href="product.html">Flared Shift Dress</a></h2>
-                                        <div class="tt-product-inside-hover">
-                                            <div class="tt-row-btn">
-                                                <a href="#" class="tt-btn-addtocart thumbprod-button-bg" data-toggle="modal" data-target="#modalAddToCartProduct">ADD TO CART</a>
-                                            </div>
-                                            <div class="tt-row-btn">
-                                                <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"></a>
-                                                <a href="#" class="tt-btn-wishlist"></a>
-                                                <a href="#" class="tt-btn-compare"></a>
-                                            </div>
+                                        <div class="tt-row-btn">
+                                            <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"></a>
+                                            <a href="#" class="tt-btn-wishlist"></a>
+                                            <a href="#" class="tt-btn-compare"></a>
                                         </div>
                                     </div>
                                 </div>

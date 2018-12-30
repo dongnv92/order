@@ -11,7 +11,7 @@ require_once '../core.php';
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Wokiee - Responsive HTML5 Template</title>
+    <title><?=$header['title']?$header['title']:'Chuyên Order Hàng Trung Quốc'?></title>
     <meta name="keywords" content="HTML5 Template">
     <meta name="description" content="Wokiee - Responsive HTML5 Template">
     <meta name="author" content="wokiee">
@@ -36,7 +36,7 @@ require_once '../core.php';
     <nav class="panel-menu mobile-main-menu">
         <ul>
             <li>
-                <a href="index.html">HOME</a>
+                <a href="<?=_URL_HOME?>">TRANG CHỦ</a>
                 <ul>
                     <li>
                         <a href="index.html">HOME STYLES</a>
@@ -638,7 +638,7 @@ require_once '../core.php';
     <div class="tt-mobile-header">
         <div class="container-fluid">
             <div class="header-tel-info">
-                <i class="icon-f-93"></i> 777 2345 7885; +777 2345 7886
+                <i class="icon-f-93"></i> 0966624292
             </div>
         </div>
         <div class="container-fluid tt-top-line">
@@ -671,7 +671,7 @@ require_once '../core.php';
             <div class="row">
                 <div class="tt-logo-container">
                     <!-- mobile logo -->
-                    <a class="tt-logo tt-logo-alignment" href="index.html"><img src="images/custom/logo.png" alt=""></a>
+                    <a class="tt-logo tt-logo-alignment" href="index.html"><img src="http://softali.net/victor/wookie/html/images/custom/logo.png" alt=""></a>
                     <!-- /mobile logo -->
                 </div>
             </div>
@@ -683,7 +683,7 @@ require_once '../core.php';
             <div class="tt-header-holder">
                 <div class="tt-col-obj tt-obj-logo">
                     <!-- logo -->
-                    <a class="tt-logo tt-logo-alignment" href="index.html"><img src="http://localhost/dong/wokieehtml-107/html/images/custom/logo.png" alt=""></a>
+                    <a class="tt-logo tt-logo-alignment" href="<?=_URL_HOME?>"><img src="http://softali.net/victor/wookie/html/images/custom/logo.png" alt=""></a>
                     <!-- /logo -->
                 </div>
                 <div class="tt-col-obj tt-obj-search-type2">
@@ -691,8 +691,8 @@ require_once '../core.php';
                         <!-- tt-search -->
                         <form action="/search" method="get" role="search">
                             <i class="icon-f-85"></i>
-                            <input class="tt-search-input" type="search" placeholder="SEARCH PRODUCTS..." aria-label="SEARCH PRODUCTS..." autocomplete="off">
-                            <button type="submit" class="tt-btn-search">SEARCH</button>
+                            <input class="tt-search-input" type="search" placeholder="NHẬP LINK SẢN PHẨM ..." aria-label="TÌM KIẾM ..." autocomplete="off">
+                            <button type="submit" class="tt-btn-search">TÌM KIẾM</button>
                             <div class="search-results" style="display: none;"></div>
                         </form>
                         <!-- /tt-search -->
@@ -700,7 +700,7 @@ require_once '../core.php';
                 </div>
                 <div class="tt-col-obj obj-move-right">
                     <div class="header-tel-info">
-                        <i class="icon-f-93"></i> 777 2345 7885; +777 2345 7886
+                        <i class="icon-f-93"></i> 0966624292
                     </div>
                 </div>
             </div>
@@ -710,7 +710,7 @@ require_once '../core.php';
                 <div class="tt-col-obj tt-obj-menu-categories tt-desctop-parent-menu-categories">
                     <div class="tt-menu-categories">
                         <button class="tt-dropdown-toggle">
-                            CATEGORIES
+                            CHUYÊN MỤC
                         </button>
                         <div class="tt-dropdown-menu">
                             <nav>
@@ -957,76 +957,7 @@ require_once '../core.php';
                         <div class="tt-desctop-menu">
                             <nav>
                                 <ul>
-                                    <li class="dropdown tt-megamenu-col-02 selected">
-                                        <a href="index.html">HOME</a>
-                                        <div class="dropdown-menu">
-                                            <div class="row tt-col-list">
-                                                <div class="col">
-                                                    <h6 class="tt-title-submenu"><a href="index.html">HOME STYLES</a></h6>
-                                                    <ul class="tt-megamenu-submenu">
-                                                        <li><a href="index.html">Home — Example 1
-                                                                <img src="images/loader.svg" data-src="images/custom/tt-layout-img-01.png" alt="Example 1">
-                                                                <span class="tt-badge tt-fatured">Popular</span>
-                                                            </a></li>
-                                                        <li><a href="index-02.html">Home — Example 2 <img  src="images/loader.svg" data-src="images/custom/tt-layout-img-02.png" alt="Example 2"></a></li>
-                                                        <li><a href="index-03.html">Home — Example 3 <img  src="images/loader.svg" data-src="images/custom/tt-layout-img-03.png" alt="Example 3"></a></li>
-                                                        <li><a href="index-04.html">Home — Example 4
-                                                                <img  src="images/loader.svg" data-src="images/custom/tt-layout-img-04.png" alt="Example 4">
-                                                                <span class="tt-badge tt-fatured">Popular</span>
-                                                            </a></li>
-                                                        <li><a href="index-05.html">Home — Example 5 <img  src="images/loader.svg" data-src="images/custom/tt-layout-img-05.png" alt="Example 5"></a></li>
-                                                        <li><a href="index-06.html">Home — Example 6 <img  src="images/loader.svg" data-src="images/custom/tt-layout-img-06.png" alt="Example 6"></a></li>
-                                                        <li><a href="index-07.html">Home — Example 7 <img  src="images/loader.svg" data-src="images/custom/tt-layout-img-07.png" alt="Example 7"></a></li>
-                                                        <li><a href="index-08.html">Home — Example 8 <img  src="images/loader.svg" data-src="images/custom/tt-layout-img-08.png" alt="Example 8"></a></li>
-                                                        <li><a href="index-09.html">Home — Example 9 <img  src="images/loader.svg" data-src="images/custom/tt-layout-img-09.png" alt="Example 9"></a></li>
-                                                    </ul>
-                                                </div>
-                                                <div class="col">
-                                                    <h6 class="tt-title-submenu"><a href="index.html">HOME STYLES</a></h6>
-                                                    <ul class="tt-megamenu-submenu">
-                                                        <li><a href="index-10.html">Home — Example 10 <img  src="images/loader.svg" data-src="images/custom/tt-layout-img-10.png" alt="Example 10"></a></li>
-                                                        <li><a href="index-11.html">Home — Example 11 <img  src="images/loader.svg" data-src="images/custom/tt-layout-img-11.png" alt="Example 11"></a></li>
-                                                        <li><a href="index-12.html">Home — Example 12 <img  src="images/loader.svg" data-src="images/custom/tt-layout-img-12.png" alt="Example 12"></a></li>
-                                                        <li><a href="index-13.html">Home — Example 13 <img  src="images/loader.svg" data-src="images/custom/tt-layout-img-13.png" alt="Example 13"></a></li>
-                                                        <li><a href="index-14.html">Home — Example 14 <img  src="images/loader.svg" data-src="images/custom/tt-layout-img-14.png" alt="Example 14"></a></li>
-                                                        <li><a href="index-15.html">Home — Example 15 <img  src="images/loader.svg" data-src="images/custom/tt-layout-img-15.png" alt="Example 15"></a></li>
-                                                        <li><a href="index-16.html">Home — Example 16
-                                                                <img  src="images/loader.svg" data-src="images/custom/tt-layout-img-16.png" alt="Example 16">
-                                                                <span class="tt-badge tt-fatured">Popular</span>
-                                                            </a></li>
-                                                        <li><a href="index-17.html">Home — Example 17 <img  src="images/loader.svg" data-src="images/custom/tt-layout-img-17.png" alt="Example 17"></a></li>
-                                                        <li><a href="index-18.html">Home — Example 18 <img  src="images/loader.svg" data-src="images/custom/tt-layout-img-18.png" alt="Example 18"></a></li>
-                                                    </ul>
-                                                </div>
-                                                <div class="col">
-                                                    <h6 class="tt-title-submenu"><a href="index-skin-snowboards.html">
-                                                            <span>HOME SKINS</span>
-                                                            <span class="tt-badge tt-sale">HOT</span>
-                                                        </a></h6>
-                                                    <ul class="tt-megamenu-submenu">
-                                                        <li><a href="index-skin-snowboards.html">Snowboards Shop
-                                                                <img src="images/loader.svg" data-src="images/custom/tt-skins-img-01.png" alt="Snowboards Shop">
-                                                                <span class="tt-badge tt-fatured">Popular</span>
-                                                            </a></li>
-                                                        <li><a href="index-skin-phones.html">Phones Shop
-                                                                <img  src="images/loader.svg" data-src="images/custom/tt-skins-img-02.png" alt="Phones Shop">
-                                                                <span class="tt-badge tt-fatured">Popular</span>
-                                                            </a></li>
-                                                        <li><a href="index-skin-bikes.html">Bikes Shop
-                                                                <img  src="images/loader.svg" data-src="images/custom/tt-skins-img-03.png" alt="Bikes Shop">
-                                                                <span class="tt-badge tt-fatured">Popular</span>
-                                                            </a></li>
-                                                        <li><a href="index-skin-lingerie.html">Lingerie Shop <img  src="images/loader.svg" data-src="images/custom/tt-skins-img-04.png" alt="Lingerie Shop"></a></li>
-                                                        <li><a href="index-skin-furniture.html">Furniture Shop <img  src="images/loader.svg" data-src="images/custom/tt-skins-img-05.png" alt="Furniture Shop"></a></li>
-                                                        <li><a href="index-skin-books.html">Books shop
-                                                                <img  src="images/loader.svg" data-src="images/custom/tt-skins-img-06.png" alt="Books Shop">
-                                                                <span class="tt-badge tt-new">New</span>
-                                                            </a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
+                                    <li class="dropdown tt-megamenu-col-02 selected"><a href="<?=_URL_HOME?>">TRANG CHỦ</a></li>
                                     <li class="dropdown megamenu">
                                         <a href="listing-collection.html">SHOP</a>
                                         <div class="dropdown-menu">
