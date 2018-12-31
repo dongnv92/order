@@ -3,6 +3,8 @@ require_once '../../includes/core.php';
 $product            = $db->from(_TABLE_PRODUCT)->where('product_url', $url)->fetch_first();
 $header['title']    = $product['product_name'];
 $images_first       = $db->select('media_source')->from(_TABLE_MEDIA)->where(array('media_type' => 'images_product', 'media_store' => 'local', 'media_parent' => $product['product_id']))->fetch_first();
+$product_categorys  = $db->from(_TABLE_METADATA)->where(array('metadata_type' => 'category_product', 'metadata_suorce' => $product['product_id']))->fetch();
+$product_brand      = $db->from(_TABLE_CATEGORY)->where('category_id', $product['product_brand'])->fetch_first();
 require_once 'header.php';
 ?>
 
@@ -116,6 +118,27 @@ require_once 'header.php';
                                     <li><a class="btn-link" href="#"><i class="icon-n-072"></i>THÊM VÀO YÊU THÍCH</a></li>
                                     <li><a class="btn-link" href="#"><i class="icon-n-08"></i>LINK SẢN PHẨM GỐC</a></li>
                                 </ul>
+                            </div>
+                            <div class="tt-wrapper">
+                                <div class="tt-add-info">
+                                    <ul>
+                                        <li>Chuyên mục:
+                                            <?php
+                                            foreach ($product_categorys as $product_category){
+                                                $post_category = $db->from(_TABLE_CATEGORY)->where('category_id', $product_category['metadata_value'])->fetch_first();
+                                                echo $post_category['category_name'].', ';
+                                            }
+                                            ?>
+                                        </li>
+                                        <li>Hãng: <?=$product_brand['category_name']?></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="tt-collapse-block">
+                                <div class="tt-item">
+                                    <div class="tt-collapse-title">Giới thiệu</div>
+                                    <div class="tt-collapse-content"><?=$product['product_content']?></div>
+                                </div>
                             </div>
                         </div>
                     </div>
