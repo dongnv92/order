@@ -88,6 +88,8 @@ require_once 'header.php';
                             $db->select('media_source')->from(_TABLE_MEDIA)->where(array('media_type' => 'images_product', 'media_store' => 'local', 'media_parent' => $product_list['product_id']));
                             $db->limit(2);
                             $images_2 = $db->fetch_first();
+                            $product_metadata = $db->from(_TABLE_METADATA)->where(array('metadata_type' => 'category_product', 'metadata_suorce' => $product_list['product_id']))->fetch_first();
+                            $product_category = $db->from(_TABLE_CATEGORY)->where(array('category_id' => $product_metadata['metadata_value']))->fetch_first();
                             ?>
                             <div class="col-6 col-md-4 col-lg-3">
                                 <div class="tt-product thumbprod-center">
@@ -102,7 +104,7 @@ require_once 'header.php';
                                         </a>
                                     </div>
                                     <div class="tt-description">
-                                        <div class="tt-row"><ul class="tt-add-info"><li><a href="#">T-SHIRTS</a></li></ul></div>
+                                        <div class="tt-row"><ul class="tt-add-info"><li><a href="#"><?=$product_category['category_name']?></a></li></ul></div>
                                         <h2 class="tt-title"><a href="<?=$function->getUrlProduct($product_list['product_id'])?>"><?=$product_list['product_name']?></a></h2>
                                         <div class="tt-price"><?=$function->convertNumberMoney($product_list['product_price_vn'])?>₫</div>
                                         <div class="tt-product-inside-hover">
@@ -137,6 +139,8 @@ require_once 'header.php';
                             $db->select('media_source')->from(_TABLE_MEDIA)->where(array('media_type' => 'images_product', 'media_store' => 'local', 'media_parent' => $product_list['product_id']));
                             $db->limit(2);
                             $images_2 = $db->fetch_first();
+                            $product_metadata = $db->from(_TABLE_METADATA)->where(array('metadata_type' => 'category_product', 'metadata_suorce' => $product_list['product_id']))->fetch_first();
+                            $product_category = $db->from(_TABLE_CATEGORY)->where(array('category_id' => $product_metadata['metadata_value']))->fetch_first();
                             ?>
                             <div class="col-6 col-md-4 col-lg-3">
                                 <div class="tt-product thumbprod-center">
@@ -151,7 +155,7 @@ require_once 'header.php';
                                         </a>
                                     </div>
                                     <div class="tt-description">
-                                        <div class="tt-row"><ul class="tt-add-info"><li><a href="#">T-SHIRTS</a></li></ul></div>
+                                        <div class="tt-row"><ul class="tt-add-info"><li><a href="#"><?=$product_category['category_name']?></a></li></ul></div>
                                         <h2 class="tt-title"><a href="<?=$function->getUrlProduct($product_list['product_id'])?>"><?=$product_list['product_name']?></a></h2>
                                         <div class="tt-price"><?=$function->convertNumberMoney($product_list['product_price_vn'])?>₫</div>
                                         <div class="tt-product-inside-hover">
