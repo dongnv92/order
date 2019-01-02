@@ -67,15 +67,63 @@ require_once 'header.php';
     <div class="container-indent">
         <div class="container container-fluid-custom-mobile-padding">
             <ul class="nav nav-tabs tt-tabs-default" role="tablist">
-                <li class="nav-item">
-                    <a class="nav-link active" data-toggle="tab" href="#tt-tab02-01">GIÀY NAM</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#tt-tab02-02">GIÀY NỮ</a>
-                </li>
+                <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#tab_1_1">NỔI BẬT</a></li>
+                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#tab_1_2">GIÀY NAM</a></li>
+                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#tab_1_3">GIÀY NỮ</a></li>
             </ul>
             <div class="tab-content">
-                <div class="tab-pane active" id="tt-tab02-01">
+                <div class="tab-pane active" id="tab_1_1">
+                    <div class="row tt-layout-product-item">
+                        <?php
+                        $db->from(_TABLE_PRODUCT)->where(array('product_status' => 2));
+                        $db->order_by('product_id', 'DESC');
+                        $db->limit(10);
+                        foreach ($db->fetch() as $product_list) {
+                            $db->select('media_source')->from(_TABLE_MEDIA)->where(array('media_type' => 'images_product', 'media_store' => 'local', 'media_parent' => $product_list['product_id']));
+                            $db->limit(1);
+                            $images_1 = $db->fetch_first();
+                            $db->select('media_source')->from(_TABLE_MEDIA)->where(array('media_type' => 'images_product', 'media_store' => 'local', 'media_parent' => $product_list['product_id']));
+                            $db->limit(2);
+                            $images_2 = $db->fetch_first();
+                            $product_metadata = $db->from(_TABLE_METADATA)->where(array('metadata_type' => 'category_product', 'metadata_suorce' => $product_list['product_id']))->fetch_first();
+                            $product_category = $db->from(_TABLE_CATEGORY)->where(array('category_id' => $product_metadata['metadata_value']))->fetch_first();
+                            ?>
+                            <div class="col-6 col-md-4 col-lg-3">
+                                <div class="tt-product thumbprod-center">
+                                    <div class="tt-image-box">
+                                        <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView" data-tooltip="Quick View" data-tposition="left"></a>
+                                        <a href="#" class="tt-btn-wishlist" data-tooltip="Add to Wishlist" data-tposition="left"></a>
+                                        <a href="#" class="tt-btn-compare" data-tooltip="Add to Compare" data-tposition="left"></a>
+                                        <a href="<?=$function->getUrlProduct($product_list['product_id'])?>">
+                                            <span class="tt-img"><img src="<?= _URL_HOME.'/'.$images_1['media_source']?>" alt=""></span>
+                                            <span class="tt-img-roll-over"><img src="<?= _URL_HOME.'/'.$images_2['media_source']?>" alt=""></span>
+                                            <?=$product_list['product_sale'] > 0 ? '<span class="tt-label-location"><span class="tt-label-new">Giảm giá '. $product_list['product_sale'] .'%</span></span>' : ''?>
+                                        </a>
+                                    </div>
+                                    <div class="tt-description">
+                                        <div class="tt-row"><ul class="tt-add-info"><li><a href="#"><?=$product_category['category_name']?></a></li></ul></div>
+                                        <h2 class="tt-title"><a href="<?=$function->getUrlProduct($product_list['product_id'])?>"><?=$product_list['product_name']?></a></h2>
+                                        <div class="tt-price"><?=$function->convertNumberMoney($product_list['product_price_vn'])?>₫</div>
+                                        <div class="tt-product-inside-hover">
+                                            <div class="tt-row-btn">
+                                                <a href="#" class="tt-btn-addtocart thumbprod-button-bg"
+                                                   data-toggle="modal" data-target="#modalAddToCartProduct">THÊM VÀO GIỎ HÀNG</a>
+                                            </div>
+                                            <div class="tt-row-btn">
+                                                <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"></a>
+                                                <a href="#" class="tt-btn-wishlist"></a>
+                                                <a href="#" class="tt-btn-compare"></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php
+                        }
+                        ?>
+                    </div>
+                </div>
+                <div class="tab-pane" id="tab_1_2">
                     <div class="row tt-layout-product-item">
                         <?php
                         $db->from(_TABLE_PRODUCT)->where(array('product_gender' => 1, 'product_status <>' => 0));
@@ -126,7 +174,7 @@ require_once 'header.php';
                         ?>
                     </div>
                 </div>
-                <div class="tab-pane" id="tt-tab02-02">
+                <div class="tab-pane" id="tab_1_3">
                     <div class="row tt-layout-product-item">
                         <?php
                         $db->from(_TABLE_PRODUCT)->where(array('product_gender' => 2, 'product_status <>' => 0));
@@ -214,144 +262,89 @@ require_once 'header.php';
         <div class="container">
             <div class="row">
                 <div class="col-sm-6 col-md-4">
-                    <h6 class="tt-title-sub">NEW PRODUCTS</h6>
+                    <h6 class="tt-title-sub">MỚI NHẤT</h6>
                     <div class="tt-layout-vertical-listing">
-                        <div class="tt-item">
-                            <div class="tt-layout-vertical">
-                                <div class="tt-img">
-                                    <a href="listing-collection.html">
-                                        <span class="tt-img-default"><img src="<?=_URL_STYLE?>/images/loader.svg" data-src="images/product/product-18.jpg" alt=""></span>
-                                        <span class="tt-img-roll-over"><img src="<?=_URL_STYLE?>/images/loader.svg" data-src="images/product/product-18-02.jpg" alt=""></span>
-                                    </a>
-                                </div>
-                                <div class="tt-description">
-                                    <ul class="tt-add-info">
-                                        <li><a href="#">T-SHIRTS</a></li>
-                                    </ul>
-                                    <h6 class="tt-title"><a href="#">Flared Shift Dress</a></h6>
-                                    <div class="tt-price">
-                                        $24
+                        <?php
+                        $db->from(_TABLE_PRODUCT)->where(array('product_status <>' => 0));
+                        $db->order_by('product_id', 'DESC');
+                        $db->limit(3);
+                        foreach ($db->fetch() as $product_list) {
+                            $db->select('media_source')->from(_TABLE_MEDIA)->where(array('media_type' => 'images_product', 'media_store' => 'local', 'media_parent' => $product_list['product_id']));
+                            $db->limit(1);
+                            $images_1 = $db->fetch_first();
+                            $db->select('media_source')->from(_TABLE_MEDIA)->where(array('media_type' => 'images_product', 'media_store' => 'local', 'media_parent' => $product_list['product_id']));
+                            $db->limit(2);
+                            $images_2 = $db->fetch_first();
+                            $product_metadata = $db->from(_TABLE_METADATA)->where(array('metadata_type' => 'category_product', 'metadata_suorce' => $product_list['product_id']))->fetch_first();
+                            $product_category = $db->from(_TABLE_CATEGORY)->where(array('category_id' => $product_metadata['metadata_value']))->fetch_first();
+                            ?>
+                            <div class="tt-item">
+                                <div class="tt-layout-vertical">
+                                    <div class="tt-img">
+                                        <a href="<?=$function->getUrlProduct($product_list['product_id'])?>">
+                                            <span class="tt-img-default"><img src="<?= _URL_HOME.'/'.$images_1['media_source']?>" data-src="<?= _URL_HOME.'/'.$images_1['media_source']?>" alt=""></span>
+                                            <span class="tt-img-roll-over"><img src="<?= _URL_HOME.'/'.$images_2['media_source']?>" data-src="<?= _URL_HOME.'/'.$images_2['media_source']?>" alt=""></span>
+                                        </a>
                                     </div>
-                                    <div class="tt-option-block">
-                                        <ul class="tt-options-swatch">
-                                            <li><a class="options-color tt-color-bg-01" href="#"></a></li>
-                                            <li><a class="options-color tt-color-bg-02" href="#"></a></li>
+                                    <div class="tt-description">
+                                        <ul class="tt-add-info">
+                                            <li><a href="#"><?=$product_category['category_name']?></a></li>
                                         </ul>
+                                        <h6 class="tt-title"><a href="<?=$function->getUrlProduct($product_list['product_id'])?>"><?=$product_list['product_name']?></a></h6>
+                                        <div class="tt-price">
+                                            <?=$function->convertNumberMoney($product_list['product_price_vn'])?>₫
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="tt-item">
-                            <div class="tt-layout-vertical">
-                                <div class="tt-img">
-                                    <a href="listing-collection.html">
-                                        <span class="tt-img-default"><img src="<?=_URL_STYLE?>/images/loader.svg" data-src="images/product/product-19.jpg" alt=""></span>
-                                        <span class="tt-img-roll-over"><img src="<?=_URL_STYLE?>/images/loader.svg" data-src="images/product/product-19-02.jpg" alt=""></span>
-                                    </a>
-                                </div>
-                                <div class="tt-description">
-                                    <ul class="tt-add-info">
-                                        <li><a href="#">T-SHIRTS</a></li>
-                                    </ul>
-                                    <h6 class="tt-title"><a href="#">Flared Shift Dress</a></h6>
-                                    <div class="tt-price">
-                                        $84
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tt-item">
-                            <div class="tt-layout-vertical">
-                                <div class="tt-img">
-                                    <a href="listing-collection.html">
-                                        <span class="tt-img-default"><img src="<?=_URL_STYLE?>/images/loader.svg" data-src="images/product/product-20.jpg" alt=""></span>
-                                        <span class="tt-img-roll-over"><img src="<?=_URL_STYLE?>/images/loader.svg" data-src="images/product/product-20-01.jpg" alt=""></span>
-                                    </a>
-                                </div>
-                                <div class="tt-description">
-                                    <ul class="tt-add-info">
-                                        <li><a href="#">T-SHIRTS</a></li>
-                                    </ul>
-                                    <h6 class="tt-title"><a href="#">Flared Shift Dress</a></h6>
-                                    <div class="tt-price">
-                                        $78
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                            <?php
+                        }
+                        ?>
                     </div>
                 </div>
                 <div class="divider visible-xs"></div>
                 <div class="col-sm-6 col-md-4">
-                    <h6 class="tt-title-sub">SPECIAL PRODUCTS</h6>
+                    <h6 class="tt-title-sub">GIẢM GIÁ</h6>
                     <div class="tt-layout-vertical-listing">
-                        <div class="tt-item">
-                            <div class="tt-layout-vertical">
-                                <div class="tt-img">
-                                    <a href="listing-collection.html">
-                                        <span class="tt-img-default"><img src="<?=_URL_STYLE?>/images/loader.svg" data-src="images/product/product-22.jpg" alt=""></span>
-                                        <span class="tt-img-roll-over"><img src="<?=_URL_STYLE?>/images/loader.svg" data-src="images/product/product-22-02.jpg" alt=""></span>
-                                    </a>
-                                </div>
-                                <div class="tt-description">
-                                    <ul class="tt-add-info">
-                                        <li><a href="#">T-SHIRTS</a></li>
-                                    </ul>
-                                    <h6 class="tt-title"><a href="#">Flared Shift Dress</a></h6>
-                                    <div class="tt-price">
-                                        <span class="new-price">$14</span>
-                                        <span class="old-price">$24</span>
+                        <?php
+                        $db->from(_TABLE_PRODUCT)->where(array('product_status <>' => 0));
+                        $db->order_by('product_sale', 'DESC');
+                        $db->limit(3);
+                        foreach ($db->fetch() as $product_list) {
+                            $db->select('media_source')->from(_TABLE_MEDIA)->where(array('media_type' => 'images_product', 'media_store' => 'local', 'media_parent' => $product_list['product_id']));
+                            $db->limit(1);
+                            $images_1 = $db->fetch_first();
+                            $db->select('media_source')->from(_TABLE_MEDIA)->where(array('media_type' => 'images_product', 'media_store' => 'local', 'media_parent' => $product_list['product_id']));
+                            $db->limit(2);
+                            $images_2 = $db->fetch_first();
+                            $product_metadata = $db->from(_TABLE_METADATA)->where(array('metadata_type' => 'category_product', 'metadata_suorce' => $product_list['product_id']))->fetch_first();
+                            $product_category = $db->from(_TABLE_CATEGORY)->where(array('category_id' => $product_metadata['metadata_value']))->fetch_first();
+                            ?>
+                            <div class="tt-item">
+                                <div class="tt-layout-vertical">
+                                    <div class="tt-img">
+                                        <a href="<?=$function->getUrlProduct($product_list['product_id'])?>">
+                                            <span class="tt-img-default"><img src="<?= _URL_HOME.'/'.$images_1['media_source']?>" data-src="<?= _URL_HOME.'/'.$images_1['media_source']?>" alt=""></span>
+                                            <span class="tt-img-roll-over"><img src="<?= _URL_HOME.'/'.$images_2['media_source']?>" data-src="<?= _URL_HOME.'/'.$images_2['media_source']?>" alt=""></span>
+                                        </a>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tt-item">
-                            <div class="tt-layout-vertical">
-                                <div class="tt-img">
-                                    <a href="listing-collection.html">
-                                        <span class="tt-img-default"><img src="<?=_URL_STYLE?>/images/loader.svg" data-src="images/product/product-23.jpg" alt=""></span>
-                                        <span class="tt-img-roll-over"><img src="<?=_URL_STYLE?>/images/loader.svg" data-src="images/product/product-23-02.jpg" alt=""></span>
-                                    </a>
-                                </div>
-                                <div class="tt-description">
-                                    <ul class="tt-add-info">
-                                        <li><a href="#">T-SHIRTS</a></li>
-                                    </ul>
-                                    <h6 class="tt-title"><a href="#">Flared Shift Dress</a></h6>
-                                    <div class="tt-price">
-                                        <span class="new-price">$14</span>
-                                        <span class="old-price">$24</span>
-                                    </div>
-                                    <div class="tt-option-block">
-                                        <ul class="tt-options-swatch">
-                                            <li><a class="options-color tt-color-bg-03" href="#"></a></li>
-                                            <li><a class="options-color tt-color-bg-04" href="#"></a></li>
-                                            <li><a class="options-color tt-color-bg-05" href="#"></a></li>
+                                    <div class="tt-description">
+                                        <ul class="tt-add-info">
+                                            <li><a href="#"><?=$product_category['category_name']?></a></li>
                                         </ul>
+                                        <h6 class="tt-title"><a href="<?=$function->getUrlProduct($product_list['product_id'])?>"><?=$product_list['product_name']?></a></h6>
+                                        <div class="tt-price">
+                                            <?=$function->convertNumberMoney($product_list['product_price_vn'])?>₫
+                                        </div>
+                                        <span class="tt-label-location">
+                                            <span class="tt-label-new">Giảm giá <?=$product_list['product_sale']?>%</span>
+                                        </span>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="tt-item">
-                            <div class="tt-layout-vertical">
-                                <div class="tt-img">
-                                    <a href="listing-collection.html">
-                                        <span class="tt-img-default"><img src="<?=_URL_STYLE?>/images/loader.svg" data-src="images/product/product-21.jpg" alt=""></span>
-                                        <span class="tt-img-roll-over"><img src="<?=_URL_STYLE?>/images/loader.svg" data-src="images/product/product-21-02.jpg" alt=""></span>
-                                    </a>
-                                </div>
-                                <div class="tt-description">
-                                    <ul class="tt-add-info">
-                                        <li><a href="#">T-SHIRTS</a></li>
-                                    </ul>
-                                    <h6 class="tt-title"><a href="#">Flared Shift Dress</a></h6>
-                                    <div class="tt-price">
-                                        <span class="new-price">$34</span>
-                                        <span class="old-price">$74</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                            <?php
+                        }
+                        ?>
                     </div>
                 </div>
                 <div class="divider visible-sm visible-xs"></div>
@@ -497,352 +490,6 @@ require_once 'header.php';
             </div>
         </div>
     </div>
-    <div class="container-indent">
-        <div class="container-fluid">
-            <div class="tt-block-title">
-                <h2 class="tt-title"><a href="https://www.instagram.com/wokieeshop/">@ FOLLOW</a> US ON</h2>
-                <div class="tt-description">INSTAGRAM</div>
-            </div>
-            <div class="row">
-                <div id="instafeed" class="instafeed-fluid"
-                     data-accessToken="8626857013.dd09515.0fcd8351c65140d48f5a340693af1c3f"
-                     data-clientId="dd095157744c4bd0a67181fc4906e5b6"
-                     data-userId="8626857013"
-                     data-limitImg="6">
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
-<footer class="nomargin">
-    <div class="tt-footer-default tt-color-scheme-02">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 col-md-9">
-                    <div class="tt-newsletter-layout-01">
-                        <div class="tt-newsletter">
-                            <div class="tt-mobile-collapse">
-                                <h4 class="tt-collapse-title">
-                                    BE IN TOUCH WITH US:
-                                </h4>
-                                <div class="tt-collapse-content">
-                                    <form id="newsletterform" class="form-inline form-default" method="post" novalidate="novalidate" action="#">
-                                        <div class="form-group">
-                                            <input type="text" name="email" class="form-control" placeholder="Enter your e-mail">
-                                            <button type="submit" class="btn">JOIN US</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-auto">
-                    <ul class="tt-social-icon">
-                        <li><a class="icon-g-64" target="_blank" href="http://www.facebook.com/"></a></li>
-                        <li><a class="icon-h-58" target="_blank" href="http://www.facebook.com/"></a></li>
-                        <li><a class="icon-g-66" target="_blank" href="http://www.twitter.com/"></a></li>
-                        <li><a class="icon-g-67" target="_blank" href="http://www.google.com/"></a></li>
-                        <li><a class="icon-g-70" target="_blank" href="https://instagram.com/"></a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="tt-footer-col tt-color-scheme-01">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 col-lg-2 col-xl-3">
-                    <div class="tt-mobile-collapse">
-                        <h4 class="tt-collapse-title">
-                            CATEGORIES
-                        </h4>
-                        <div class="tt-collapse-content">
-                            <ul class="tt-list">
-                                <li><a href="listing-collection.html">Women</a></li>
-                                <li><a href="listing-collection.html">Men</a></li>
-                                <li><a href="listing-collection.html">Accessories</a></li>
-                                <li><a href="listing-collection.html">Shoes</a></li>
-                                <li><a href="listing-collection.html">New Arrivals</a></li>
-                                <li><a href="listing-collection.html">Clearence</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-2 col-xl-3">
-                    <div class="tt-mobile-collapse">
-                        <h4 class="tt-collapse-title">
-                            MY ACCOUNT
-                        </h4>
-                        <div class="tt-collapse-content">
-                            <ul class="tt-list">
-                                <li><a href="account_order.html">Orders</a></li>
-                                <li><a href="page404.html">Compare</a></li>
-                                <li><a href="page404.html">Wishlist</a></li>
-                                <li><a href="login.html">Log In</a></li>
-                                <li><a href="create-account.html">Register</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4 col-xl-3">
-                    <div class="tt-mobile-collapse">
-                        <h4 class="tt-collapse-title">
-                            ABOUT
-                        </h4>
-                        <div class="tt-collapse-content">
-                            <p>
-                                Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore. Lorem ipsum dolor sit amet conse ctetur adipisicing elit, seddo eiusmod tempor incididunt ut labore etdolore.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4 col-xl-3">
-                    <div class="tt-newsletter">
-                        <div class="tt-mobile-collapse">
-                            <h4 class="tt-collapse-title">
-                                CONTACTS
-                            </h4>
-                            <div class="tt-collapse-content">
-                                <address>
-                                    <p><span>Address:</span> 2548 Broaddus Maple Court Avenue, Madisonville KY 4783, United States of America</p>
-                                    <p><span>Phone:</span> +777 2345 7885;  +777 2345 7886</p>
-                                    <p><span>Hours:</span> 7 Days a week from 10 am to 6 pm</p>
-                                    <p><span>E-mail:</span> <a href="mailto:info@mydomain.com">info@mydomain.com</a></p>
-                                </address>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="tt-footer-custom">
-        <div class="container">
-            <div class="tt-row">
-                <div class="tt-col-left">
-                    <div class="tt-col-item tt-logo-col">
-                        <!-- logo -->
-                        <a class="tt-logo tt-logo-alignment" href="index.html">
-                            <img src="images/custom/logo.png" alt="">
-                        </a>
-                        <!-- /logo -->
-                    </div>
-                    <div class="tt-col-item">
-                        <!-- copyright -->
-                        <div class="tt-box-copyright">
-                            &copy; Wokiee 2018. All Rights Reserved
-                        </div>
-                        <!-- /copyright -->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</footer>
-<a href="#" class="tt-back-to-top">BACK TO TOP</a>
-<!-- modal (AddToCartProduct) -->
-<div class="modal  fade"  id="modalAddToCartProduct" tabindex="-1" role="dialog" aria-label="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content ">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="icon icon-clear"></span></button>
-            </div>
-            <div class="modal-body">
-                <div class="tt-modal-addtocart mobile">
-                    <div class="tt-modal-messages">
-                        <i class="icon-f-68"></i> Added to cart successfully!
-                    </div>
-                    <a href="#" class="btn-link btn-close-popup">CONTINUE SHOPPING</a>
-                    <a href="shopping_cart_02.html" class="btn-link">VIEW CART</a>
-                    <a href="page404.html" class="btn-link">PROCEED TO CHECKOUT</a>
-                </div>
-                <div class="tt-modal-addtocart desctope">
-                    <div class="row">
-                        <div class="col-12 col-lg-6">
-                            <div class="tt-modal-messages">
-                                <i class="icon-f-68"></i> Added to cart successfully!
-                            </div>
-                            <div class="tt-modal-product">
-                                <div class="tt-img">
-                                    <img src="images/loader.svg" data-src="images/product/product-01.jpg" alt="">
-                                </div>
-                                <h2 class="tt-title"><a href="product.html">Flared Shift Dress</a></h2>
-                                <div class="tt-qty">
-                                    QTY: <span>1</span>
-                                </div>
-                            </div>
-                            <div class="tt-product-total">
-                                <div class="tt-total">
-                                    TOTAL: <span class="tt-price">$324</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-lg-6">
-                            <a href="#" class="tt-cart-total">
-                                There are 1 items in your cart
-                                <div class="tt-total">
-                                    TOTAL: <span class="tt-price">$324</span>
-                                </div>
-                            </a>
-                            <a href="#" class="btn btn-border btn-close-popup">CONTINUE SHOPPING</a>
-                            <a href="shopping_cart_02.html" class="btn btn-border">VIEW CART</a>
-                            <a href="#" class="btn">PROCEED TO CHECKOUT</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- modal (quickViewModal) -->
-<div class="modal  fade"  id="ModalquickView" tabindex="-1" role="dialog" aria-label="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content ">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="icon icon-clear"></span></button>
-            </div>
-            <div class="modal-body">
-                <div class="tt-modal-quickview desctope">
-                    <div class="row">
-                        <div class="col-12 col-md-5 col-lg-6">
-                            <div class="tt-mobile-product-slider arrow-location-center">
-                                <div><img src="images/loader.svg" data-src="images/product/product-01.jpg" alt=""></div>
-                                <div><img src="images/loader.svg" data-src="images/product/product-01-02.jpg" alt=""></div>
-                                <div><img src="images/loader.svg" data-src="images/product/product-01-03.jpg" alt=""></div>
-                                <div><img src="images/loader.svg" data-src="images/product/product-01-04.jpg" alt=""></div>
-                                <div>
-                                    <div class="tt-video-block">
-                                        <a href="#" class="link-video"></a>
-                                        <video class="movie" src="video/video.mp4" poster="video/video_img.jpg"></video>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-7 col-lg-6">
-                            <div class="tt-product-single-info">
-                                <div class="tt-add-info">
-                                    <ul>
-                                        <li><span>SKU:</span> 001</li>
-                                        <li><span>Availability:</span> 40 in Stock</li>
-                                    </ul>
-                                </div>
-                                <h2 class="tt-title">Cotton Blend Fleece Hoodie</h2>
-                                <div class="tt-price">
-                                    <span class="new-price">$29</span>
-                                    <span class="old-price"></span>
-                                </div>
-                                <div class="tt-review">
-                                    <div class="tt-rating">
-                                        <i class="icon-star"></i>
-                                        <i class="icon-star"></i>
-                                        <i class="icon-star"></i>
-                                        <i class="icon-star-half"></i>
-                                        <i class="icon-star-empty"></i>
-                                    </div>
-                                    <a href="#">(1 Customer Review)</a>
-                                </div>
-                                <div class="tt-wrapper">
-                                    Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
-                                </div>
-                                <div class="tt-swatches-container">
-                                    <div class="tt-wrapper">
-                                        <div class="tt-title-options">SIZE</div>
-                                        <form class="form-default">
-                                            <div class="form-group">
-                                                <select class="form-control">
-                                                    <option>21</option>
-                                                    <option>25</option>
-                                                    <option>36</option>
-                                                </select>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div class="tt-wrapper">
-                                        <div class="tt-title-options">COLOR</div>
-                                        <form class="form-default">
-                                            <div class="form-group">
-                                                <select class="form-control">
-                                                    <option>Red</option>
-                                                    <option>Green</option>
-                                                    <option>Brown</option>
-                                                </select>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div class="tt-wrapper">
-                                        <div class="tt-title-options">TEXTURE:</div>
-                                        <ul class="tt-options-swatch options-large">
-                                            <li><a class="options-color" href="#">
-												<span class="swatch-img">
-													<img src="images/loader.svg" data-src="images/custom/texture-img-01.jpg" alt="">
-												</span>
-                                                    <span class="swatch-label color-black"></span>
-                                                </a></li>
-                                            <li class="active"><a class="options-color" href="#">
-												<span class="swatch-img">
-													<img src="images/loader.svg" data-src="images/custom/texture-img-02.jpg" alt="">
-												</span>
-                                                    <span class="swatch-label color-black"></span>
-                                                </a></li>
-                                            <li><a class="options-color" href="#">
-												<span class="swatch-img">
-													<img src="images/loader.svg" data-src="images/custom/texture-img-03.jpg" alt="">
-												</span>
-                                                    <span class="swatch-label color-black"></span>
-                                                </a></li>
-                                            <li><a class="options-color" href="#">
-												<span class="swatch-img">
-													<img src="images/loader.svg" data-src="images/custom/texture-img-04.jpg" alt="">
-												</span>
-                                                    <span class="swatch-label color-black"></span>
-                                                </a></li>
-                                            <li><a class="options-color" href="#">
-												<span class="swatch-img">
-													<img src="images/loader.svg" data-src="images/custom/texture-img-05.jpg" alt="">
-												</span>
-                                                    <span class="swatch-label color-black"></span>
-                                                </a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="tt-wrapper">
-                                    <div class="tt-row-custom-01">
-                                        <div class="col-item">
-                                            <div class="tt-input-counter style-01">
-                                                <span class="minus-btn"></span>
-                                                <input type="text" value="1" size="5">
-                                                <span class="plus-btn"></span>
-                                            </div>
-                                        </div>
-                                        <div class="col-item">
-                                            <a href="#" class="btn btn-lg"><i class="icon-f-39"></i>ADD TO CART</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<script src="<?=_URL_STYLE?>/external/jquery/jquery.min.js"></script>
-<script src="<?=_URL_STYLE?>/external/bootstrap/js/bootstrap.min.js"></script>
-<script src="<?=_URL_STYLE?>/external/slick/slick.min.js"></script>
-<script src="<?=_URL_STYLE?>/external/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-<script src="<?=_URL_STYLE?>/external/panelmenu/panelmenu.js"></script>
-<script src="<?=_URL_STYLE?>/external/instafeed/instafeed.min.js"></script>
-<script src="<?=_URL_STYLE?>/external/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
-<script src="<?=_URL_STYLE?>/external/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
-<script src="<?=_URL_STYLE?>/external/countdown/jquery.plugin.min.js"></script>
-<script src="<?=_URL_STYLE?>/external/countdown/jquery.countdown.min.js"></script>
-<script src="<?=_URL_STYLE?>/external/lazyLoad/lazyload.min.js"></script>
-<script src="<?=_URL_STYLE?>/js/main.js"></script>
-<!-- form validation and sending to mail -->
-<script src="<?=_URL_STYLE?>/external/form/jquery.form.js"></script>
-<script src="<?=_URL_STYLE?>/external/form/jquery.validate.min.js"></script>
-<script src="<?=_URL_STYLE?>/external/form/jquery.form-init.js"></script>
-</body>
-</html>
+<?php
+require_once 'footer.php';
