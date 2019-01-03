@@ -77,7 +77,7 @@ require_once 'header.php';
                         <?php
                         $db->from(_TABLE_PRODUCT)->where(array('product_status' => 2));
                         $db->order_by('product_id', 'DESC');
-                        $db->limit(10);
+                        $db->limit(8);
                         foreach ($db->fetch() as $product_list) {
                             $db->select('media_source')->from(_TABLE_MEDIA)->where(array('media_type' => 'images_product', 'media_store' => 'local', 'media_parent' => $product_list['product_id']));
                             $db->limit(1);
@@ -128,7 +128,7 @@ require_once 'header.php';
                         <?php
                         $db->from(_TABLE_PRODUCT)->where(array('product_gender' => 1, 'product_status <>' => 0));
                         $db->order_by('product_id', 'DESC');
-                        $db->limit(10);
+                        $db->limit(8);
                         foreach ($db->fetch() as $product_list) {
                             $db->select('media_source')->from(_TABLE_MEDIA)->where(array('media_type' => 'images_product', 'media_store' => 'local', 'media_parent' => $product_list['product_id']));
                             $db->limit(1);
@@ -179,7 +179,7 @@ require_once 'header.php';
                         <?php
                         $db->from(_TABLE_PRODUCT)->where(array('product_gender' => 2, 'product_status <>' => 0));
                         $db->order_by('product_id', 'DESC');
-                        $db->limit(10);
+                        $db->limit(8);
                         foreach ($db->fetch() as $product_list) {
                             $db->select('media_source')->from(_TABLE_MEDIA)->where(array('media_type' => 'images_product', 'media_store' => 'local', 'media_parent' => $product_list['product_id']));
                             $db->limit(1);
@@ -233,24 +233,22 @@ require_once 'header.php';
             <div class="row tt-layout-promo-box">
                 <div class="col-md-6">
                     <a href="listing-left-column.html" class="tt-promo-box tt-one-child">
-                        <img src="<?=_URL_STYLE?>/images/loader.svg" data-src="<?=_URL_STYLE?>/images/promo/index04-promo-img-05.jpg" alt="">
+                        <img src="<?=_URL_STYLE?>/images/banner/5.jpg" data-src="<?=_URL_STYLE?>/images/banner/5.jpg" alt="">
                         <div class="tt-description">
                             <div class="tt-description-wrapper">
                                 <div class="tt-background"></div>
-                                <div class="tt-title-small">NEW IN:</div>
-                                <div class="tt-title-large">CLOTHING</div>
+                                <div class="tt-title-small">PHỤ KIỆN</div>
                             </div>
                         </div>
                     </a>
                 </div>
                 <div class="col-md-6">
                     <a href="listing-left-column.html" class="tt-promo-box tt-one-child">
-                        <img src="<?=_URL_STYLE?>/images/loader.svg" data-src="<?=_URL_STYLE?>/images/promo/index04-promo-img-06.jpg" alt="">
+                        <img src="<<?=_URL_STYLE?>/images/banner/6.jpg" data-src="<?=_URL_STYLE?>/images/banner/6.jpg" alt="">
                         <div class="tt-description">
                             <div class="tt-description-wrapper">
                                 <div class="tt-background"></div>
-                                <div class="tt-title-small">CLEARANCE SALES</div>
-                                <div class="tt-title-large">GET UP TO <span class="tt-base-color">20% OFF</span></div>
+                                <div class="tt-title-small">TÚI XÁCH</div>
                             </div>
                         </div>
                     </a>
@@ -332,13 +330,13 @@ require_once 'header.php';
                                         <ul class="tt-add-info">
                                             <li><a href="#"><?=$product_category['category_name']?></a></li>
                                         </ul>
+                                        <span class="tt-label-location">
+                                            <span class="tt-label-new">Giảm giá <?=$product_list['product_sale']?>%</span>
+                                        </span>
                                         <h6 class="tt-title"><a href="<?=$function->getUrlProduct($product_list['product_id'])?>"><?=$product_list['product_name']?></a></h6>
                                         <div class="tt-price">
                                             <?=$function->convertNumberMoney($product_list['product_price_vn'])?>₫
                                         </div>
-                                        <span class="tt-label-location">
-                                            <span class="tt-label-new">Giảm giá <?=$product_list['product_sale']?>%</span>
-                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -349,92 +347,44 @@ require_once 'header.php';
                 </div>
                 <div class="divider visible-sm visible-xs"></div>
                 <div class="col-sm-6 col-md-4">
-                    <h6 class="tt-title-sub">FEATURED PRODUCTS</h6>
+                    <h6 class="tt-title-sub">NỔI BẬT</h6>
                     <div class="tt-layout-vertical-listing">
-                        <div class="tt-item">
-                            <div class="tt-layout-vertical">
-                                <div class="tt-img">
-                                    <a href="listing-collection.html">
-                                        <span class="tt-img-default"><img src="<?=_URL_STYLE?>/images/loader.svg" data-src="images/product/product-16.jpg" alt=""></span>
-                                        <span class="tt-img-roll-over"><img src="<?=_URL_STYLE?>/images/loader.svg" data-src="images/product/product-16-02.jpg" alt=""></span>
-                                    </a>
-                                </div>
-                                <div class="tt-description">
-                                    <div class="tt-rating">
-                                        <i class="icon-star"></i>
-                                        <i class="icon-star"></i>
-                                        <i class="icon-star"></i>
-                                        <i class="icon-star"></i>
-                                        <i class="icon-star"></i>
+                        <?php
+                        $db->from(_TABLE_PRODUCT)->where(array('product_status' => 2));
+                        $db->order_by('product_id', 'DESC');
+                        $db->limit(3);
+                        foreach ($db->fetch() as $product_list) {
+                            $db->select('media_source')->from(_TABLE_MEDIA)->where(array('media_type' => 'images_product', 'media_store' => 'local', 'media_parent' => $product_list['product_id']));
+                            $db->limit(1);
+                            $images_1 = $db->fetch_first();
+                            $db->select('media_source')->from(_TABLE_MEDIA)->where(array('media_type' => 'images_product', 'media_store' => 'local', 'media_parent' => $product_list['product_id']));
+                            $db->limit(2);
+                            $images_2 = $db->fetch_first();
+                            $product_metadata = $db->from(_TABLE_METADATA)->where(array('metadata_type' => 'category_product', 'metadata_suorce' => $product_list['product_id']))->fetch_first();
+                            $product_category = $db->from(_TABLE_CATEGORY)->where(array('category_id' => $product_metadata['metadata_value']))->fetch_first();
+                            ?>
+                            <div class="tt-item">
+                                <div class="tt-layout-vertical">
+                                    <div class="tt-img">
+                                        <a href="<?=$function->getUrlProduct($product_list['product_id'])?>">
+                                            <span class="tt-img-default"><img src="<?= _URL_HOME.'/'.$images_1['media_source']?>" data-src="<?= _URL_HOME.'/'.$images_1['media_source']?>" alt=""></span>
+                                            <span class="tt-img-roll-over"><img src="<?= _URL_HOME.'/'.$images_2['media_source']?>" data-src="<?= _URL_HOME.'/'.$images_2['media_source']?>" alt=""></span>
+                                        </a>
                                     </div>
-                                    <ul class="tt-add-info">
-                                        <li><a href="#">T-SHIRTS</a></li>
-                                    </ul>
-                                    <h6 class="tt-title"><a href="#">Flared Shift Dress</a></h6>
-                                    <div class="tt-price">
-                                        $24
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tt-item">
-                            <div class="tt-layout-vertical">
-                                <div class="tt-img">
-                                    <a href="listing-collection.html">
-                                        <span class="tt-img-default"><img src="<?=_URL_STYLE?>/images/loader.svg" data-src="images/product/product-12.jpg" alt=""></span>
-                                        <span class="tt-img-roll-over"><img src="<?=_URL_STYLE?>/images/loader.svg" data-src="images/product/product-12-01.jpg" alt=""></span>
-                                    </a>
-                                </div>
-                                <div class="tt-description">
-                                    <div class="tt-rating">
-                                        <i class="icon-star"></i>
-                                        <i class="icon-star"></i>
-                                        <i class="icon-star"></i>
-                                        <i class="icon-star"></i>
-                                        <i class="icon-star"></i>
-                                    </div>
-                                    <ul class="tt-add-info">
-                                        <li><a href="#">T-SHIRTS</a></li>
-                                    </ul>
-                                    <h6 class="tt-title"><a href="#">Flared Shift Dress</a></h6>
-                                    <div class="tt-price">
-                                        $178
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tt-item">
-                            <div class="tt-layout-vertical">
-                                <div class="tt-img">
-                                    <a href="listing-collection.html">
-                                        <span class="tt-img-default"><img src="<?=_URL_STYLE?>/images/loader.svg" data-src="images/product/product-13.jpg" alt=""></span>
-                                        <span class="tt-img-roll-over"><img src="<?=_URL_STYLE?>/images/loader.svg" data-src="images/product/product-13-02.jpg" alt=""></span>
-                                    </a>
-                                </div>
-                                <div class="tt-description">
-                                    <div class="tt-rating">
-                                        <i class="icon-star"></i>
-                                        <i class="icon-star"></i>
-                                        <i class="icon-star"></i>
-                                        <i class="icon-star"></i>
-                                        <i class="icon-star"></i>
-                                    </div>
-                                    <ul class="tt-add-info">
-                                        <li><a href="#">T-SHIRTS</a></li>
-                                    </ul>
-                                    <h6 class="tt-title"><a href="#">Flared Shift Dress</a></h6>
-                                    <div class="tt-price">
-                                        $54
-                                    </div>
-                                    <div class="tt-option-block">
-                                        <ul class="tt-options-swatch">
-                                            <li><a class="options-color tt-color-bg-01" href="#"></a></li>
-                                            <li><a class="options-color tt-color-bg-02" href="#"></a></li>
+                                    <div class="tt-description">
+                                        <ul class="tt-add-info">
+                                            <li><a href="#"><?=$product_category['category_name']?></a></li>
                                         </ul>
+                                        <h6 class="tt-title"><a href="<?=$function->getUrlProduct($product_list['product_id'])?>"><?=$product_list['product_name']?></a></h6>
+                                        <div class="tt-price">
+                                            <?=$function->convertNumberMoney($product_list['product_price_vn'])?>₫
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                            <?php
+                        }
+                        ?>
                     </div>
                 </div>
             </div>
@@ -443,8 +393,8 @@ require_once 'header.php';
     <div class="container-indent">
         <div class="container container-fluid-custom-mobile-padding">
             <div class="tt-block-title">
-                <h2 class="tt-title">POPULAR</h2>
-                <div class="tt-description">CLOTHING BRANDS</div>
+                <h2 class="tt-title">THƯƠNG HIỆU</h2>
+                <div class="tt-description">THƯƠNG HIỆN NỔI BẬT</div>
             </div>
             <div class="row tt-img-box-listing">
                 <div class="col-6 col-sm-4 col-md-3">

@@ -103,7 +103,7 @@ $header['title'] = isset($header['title']) && !empty($header['title']) ? $header
             <li class=" nav-item">
                 <a href="#"><i class="ft-shopping-cart"></i><span class="menu-title">Sản Phẩm</span></a>
                 <ul class="menu-content">
-                    <li <?php echo ($admin_module == 'product' && $act == 'update') ? 'class="active"' : '';?>><a class="menu-item" href="<?php echo _URL_ADMIN;?>/product.php"><i class="ft-list"></i> Danh sách sản phẩm</a></li>
+                    <li <?php echo ($admin_module == 'product' && in_array($act, array('', 'update'))) ? 'class="active"' : '';?>><a class="menu-item" href="<?php echo _URL_ADMIN;?>/product.php"><i class="ft-list"></i> Danh sách sản phẩm</a></li>
                     <li <?php echo ($admin_module == 'product' && $act == 'add') ? 'class="active"' : '';?>><a class="menu-item" href="<?php echo _URL_ADMIN;?>/product.php?act=add"><i class="ft-plus"></i> Thêm sản phẩm</a></li>
                     <li <?php echo ($admin_module == 'category' && $type == 'shop') ? 'class="active"' : '';?>><a class="menu-item" href="<?php echo _URL_ADMIN;?>/category.php?type=shop"><i class="ft-hash"></i> Chuyên mục</a></li>
                     <li <?php echo ($admin_module == 'category' && $type == 'brand') ? 'class="active"' : '';?>><a class="menu-item" href="<?php echo _URL_ADMIN;?>/category.php?type=brand"><i class="la la-twitter-square"></i> Thương Hiệu</a></li>
