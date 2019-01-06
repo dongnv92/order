@@ -7,11 +7,33 @@
  */
 require_once '../../includes/core.php';
 switch ($act){
-    default:
-        $header['title'] = 'Sản phẩm mới';
-        $db->select()->from(_TABLE_PRODUCT)->where(array('product_status <>' => 0));
+    case 'feature':
+        $header['title']        = 'Sản phẩm nổi bật';
+        $header['menu_active']  = 'feature';
+        $text_price_sort = '<strong>SẮP XẾP THEO</strong>:  <a href="'. _URL_HOME .'/feature?price=desc">Giá tăng dần</a> | <a href="'. _URL_HOME .'/feature?price=asc">Giá tăng dần</a>';
+        $price   = (isset($_GET['price']) && !empty($_GET['price']))   ? trim($_GET['price'])   : '';
+        $db->select()->from(_TABLE_PRODUCT)->where(array('product_status' => 2));
+        if($price == 'desc'){
+            $db->order_by('product_price_vn', 'DESC');
+        }else if($price == 'asc'){
+            $db->order_by('product_price_vn', 'ASC');
+        }
         $db->order_by('product_id', 'DESC');
-        $db->limit(18);
+        $db->limit(16);
+        break;
+    default:
+        $header['title']        = 'Sản phẩm mới';
+        $header['menu_active']  = 'new';
+        $text_price_sort        = '<strong>SẮP XẾP THEO</strong>:  <a href="'. _URL_HOME .'/new?price=desc">Giá tăng dần</a> | <a href="'. _URL_HOME .'/new?price=asc">Giá tăng dần</a>';
+        $price                  = (isset($_GET['price']) && !empty($_GET['price']))   ? trim($_GET['price'])   : '';
+        $db->select()->from(_TABLE_PRODUCT)->where(array('product_status <>' => 0));
+        if($price == 'desc'){
+            $db->order_by('product_price_vn', 'DESC');
+        }else if($price == 'asc'){
+            $db->order_by('product_price_vn', 'ASC');
+        }
+        $db->order_by('product_id', 'DESC');
+        $db->limit(16);
         break;
 }
 require_once 'header.php';
@@ -32,19 +54,7 @@ require_once 'header.php';
                     <div class="content-indent">
                         <div class="tt-filters-options desctop-no-sidebar">
                             <h1 class="tt-title"><?=$header['title']?></h1>
-                            <div class="tt-sort">
-                                <select>
-                                    <option value="Default Sorting">Default Sorting</option>
-                                    <option value="Default Sorting">Default Sorting 02</option>
-                                    <option value="Default Sorting">Default Sorting 03</option>
-                                </select>
-                                <select>
-                                    <option value="Show">Show</option>
-                                    <option value="9">9</option>
-                                    <option value="16">16</option>
-                                    <option value="32">32</option>
-                                </select>
-                            </div>
+                            <div class="tt-sort"><?=$text_price_sort?></div>
                             <div class="tt-quantity">
                                 <a href="#" class="tt-col-one" data-value="tt-col-one"></a>
                                 <a href="#" class="tt-col-two" data-value="tt-col-two"></a>
