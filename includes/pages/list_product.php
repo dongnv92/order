@@ -7,6 +7,10 @@
  */
 require_once '../../includes/core.php';
 switch ($act){
+    case 'category':
+        echo $url;
+        exit();
+        break;
     case 'feature':
         $header['title']        = 'Sản phẩm nổi bật';
         $header['menu_active']  = 'feature';

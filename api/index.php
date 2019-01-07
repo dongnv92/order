@@ -1,6 +1,10 @@
 <?php
 require_once '../includes/core.php';
 switch ($act){
+    // Lấy danh sách các chuyên mục
+    case 'get_list_category_by_category':
+
+        break;
     case 'product':
         switch ($type){
             case 'update_status':
