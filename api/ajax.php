@@ -61,6 +61,7 @@ switch ($act){
         $response['product_images']             = $product['product_images'];
         $response['product_size']               = $product['product_size'];
         $response['product_color']              = $product['product_color'];
+        $response['product_content']            = $product['product_content'];
         foreach ($response['product_images'] AS $images){
             $response['images'] .= '<img src="'. $images .'" class="col-md-4 text-center" style="height: 85px"><input type="hidden" name="product_images[]" value="'. $images .'">';
         }

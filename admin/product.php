@@ -888,6 +888,7 @@ switch ($act){
                             $('#ajax_size').html(data.size);
                             $('#ajax_color').html(data.color);
                             $('#connect_ajax').html('Lấy thông tin');
+                            $('textarea[name=product_content]').html(data.product_content);
                         },
                         error: function(jqXHR, textStatus){
                             if(textStatus == 'timeout')

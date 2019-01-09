@@ -48,7 +48,6 @@ switch ($act){
         require_once '../includes/lib/simple_html_dom.php';
         $url_parse                          = parse_url($url);
         parse_str($url_parse['query'], $query);
-        //echo 'https://detail.tmall.com/item.htm?id='.$query['id']; exit();
         $html                               = file_get_html('https://detail.tmall.com/item.htm?id='.$query['id']);
         $response                           = array();
         $images                             = $html->find('ul[id=J_UlThumb] li a img');
@@ -79,6 +78,10 @@ switch ($act){
         $response['product_price_promotion']= str_replace('&yen', '', $response['product_price_promotion']);
         $response['product_price_promotion']= explode('.', $response['product_price_promotion']);
         $response['product_price_promotion']= $response['product_price_promotion'][0];
+        $response['product_content']        = '';
+        foreach ($html_taobao->find('img[align=absmiddle]') as $content){
+            $response['product_content']   .= '<p><img src="'. $content->src .'" align="absmiddle"></p>';
+        }
         $response['response'] = 200;
         echo json_encode($response);
         /*echo "<pre>";
@@ -86,11 +89,12 @@ switch ($act){
         echo "<pre>";*/
         break;
     case 'get_taobao':
-        require_once '../includes/class/simple_html_dom.php';
+        require_once '../includes/lib/simple_html_dom.php';
         $html                               = file_get_html($url);
         $response                           = array();
         $response['product_price']          = trim($html->find('.price span[class=promotionPrice]', 0)->plaintext);
         $response['product_price']          = str_replace('&yen', '', $response['product_price']);
+        $response['product_content']        = '';
         $i                                  = 0;
         foreach ($html->find('.thumbPic li img') as $images){
             if($i > 1){
@@ -99,9 +103,16 @@ switch ($act){
             }
             $i++;
         }
+
+        foreach ($html->find('img[align=absmiddle]') as $content){
+            $response['product_content']   .= '<p><img src="'. $content->src .'" align="absmiddle"></p>';
+        }
+
+
         echo "<pre>";
         print_r($response);
         echo "</pre>";
+        //echo $html;
         break;
     default:
         $response = array();
