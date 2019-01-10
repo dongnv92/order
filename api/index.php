@@ -2,8 +2,28 @@
 require_once '../includes/core.php';
 switch ($act){
     // Lấy danh sách các chuyên mục
-    case 'get_list_category_by_category':
+    case 'get_list_product':
+        switch ($type){
+            case 'by_category':
+                $category = (isset($_GET['category']) && !empty($_GET['category'])) ? $_GET['category'] : '';
+                // Kiểm tra xem chuyên mục có tồn tại hay không?
+                if(!$function->checkData(_TABLE_CATEGORY, array('product_id' => $category, 'product_type' => 'shop'))){
+                    $response = array();
+                    $response['response']   = 404;
+                    $response['message']    = 'Category empty';
+                    echo json_encode($response);
+                    break;
+                }
 
+
+                break;
+            default:
+                $response = array();
+                $response['response']   = 404;
+                $response['message']    = 'Default Get List Product Page';
+                echo json_encode($response);
+                break;
+        }
         break;
     case 'product':
         switch ($type){
@@ -38,7 +58,7 @@ switch ($act){
                 break;
             default:
                 $response = array();
-                $response['response']   = 200;
+                $response['response']   = 404;
                 $response['message']    = 'Default Product Page';
                 echo json_encode($response);
                 break;

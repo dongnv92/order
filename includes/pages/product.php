@@ -134,17 +134,27 @@ require_once 'header.php';
                                     </ul>
                                 </div>
                             </div>
-                            <div class="tt-collapse-block">
-                                <div class="tt-item">
-                                    <div class="tt-collapse-title">Giới thiệu</div>
-                                    <div class="tt-collapse-content"><?=$product['product_content']?></div>
-                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Content -->
+        <div class="container-indent">
+            <div class="container container-fluid-custom-mobile-padding">
+                <div class="row justify-content-center">
+                    <div class="col-xs-12 col-md-10 col-lg-8 col-md-auto">
+                        <div class="tt-post-single">
+                            <div class="tt-post-content">
+                                <h2 class="tt-title">MÔ TẢ SẢN PHẨM</h2>
+                                <?=$product['product_content']?>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <!-- Content -->
         <div class="container-indent">
             <div class="container container-fluid-custom-mobile-padding">
                 <div class="tt-block-title text-left">

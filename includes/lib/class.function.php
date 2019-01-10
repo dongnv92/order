@@ -21,6 +21,16 @@ class orderFunction{
         header('location:'.$url);
     }
 
+    function checkData($table, $data){
+        global $db;
+        $check = $db->select()->from($table)->where($data)->fetch_first();
+        if($check){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     function getUrlProduct($id){
         global $db;
         $product    = $db->select('product_url')->from(_TABLE_PRODUCT)->where('product_id', $id)->fetch_first();
