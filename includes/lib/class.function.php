@@ -52,11 +52,8 @@ class orderFunction{
                     </td>
                     </tr>';
                 }else if($display == 'select'){
-                    if($option['product_update_selected']){
-                        $db->select('metadata_id')->from(_TABLE_METADATA)->where(array('metadata_type' => 'category_product', 'metadata_suorce' => $option['product_update_selected'], 'metadata_value' => $item['category_id']))->execute();
-                        if($db->affected_rows > 0){
-                            $selected = 'selected';
-                        }
+                    if($option['selected'] == $item['category_id']){
+                        $selected = 'selected';
                     }
                     echo '<option '. $selected .' value="'. $item['category_id'] .'" id="option_'. $item['category_id'] .'">'. $char . $item['category_name'] .'</option>';
                 }

@@ -23,21 +23,23 @@ switch ($act){
             $db->order_by('product_price_vn', 'ASC');
         }
         $db->order_by('product_id', 'DESC');
-        $db->limit(16);
+        $db->limit(8);
         break;
     default:
         $header['title']        = 'Sản phẩm mới';
         $header['menu_active']  = 'new';
         $text_price_sort        = '<strong>SẮP XẾP THEO</strong>:  <a href="'. _URL_HOME .'/new?price=desc">Giá tăng dần</a> | <a href="'. _URL_HOME .'/new?price=asc">Giá tăng dần</a>';
         $price                  = (isset($_GET['price']) && !empty($_GET['price']))   ? trim($_GET['price'])   : '';
-        $db->select()->from(_TABLE_PRODUCT)->where(array('product_status <>' => 0));
         if($price == 'desc'){
-            $db->order_by('product_price_vn', 'DESC');
+            $query_orderby      = 'ORDER BY `product_price_vn` DESC';
         }else if($price == 'asc'){
-            $db->order_by('product_price_vn', 'ASC');
+            $query_orderby      = 'ORDER BY `product_price_vn` ASC';
+        }else{
+            $query_orderby      = 'ORDER BY `product_id` DESC';
         }
-        $db->order_by('product_id', 'DESC');
-        $db->limit(16);
+
+        $query                  = "SELECT * FROM `"._TABLE_PRODUCT."` WHERE `product_id` IN (SELECT `product_id` FROM `". _TABLE_PRODUCT ."` ORDER BY `product_id` DESC) $query_orderby LIMIT 8";
+        $db->query($query);
         break;
 }
 require_once 'header.php';

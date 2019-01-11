@@ -33,7 +33,8 @@ switch ($act){
         $product_quality            = isset($_POST['product_quality'])          && !empty($_POST['product_quality'])            ? $_POST['product_quality']             : $product['product_quality'];
         $product_size               = isset($_POST['product_size'])             && !empty($_POST['product_size'])               ? $_POST['product_size']                : unserialize($product['product_size']);
         $product_color              = isset($_POST['product_color'])            && !empty($_POST['product_color'])              ? $_POST['product_color']               : unserialize($product['product_color']);
-        $product_category           = isset($_POST['product_category'])         && !empty($_POST['product_category'])           ? $_POST['product_category']            : '';
+        $product_category           = isset($_POST['product_category'])         && !empty($_POST['product_category'])           ? $_POST['product_category']            : $product['product_category'];
+        $product_gender             = isset($_POST['product_gender'])           && !empty($_POST['product_gender'])             ? $_POST['product_gender']              : $product['product_gender'];
         $product_sale               = ceil(($product_price_promotion/$product_price_default)*100);
 
         if($submit){
@@ -47,7 +48,7 @@ switch ($act){
             if(!$product_price_vn){
                 $error['product_price_vn']  = 'Bạn cần nhập giá Việt Nam';
             }
-            if(count($product_category) == 1 && $product_category[0] == ''){
+            if(!$product_category){
                 $error['product_category']  = 'Bạn hãy chọn 1 chuyên mục';
             }
             if($product_price_default && !is_numeric($product_price_default)){
@@ -64,7 +65,9 @@ switch ($act){
                 $data_product = array(
                     'product_name'              => $product_name,
                     'product_content'           => $product_content,
+                    'product_category'          => $product_category,
                     'product_brand'             => $product_brand,
+                    'product_gender'            => $product_gender,
                     'product_quality'           => $product_quality,
                     'product_price_default'     => $product_price_default,
                     'product_price_promotion'   => $product_price_promotion,
@@ -84,9 +87,8 @@ switch ($act){
                     break;
                 }
 
-                // Xóa danh mục trước khi thêm lại
+                /*// Xóa danh mục trước khi thêm lại
                 $db->delete()->from(_TABLE_METADATA)->where(array('metadata_type' => 'category_product', 'metadata_suorce' => $id))->execute();
-
                 // Thêm chuyên mục của sản phẩm vào bảng metadata
                 foreach ($product_category as $category){
                     $data_category = array(
@@ -102,7 +104,7 @@ switch ($act){
                         require_once 'footer.php';
                         break;
                     }
-                }
+                }*/
 
                 // Upload ảnh
                 $uploader = new Uploader();
@@ -237,6 +239,30 @@ switch ($act){
                                     </div>
                                 </fieldset>
                             </div>
+                            <h4 class="card-title">Giới tính</h4>
+                            <hr>
+                            <div class="form-group">
+                                <fieldset>
+                                    <div class="row skin skin-flat">
+                                        <div class="col-6 text-left">
+                                            <input type="radio" <?php echo ($product_gender == 1) ? 'checked' : '';?> name="product_gender" id="product_gender_1" value="1">
+                                        </div>
+                                        <div class="col-6 text-right">
+                                            <label for="product_gender_1">NAM</label>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <fieldset>
+                                    <div class="row skin skin-flat">
+                                        <div class="col-6 text-left">
+                                            <input type="radio" <?php echo ($product_gender == 2) ? 'checked' : '';?> name="product_gender" id="product_gender_2" value="2">
+                                        </div>
+                                        <div class="col-6 text-right">
+                                            <label for="product_gender_2">NỮ</label>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
                             <div class="text-center">
                                 <button class="btn btn-outline-danger round">Xóa</button>
                                 <a href="<?=$function->getUrlProduct($id)?>" target="_blank" class="btn btn-outline-blue round">Xem</a>
@@ -308,8 +334,12 @@ switch ($act){
                             <h4 class="card-title">Chuyên mục & hãng</h4><hr>
                             <fieldset class="form-group">
                                 <label><strong class="text-danger">(*)</strong> Chuyên Mục</label><br />
-                                <select name="product_category[]" id="category_select" class="select2 form-control border-grey-blue" multiple="multiple" required>
-                                    <?php $function->showCategories($db->select('category_id, category_name, category_parent')->from(_TABLE_CATEGORY)->where(array('category_type' => 'shop'))->fetch(), 0, '','select', array('product_update_selected' => $id)); ?>
+                                <select name="product_category" id="category_select" class="select2 form-control border-grey-blue" required>
+                                    <?php
+                                    foreach ($db->select('category_id, category_name')->from(_TABLE_CATEGORY)->where('category_type', 'shop')->fetch() as $category){
+                                        echo '<option '. ( $category['category_id'] == $product_category ? 'selected' : '' ) .' value="'. $category['category_id'] .'">'. $category['category_name'] .'</option>';
+                                    }
+                                    ?>
                                 </select>
                                 <?php echo $error['product_category'] ? $function->getAlert('help_error', $error['product_category']) : '';?>
                             </fieldset>
@@ -462,7 +492,7 @@ switch ($act){
             if(!$product_price_vn){
                 $error['product_price_vn']  = 'Bạn cần nhập giá Việt Nam';
             }
-            if(count($product_category) == 1 && $product_category[0] == ''){
+            if(!$product_category){
                 $error['product_category']  = 'Bạn hãy chọn 1 chuyên mục';
             }
             if($product_price_default && !is_numeric($product_price_default)){
@@ -495,6 +525,7 @@ switch ($act){
                     'product_name'              => $product_name,
                     'product_url'               => $product_url,
                     'product_content'           => $product_content,
+                    'product_category'          => $product_category,
                     'product_suorce'            => $product_suorce,
                     'product_brand'             => $product_brand,
                     'product_quality'           => $product_quality,
@@ -518,8 +549,9 @@ switch ($act){
                     require_once 'footer.php';
                     break;
                 }
+
                 // thêm chuyên mục của sản phẩm vào bảng metadata
-                foreach ($product_category as $category){
+                /*foreach ($product_category as $category){
                     $data_category = array(
                         'metadata_type'     => 'category_product',
                         'metadata_suorce'   => $product_id,
@@ -534,7 +566,8 @@ switch ($act){
                         require_once 'footer.php';
                         break;
                     }
-                }
+                }*/
+
                 // thêm ảnh vào bảng media
                 foreach ($product_images as $images){
                     $data_images = array(
@@ -803,7 +836,7 @@ switch ($act){
                             <h4 class="card-title">Chuyên mục & hãng</h4><hr>
                             <fieldset class="form-group">
                                 <label><strong class="text-danger">(*)</strong> Chuyên Mục</label><br />
-                                <select name="product_category[]" id="category_select" class="select2 form-control border-grey-blue" multiple="multiple" required>
+                                <select name="product_category" id="category_select" class="select2 form-control border-grey-blue" required>
                                     <?php $function->showCategories($db->select('category_id, category_name, category_parent')->from(_TABLE_CATEGORY)->where(array('category_type' => 'shop'))->fetch(), 0, '','select'); ?>
                                 </select>
                                 <?php echo $error['product_category'] ? $function->getAlert('help_error', $error['product_category']) : '';?>
@@ -952,9 +985,10 @@ switch ($act){
                             <tr>
                                 <th width="5%">Ảnh</th>
                                 <th width="40%">Tên sản phẩm</th>
-                                <th data-breakpoints="sm xs" width="10%">Giá chuẩn (¥)</th>
-                                <th data-breakpoints="sm xs" width="10%">Giá khuyến mãi (¥)</th>
+                                <th data-breakpoints="sm xs" width="5%">Giá chuẩn (¥)</th>
+                                <th data-breakpoints="sm xs" width="5%">Giá khuyến mãi (¥)</th>
                                 <th data-breakpoints="sm xs" width="10%">Giá Việt Nam (₫)</th>
+                                <th data-breakpoints="sm xs" width="10%">Chuyên mục</th>
                                 <th data-breakpoints="sm xs" width="5%">Nổi bật</th>
                                 <th data-breakpoints="sm xs" width="10%">Người Đăng</th>
                                 <th data-breakpoints="sm xs" width="10%">Ngày đăng</th>
@@ -963,8 +997,9 @@ switch ($act){
                             <tbody>
                             <?php
                             foreach ($data as $row){
-                                $product_user   = $db->select()->from(_TABLE_USER)->where('user_id', $row['product_user'])->fetch_first();
-                                $product_images = $db->select()->from(_TABLE_MEDIA)->where(array('media_store' => 'remote', 'media_type' => 'images_product', 'media_parent' => $row['product_id']))->fetch_first();
+                                $product_user       = $db->select()->from(_TABLE_USER)->where('user_id', $row['product_user'])->fetch_first();
+                                $product_images     = $db->select()->from(_TABLE_MEDIA)->where(array('media_store' => 'remote', 'media_type' => 'images_product', 'media_parent' => $row['product_id']))->fetch_first();
+                                $product_category   = $db->select('category_name')->from(_TABLE_CATEGORY)->where('category_id', $row['product_category'])->fetch_first();
                                 echo '<tr id="tr_'. $row['product_id'] .'">';
                                     echo '<td><img class="rounded" src="'. $product_images['media_source'] .'" height="50" /></td>';
                                     echo '<td data-hover="product_name" data-content="'. $row['product_id'] .'">
@@ -975,6 +1010,7 @@ switch ($act){
                                     echo '<td>'. $row['product_price_default'] .' ¥</td>';
                                     echo '<td>'. $row['product_price_promotion'] .' ¥</td>';
                                     echo '<td>'. number_format($row['product_price_vn'], 0,'', '.') .' ₫</td>';
+                                    echo '<td>'. $product_category['category_name'] .'</td>';
                                     echo '<td><input data-content="'. $row['product_id'] .'" name="product_status" type="checkbox" '. (($row['product_status'] == 2) ? 'checked' : '') .' class="switchery" data-size="xs" data-color="primary"/></td>';
                                     echo '<td>'. $product_user['user_name'] .'</td>';
                                     echo '<td>'. $function->getTimeDisplay($row['product_time']) .'</td>';
