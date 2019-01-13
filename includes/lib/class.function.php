@@ -7,6 +7,42 @@
  */
 
 class orderFunction{
+    function getListCategory($category){
+        global $db;
+        if(!$this->checkData(_TABLE_CATEGORY, array('category_id' => $category))){
+            return false;
+        }
+        $list_category      = array();
+        $list_category[]    = $category;
+        $cate_parents       = $db->select('category_id')->from(_TABLE_CATEGORY)->where('category_parent', $category)->fetch();
+        if($cate_parents){
+            foreach ($cate_parents AS $cate_parent){
+                $list_category[] = $cate_parent['category_id'];
+                $cate_parents_1  = $db->select('category_id')->from(_TABLE_CATEGORY)->where('category_parent', $cate_parent['category_id'])->fetch();
+                if($cate_parents_1){
+                    foreach ($cate_parents_1 AS $cate_parent_1){
+                        $list_category[] = $cate_parent_1['category_id'];
+                    }
+                }
+            }
+        }
+        return $list_category;
+    }
+
+    // Sắp xếp mảng đa chiều
+    function sortMultiArray($array, $keySort, $sort = SORT_DESC){
+        $sortArray = array();
+        foreach($array as $arrays){
+            foreach($arrays as $key=>$value){
+                if(!isset($sortArray[$key])){
+                    $sortArray[$key] = array();
+                }
+                $sortArray[$key][] = $value;
+            }
+        }
+        array_multisort($sortArray[$keySort], $sort, $array);
+        return $array;
+    }
 
     // Function hiển thị tiền thêm dấu chấm
     function convertNumberMoney($number){
@@ -151,6 +187,46 @@ class orderFunction{
         }
         if($config['page_num']>1 && $page<=$config['page_num']){
             return '<ul class="pagination justify-content-center pagination-separate">'.$link1.$page_start_pt.$linked.$link.$page_end_pt.$link2.'</ul>';
+        }else{
+            return false;
+        }
+    }
+
+    public function paginationListProduct($config = ''){
+        $link = '';
+        global $page;
+        for($i=$page;$i<=($page+4) && $i<= $config['page_num'] ;$i++){
+            if($page==$i){
+                $link = '<li class="active"><a href="javascript:;">'.$i.'</a></li>';
+            }else{
+                $link = $link.'<li><a href="'. $this->createPaginationUrl($config['url'], $i) .'">'.$i.'</a></li>';
+            }
+        }
+        if($page>4){
+            $page4 = '<li><a href="'. $this->createPaginationUrl($config['url'], ($page-4)) .'">'.($page-4).'</a></li>';
+        }
+        if($page>3){
+            $page3 = '<li><a href="'. $this->createPaginationUrl($config['url'], ($page-3)) .'">'.($page-3).'</a></li>';
+        }
+        if($page>2){
+            $page2 = '<li><a href="'. $this->createPaginationUrl($config['url'], ($page-2)) .'">'.($page-2).'</a></li>';
+        }
+        if($page>1){
+            $page1 = '<li><a href="'. $this->createPaginationUrl($config['url'], ($page-1)) .'" class="page-link">'.($page-1).'</a></li>';
+            $link1 = '<a href="'. $this->createPaginationUrl($config['url'], ($page-1)) .'" class="btn-pagination btn-prev"></a>';
+        }
+        if($page < $config['page_num']){
+            $link2 = '<a href="'. $this->createPaginationUrl($config['url'], ($page+1)) .'" class="btn-pagination btn-next"></a>';
+        }
+        $linked = $page4.$page3.$page2.$page1;
+        if($page < $config['page_num']-4){
+            $page_end_pt='<li><a href="'. $this->createPaginationUrl($config['url'], $config['page_num']) .'">'.$config['page_num'].'</a></li>';
+        }
+        if($page>5){
+            $page_start_pt =' <li><a href="'.$config['url'].'">1</a></li>';
+        }
+        if($config['page_num']>1 && $page<=$config['page_num']){
+            return '<div class="tt-pagination">'. $link1 .'<ul>'.$page_start_pt.$linked.$link.$page_end_pt.'</ul>'. $link2 .'</div>';
         }else{
             return false;
         }

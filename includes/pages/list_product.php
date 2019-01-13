@@ -14,32 +14,66 @@ switch ($act){
     case 'feature':
         $header['title']        = 'Sản phẩm nổi bật';
         $header['menu_active']  = 'feature';
-        $text_price_sort = '<strong>SẮP XẾP THEO</strong>:  <a href="'. _URL_HOME .'/feature?price=desc">Giá tăng dần</a> | <a href="'. _URL_HOME .'/feature?price=asc">Giá tăng dần</a>';
-        $price   = (isset($_GET['price']) && !empty($_GET['price']))   ? trim($_GET['price'])   : '';
-        $db->select()->from(_TABLE_PRODUCT)->where(array('product_status' => 2));
-        if($price == 'desc'){
-            $db->order_by('product_price_vn', 'DESC');
-        }else if($price == 'asc'){
-            $db->order_by('product_price_vn', 'ASC');
-        }
+        $text_price_sort        = '<strong>SẮP XẾP THEO</strong>:  <a href="'. _URL_HOME .'/feature?price=desc'. ($page ? '&page='.$page : '') .'">Giá giảm dần</a> | <a href="'. _URL_HOME .'/feature?price=asc'. ($page ? '&page='.$page : '') .'">Giá tăng dần</a>';
+        $text_brackcrum         = 'Sản phẩm nổi bật';
+        $price                  = (isset($_GET['price']) && !empty($_GET['price']))   ? trim($_GET['price'])   : '';
+
+        // Product Where
+        $product_where                   = array();
+        $product_where['product_status'] = 2;
+        // Product Where
+
+        // Config Pagination
+        $db->select('product_id')->from(_TABLE_PRODUCT)->where($product_where)->fetch();
+        $pagination['page_row']    = _CONFIG_PAGINATION_PRODUCT;
+        $pagination['page_num']    = ceil($db->affected_rows/$pagination['page_row']);
+        $pagination['url']         = _URL_HOME.'/new?page={page}';
+        $page_start                = ($page-1) * $pagination['page_row'];
+        // Config Pagination
+
+        $db->select('product_id, product_price_vn')->from(_TABLE_PRODUCT)->where($product_where);
         $db->order_by('product_id', 'DESC');
-        $db->limit(8);
+        $db->limit(_CONFIG_PAGINATION_PRODUCT, $page_start);
+        $db->order_by('product_id', 'DESC');
+        $data = $db->fetch();
+
+        if($price == 'desc'){
+            $data = $function->sortMultiArray($data, 'product_price_vn', SORT_DESC);
+        }else if($price == 'asc'){
+            $data = $function->sortMultiArray($data, 'product_price_vn', SORT_ASC);
+        }
         break;
     default:
         $header['title']        = 'Sản phẩm mới';
         $header['menu_active']  = 'new';
-        $text_price_sort        = '<strong>SẮP XẾP THEO</strong>:  <a href="'. _URL_HOME .'/new?price=desc">Giá tăng dần</a> | <a href="'. _URL_HOME .'/new?price=asc">Giá tăng dần</a>';
+        $text_price_sort        = '<strong>SẮP XẾP THEO</strong>:  <a href="'. _URL_HOME .'/new?price=desc'. ($page ? '&page='.$page : '') .'">Giá giảm dần</a> | <a href="'. _URL_HOME .'/new?price=asc'. ($page ? '&page='.$page : '') .'">Giá tăng dần</a>';
+        $text_brackcrum         = 'Sản phẩm mới đăng';
         $price                  = (isset($_GET['price']) && !empty($_GET['price']))   ? trim($_GET['price'])   : '';
-        if($price == 'desc'){
-            $query_orderby      = 'ORDER BY `product_price_vn` DESC';
-        }else if($price == 'asc'){
-            $query_orderby      = 'ORDER BY `product_price_vn` ASC';
-        }else{
-            $query_orderby      = 'ORDER BY `product_id` DESC';
-        }
 
-        $query                  = "SELECT * FROM `"._TABLE_PRODUCT."` WHERE `product_id` IN (SELECT `product_id` FROM `". _TABLE_PRODUCT ."` ORDER BY `product_id` DESC) $query_orderby LIMIT 8";
-        $db->query($query);
+        // Product Where
+        $product_where                      = array();
+        $product_where['product_status !='] = 0;
+        // Product Where
+
+        // Config Pagination
+        $db->select('product_id')->from(_TABLE_PRODUCT)->where($product_where)->fetch();
+        $pagination['page_row']    = _CONFIG_PAGINATION_PRODUCT;
+        $pagination['page_num']    = ceil($db->affected_rows/$pagination['page_row']);
+        $pagination['url']         = _URL_HOME.'/new?page={page}';
+        $page_start                = ($page-1) * $pagination['page_row'];
+        // Config Pagination
+
+        $db->select('product_id, product_price_vn')->from(_TABLE_PRODUCT)->where($product_where);
+        $db->order_by('product_id', 'DESC');
+        $db->limit(_CONFIG_PAGINATION_PRODUCT, $page_start);
+        $db->order_by('product_id', 'DESC');
+        $data = $db->fetch();
+
+        if($price == 'desc'){
+            $data = $function->sortMultiArray($data, 'product_price_vn', SORT_DESC);
+        }else if($price == 'asc'){
+            $data = $function->sortMultiArray($data, 'product_price_vn', SORT_ASC);
+        }
         break;
 }
 require_once 'header.php';
@@ -47,8 +81,8 @@ require_once 'header.php';
 <div class="tt-breadcrumb">
     <div class="container">
         <ul>
-            <li><a href="index.html">Home</a></li>
-            <li>Listing</li>
+            <li><a href="<?=_URL_HOME?>">Trang Chủ</a></li>
+            <li></li>
         </ul>
     </div>
 </div>
@@ -71,7 +105,7 @@ require_once 'header.php';
                         </div>
                         <div class="tt-product-listing row">
                             <?php
-                            foreach ($db->fetch() as $product_list) {
+                            foreach ($data as $product_list) {
                                 $db->select('media_source')->from(_TABLE_MEDIA)->where(array('media_type' => 'images_product', 'media_store' => 'local', 'media_parent' => $product_list['product_id']));
                                 $db->limit(1);
                                 $images_1 = $db->fetch_first();
@@ -116,12 +150,7 @@ require_once 'header.php';
                             ?>
                         </div>
                         </div>
-                        <div class="text-center tt_product_showmore">
-                            <a href="#" class="btn btn-border">LOAD MORE</a>
-                            <div class="tt_item_all_js">
-                                <a href="#" class="btn btn-border01">NO MORE ITEM TO SHOW</a>
-                            </div>
-                        </div>
+                        <div class="text-center tt_product_showmore"><?=$function->paginationListProduct($pagination)?></div>
                     </div>
                 </div>
             </div>
