@@ -8,8 +8,37 @@
 require_once '../../includes/core.php';
 switch ($act){
     case 'category':
-        echo $url;
-        exit();
+        $category               = $db->from(_TABLE_CATEGORY)->where('category_url', $url)->fetch_first();
+        $list_category          = $function->getListCategory($category['category_id']);
+        $header['title']        = $category['category_name'];
+        $text_brackcrum         = 'Chuyên mục';
+        $header['menu_active']  = 'category';
+
+        // Product Where
+        $product_where                      = array();
+        $product_where['product_status !='] = 0;
+        // Product Where
+
+        // Config Pagination
+        $db->select('product_id')->from(_TABLE_PRODUCT);
+        $db->where($product_where);
+        $db->where_in('product_category', $list_category);
+        $db->execute();
+        $pagination['page_row']    = _CONFIG_PAGINATION_PRODUCT;
+        $pagination['page_num']    = ceil($db->affected_rows/$pagination['page_row']);
+        $pagination['url']         = $function->getUrlCategory($category['category_id']).'?page={page}';
+        $page_start                = ($page-1) * $pagination['page_row'];
+        // Config Pagination
+
+        // Data
+        $db->from(_TABLE_PRODUCT);
+        $db->where($product_where);
+        $db->where_in('product_category', $list_category);
+        $db->order_by('product_id', 'DESC');
+        $db->limit(_CONFIG_PAGINATION_PRODUCT, $page_start);
+        $data = $db->fetch();
+        // Data
+
         break;
     case 'feature':
         $header['title']        = 'Sản phẩm nổi bật';
@@ -31,11 +60,13 @@ switch ($act){
         $page_start                = ($page-1) * $pagination['page_row'];
         // Config Pagination
 
-        $db->select('product_id, product_price_vn')->from(_TABLE_PRODUCT)->where($product_where);
+        // Data
+        $db->from(_TABLE_PRODUCT)->where($product_where);
         $db->order_by('product_id', 'DESC');
         $db->limit(_CONFIG_PAGINATION_PRODUCT, $page_start);
         $db->order_by('product_id', 'DESC');
         $data = $db->fetch();
+        // Data
 
         if($price == 'desc'){
             $data = $function->sortMultiArray($data, 'product_price_vn', SORT_DESC);
@@ -63,11 +94,13 @@ switch ($act){
         $page_start                = ($page-1) * $pagination['page_row'];
         // Config Pagination
 
-        $db->select('product_id, product_price_vn')->from(_TABLE_PRODUCT)->where($product_where);
+        // Data
+        $db->from(_TABLE_PRODUCT)->where($product_where);
         $db->order_by('product_id', 'DESC');
         $db->limit(_CONFIG_PAGINATION_PRODUCT, $page_start);
         $db->order_by('product_id', 'DESC');
         $data = $db->fetch();
+        // Data
 
         if($price == 'desc'){
             $data = $function->sortMultiArray($data, 'product_price_vn', SORT_DESC);
@@ -82,7 +115,7 @@ require_once 'header.php';
     <div class="container">
         <ul>
             <li><a href="<?=_URL_HOME?>">Trang Chủ</a></li>
-            <li></li>
+            <li><?=$text_brackcrum?></li>
         </ul>
     </div>
 </div>

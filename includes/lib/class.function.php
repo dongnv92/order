@@ -7,6 +7,18 @@
  */
 
 class orderFunction{
+
+    // Lấy đường dẫn Categry
+    function getUrlCategory($id){
+        global $db;
+        $category = $db->select('category_url')->from(_TABLE_CATEGORY)->where('category_id', $id)->fetch_first();
+        if(!$category){
+            return false;
+        }
+        return _URL_HOME.'/category/'.$category['category_url'].'.html';
+    }
+
+    // Lấy danh sách ID chuyên mục con từ 1 chuyên mục
     function getListCategory($category){
         global $db;
         if(!$this->checkData(_TABLE_CATEGORY, array('category_id' => $category))){
