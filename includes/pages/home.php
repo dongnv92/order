@@ -16,7 +16,7 @@ require_once 'header.php';
                 <div class="col-sm-12 col-md-6">
                     <div class="row">
                         <div class="col-sm-6">
-                            <a href="listing-left-column.html" class="tt-promo-box tt-one-child hover-type-2">
+                            <a href="<?=$function->getUrlCategory(1)?>?gender=make" class="tt-promo-box tt-one-child hover-type-2">
                                 <img src="<?=_URL_STYLE?>/images/banner/3.png" data-src="<?=_URL_STYLE?>/images/banner/3.png" alt="">
                                 <div class="tt-description">
                                     <div class="tt-description-wrapper">
@@ -27,7 +27,7 @@ require_once 'header.php';
                             </a>
                         </div>
                         <div class="col-sm-6">
-                            <a href="listing-left-column.html" class="tt-promo-box tt-one-child hover-type-2">
+                            <a href="<?=$function->getUrlCategory(1)?>?gender=femake" class="tt-promo-box tt-one-child hover-type-2">
                                 <img src="<?=_URL_STYLE?>/images/banner/4.png" data-src="<?=_URL_STYLE?>/images/banner/4.png" alt="">
                                 <div class="tt-description">
                                     <div class="tt-description-wrapper">
@@ -51,7 +51,7 @@ require_once 'header.php';
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-6">
-                    <a href="listing-left-column.html" class="tt-promo-box">
+                    <a href="<?=$function->getUrlCategory(2)?>" class="tt-promo-box">
                         <img src="<?=_URL_STYLE?>/images/banner/1.jpg" data-src="<?=_URL_STYLE?>/images/banner/1.jpg" alt="">
                         <div class="tt-description">
                             <div class="tt-description-wrapper">
@@ -90,9 +90,7 @@ require_once 'header.php';
                             <div class="col-6 col-md-4 col-lg-3">
                                 <div class="tt-product thumbprod-center">
                                     <div class="tt-image-box">
-                                        <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView" data-tooltip="Quick View" data-tposition="left"></a>
-                                        <a href="#" class="tt-btn-wishlist" data-tooltip="Add to Wishlist" data-tposition="left"></a>
-                                        <a href="#" class="tt-btn-compare" data-tooltip="Add to Compare" data-tposition="left"></a>
+                                        <a href="#" class="tt-btn-wishlist" data-tooltip="Yêu Thích" data-tposition="left"></a>
                                         <a href="<?=$function->getUrlProduct($product_list['product_id'])?>">
                                             <span class="tt-img"><img src="<?= _URL_HOME.'/'.$images_1['media_source']?>" alt=""></span>
                                             <span class="tt-img-roll-over"><img src="<?= _URL_HOME.'/'.$images_2['media_source']?>" alt=""></span>
@@ -125,7 +123,9 @@ require_once 'header.php';
                 <div class="tab-pane" id="tab_1_2">
                     <div class="row tt-layout-product-item">
                         <?php
-                        $db->from(_TABLE_PRODUCT)->where(array('product_gender' => 1, 'product_status <>' => 0));
+                        $db->from(_TABLE_PRODUCT);
+                        $db->where(array('product_status <>' => 0));
+                        $db->where_in('product_category', $function->getListCategory(1));
                         $db->order_by('product_id', 'DESC');
                         $db->limit(8);
                         foreach ($db->fetch() as $product_list) {
@@ -176,7 +176,9 @@ require_once 'header.php';
                 <div class="tab-pane" id="tab_1_3">
                     <div class="row tt-layout-product-item">
                         <?php
-                        $db->from(_TABLE_PRODUCT)->where(array('product_gender' => 2, 'product_status <>' => 0));
+                        $db->from(_TABLE_PRODUCT);
+                        $db->where(array('product_status <>' => 0));
+                        $db->where_in('product_category', $function->getListCategory(1));
                         $db->order_by('product_id', 'DESC');
                         $db->limit(8);
                         foreach ($db->fetch() as $product_list) {

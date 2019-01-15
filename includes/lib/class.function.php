@@ -8,6 +8,29 @@
 
 class orderFunction{
 
+    // Tạo url chứa các Parameter
+    function createParameter($parameter){
+        $text = '';
+        if(count($parameter) == 1){
+            foreach ($parameter as $key => $value){
+                if(isset($value) && !empty($value)){
+                    $text .= urlencode($key).'='.urlencode($value);
+                }
+            }
+            return '?'.$text;
+        }
+        $list_para = array();
+        foreach ($parameter as $key => $value){
+            if(isset($value) && !empty($value)) {
+                $list_para[] = urlencode($key) . '=' . urlencode($value);
+            }
+        }
+        $text = '?'.implode('&', $list_para);
+        $text = str_replace(array('%7B','%7D'), array('{','}'), $text);
+        $text = $text == '?' ? '' : $text;
+        return $text;
+    }
+
     // Lấy đường dẫn Categry
     function getUrlCategory($id){
         global $db;

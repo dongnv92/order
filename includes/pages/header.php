@@ -12,8 +12,8 @@ require_once '../core.php';
 <head>
     <meta charset="utf-8">
     <title><?=$header['title']?$header['title']:'Chuyên Order Hàng Trung Quốc'?></title>
-    <meta name="keywords" content="HTML5 Template">
-    <meta name="description" content="Wokiee - Responsive HTML5 Template">
+    <meta name="keywords" content="Order Trung Quốc, Order Quảng Châu, Order Taobao, vận chuyển hàng Trung Quốc giá rẻ, uy tín toàn quốc, order hang trung quoc">
+    <meta name="description" content="Order Trung Quốc cung cấp các dịch vụ tư vấn, hỗ trợ đặt hàng, vận chuyển hàng Trung Quốc về Việt Nam từ các website thương mại lớn như : taobao.com, tmall.com, 1688.com, alibaba.com ... uy tín giá rẻ trách nhiệm cao">
     <meta name="author" content="wokiee">
     <link rel="shortcut icon" href="<?=_URL_HOME?>/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -35,37 +35,51 @@ require_once '../core.php';
     <!-- tt-mobile menu -->
     <nav class="panel-menu mobile-main-menu">
         <ul>
-            <li><a href="index-rtl.html">RTL</a></li>
+            <li class="<?=!$header['menu_active'] ? 'selected' : ''?>"><a href="<?=_URL_HOME?>">TRANG CHỦ</a></li>
+            <li class="<?=$header['menu_active'] == 'new' ? 'selected' : ''?>"><a href="<?=_URL_HOME?>/new">MỚI NHẤT</a></li>
+            <li class="<?=$header['menu_active'] == 'feature' ? 'selected' : ''?>"><a href="<?=_URL_HOME?>/feature">NỔI BẬT</a></li>
         </ul>
         <div class="mm-navbtn-names">
-            <div class="mm-closebtn">Close</div>
-            <div class="mm-backbtn">Back</div>
+            <div class="mm-closebtn">Đóng</div>
+            <div class="mm-backbtn">Quay lại</div>
         </div>
     </nav>
     <nav class="panel-menu mobile-caterorie-menu">
         <ul>
             <li>
-                <a href="listing-left-column.html">
-                    <i class="icon-new"></i>
-                    <span>NEW ARRIVALS</span>
-                </a>
-            </li>
-            <li>
-                <a href="listing-left-column.html">
-                    <i class="icon-sale"></i>
-                    <span>CLEARENCE</span>
-                </a>
-            </li>
-            <li>
-                <a href="https://themeforest.net/item/wokiee-ecommerce-html-template/22564267?s_rank=2">
-                    <i class="icon-theme"></i>
-                    <span>BUY THEME!</span>
-                </a>
+                <a href="<?=$function->getUrlCategory(1)?>"><i class="icon-women"></i><span>GIÀY - DÉP</span></a>
+                <ul>
+                    <li>
+                        <a href="<?=$function->getUrlCategory(1)?>?gender=make">NAM</a>
+                        <ul>
+                            <li><a href="<?=$function->getUrlCategory(2)?>?gender=make">Giày thể thao</a></li>
+                            <li><a href="<?=$function->getUrlCategory(3)?>?gender=make">Giày thường</a></li>
+                            <li><a href="<?=$function->getUrlCategory(13)?>?gender=make">Giày vải</a></li>
+                            <li><a href="<?=$function->getUrlCategory(18)?>?gender=make">Giày tây</a></li>
+                            <li><a href="<?=$function->getUrlCategory(19)?>?gender=make">Giày Sneakers</a></li>
+                            <li><a href="<?=$function->getUrlCategory(20)?>?gender=make">Giày Sandals</a></li>
+                            <li><a href="<?=$function->getUrlCategory(21)?>?gender=make">Giày Lười</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="<?=$function->getUrlCategory(1)?>?gender=femake">NỮ</a>
+                        <ul>
+                            <li><a href="<?=$function->getUrlCategory(2)?>?gender=femake">Giày thể thao</a></li>
+                            <li><a href="<?=$function->getUrlCategory(3)?>?gender=femake">Giày thường</a></li>
+                            <li><a href="<?=$function->getUrlCategory(13)?>?gender=femake">Giày vải</a></li>
+                            <li><a href="<?=$function->getUrlCategory(19)?>?gender=femake">Giày Sneakers</a></li>
+                            <li><a href="<?=$function->getUrlCategory(20)?>?gender=femake">Giày Sandals</a></li>
+                            <li><a href="<?=$function->getUrlCategory(29)?>?gender=femake">Giày cao gót</a></li>
+                            <li><a href="<?=$function->getUrlCategory(30)?>?gender=femake">Giày đế bằng</a></li>
+                            <li><a href="<?=$function->getUrlCategory(31)?>?gender=femake">Bốt</a></li>
+                        </ul>
+                    </li>
+                </ul>
             </li>
         </ul>
         <div class="mm-navbtn-names">
-            <div class="mm-closebtn">Close</div>
-            <div class="mm-backbtn">Back</div>
+            <div class="mm-closebtn">Đóng</div>
+            <div class="mm-backbtn">Quay lại</div>
         </div>
     </nav>
     <!-- tt-mobile-header -->
@@ -150,212 +164,35 @@ require_once '../core.php';
                             <nav>
                                 <ul>
                                     <li>
-                                        <a href="#">
-                                            <i class="icon-women"></i>
-                                            <span>WOMEN</span>
-                                        </a>
+                                        <a href="<?=$function->getUrlCategory(1)?>"><i class="icon-women"></i><span>GIÀY - DÉP</span></a>
                                         <div class="dropdown-menu size-md">
                                             <div class="dropdown-menu-wrapper">
                                                 <div class="row">
                                                     <div class="col-12">
                                                         <div class="row tt-col-list">
-                                                            <div class="col-sm-4">
-                                                                <a class="tt-title-submenu" href="listing-left-column.html">
-                                                                    TOPS
-                                                                </a>
+                                                            <div class="col-sm-6">
+                                                                <a class="tt-title-submenu" href="<?=$function->getUrlCategory(1)?>?gender=make">NAM</a>
                                                                 <ul class="tt-megamenu-submenu">
-                                                                    <li><a href="listing-left-column.html">Blouses &amp; Shirts</a></li>
-                                                                    <li><a href="listing-left-column.html">Dresses <span class="tt-badge tt-new">New</span></a></li>
-                                                                    <li>
-                                                                        <a href="listing-left-column.html">Tops &amp; T-shirts</a>
-                                                                        <ul>
-                                                                            <li><a href="listing-left-column.html">Link Level 1</a></li>
-                                                                            <li>
-                                                                                <a href="listing-left-column.html">Link Level 1</a>
-                                                                                <ul>
-                                                                                    <li><a href="listing-left-column.html">Link Level 2</a></li>
-                                                                                    <li>
-                                                                                        <a href="listing-left-column.html">Link Level 2</a>
-                                                                                        <ul>
-                                                                                            <li><a href="listing-left-column.html">Link Level 3</a></li>
-                                                                                            <li><a href="listing-left-column.html">Link Level 3</a></li>
-                                                                                            <li><a href="listing-left-column.html">Link Level 3</a></li>
-                                                                                            <li>
-                                                                                                <a href="listing-left-column.html">Link Level 3</a>
-                                                                                                <ul>
-                                                                                                    <li>
-                                                                                                        <a href="listing-left-column.html">Link Level 4</a>
-                                                                                                        <ul>
-                                                                                                            <li><a href="listing-left-column.html">Link Level 5</a></li>
-                                                                                                            <li><a href="listing-left-column.html">Link Level 5</a></li>
-                                                                                                            <li><a href="listing-left-column.html">Link Level 5</a></li>
-                                                                                                            <li><a href="listing-left-column.html">Link Level 5</a></li>
-                                                                                                            <li><a href="listing-left-column.html">Link Level 5</a></li>
-                                                                                                        </ul>
-                                                                                                    </li>
-                                                                                                    <li><a href="listing-left-column.html">Link Level 4</a></li>
-                                                                                                </ul>
-                                                                                            </li>
-                                                                                            <li><a href="listing-left-column.html">Link Level 3</a></li>
-                                                                                        </ul>
-                                                                                    </li>
-                                                                                    <li><a href="listing-left-column.html">Link Level 2</a></li>
-                                                                                    <li><a href="listing-left-column.html">Link Level 2</a></li>
-                                                                                </ul>
-                                                                            </li>
-                                                                            <li><a href="listing-left-column.html">Link Level 1</a></li>
-                                                                            <li><a href="listing-left-column.html">Link Level 1</a></li>
-                                                                            <li><a href="listing-left-column.html">Link Level 1</a></li>
-                                                                        </ul>
-                                                                    </li>
-                                                                    <li><a href="listing-left-column.html">Sleeveless Tops</a></li>
-                                                                    <li><a href="listing-left-column.html">Sweaters</a></li>
-                                                                    <li><a href="listing-left-column.html">Jackets</a></li>
-                                                                    <li><a href="listing-left-column.html">Outerwear</a></li>
+                                                                    <li><a href="<?=$function->getUrlCategory(2)?>?gender=make">Giày thể thao</a></li>
+                                                                    <li><a href="<?=$function->getUrlCategory(3)?>?gender=make">Giày thường</a></li>
+                                                                    <li><a href="<?=$function->getUrlCategory(13)?>?gender=make">Giày vải</a></li>
+                                                                    <li><a href="<?=$function->getUrlCategory(18)?>?gender=make">Giày tây</a></li>
+                                                                    <li><a href="<?=$function->getUrlCategory(19)?>?gender=make">Giày Sneakers</a></li>
+                                                                    <li><a href="<?=$function->getUrlCategory(20)?>?gender=make">Giày Sandals</a></li>
+                                                                    <li><a href="<?=$function->getUrlCategory(21)?>?gender=make">Giày Lười</a></li>
                                                                 </ul>
                                                             </div>
-                                                            <div class="col-sm-4">
-                                                                <a class="tt-title-submenu" href="listing-left-column.html">
-                                                                    BOTTOMS
-                                                                </a>
+                                                            <div class="col-sm-6">
+                                                                <a class="tt-title-submenu" href="<?=$function->getUrlCategory(1)?>?gender=femake">NỮ</a>
                                                                 <ul class="tt-megamenu-submenu">
-                                                                    <li><a href="listing-left-column.html">Trousers <span class="tt-badge tt-fatured">Fatured</span></a></li>
-                                                                    <li>
-                                                                        <a href="listing-left-column.html">Jeans</a>
-                                                                    </li>
-                                                                    <li><a href="listing-left-column.html">Leggings</a></li>
-                                                                    <li><a href="listing-left-column.html">Jumpsuit &amp; Shorts</a></li>
-                                                                    <li><a href="listing-left-column.html">Skirts</a></li>
-                                                                    <li><a href="listing-left-column.html">Tights</a></li>
-                                                                </ul>
-                                                            </div>
-                                                            <div class="col-sm-4">
-                                                                <a class="tt-title-submenu" href="listing-left-column.html">
-                                                                    ACCESSORIES
-                                                                </a>
-                                                                <ul class="tt-megamenu-submenu">
-                                                                    <li><a href="listing-left-column.html">Jewellery</a></li>
-                                                                    <li><a href="listing-left-column.html">Hats</a></li>
-                                                                    <li><a href="listing-left-column.html">Scarves &amp; Snoods</a></li>
-                                                                    <li><a href="listing-left-column.html">Belts</a></li>
-                                                                    <li><a href="listing-left-column.html">Bags</a></li>
-                                                                    <li><a href="listing-left-column.html">Shoes <span class="tt-badge tt-sale">Sale 15%</span></a></li>
-                                                                    <li><a href="listing-left-column.html">Sunglasses</a></li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-sm-12">
-                                                        <a href="listing-left-column.html" class="tt-promo-02">
-                                                            <img src="images/custom/header-promo-01.jpg" alt="">
-                                                            <div class="tt-description tt-point-h-l">
-                                                                <div class="tt-description-wrapper">
-                                                                    <div class="tt-title-small">SUMMER <span class="tt-base-color">2018</span></div>
-                                                                    <div class="tt-title-large">NEW ARRIVALS</div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="icon-men"></i>
-                                            <span>MEN</span>
-                                        </a>
-                                        <div class="dropdown-menu size-lg">
-                                            <div class="dropdown-menu-wrapper">
-                                                <div class="row">
-                                                    <div class="col-sm-12">
-                                                        <div class="row tt-col-list">
-                                                            <div class="col-sm-4">
-                                                                <a href="listing-right-column.html" class="tt-title-submenu">
-                                                                    TOPS
-                                                                    <img  src="images/loader.svg" data-src="images/custom/header-category-01.jpg" alt="">
-                                                                </a>
-                                                                <ul class="tt-megamenu-submenu">
-                                                                    <li><a href="listing-right-column.html">Shirts</a></li>
-                                                                    <li><a href="listing-right-column.html">Sweaters  <span class="tt-badge tt-new">New</span></a></li>
-                                                                    <li>
-                                                                        <a href="listing-right-column.html">Tops &amp; T-shirts</a>
-                                                                        <ul>
-                                                                            <li><a href="listing-right-column.html">Link Level 1</a></li>
-                                                                            <li>
-                                                                                <a href="listing-right-column.html">Link Level 1</a>
-                                                                                <ul>
-                                                                                    <li><a href="listing-right-column.html">Link Level 2</a></li>
-                                                                                    <li>
-                                                                                        <a href="listing-right-column.html">Link Level 2</a>
-                                                                                        <ul>
-                                                                                            <li><a href="listing-right-column.html">Link Level 3</a></li>
-                                                                                            <li><a href="listing-right-column.html">Link Level 3</a></li>
-                                                                                            <li><a href="listing-right-column.html">Link Level 3</a></li>
-                                                                                            <li>
-                                                                                                <a href="listing-right-column.html">Link Level 3</a>
-                                                                                                <ul>
-                                                                                                    <li>
-                                                                                                        <a href="listing-right-column.html">Link Level 4</a>
-                                                                                                        <ul>
-                                                                                                            <li><a href="listing-right-column.html">Link Level 5</a></li>
-                                                                                                            <li><a href="listing-right-column.html">Link Level 5</a></li>
-                                                                                                            <li><a href="listing-right-column.html">Link Level 5</a></li>
-                                                                                                            <li><a href="listing-right-column.html">Link Level 5</a></li>
-                                                                                                            <li><a href="listing-right-column.html">Link Level 5</a></li>
-                                                                                                        </ul>
-                                                                                                    </li>
-                                                                                                    <li><a href="listing-right-column.html">Link Level 4</a></li>
-                                                                                                    <li><a href="listing-right-column.html">Link Level 4</a></li>
-                                                                                                    <li><a href="listing-right-column.html">Link Level 4</a></li>
-                                                                                                    <li><a href="listing-right-column.html">Link Level 4</a></li>
-                                                                                                </ul>
-                                                                                            </li>
-                                                                                            <li><a href="listing-right-column.html">Link Level 3</a></li>
-                                                                                        </ul>
-                                                                                    </li>
-                                                                                    <li><a href="listing-right-column.html">Link Level 2</a></li>
-                                                                                    <li><a href="listing-right-column.html">Link Level 2</a></li>
-                                                                                    <li><a href="listing-right-column.html">Link Level 2</a></li>
-                                                                                </ul>
-                                                                            </li>
-                                                                            <li><a href="listing-right-column.html">Link Level 1</a></li>
-                                                                            <li><a href="listing-right-column.html">Link Level 1</a></li>
-                                                                            <li><a href="listing-right-column.html">Link Level 1</a></li>
-                                                                        </ul>
-                                                                    </li>
-                                                                    <li><a href="listing-right-column.html">Sleeveless Tops</a></li>
-                                                                    <li><a href="listing-right-column.html">Jackets</a></li>
-                                                                    <li><a href="listing-right-column.html">Outerwear</a></li>
-                                                                </ul>
-                                                            </div>
-                                                            <div class="col-sm-4">
-                                                                <a class="tt-title-submenu" href="listing-right-column.html">
-                                                                    BOTTOMS
-                                                                    <img  src="images/loader.svg" data-src="images/custom/header-category-02.jpg" alt="">
-                                                                </a>
-                                                                <ul class="tt-megamenu-submenu">
-                                                                    <li><a href="listing-right-column.html">Trousers <span class="tt-badge tt-fatured">Fatured</span></a></li>
-                                                                    <li><a href="listing-right-column.html">Jeans</a></li>
-                                                                    <li><a href="listing-right-column.html">Jumpsuit &amp; Shorts</a></li>
-                                                                    <li><a href="listing-right-column.html">Skirts</a></li>
-                                                                    <li><a href="listing-right-column.html">Tights</a></li>
-                                                                </ul>
-                                                            </div>
-                                                            <div class="col-sm-4">
-                                                                <a class="tt-title-submenu" href="listing-right-column.html">
-                                                                    ACCESSORIES
-                                                                    <img  src="images/loader.svg" data-src="images/custom/header-category-03.jpg" alt="">
-                                                                </a>
-                                                                <ul class="tt-megamenu-submenu">
-                                                                    <li><a href="listing-right-column.html">Hats</a></li>
-                                                                    <li><a href="listing-right-column.html">Scarves &amp; Snoods</a></li>
-                                                                    <li><a href="listing-right-column.html">Belts</a></li>
-                                                                    <li><a href="listing-right-column.html">Bags</a></li>
-                                                                    <li><a href="listing-right-column.html">Shoes</a></li>
-                                                                    <li><a href="listing-right-column.html">Sunglasses <span class="tt-badge tt-sale">Sale 15%</span></a></li>
+                                                                    <li><a href="<?=$function->getUrlCategory(2)?>?gender=femake">Giày thể thao</a></li>
+                                                                    <li><a href="<?=$function->getUrlCategory(3)?>?gender=femake">Giày thường</a></li>
+                                                                    <li><a href="<?=$function->getUrlCategory(13)?>?gender=femake">Giày vải</a></li>
+                                                                    <li><a href="<?=$function->getUrlCategory(19)?>?gender=femake">Giày Sneakers</a></li>
+                                                                    <li><a href="<?=$function->getUrlCategory(20)?>?gender=femake">Giày Sandals</a></li>
+                                                                    <li><a href="<?=$function->getUrlCategory(29)?>?gender=femake">Giày cao gót</a></li>
+                                                                    <li><a href="<?=$function->getUrlCategory(30)?>?gender=femake">Giày đế bằng</a></li>
+                                                                    <li><a href="<?=$function->getUrlCategory(31)?>?gender=femake">Bốt</a></li>
                                                                 </ul>
                                                             </div>
                                                         </div>
@@ -364,22 +201,6 @@ require_once '../core.php';
                                             </div>
                                         </div>
                                     </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="icon-new"></i>
-                                            <span>NEW ARRIVALS</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="icon-sale"></i>
-                                            <span>CLEARENCE</span>
-                                        </a>
-                                    </li>
-                                    <li><a href="#">
-                                            <i class="icon-theme"></i>
-                                            <span>BUY THEME!</span>
-                                        </a></li>
                                 </ul>
                             </nav>
                         </div>
