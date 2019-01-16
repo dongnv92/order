@@ -319,7 +319,9 @@ require_once '../core.php';
                         </div>
                     </div>
                     <!-- /tt-search -->
-                    <div class="tt-desctop-parent-cart tt-parent-box" id="product_cart"><?=$function->getProductInMenu()?></div>
+                    <div class="tt-desctop-parent-cart tt-parent-box" id="product_cart">
+                        <?=$function->getProductInMenu()?>
+                    </div>
                     <!-- tt-account -->
                     <div class="tt-desctop-parent-account tt-parent-box">
                         <div class="tt-account tt-dropdown-obj">

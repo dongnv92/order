@@ -33,9 +33,9 @@ switch ($act){
                     $response['product_cart_menu']  = $function->getProductInMenu();
                     echo json_encode($response);
                 }else{ // Nếu sản phẩm chưa có trong giỏ hàng thì thêm mới
-                    $_SESSION['cart'][] = array('productId' => $id, 'quantily' => $quantily ? $quantily : 1);
-                    $response['response']   = 200;
-                    $response['message']    = 'Add product to cart success.';
+                    $_SESSION['cart'][]             = array('productId' => $id, 'quantily' => $quantily ? $quantily : 1);
+                    $response['response']           = 200;
+                    $response['message']            = 'Add product to cart success.';
                     $response['product_cart_menu']  = $function->getProductInMenu();
                     echo json_encode($response);
                 }

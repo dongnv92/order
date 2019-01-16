@@ -95,6 +95,7 @@ require_once '../../includes/core.php';
 <a href="#" class="tt-back-to-top">ĐẦU TRANG</a>
 <script src="<?=_URL_STYLE?>/external/jquery/jquery.min.js"></script>
 <script src="<?=_URL_STYLE?>/external/bootstrap/js/bootstrap.min.js"></script>
+<script src="<?=_URL_HOME?>/javascript.js?act=add_cart"></script>
 <script src="<?=_URL_STYLE?>/external/slick/slick.min.js"></script>
 <script src="<?=_URL_STYLE?>/external/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 <script src="<?=_URL_STYLE?>/external/panelmenu/panelmenu.js"></script>
@@ -107,7 +108,6 @@ require_once '../../includes/core.php';
 <script src="<?=_URL_STYLE?>/js/main.js"></script>
 <script src="<?=_URL_STYLE?>/external/elevatezoom/jquery.elevatezoom.js"></script>
 <script src="<?=_URL_STYLE?>/external/magnific-popup/jquery.magnific-popup.min.js"></script>
-<script src="<?=_URL_HOME?>/javascript.js?act=add_cart"></script>
 <!-- form validation and sending to mail -->
 <script src="<?=_URL_STYLE?>/external/form/jquery.form.js"></script>
 <script src="<?=_URL_STYLE?>/external/form/jquery.validate.min.js"></script>
