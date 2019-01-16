@@ -102,15 +102,7 @@ require_once 'header.php';
                                         <h2 class="tt-title"><a href="<?=$function->getUrlProduct($product_list['product_id'])?>"><?=$product_list['product_name']?></a></h2>
                                         <div class="tt-price"><?=$function->convertNumberMoney($product_list['product_price_vn'])?>₫</div>
                                         <div class="tt-product-inside-hover">
-                                            <div class="tt-row-btn">
-                                                <a href="#" class="tt-btn-addtocart thumbprod-button-bg"
-                                                   data-toggle="modal" data-target="#modalAddToCartProduct">THÊM VÀO GIỎ HÀNG</a>
-                                            </div>
-                                            <div class="tt-row-btn">
-                                                <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"></a>
-                                                <a href="#" class="tt-btn-wishlist"></a>
-                                                <a href="#" class="tt-btn-compare"></a>
-                                            </div>
+                                            <div class="tt-row-btn"><a href="javascript:;" class="tt-btn-addtocart thumbprod-button-bg" data-content="<?=$product_list['product_id']?>" data-label="addToCart">THÊM VÀO GIỎ HÀNG</a></div>
                                         </div>
                                     </div>
                                 </div>
@@ -123,9 +115,10 @@ require_once 'header.php';
                 <div class="tab-pane" id="tab_1_2">
                     <div class="row tt-layout-product-item">
                         <?php
+                        $list_category = $function->getListCategory(1);
                         $db->from(_TABLE_PRODUCT);
-                        $db->where(array('product_status <>' => 0));
-                        $db->where_in('product_category', $function->getListCategory(1));
+                        $db->where(array('product_gender' => 1, 'product_status <>' => 0));
+                        $db->where_in('product_category', $list_category);
                         $db->order_by('product_id', 'DESC');
                         $db->limit(8);
                         foreach ($db->fetch() as $product_list) {
@@ -135,8 +128,7 @@ require_once 'header.php';
                             $db->select('media_source')->from(_TABLE_MEDIA)->where(array('media_type' => 'images_product', 'media_store' => 'local', 'media_parent' => $product_list['product_id']));
                             $db->limit(2);
                             $images_2 = $db->fetch_first();
-                            $product_metadata = $db->from(_TABLE_METADATA)->where(array('metadata_type' => 'category_product', 'metadata_suorce' => $product_list['product_id']))->fetch_first();
-                            $product_category = $db->from(_TABLE_CATEGORY)->where(array('category_id' => $product_metadata['metadata_value']))->fetch_first();
+                            $product_category = $db->select('category_id, category_name')->from(_TABLE_CATEGORY)->where(array('category_id' => $product_list['product_category']))->fetch_first();
                             ?>
                             <div class="col-6 col-md-4 col-lg-3">
                                 <div class="tt-product thumbprod-center">
@@ -176,9 +168,10 @@ require_once 'header.php';
                 <div class="tab-pane" id="tab_1_3">
                     <div class="row tt-layout-product-item">
                         <?php
+                        $list_category = $function->getListCategory(1);
                         $db->from(_TABLE_PRODUCT);
-                        $db->where(array('product_status <>' => 0));
-                        $db->where_in('product_category', $function->getListCategory(1));
+                        $db->where(array('product_gender' => 2, 'product_status <>' => 0));
+                        $db->where_in('product_category', $list_category);
                         $db->order_by('product_id', 'DESC');
                         $db->limit(8);
                         foreach ($db->fetch() as $product_list) {
@@ -188,8 +181,7 @@ require_once 'header.php';
                             $db->select('media_source')->from(_TABLE_MEDIA)->where(array('media_type' => 'images_product', 'media_store' => 'local', 'media_parent' => $product_list['product_id']));
                             $db->limit(2);
                             $images_2 = $db->fetch_first();
-                            $product_metadata = $db->from(_TABLE_METADATA)->where(array('metadata_type' => 'category_product', 'metadata_suorce' => $product_list['product_id']))->fetch_first();
-                            $product_category = $db->from(_TABLE_CATEGORY)->where(array('category_id' => $product_metadata['metadata_value']))->fetch_first();
+                            $product_category = $db->select('category_id, category_name')->from(_TABLE_CATEGORY)->where(array('category_id' => $product_list['product_category']))->fetch_first();
                             ?>
                             <div class="col-6 col-md-4 col-lg-3">
                                 <div class="tt-product thumbprod-center">

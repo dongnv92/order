@@ -8,6 +8,16 @@
 
 class orderFunction{
 
+    // Kiểm tra với xem dữ liệu trong array có tồn tại không
+    function checkArray($array, $key, $value){
+        $num = array_search($value, array_column($array, $key));
+        if(is_numeric($num)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     // Tạo url chứa các Parameter
     function createParameter($parameter){
         $text = '';
@@ -342,5 +352,77 @@ class orderFunction{
                 return 'btn btn-outline-blue round';
                 break;
         }
+    }
+
+    //
+    function getProductInMenu(){
+        global $db;
+        $cart['count_cart'] = count($_SESSION['cart']);
+        ?>
+        <!-- tt-cart -->
+            <div class="tt-cart tt-dropdown-obj" data-tooltip="GIỎ HÀNG" data-tposition="bottom">
+                <button class="tt-dropdown-toggle">
+                    <i class="icon-f-39"></i>
+                    <span class="tt-badge-cart"><?=$cart['count_cart']?></span>
+                </button>
+                <div class="tt-dropdown-menu">
+                    <div class="tt-mobile-add">
+                        <h6 class="tt-title">GIỎ HÀNG</h6>
+                        <button class="tt-close">ĐÓNG</button>
+                    </div>
+                    <div class="tt-dropdown-inner">
+                        <div class="tt-cart-layout">
+                            <?php if($cart['count_cart'] == 0){
+                                echo '<a href="'. _URL_HOME .'" class="tt-cart-empty"><i class="icon-f-39"></i><p>Chưa có sản phẩm nào trong giỏ hàng</p></a>';
+                            }else{
+                                ?>
+                                <div class="tt-cart-content">
+                                    <div class="tt-cart-list">
+                                        <?php
+                                        $i = 1;
+                                        foreach ($_SESSION['cart'] as $list_cart){
+                                            if($i <= 5){
+                                                $product        = $db->select()->from(_TABLE_PRODUCT)->where('product_id', $list_cart['productId'])->fetch_first();
+                                                $images_product = $db->select('media_source')->from(_TABLE_MEDIA)->where(array('media_type' => 'images_product', 'media_store' => 'local', 'media_parent' => $product['product_id']))->fetch_first();;
+                                                ?>
+                                                <div class="tt-item">
+                                                    <a href="<?=$this->getUrlProduct($product['product_id'])?>">
+                                                        <div class="tt-item-img"><img src="<?=_URL_HOME.'/'.$images_product['media_source']?>" data-src="<?=_URL_HOME.'/'.$images_product['media_source']?>"></div>
+                                                        <div class="tt-item-descriptions">
+                                                            <h2 class="tt-title"><?=$product['product_name']?></h2>
+                                                            <div class="tt-quantity"><?=$list_cart['quantily']?> X</div> <div class="tt-price"><?=$product['product_price_vn']?></div>
+                                                        </div>
+                                                    </a>
+                                                    <div class="tt-item-close">
+                                                        <a href="#" class="tt-btn-close"></a>
+                                                    </div>
+                                                </div>
+                                                <?php
+                                            }
+                                            $i++;
+                                        }
+                                        ?>
+                                    </div>
+                                    <div class="tt-cart-total-row">
+                                        <div class="tt-cart-total-title">TỔNG TIỀN:</div>
+                                        <div class="tt-cart-total-price"></div>
+                                    </div>
+                                    <div class="tt-cart-btn">
+                                        <div class="tt-item">
+                                            <a href="<?=_URL_HOME?>/cart" class="btn">XEM GIỎ HÀNG</a>
+                                        </div>
+                                        <div class="tt-item">
+                                            <a href="<?=_URL_HOME?>/cart" class="btn-link-02 tt-hidden-mobile">THANH TOÁN</a>
+                                            <a href="<?=_URL_HOME?>/cart" class="btn btn-border tt-hidden-desctope">THANH TOÁN</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php }?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <!-- /tt-cart -->
+        <?php
     }
 }

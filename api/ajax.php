@@ -7,6 +7,75 @@
  */
 require_once '../includes/core.php';
 switch ($act){
+    case 'cart':
+        switch ($type){
+            case 'add':
+                // Kiểm tra sản phẩm có tồn tại không?
+                if(!$id || !$function->checkData(_TABLE_PRODUCT, array('product_id' => $id))){
+                    $response['response']   = 404;
+                    $response['message']    = 'Product does not exist.';
+                    echo json_encode($response);
+                    break;
+                }
+
+                // Parameter Biến số lượng sản phẩm
+                $quantily = isset($_GET['quantily']) ? $_GET['quantily'] : '';
+
+                // Nếu sản phẩm đã có trong giỏ hàng thì cập nhập thêm số lượng
+                if($function->checkArray($_SESSION['cart'], 'productId', $id)){
+                    foreach ($_SESSION['cart'] AS &$cart){
+                        if($cart['productId'] == $id){
+                            $cart['quantily'] = $quantily ? $quantily : $cart['quantily'] + 1;
+                        }
+                    }
+                    $response['response']           = 200;
+                    $response['message']            = 'Update quantily product success.';
+                    $response['product_cart_menu']  = $function->getProductInMenu();
+                    echo json_encode($response);
+                }else{ // Nếu sản phẩm chưa có trong giỏ hàng thì thêm mới
+                    $_SESSION['cart'][] = array('productId' => $id, 'quantily' => $quantily ? $quantily : 1);
+                    $response['response']   = 200;
+                    $response['message']    = 'Add product to cart success.';
+                    $response['product_cart_menu']  = $function->getProductInMenu();
+                    echo json_encode($response);
+                }
+                break;
+            case 'delete_product':
+                // Check id product
+                if(!$id || !$function->checkData(_TABLE_PRODUCT, array('product_id' => $id))){
+                    $response['response']   = 404;
+                    $response['message']    = 'Product does not exist.';
+                    echo json_encode($response);
+                    break;
+                }
+                if($function->checkArray($_SESSION['cart'], 'productId', $id)){
+                    foreach ($_SESSION['cart'] AS $key => $value){
+                        if($value['productId'] == $id){
+                            unset($_SESSION['cart'][$key]);
+                            $response['response']   = 200;
+                            $response['message']    = 'Delete productId '.$id.' success.';
+                            echo json_encode($response);
+                            break;
+                        }
+                    }
+                }else{
+                    $response['response']   = 404;
+                    $response['message']    = 'Product '. $id .' does not exist in cart.';
+                    echo json_encode($response);
+                    break;
+                }
+                break;
+            case 'delete_all':
+                $response['response']   = 200;
+                $response['message']    = 'Delete cart success';
+                echo json_encode($response);
+                unset($_SESSION['cart']);
+                break;
+            case 'view_cart_menu':
+                $function->getProductInMenu();
+                break;
+        }
+        break;
     case 'delete_media':
         // Check id media
         $media = $db->select('media_source, media_store')->from(_TABLE_MEDIA)->where('media_id', $id)->fetch_first();
