@@ -17,11 +17,12 @@
           <entry key="project.open.time.11" value="2" />
           <entry key="project.open.time.12" value="1" />
           <entry key="project.open.time.13" value="1" />
+          <entry key="project.open.time.14" value="1" />
           <entry key="project.open.time.15" value="1" />
           <entry key="project.open.time.18" value="1" />
           <entry key="project.open.time.22" value="1" />
           <entry key="project.open.time.47" value="1" />
-          <entry key="project.opened" value="9" />
+          <entry key="project.opened" value="10" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -29,7 +30,7 @@
           <entry key="css" value="1" />
           <entry key="htaccess" value="3" />
           <entry key="html" value="1" />
-          <entry key="php" value="61" />
+          <entry key="php" value="62" />
           <entry key="scss" value="1" />
         </counts>
       </usages-collector>
@@ -37,7 +38,7 @@
         <counts>
           <entry key="CSS" value="1" />
           <entry key="HTML" value="1" />
-          <entry key="PHP" value="61" />
+          <entry key="PHP" value="62" />
           <entry key="SCSS" value="1" />
           <entry key="htaccess" value="3" />
         </counts>
@@ -62,47 +63,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/includes/lib/class.function.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="148">
-              <caret line="362" column="67" selection-start-line="362" selection-start-column="49" selection-end-line="362" selection-end-column="67" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/api/javascript.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="298">
-              <caret line="25" column="29" lean-forward="true" selection-start-line="25" selection-start-column="29" selection-end-line="25" selection-end-column="29" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/includes/pages/footer.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="145">
-              <caret line="97" selection-start-line="97" selection-end-line="98" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/api/ajax.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="38" column="48" selection-start-line="38" selection-start-column="31" selection-end-line="38" selection-end-column="48" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/includes/pages/header.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="148">
-              <caret line="322" column="58" lean-forward="true" selection-start-line="322" selection-start-column="58" selection-end-line="322" selection-end-column="58" />
+            <state relative-caret-position="559">
+              <caret line="362" column="67" selection-start-line="362" selection-start-column="67" selection-end-line="362" selection-end-column="67" />
             </state>
           </provider>
         </entry>
@@ -153,7 +118,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -164,28 +128,19 @@
             <path>
               <item name="order" type="b2602c69:ProjectViewProjectNode" />
               <item name="order" type="462c0819:PsiDirectoryNode" />
-              <item name="admin" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="order" type="b2602c69:ProjectViewProjectNode" />
-              <item name="order" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="order" type="b2602c69:ProjectViewProjectNode" />
-              <item name="order" type="462c0819:PsiDirectoryNode" />
               <item name="includes" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="order" type="b2602c69:ProjectViewProjectNode" />
               <item name="order" type="462c0819:PsiDirectoryNode" />
               <item name="includes" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="lib" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -225,17 +180,18 @@
       <workItem from="1547301416870" duration="4980000" />
       <workItem from="1547344594248" duration="10460000" />
       <workItem from="1547647965588" duration="9179000" />
+      <workItem from="1547734709973" duration="610000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="56926000" />
+    <option name="totallyTimeSpent" value="57536000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="22" width="1382" height="754" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.12254161" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.12405446" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -387,31 +343,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/api/javascript.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="24" column="29" selection-start-line="24" selection-start-column="29" selection-end-line="24" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/api/ajax.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
+        <state relative-caret-position="646">
           <caret line="38" column="48" selection-start-line="38" selection-start-column="31" selection-end-line="38" selection-end-column="48" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/includes/pages/header.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="148">
-          <caret line="322" column="58" lean-forward="true" selection-start-line="322" selection-start-column="58" selection-end-line="322" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/includes/lib/class.function.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="148">
-          <caret line="362" column="67" selection-start-line="362" selection-start-column="49" selection-end-line="362" selection-end-column="67" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/javascript.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="298">
-          <caret line="25" column="29" lean-forward="true" selection-start-line="25" selection-start-column="29" selection-end-line="25" selection-end-column="29" />
+        <state relative-caret-position="5474">
+          <caret line="322" column="58" selection-start-line="322" selection-start-column="58" selection-end-line="322" selection-end-column="58" />
         </state>
       </provider>
     </entry>
@@ -419,6 +368,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="145">
           <caret line="97" selection-start-line="97" selection-end-line="98" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/includes/lib/class.function.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="559">
+          <caret line="362" column="67" selection-start-line="362" selection-start-column="67" selection-end-line="362" selection-end-column="67" />
         </state>
       </provider>
     </entry>

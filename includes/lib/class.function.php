@@ -469,7 +469,7 @@ class orderFunction{
                                     <div class="col-12 col-lg-6">
                                         <div class="tt-modal-messages"><i class="icon-f-68"></i> Thêm sản phẩm vào giỏ hàng thành công!</div>
                                         <div class="tt-modal-product">
-                                            <div class="tt-img"><img src="'. _URL_HOME .'/'. $images_1['media_source'] .'" data-src="'. _URL_HOME .'/'. $images_1 .'" alt=""></div>
+                                            <div class="tt-img"><img src="'. _URL_HOME .'/'. $images_1['media_source'] .'" data-src="'. _URL_HOME .'/'. $images_1['media_source'] .'" alt=""></div>
                                             <h2 class="tt-title"><a href="'. $this->getUrlProduct($product['product_id']) .'">'. $product['product_name'] .'</a></h2>
                                             <div class="tt-qty">Số lượng: <span>1</span></div>
                                         </div>
