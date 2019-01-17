@@ -79,35 +79,7 @@ require_once 'header.php';
                         $db->order_by('product_id', 'DESC');
                         $db->limit(8);
                         foreach ($db->fetch() as $product_list) {
-                            $db->select('media_source')->from(_TABLE_MEDIA)->where(array('media_type' => 'images_product', 'media_store' => 'local', 'media_parent' => $product_list['product_id']));
-                            $db->limit(1);
-                            $images_1 = $db->fetch_first();
-                            $db->select('media_source')->from(_TABLE_MEDIA)->where(array('media_type' => 'images_product', 'media_store' => 'local', 'media_parent' => $product_list['product_id']));
-                            $db->limit(2);
-                            $images_2 = $db->fetch_first();
-                            $product_category = $db->select('category_id, category_name')->from(_TABLE_CATEGORY)->where(array('category_id' => $product_list['product_category']))->fetch_first();
-                            ?>
-                            <div class="col-6 col-md-4 col-lg-3">
-                                <div class="tt-product thumbprod-center">
-                                    <div class="tt-image-box">
-                                        <a href="#" class="tt-btn-wishlist" data-tooltip="Yêu Thích" data-tposition="left"></a>
-                                        <a href="<?=$function->getUrlProduct($product_list['product_id'])?>">
-                                            <span class="tt-img"><img src="<?= _URL_HOME.'/'.$images_1['media_source']?>" alt=""></span>
-                                            <span class="tt-img-roll-over"><img src="<?= _URL_HOME.'/'.$images_2['media_source']?>" alt=""></span>
-                                            <?=$product_list['product_sale'] > 0 ? '<span class="tt-label-location"><span class="tt-label-new">Giảm giá '. $product_list['product_sale'] .'%</span></span>' : ''?>
-                                        </a>
-                                    </div>
-                                    <div class="tt-description">
-                                        <div class="tt-row"><ul class="tt-add-info"><li><a href="<?=$function->getUrlCategory($product_category['category_id'])?>"><?=$product_category['category_name']?></a></li></ul></div>
-                                        <h2 class="tt-title"><a href="<?=$function->getUrlProduct($product_list['product_id'])?>"><?=$product_list['product_name']?></a></h2>
-                                        <div class="tt-price"><?=$function->convertNumberMoney($product_list['product_price_vn'])?>₫</div>
-                                        <div class="tt-product-inside-hover">
-                                            <div class="tt-row-btn"><a href="javascript:;" class="tt-btn-addtocart thumbprod-button-bg" data-content="<?=$product_list['product_id']?>" data-label="addToCart">THÊM VÀO GIỎ HÀNG</a></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <?php
+                            echo $function->getProduct($product_list['product_id'], array('type' => 'home', 'layout' => 'col-6 col-md-4 col-lg-3'));
                         }
                         ?>
                     </div>

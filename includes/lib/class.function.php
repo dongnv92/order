@@ -354,7 +354,7 @@ class orderFunction{
         }
     }
 
-    //
+    // Hiển thị giỏ hàng trên Menu
     function getProductInMenu(){
         global $db;
         $cart['count_cart'] = count($_SESSION['cart']);
@@ -386,7 +386,7 @@ class orderFunction{
                                                     <div class="tt-item-img"><img src=" '. _URL_HOME.'/'.$images_product['media_source'].'" data-src="'. _URL_HOME.'/'.$images_product['media_source'].'"></div>
                                                     <div class="tt-item-descriptions">
                                                         <h2 class="tt-title">'. $product['product_name'] .'</h2>
-                                                        <div class="tt-quantity">'. $list_cart['quantily'] .' X</div> <div class="tt-price">'. $product['product_price_vn'] .'</div>
+                                                        <div class="tt-quantity">'. $list_cart['quantily'] .' X</div> <div class="tt-price">'. $this->convertNumberMoney($product['product_price_vn']) .'₫</div>
                                                     </div>
                                                 </a>
                                                 <div class="tt-item-close"><a href="#" class="tt-btn-close"></a></div>
@@ -415,6 +415,82 @@ class orderFunction{
             </div>
         </div>
         <!-- /tt-cart -->';
+        return $text;
+    }
+
+    // Hiển thị chi tiết sản phẩm
+    function getProduct($productId, $option = ''){
+        global $db;
+        $text = '';
+        $product = $db->select()->from(_TABLE_PRODUCT)->where('product_id', $productId)->fetch_first();
+        $images_1 = $db->select('media_id, media_source')->from(_TABLE_MEDIA)->where(array('media_type' => 'images_product', 'media_store' => 'local', 'media_parent' => $product['product_id']))->fetch_first();
+        $images_2 = $db->select('media_source')->from(_TABLE_MEDIA)->where(array('media_type' => 'images_product', 'media_store' => 'local', 'media_parent' => $product['product_id'], 'media_id <>' => $images_1['media_id']))->fetch_first();
+        $product_category = $db->select('category_id, category_name')->from(_TABLE_CATEGORY)->where(array('category_id' => $product['product_category']))->fetch_first();
+        if($option['type'] == 'home'){
+            $text .= '
+            <!-- Product Detail -->
+            <div class="'. $option['layout'] .'">
+                <div class="tt-product thumbprod-center">
+                    <div class="tt-image-box">
+                        <a href="#" class="tt-btn-wishlist" data-tooltip="Yêu Thích" data-tposition="left"></a>
+                        <a href="'. $this->getUrlProduct($productId) .'">
+                            <span class="tt-img"><img src="'. _URL_HOME .'/'.$images_1['media_source'].'" alt=""></span>
+                            <span class="tt-img-roll-over"><img src="'. _URL_HOME .'/'. $images_2['media_source'] .'" alt=""></span>
+                            '. ($product['product_sale'] > 0 ? '<span class="tt-label-location"><span class="tt-label-new">Giảm giá '. $product['product_sale'] .'%</span></span>' : '') .'
+                        </a>
+                    </div>
+                    <div class="tt-description">
+                        <div class="tt-row"><ul class="tt-add-info"><li><a href="'. $this->getUrlCategory($product_category['category_id']).'">'. $product_category['category_name'] .'</a></li></ul></div>
+                        <h2 class="tt-title"><a href="'. $this->getUrlProduct($product['product_id']) .'">'. $product['product_name'] .'</a></h2>
+                        <div class="tt-price">'. $this->convertNumberMoney($product['product_price_vn']) .'₫</div>
+                        <div class="tt-product-inside-hover">
+                            <div class="tt-row-btn">
+                                <a href="javascript:;" class="tt-btn-addtocart thumbprod-button-bg" data-toggle="modal" data-target="#modalAddToCartProduct_'. $product['product_id'] .'" data-content="'. $product['product_id'] .'" data-label="addToCart">THÊM VÀO GIỎ HÀNG</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Product Detail -->
+            
+            <!-- Product Modal -->
+            <div class="modal  fade"  id="modalAddToCartProduct_'. $product['product_id'] .'" tabindex="-1" role="dialog" aria-label="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content ">
+                        <div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="icon icon-clear"></span></button></div>
+                        <div class="modal-body">
+                            <div class="tt-modal-addtocart mobile">
+                                <div class="tt-modal-messages"><i class="icon-f-68"></i> Thêm sản phẩm vào giỏ hàng thành công!</div>
+                                <a href="#" class="btn-link btn-close-popup">Tiếp tục mua hàng</a>
+                                <a href="page404.html" class="btn-link">XEM GIỎ HÀNG</a>
+                            </div>
+                            <div class="tt-modal-addtocart desctope">
+                                <div class="row">
+                                    <div class="col-12 col-lg-6">
+                                        <div class="tt-modal-messages"><i class="icon-f-68"></i> Thêm sản phẩm vào giỏ hàng thành công!</div>
+                                        <div class="tt-modal-product">
+                                            <div class="tt-img"><img src="'. _URL_HOME .'/'. $images_1['media_source'] .'" data-src="'. _URL_HOME .'/'. $images_1 .'" alt=""></div>
+                                            <h2 class="tt-title"><a href="'. $this->getUrlProduct($product['product_id']) .'">'. $product['product_name'] .'</a></h2>
+                                            <div class="tt-qty">Số lượng: <span>1</span></div>
+                                        </div>
+                                        <div class="tt-product-total"><div class="tt-total">GIÁ TIỀN: <span class="tt-price">'. $this->convertNumberMoney($product['product_price_vn']) .'</span></div></div>
+                                    </div>
+                                    <div class="col-12 col-lg-6">
+                                        <a href="#" class="tt-cart-total">Bạn có '. count($_SESSION['cart']) .' trong giỏ hàng
+                                            <div class="tt-total">TỔNG TIỀN: <span class="tt-price">xxxxđ</span></div>
+                                        </a>
+                                        <a href="#" class="btn btn-border btn-close-popup">Tiếp tục mua hàng</a>
+                                        <a href="#" class="btn btn-border">XEM GIỎ HÀNG</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Product Modal -->
+            ';
+        }
         return $text;
     }
 }

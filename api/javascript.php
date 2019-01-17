@@ -21,8 +21,7 @@ switch ($act){
                         data    : {'act' : 'cart', 'type' : 'add', 'id' : productId},
                         success : function (data) {
                             if(data.response == 200){
-                                $('div[id=product_cart_first]').remove();
-                                $('div[id=product_cart]').html(data.product_cart_menu);
+
                             }
                         }
                     });
