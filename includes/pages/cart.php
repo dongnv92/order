@@ -6,6 +6,7 @@
  * Time: 16:23
  */
 require_once '../core.php';
+$header['title'] = 'Giỏ hàng của bạn';
 require_once 'header.php';
 ?>
     <div class="tt-breadcrumb">
@@ -31,7 +32,7 @@ require_once 'header.php';
                                 $images     = $db->select('media_source')->from(_TABLE_MEDIA)->where(array('media_type' => 'images_product', 'media_store' => 'local', 'media_parent' => $product['product_id']))->fetch_first();
                                 ?>
                                 <tr>
-                                    <td><a href="#" class="tt-btn-close"></a></td>
+                                    <td><a href="<?=_URL_API.'/?act=cart&type=delete_product&id='.$list_product['productId'].'&token='.$function->createToken()?>" class="tt-btn-close"></a></td>
                                     <td><div class="tt-product-img"><img src="<?=$images['media_source']?>" data-src="<?=$images['media_source']?>" alt="<?=$product['product_name']?>"></div></td>
                                     <td>
                                         <h2 class="tt-title"><a href="<?=$function->getUrlProduct($product['product_id'])?>"><?=$product['product_name']?></a></h2>
@@ -46,8 +47,8 @@ require_once 'header.php';
                                         <div class="detach-quantity-desctope">
                                             <div class="tt-input-counter style-01">
                                                 <span class="minus-btn"></span>
-                                                <input type="number" name="quantily" value="<?=$list_product['quantily']?>">
-                                                <span class="plus-btn"></span>
+                                                <input type="text" value="<?=$list_product['quantily']?>" size="5">
+                                                <span class="plus-btn" data-label="quanlity" data-value="<?=$list_product['productId']?>"></span>
                                             </div>
                                         </div>
                                     </td>
@@ -58,17 +59,17 @@ require_once 'header.php';
                                 ?>
                                 </tbody>
                                 <tr>
-                                    <td colspan="5" class="text-center"><h2 class="tt-title">TỔNG TIỀN</td>
-                                    <td class="text-right"><div class="tt-price"><?=$function->convertNumberMoney($function->sumPriceCart())?>đ</div></td>
+                                    <td colspan="5" class="text-center"><h2 class="tt-title"><?=(count($_SESSION['cart']) > 0 ? 'TỔNG TIỀN' : 'CHƯA CÓ SẢN PHẨM NÀO ĐƯỢC CHỌN')?></td>
+                                    <td class="text-right"><div class="tt-price"><?=$function->sumPriceCart() > 0 ? $function->convertNumberMoney($function->sumPriceCart()).'đ' : ''?></div></td>
                                 </tr>
                             </table>
                             <div class="tt-shopcart-btn">
                                 <div class="col-left">
-                                    <a class="btn-link" href="#"><i class="icon-e-19"></i>CONTINUE SHOPPING</a>
+                                    <a class="btn-link" href="<?=_URL_HOME?>"><i class="icon-e-19"></i>TIẾP TỤC MUA HÀNG</a>
                                 </div>
                                 <div class="col-right">
-                                    <a class="btn-link" href="#"><i class="icon-h-02"></i>CLEAR SHOPPING CART</a>
-                                    <a class="btn-link" href="#"><i class="icon-h-48"></i>UPDATE CART</a>
+                                    <a class="btn-link" href="<?=_URL_API?>/?act=cart&type=delete_all&token=<?=$function->createToken()?>"><i class="icon-h-02"></i>LÀM TRỐNG GIỎ HÀNG</a>
+                                    <a class="btn-link" href="<?=_URL_CART?>"><i class="icon-h-48"></i>CẬP NHẬP GIỎ HÀNG</a>
                                 </div>
                             </div>
                         </div>

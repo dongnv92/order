@@ -36,6 +36,9 @@ define('_URL_ADMIN',_URL_HOME.'/admin');
 define('_URL_BACK', isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : _URL_ADMIN);
 define('_URL_STYLE', _URL_HOME.'/assets');
 define('_URL_PRODUCT', _URL_HOME.'/product');
+define('_URL_CART', _URL_HOME.'/cart');
+define('_URL_REFERER', $_SERVER['HTTP_REFERER'] ? $_SERVER['HTTP_REFERER'] : _URL_HOME);
+define('_URL_API', _URL_HOME.'/api');
 
 // Đặt các giá trị hằng số cho tên các bảng
 define('_TABLE_USER','dong_user');
@@ -77,3 +80,4 @@ $act    = (isset($_REQUEST['act'])  && !empty($_REQUEST['act']))    ? $_REQUEST[
 $type   = (isset($_REQUEST['type']) && !empty($_REQUEST['type']))   ? $_REQUEST['type']         : false;
 $url    = (isset($_REQUEST['url'])  && !empty($_REQUEST['url']))    ? trim($_REQUEST['url'])    : false;
 $page   = (isset($_REQUEST['page']) && !empty($_REQUEST['page']))   ? trim($_REQUEST['page'])   : 1;
+$token  = (isset($_REQUEST['token'])&& !empty($_REQUEST['token']))  ? trim($_REQUEST['token'])  : false;

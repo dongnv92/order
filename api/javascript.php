@@ -12,6 +12,7 @@ switch ($act){
         ?>
         //<script>
             $(document).ready(function () {
+                // Thêm 1 sản phẩm vào giỏ hàng
                 $('a[data-label=addToCart]').click(function () {
                     var productId = $(this).attr('data-content');
                     $.ajax({
@@ -26,6 +27,23 @@ switch ($act){
                         }
                     });
                 });
+
+                // Thêm số lượng sản phẩm trong giỏ hàng
+                $('span[data-label=quanlity]').click(function () {
+                    var productId = $(this).attr('data-value');
+                    $.ajax({
+                        url     : '<?=_URL_HOME?>/api/ajax.php',
+                        method  : 'GET',
+                        dataType: 'json',
+                        data    : {'act' : 'cart', 'type' : 'add', 'id' : productId},
+                        success : function (data) {
+                            if(data.response == 200){
+                                $(location).attr('href', '<?=_URL_CART?>');
+                            }
+                        }
+                    });
+                });
+
             });
         // </script>
         <?php

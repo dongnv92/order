@@ -8,6 +8,32 @@
 
 class orderFunction{
 
+    // Tạo Mã Token
+    function createToken(){
+        $key_start  = 'DONG';
+        $key_time   = _CONGIF_TIME;
+        $key_end    = 'CHINH';
+        return md5(md5($key_start.$key_time.$key_end));
+    }
+
+    // Kiểm tra mã token
+    function checkToken($token){
+        $arr_token = array();
+        for ($i = 0; $i <= 60; $i++){
+            $time_c         = time() + $i;
+            $time_t         = time() - $i;
+            $key_start      = 'DONG';
+            $key_end        = 'CHINH';
+            $arr_token[]    = md5(md5($key_start.$time_c.$key_end));
+            $arr_token[]    = md5(md5($key_start.$time_t.$key_end));
+        }
+        if(in_array($token, $arr_token)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     // Tính tổng tiền trong giỏ hàng
     function sumPriceCart(){
         global $db;
@@ -400,7 +426,7 @@ class orderFunction{
                                                         <div class="tt-quantity">'. $list_cart['quantily'] .' X</div> <div class="tt-price">'. $this->convertNumberMoney($product['product_price_vn']) .'₫</div>
                                                     </div>
                                                 </a>
-                                                <div class="tt-item-close"><a href="#" class="tt-btn-close"></a></div>
+                                                <div class="tt-item-close"><a href="'. _URL_API .'/?act=cart&type=delete_product&id='. $list_cart['productId'] .'&token='. $this->createToken() .'" class="tt-btn-close"></a></div>
                                             </div>';
                                         }
                                         $i++;
@@ -409,13 +435,13 @@ class orderFunction{
                                 </div>
                                 <div class="tt-cart-total-row">
                                     <div class="tt-cart-total-title">TỔNG TIỀN:</div>
-                                    <div class="tt-cart-total-price"></div>
+                                    <div class="tt-cart-total-price">'. $this->convertNumberMoney($this->sumPriceCart()) .'đ</div>
                                 </div>
                                 <div class="tt-cart-btn">
-                                    <div class="tt-item"><a href="<?=_URL_HOME?>/cart" class="btn">XEM GIỎ HÀNG</a></div>
+                                    <div class="tt-item"><a href="'. _URL_CART .'" class="btn">XEM GIỎ HÀNG</a></div>
                                     <div class="tt-item">
-                                        <a href="<?=_URL_HOME?>/cart" class="btn-link-02 tt-hidden-mobile">THANH TOÁN</a>
-                                        <a href="<?=_URL_HOME?>/cart" class="btn btn-border tt-hidden-desctope">THANH TOÁN</a>
+                                        <a href="'. _URL_CART .'" class="btn-link-02 tt-hidden-mobile">THANH TOÁN</a>
+                                        <a href="'. _URL_CART .'" class="btn btn-border tt-hidden-desctope">THANH TOÁN</a>
                                     </div>
                                 </div>
                             </div>';

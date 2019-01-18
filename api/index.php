@@ -1,6 +1,42 @@
 <?php
 require_once '../includes/core.php';
+if(!$token){
+    $response['response']   = 404;
+    $response['message']    = 'Missing Token';
+    echo json_encode($response);
+    exit();
+}
+if(!$function->checkToken($token)){
+    $response['response']   = 403;
+    $response['message']    = 'Wrong Token. Please try again';
+    echo json_encode($response);
+    exit();
+}
 switch ($act){
+    case 'cart':
+        switch ($type){
+            case 'delete_all':
+                unset($_SESSION['cart']);
+                $function->redirect(_URL_REFERER);
+                break;
+            case 'delete_product':
+                // Check id product
+                if(!$id || !$function->checkData(_TABLE_PRODUCT, array('product_id' => $id))){
+                    $function->redirect(_URL_REFERER);
+                    break;
+                }
+
+                if($function->checkArray($_SESSION['cart'], 'productId', $id)){
+                    foreach ($_SESSION['cart'] AS $key => $value){
+                        if($value['productId'] == $id){
+                            unset($_SESSION['cart'][$key]);
+                        }
+                    }
+                }
+                $function->redirect(_URL_REFERER);
+                break;
+        }
+        break;
     // Lấy danh sách các chuyên mục
     case 'get_list_product':
         switch ($type){
