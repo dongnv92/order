@@ -10,6 +10,7 @@ switch ($act){
     case 'cart':
         switch ($type){
             case 'add':
+                $type_quantily = isset($_GET['type_quantily']) ? $_GET['type_quantily'] : '';
                 // Kiểm tra sản phẩm có tồn tại không?
                 if(!$id || !$function->checkData(_TABLE_PRODUCT, array('product_id' => $id))){
                     $response['response']   = 404;
@@ -25,7 +26,7 @@ switch ($act){
                 if($function->checkArray($_SESSION['cart'], 'productId', $id)){
                     foreach ($_SESSION['cart'] AS &$cart){
                         if($cart['productId'] == $id){
-                            $cart['quantily'] = $quantily ? $quantily : $cart['quantily'] + 1;
+                            $cart['quantily'] = $quantily ? $quantily : ($type_quantily == 'minus' ? ($cart['quantily'] >= 2 ? $cart['quantily'] - 1 : $cart['quantily']) : $cart['quantily'] + 1);
                         }
                     }
                     $response['response']           = 200;

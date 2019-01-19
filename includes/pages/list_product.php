@@ -244,46 +244,7 @@ require_once 'header.php';
                         <div class="tt-product-listing row">
                             <?php
                             foreach ($data as $product_list) {
-                                $db->select('media_source')->from(_TABLE_MEDIA)->where(array('media_type' => 'images_product', 'media_store' => 'local', 'media_parent' => $product_list['product_id']));
-                                $db->limit(1);
-                                $images_1 = $db->fetch_first();
-                                $db->select('media_source')->from(_TABLE_MEDIA)->where(array('media_type' => 'images_product', 'media_store' => 'local', 'media_parent' => $product_list['product_id']));
-                                $db->limit(2);
-                                $images_2 = $db->fetch_first();
-                                $product_metadata = $db->from(_TABLE_METADATA)->where(array('metadata_type' => 'category_product', 'metadata_suorce' => $product_list['product_id']))->fetch_first();
-                                $product_category = $db->from(_TABLE_CATEGORY)->where(array('category_id' => $product_metadata['metadata_value']))->fetch_first();
-                                ?>
-                                <div class="col-6 col-md-4 tt-col-item">
-                                    <div class="tt-product thumbprod-center">
-                                        <div class="tt-image-box">
-                                            <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView" data-tooltip="Quick View" data-tposition="left"></a>
-                                            <a href="#" class="tt-btn-wishlist" data-tooltip="Add to Wishlist" data-tposition="left"></a>
-                                            <a href="#" class="tt-btn-compare" data-tooltip="Add to Compare" data-tposition="left"></a>
-                                            <a href="<?=$function->getUrlProduct($product_list['product_id'])?>">
-                                                <span class="tt-img"><img src="<?= _URL_HOME.'/'.$images_1['media_source']?>" alt=""></span>
-                                                <span class="tt-img-roll-over"><img src="<?= _URL_HOME.'/'.$images_2['media_source']?>" alt=""></span>
-                                                <?=$product_list['product_sale'] > 0 ? '<span class="tt-label-location"><span class="tt-label-new">Giảm giá '. $product_list['product_sale'] .'%</span></span>' : ''?>
-                                            </a>
-                                        </div>
-                                        <div class="tt-description">
-                                            <div class="tt-row"><ul class="tt-add-info"><li><a href="#"><?=$product_category['category_name']?></a></li></ul></div>
-                                            <h2 class="tt-title"><a href="<?=$function->getUrlProduct($product_list['product_id'])?>"><?=$product_list['product_name']?></a></h2>
-                                            <div class="tt-price"><?=$function->convertNumberMoney($product_list['product_price_vn'])?>₫</div>
-                                            <div class="tt-product-inside-hover">
-                                                <div class="tt-row-btn">
-                                                    <a href="#" class="tt-btn-addtocart thumbprod-button-bg"
-                                                       data-toggle="modal" data-target="#modalAddToCartProduct">THÊM VÀO GIỎ HÀNG</a>
-                                                </div>
-                                                <div class="tt-row-btn">
-                                                    <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"></a>
-                                                    <a href="#" class="tt-btn-wishlist"></a>
-                                                    <a href="#" class="tt-btn-compare"></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <?php
+                                echo $function->getProduct($product_list['product_id'], array('type' => 'home', 'layout' => 'col-6 col-md-4 tt-col-item'));
                             }
                             ?>
                         </div>

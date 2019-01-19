@@ -19,13 +19,11 @@ class orderFunction{
     // Kiểm tra mã token
     function checkToken($token){
         $arr_token = array();
-        for ($i = 0; $i <= 60; $i++){
-            $time_c         = time() + $i;
-            $time_t         = time() - $i;
+        for ($i = 0; $i <= 400; $i++){
+            $time_c         = time() - $i;
             $key_start      = 'DONG';
             $key_end        = 'CHINH';
             $arr_token[]    = md5(md5($key_start.$time_c.$key_end));
-            $arr_token[]    = md5(md5($key_start.$time_t.$key_end));
         }
         if(in_array($token, $arr_token)){
             return true;
@@ -497,14 +495,14 @@ class orderFunction{
                         <div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="icon icon-clear"></span></button></div>
                         <div class="modal-body">
                             <div class="tt-modal-addtocart mobile">
-                                <div class="tt-modal-messages"><i class="icon-f-68"></i>Đã thêm sản phẩm vào giỏ hàng</div>
+                                <div class="tt-modal-messages"><i class="icon-f-68"></i>Đã thêm sản phẩm vào giỏ</div>
                                 <a href="#" class="btn-link btn-close-popup">Tiếp tục mua hàng</a>
                                 <a href="page404.html" class="btn-link">XEM GIỎ HÀNG</a>
                             </div>
                             <div class="tt-modal-addtocart desctope">
                                 <div class="row">
                                     <div class="col-12 col-lg-6">
-                                        <div class="tt-modal-messages"><i class="icon-f-68"></i>Đã thêm sản phẩm vào giỏ hàng</div>
+                                        <div class="tt-modal-messages"><i class="icon-f-68"></i>Đã thêm sản phẩm vào giỏ</div>
                                         <div class="tt-modal-product">
                                             <div class="tt-img"><img src="'. _URL_HOME .'/'. $images_1['media_source'] .'" data-src="'. _URL_HOME .'/'. $images_1['media_source'] .'" alt=""></div>
                                             <h2 class="tt-title"><a href="'. $this->getUrlProduct($product['product_id']) .'">'. $product['product_name'] .'</a></h2>
@@ -513,7 +511,7 @@ class orderFunction{
                                         <div class="tt-product-total"><div class="tt-total">GIÁ TIỀN: <span class="tt-price">'. $this->convertNumberMoney($product['product_price_vn']) .'đ</span></div></div>
                                     </div>
                                     <div class="col-12 col-lg-6">
-                                        <a href="#" class="tt-cart-total">Bạn có '. count($_SESSION['cart']) .' sản phẩm trong giỏ hàng
+                                        <a href="#" class="tt-cart-total">Bạn có '. (count($_SESSION['cart']) + 1) .' sản phẩm trong giỏ hàng
                                             <div class="tt-total">TỔNG TIỀN: <span class="tt-price">'. $this->convertNumberMoney($this->sumPriceCart() + $product['product_price_vn']) .'đ</span></div>
                                         </a>
                                         <a href="'. _URL_HOME .'/cart" class="btn btn-border btn-close-popup">XEM GIỎ HÀNG</a>

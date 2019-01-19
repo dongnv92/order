@@ -1,15 +1,13 @@
 <?php
 require_once '../includes/core.php';
+header('Content-Type: text/html; charset=utf-8');
+
 if(!$token){
-    $response['response']   = 404;
-    $response['message']    = 'Missing Token';
-    echo json_encode($response);
+    echo '<center><h1>THIẾU MÃ TOKEN</h1>Thiếu mã Token, để thực hiện thao tác này, vui lòng liên hệ với BQT để lấy mã TOKEN. <a href="'. _URL_REFERER .'">Quay lại</a> </center>';
     exit();
 }
 if(!$function->checkToken($token)){
-    $response['response']   = 403;
-    $response['message']    = 'Wrong Token. Please try again';
-    echo json_encode($response);
+    echo '<center><h1>MÃ TOKEN KHÔNG ĐÚNG HOẶC HẾT HẠN</h1>Mã Token không đúng hoặc hết hạn, để thực hiện thao tác này, vui lòng liên hệ với BQT để lấy mã TOKEN. <a href="'. _URL_REFERER .'">Quay lại</a> </center>';
     exit();
 }
 switch ($act){

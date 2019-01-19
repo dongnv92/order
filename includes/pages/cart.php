@@ -46,9 +46,9 @@ require_once 'header.php';
                                     <td>
                                         <div class="detach-quantity-desctope">
                                             <div class="tt-input-counter style-01">
-                                                <span class="minus-btn"></span>
-                                                <input type="text" value="<?=$list_product['quantily']?>" size="5">
-                                                <span class="plus-btn" data-label="quanlity" data-value="<?=$list_product['productId']?>"></span>
+                                                <span class="minus-btn" data-label="quanlity_minus" data-value="<?=$list_product['productId']?>"></span>
+                                                <input data-label="input_quanlity" data-value="<?=$list_product['productId']?>" data-num="<?=$list_product['quantily']?>" type="text" value="<?=$list_product['quantily']?>" size="200">
+                                                <span class="plus-btn" data-label="quanlity_plus" data-value="<?=$list_product['productId']?>"></span>
                                             </div>
                                         </div>
                                     </td>
@@ -77,10 +77,8 @@ require_once 'header.php';
                     <div class="col-sm-12 col-xl-4">
                         <div class="tt-shopcart-wrapper">
                             <div class="tt-shopcart-box">
-                                <h4 class="tt-title">
-                                    ESTIMATE SHIPPING AND TAX
-                                </h4>
-                                <p>Enter your destination to get a shipping estimate.</p>
+                                <h4 class="tt-title">THÔNG TIN KHÁCH HÀNG</h4>
+                                <p>Nhập thông tin của bạn để chúng tôi liên hệ xác nhận.</p>
                                 <form class="form-default">
                                     <div class="form-group">
                                         <label for="address_country">COUNTRY <sup>*</sup></label>
