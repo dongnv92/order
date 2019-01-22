@@ -72,7 +72,7 @@ require_once 'header.php';
                                     <ul class="tt-options-swatch options-large">
                                         <?php
                                         foreach (unserialize($product['product_size']) as $product_size){
-                                            echo '<li><a href="#">'. $product_size .'</a></li>';
+                                            echo '<li data-content="product_size"><a href="javascript:;">'. $product_size .'</a></li>';
                                         }
                                         ?>
                                     </ul>
@@ -86,10 +86,10 @@ require_once 'header.php';
                                     <ul class="tt-options-swatch options-large">
                                         <?php
                                         foreach (unserialize($product['product_color']) as $product_color){
-                                            echo '<li>
-                                            <a class="options-color" href="#">
+                                            echo '<li data-content="product_color">
+                                            <a class="options-color" href="javascript:;">
 										        <span class="swatch-img">
-											        <img src="'. _URL_HOME .'/'. $product_color .'" alt="">
+											        <img src="'. _URL_HOME .'/'. $product_color .'" alt="'. $product['product_name'] .'">
 										        </span>
                                                 <span class="swatch-label color-black"></span>
                                             </a>
@@ -109,7 +109,7 @@ require_once 'header.php';
                                         </div>
                                     </div>
                                     <div class="col-item">
-                                        <a href="#" class="btn btn-lg"><i class="icon-f-39"></i>THÊM VÀO GIỎ HÀNG</a>
+                                        <a href="javascript:;" id="productAddToCart" data-content="<?=$product['product_id']?>" class="btn btn-lg"><i class="icon-f-39"></i>THÊM VÀO GIỎ HÀNG</a>
                                     </div>
                                 </div>
                             </div>
@@ -194,8 +194,7 @@ require_once 'header.php';
                                     <div class="tt-price"><?=$function->convertNumberMoney($product_list['product_price_vn'])?>₫</div>
                                     <div class="tt-product-inside-hover">
                                         <div class="tt-row-btn">
-                                            <a href="#" class="tt-btn-addtocart thumbprod-button-bg"
-                                               data-toggle="modal" data-target="#modalAddToCartProduct">THÊM VÀO GIỎ HÀNG</a>
+                                            <a href="javascript:;" class="tt-btn-addtocart thumbprod-button-bg" id="">THÊM VÀO GIỎ HÀNG</a>
                                         </div>
                                         <div class="tt-row-btn">
                                             <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"></a>
@@ -213,5 +212,41 @@ require_once 'header.php';
             </div>
         </div>
     </div>
+    <!-- Modal Add To Cart -->
+    <div class="modal  fade"  id="modalAddToCartProduct" tabindex="-1" role="dialog" aria-label="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content ">
+                <div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="icon icon-clear"></span></button></div>
+                <div class="modal-body">
+                    <div class="tt-modal-addtocart mobile">
+                        <div class="tt-modal-messages"><i class="icon-f-68"></i>Đã thêm sản phẩm vào giỏ</div>
+                        <a href="#" class="btn-link btn-close-popup">Tiếp tục mua hàng</a>
+                        <a href="<?=_URL_CART?>" class="btn-link">XEM GIỎ HÀNG</a>
+                    </div>
+                    <div class="tt-modal-addtocart desctope">
+                        <div class="row">
+                            <div class="col-12 col-lg-6">
+                                <div class="tt-modal-messages"><i class="icon-f-68"></i>Đã thêm sản phẩm vào giỏ</div>
+                                <div class="tt-modal-product">
+                                    <div class="tt-img"><img src="'. _URL_HOME .'/'. $images_1['media_source'] .'" data-src="'. _URL_HOME .'/'. $images_1['media_source'] .'" alt=""></div>
+                                    <h2 class="tt-title"><a href="'. $this->getUrlProduct($product['product_id']) .'">'. $product['product_name'] .'</a></h2>
+                                    <div class="tt-qty">Số lượng: <span>1</span></div>
+                                </div>
+                                <div class="tt-product-total"><div class="tt-total">GIÁ TIỀN: <span class="tt-price">'. $this->convertNumberMoney($product['product_price_vn']) .'đ</span></div></div>
+                            </div>
+                            <div class="col-12 col-lg-6">
+                                <a href="#" class="tt-cart-total">Bạn có '. (count($_SESSION['cart']) + 1) .' sản phẩm trong giỏ hàng
+                                    <div class="tt-total">TỔNG TIỀN: <span class="tt-price">'. $this->convertNumberMoney($this->sumPriceCart() + $product['product_price_vn']) .'đ</span></div>
+                                </a>
+                                <a href="'. _URL_HOME .'/cart" class="btn btn-border btn-close-popup">XEM GIỎ HÀNG</a>
+                                <a href="'. _URL_HOME .'/cart" class="btn">THANH TOÁN</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Add To Cart -->
 <?php
 require_once 'footer.php';

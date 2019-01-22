@@ -23,7 +23,7 @@ require_once 'header.php';
                 <h1 class="tt-title-subpages noborder">GIỎ HÀNG</h1>
                 <div class="row">
                     <div class="col-sm-12 col-xl-8">
-                        <div class="tt-shopcart-table">
+                        <div class="tt-shopcart-table-02">
                             <table>
                                 <tbody>
                                 <?php
@@ -32,10 +32,18 @@ require_once 'header.php';
                                 $images     = $db->select('media_source')->from(_TABLE_MEDIA)->where(array('media_type' => 'images_product', 'media_store' => 'local', 'media_parent' => $product['product_id']))->fetch_first();
                                 ?>
                                 <tr>
-                                    <td><a href="<?=_URL_API.'/?act=cart&type=delete_product&id='.$list_product['productId'].'&token='.$function->createToken()?>" class="tt-btn-close"></a></td>
                                     <td><div class="tt-product-img"><img src="<?=$images['media_source']?>" data-src="<?=$images['media_source']?>" alt="<?=$product['product_name']?>"></div></td>
                                     <td>
                                         <h2 class="tt-title"><a href="<?=$function->getUrlProduct($product['product_id'])?>"><?=$product['product_name']?></a></h2>
+                                        <ul class="tt-list-description">
+                                            <?=$list_product['size']    ? '<li>SIZE: '.$list_product['size'].'</li>' : ''?>
+                                            <?=$list_product['color']   ? '<li>MÀU: <ul class="tt-options-swatch options-large"><li data-content="product_color">
+                                            <a class="options-color" href="javascript:;">
+										        <span class="swatch-img"><img src="'. $list_product['color'] .'"></span>
+                                                <span class="swatch-label color-black"></span>
+                                            </a>
+                                            </li></ul></li>' : ''?>
+                                        </ul>
                                         <ul class="tt-list-parameters">
                                             <li><div class="tt-price"><?=$function->convertNumberMoney($product['product_price_vn'])?>đ</div></li>
                                             <li><div class="detach-quantity-mobile"></div></li>
@@ -53,6 +61,7 @@ require_once 'header.php';
                                         </div>
                                     </td>
                                     <td><div class="tt-price subtotal"><?=$function->convertNumberMoney($product['product_price_vn']*$list_product['quantily'])?>đ</div></td>
+                                    <td><a href="<?=_URL_API.'/?act=cart&type=delete_product&id='.$list_product['productId'].'&token='.$function->createToken()?>" class="tt-btn-close"></a></td>
                                 </tr>
                                 <?php
                                 }

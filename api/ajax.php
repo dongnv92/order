@@ -10,7 +10,6 @@ switch ($act){
     case 'cart':
         switch ($type){
             case 'add':
-                $type_quantily = isset($_GET['type_quantily']) ? $_GET['type_quantily'] : '';
                 // Kiểm tra sản phẩm có tồn tại không?
                 if(!$id || !$function->checkData(_TABLE_PRODUCT, array('product_id' => $id))){
                     $response['response']   = 404;
@@ -19,14 +18,17 @@ switch ($act){
                     break;
                 }
 
-                // Parameter Biến số lượng sản phẩm
-                $quantily = isset($_GET['quantily']) ? $_GET['quantily'] : '';
+                $quantily       = isset($_GET['quantily'])      && !empty($_GET['quantily'])        ? $_GET['quantily']     : '';
+                $type_quantily  = isset($_GET['type_quantily']) && !empty($_GET['type_quantily'])   ? $_GET['type_quantily']: '';
+                $color          = isset($_GET['color'])         && !empty($_GET['color'])           ? $_GET['color']        : '';
+                $size           = isset($_GET['size'])          && !empty($_GET['size'])            ? $_GET['size']         : '';
 
                 // Nếu sản phẩm đã có trong giỏ hàng thì cập nhập thêm số lượng
                 if($function->checkArray($_SESSION['cart'], 'productId', $id)){
                     foreach ($_SESSION['cart'] AS &$cart){
                         if($cart['productId'] == $id){
-                            $cart['quantily'] = $quantily ? $quantily : ($type_quantily == 'minus' ? ($cart['quantily'] >= 2 ? $cart['quantily'] - 1 : $cart['quantily']) : $cart['quantily'] + 1);
+
+                            $cart['quantily']       = $quantily ? $quantily : ($type_quantily == 'minus' ? ($cart['quantily'] >= 2 ? $cart['quantily'] - 1 : $cart['quantily']) : $cart['quantily'] + 1);
                         }
                     }
                     $response['response']           = 200;
@@ -34,7 +36,7 @@ switch ($act){
                     $response['product_cart_menu']  = $function->getProductInMenu();
                     echo json_encode($response);
                 }else{ // Nếu sản phẩm chưa có trong giỏ hàng thì thêm mới
-                    $_SESSION['cart'][]             = array('productId' => $id, 'quantily' => $quantily ? $quantily : 1);
+                    $_SESSION['cart'][]             = array('productId' => $id, 'quantily' => $quantily ? $quantily : 1, 'color' => $color, 'size' => $size);
                     $response['response']           = 200;
                     $response['message']            = 'Add product to cart success.';
                     $response['product_cart_menu']  = $function->getProductInMenu();
