@@ -104,7 +104,7 @@ require_once 'header.php';
                                     <div class="col-item">
                                         <div class="tt-input-counter style-01">
                                             <span class="minus-btn"></span>
-                                            <input type="text" value="1" size="5">
+                                            <input type="text" name="quantily" value="1" size="50">
                                             <span class="plus-btn"></span>
                                         </div>
                                     </div>

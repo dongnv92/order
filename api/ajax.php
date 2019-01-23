@@ -22,38 +22,38 @@ switch ($act){
                 $type_quantily  = isset($_GET['type_quantily']) && !empty($_GET['type_quantily'])   ? $_GET['type_quantily']: '';
                 $color          = isset($_GET['color'])         && !empty($_GET['color'])           ? $_GET['color']        : '';
                 $size           = isset($_GET['size'])          && !empty($_GET['size'])            ? $_GET['size']         : '';
+                $cartId         = isset($_GET['cartId'])        && !empty($_GET['cartId'])          ? $_GET['cartId']       : md5($id.($color ? '_'.$color : '').($size ? '_'.$size : ''));
 
                 // Nếu sản phẩm đã có trong giỏ hàng thì cập nhập thêm số lượng
-                if($function->checkArray($_SESSION['cart'], 'productId', $id)){
+                if($function->checkArray($_SESSION['cart'], 'cartId', $cartId)){
                     foreach ($_SESSION['cart'] AS &$cart){
-                        if($cart['productId'] == $id){
-
-                            $cart['quantily']       = $quantily ? $quantily : ($type_quantily == 'minus' ? ($cart['quantily'] >= 2 ? $cart['quantily'] - 1 : $cart['quantily']) : $cart['quantily'] + 1);
+                        if($cart['cartId'] == $cartId){
+                            $cart['quantily']               = $quantily ? $quantily : ($type_quantily == 'minus' ? ($cart['quantily'] >= 2 ? $cart['quantily'] - 1 : $cart['quantily']) : $cart['quantily'] + 1);
+                            $flag                           = false;
                         }
                     }
                     $response['response']           = 200;
                     $response['message']            = 'Update quantily product success.';
-                    $response['product_cart_menu']  = $function->getProductInMenu();
                     echo json_encode($response);
                 }else{ // Nếu sản phẩm chưa có trong giỏ hàng thì thêm mới
-                    $_SESSION['cart'][]             = array('productId' => $id, 'quantily' => $quantily ? $quantily : 1, 'color' => $color, 'size' => $size);
+                    $_SESSION['cart'][]             = array('productId' => $id, 'quantily' => $quantily ? $quantily : 1, 'color' => $color, 'size' => $size, 'cartId' => $cartId);
                     $response['response']           = 200;
                     $response['message']            = 'Add product to cart success.';
-                    $response['product_cart_menu']  = $function->getProductInMenu();
                     echo json_encode($response);
                 }
                 break;
             case 'delete_product':
                 // Check id product
+                $cartId = isset($_GET['cartId']) && !empty($_GET['cartId']) ? $_GET['cartId'] : '';
                 if(!$id || !$function->checkData(_TABLE_PRODUCT, array('product_id' => $id))){
                     $response['response']   = 404;
                     $response['message']    = 'Product does not exist.';
                     echo json_encode($response);
                     break;
                 }
-                if($function->checkArray($_SESSION['cart'], 'productId', $id)){
+                if($function->checkArray($_SESSION['cart'], 'cartId', $cartId)){
                     foreach ($_SESSION['cart'] AS $key => $value){
-                        if($value['productId'] == $id){
+                        if($value['cartId'] == $cartId){
                             unset($_SESSION['cart'][$key]);
                             $response['response']   = 200;
                             $response['message']    = 'Delete productId '.$id.' success.';

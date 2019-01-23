@@ -54,14 +54,14 @@ require_once 'header.php';
                                     <td>
                                         <div class="detach-quantity-desctope">
                                             <div class="tt-input-counter style-01">
-                                                <span class="minus-btn" data-label="quanlity_minus" data-value="<?=$list_product['productId']?>"></span>
-                                                <input data-label="input_quanlity" data-value="<?=$list_product['productId']?>" data-num="<?=$list_product['quantily']?>" type="text" value="<?=$list_product['quantily']?>" size="200">
-                                                <span class="plus-btn" data-label="quanlity_plus" data-value="<?=$list_product['productId']?>"></span>
+                                                <span class="minus-btn" data-product="<?=$list_product['productId']?>" data-label="quanlity_minus" data-value="<?=$list_product['cartId']?>"></span>
+                                                <input data-label="input_quanlity" data-product="<?=$list_product['productId']?>" data-value="<?=$list_product['cartId']?>" data-num="<?=$list_product['quantily']?>" type="text" value="<?=$list_product['quantily']?>" size="200">
+                                                <span class="plus-btn" data-product="<?=$list_product['productId']?>" data-label="quanlity_plus" data-value="<?=$list_product['cartId']?>"></span>
                                             </div>
                                         </div>
                                     </td>
                                     <td><div class="tt-price subtotal"><?=$function->convertNumberMoney($product['product_price_vn']*$list_product['quantily'])?>đ</div></td>
-                                    <td><a href="<?=_URL_API.'/?act=cart&type=delete_product&id='.$list_product['productId'].'&token='.$function->createToken()?>" class="tt-btn-close"></a></td>
+                                    <td><a href="<?=_URL_API.'/?act=cart&type=delete_product&id='.$list_product['productId'].'&cartId='. $list_product['cartId'] .'&token='.$function->createToken()?>" class="tt-btn-close"></a></td>
                                 </tr>
                                 <?php
                                 }

@@ -16,13 +16,14 @@ switch ($act){
                 // Thêm 1 sản phẩm vào giỏ hàng trong trang sản phẩm
                 $('#productAddToCart').click(function () {
                     var productId       = $(this).attr('data-content');
+                    var productQuantily = $('input[name=quantily]').val();
                     var productSize     = $('li[data-content=product_size][class=active] a').html();
                     var productcolor    = $('li[data-content=product_color][class=active] a span img').attr('src');
                     $.ajax({
                         url     : '<?=_URL_HOME?>/api/ajax.php',
                         method  : 'GET',
                         dataType: 'json',
-                        data    : {'act' : 'cart', 'type' : 'add', 'id' : productId, 'size' : productSize, 'color' : productcolor},
+                        data    : {'act' : 'cart', 'type' : 'add', 'id' : productId, 'size' : productSize, 'color' : productcolor, 'quantily' : productQuantily},
                         success : function (data) {
                             if(data.response == 200){
 
@@ -49,12 +50,13 @@ switch ($act){
 
                 // Thêm số lượng sản phẩm trong giỏ hàng
                 $('span[data-label=quanlity_plus]').click(function () {
-                    var productId = $(this).attr('data-value');
+                    var cartId      = $(this).attr('data-value');
+                    var productId   = $(this).attr('data-product');
                     $.ajax({
                         url     : '<?=_URL_HOME?>/api/ajax.php',
                         method  : 'GET',
                         dataType: 'json',
-                        data    : {'act' : 'cart', 'type' : 'add', 'id' : productId},
+                        data    : {'act' : 'cart', 'type' : 'add', 'cartId' : cartId, 'id' : productId},
                         success : function (data) {
                             if(data.response == 200){
                                 $(location).attr('href', '<?=_URL_CART?>');
@@ -65,12 +67,13 @@ switch ($act){
 
                 // Giảm số lượng sản phẩm trong giỏ hàng
                 $('span[data-label=quanlity_minus]').click(function () {
-                    var productId = $(this).attr('data-value');
+                    var cartId      = $(this).attr('data-value');
+                    var productId   = $(this).attr('data-product');
                     $.ajax({
                         url     : '<?=_URL_HOME?>/api/ajax.php',
                         method  : 'GET',
                         dataType: 'json',
-                        data    : {'act' : 'cart', 'type' : 'add', 'id' : productId, 'type_quantily' : 'minus'},
+                        data    : {'act' : 'cart', 'type' : 'add', 'cartId' : cartId, 'type_quantily' : 'minus', 'id' : productId},
                         success : function (data) {
                             if(data.response == 200){
                                 $(location).attr('href', '<?=_URL_CART?>');
@@ -81,9 +84,11 @@ switch ($act){
 
                 // Khi user nhập vào ô số lượng
                 $('input[data-label=input_quanlity]').focusout(function () {
-                    var productId       = $(this).attr('data-value');
+                    var cartId          = $(this).attr('data-value');
                     var quanlity        = $(this).val();
                     var quanlity_old    = $(this).attr('data-num');
+                    var productId       = $(this).attr('data-product');
+
                     if(isNaN(quanlity) || quanlity < 1 || quanlity > 50){
                         alert('Vui lòng nhập số lượng từ 1 đến 50');
                         return false;
@@ -95,7 +100,7 @@ switch ($act){
                         url     : '<?=_URL_HOME?>/api/ajax.php',
                         method  : 'GET',
                         dataType: 'json',
-                        data    : {'act' : 'cart', 'type' : 'add', 'id' : productId, 'quantily' : quanlity},
+                        data    : {'act' : 'cart', 'type' : 'add', 'cartId' : cartId, 'quantily' : quanlity, 'id' : productId},
                         success : function (data) {
                             if(data.response == 200){
                                 $(location).attr('href', '<?=_URL_CART?>');

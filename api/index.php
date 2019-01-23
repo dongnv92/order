@@ -18,15 +18,16 @@ switch ($act){
                 $function->redirect(_URL_REFERER);
                 break;
             case 'delete_product':
+                $cartId = isset($_GET['cartId']) && !empty($_GET['cartId']) ? $_GET['cartId'] : '';
                 // Check id product
                 if(!$id || !$function->checkData(_TABLE_PRODUCT, array('product_id' => $id))){
                     $function->redirect(_URL_REFERER);
                     break;
                 }
 
-                if($function->checkArray($_SESSION['cart'], 'productId', $id)){
+                if($function->checkArray($_SESSION['cart'], 'cartId', $cartId)){
                     foreach ($_SESSION['cart'] AS $key => $value){
-                        if($value['productId'] == $id){
+                        if($value['cartId'] == $cartId){
                             unset($_SESSION['cart'][$key]);
                         }
                     }
