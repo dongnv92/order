@@ -27,6 +27,7 @@ define('_CONGIF_FOLDER_IMAGES_PRODUCT', 'assets/images/products');
 define('_CONGIF_FOLDER_IMAGES_PRODUCT_COLOR', 'assets/images/products_color');
 define('_CONFIG_PAGINATION', 50);
 define('_CONFIG_PAGINATION_PRODUCT', 15);
+define('_CONFIG_NDT', 3500);
 
 // Đặt các giá trị hằng số các đường dẫn
 define('_URL_HOME','http://order.xoidua.com');

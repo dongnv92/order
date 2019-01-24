@@ -3,7 +3,7 @@ require_once '../../includes/core.php';
 $product            = $db->from(_TABLE_PRODUCT)->where('product_url', $url)->fetch_first();
 $header['title']    = $product['product_name'];
 $images_first       = $db->select('media_source')->from(_TABLE_MEDIA)->where(array('media_type' => 'images_product', 'media_store' => 'local', 'media_parent' => $product['product_id']))->fetch_first();
-$product_categorys  = $db->from(_TABLE_METADATA)->where(array('metadata_type' => 'category_product', 'metadata_suorce' => $product['product_id']))->fetch();
+$product_category   = $db->from(_TABLE_CATEGORY)->where('category_id', $product['product_category'])->fetch_first();;
 $product_brand      = $db->from(_TABLE_CATEGORY)->where('category_id', $product['product_brand'])->fetch_first();
 require_once 'header.php';
 ?>
@@ -11,8 +11,8 @@ require_once 'header.php';
     <div class="tt-breadcrumb">
         <div class="container">
             <ul>
-                <li><a href="index.html">Trang chủ</a></li>
-                <li><a href="listing-left-column.html">Shop</a></li>
+                <li><a href="<?=_URL_HOME?>">Trang chủ</a></li>
+                <li><a href="#">Shop</a></li>
                 <li>T-Shirt</li>
             </ul>
         </div>
@@ -62,9 +62,9 @@ require_once 'header.php';
                         <div class="tt-product-single-info">
                             <h3 class="tt-title"><?=$product['product_name']?></h3>
                             <div class="tt-price">
+                                <span class="old-price" style="color: #0c84d1"><small><?=$function->convertNumberMoney($product['product_price_default'] * _CONFIG_NDT)?>₫</small></span>
                                 <span class="new-price"><?=$function->convertNumberMoney($product['product_price_vn'])?>₫</span>
-                                <!--<span class="old-price" style="color: #D81B60"><small><?/*=$product['product_price_default']*/?>¥</small></span>
-                                <span class="new-price"><small><?/*=$product['product_price_promotion']*/?>¥</small></span>-->
+                                <!--<span class="new-price"><small><?/*=$product['product_price_promotion']*/?>¥</small></span>-->
                             </div>
                             <div class="tt-swatches-container">
                                 <div class="tt-wrapper">
@@ -109,7 +109,7 @@ require_once 'header.php';
                                         </div>
                                     </div>
                                     <div class="col-item">
-                                        <a href="javascript:;" id="productAddToCart" data-content="<?=$product['product_id']?>" class="btn btn-lg"><i class="icon-f-39"></i>THÊM VÀO GIỎ HÀNG</a>
+                                        <a href="javascript:;" data-goto="<?=$function->getCurrentDomain()?>" id="productAddToCart" data-content="<?=$product['product_id']?>" class="btn btn-lg"><i class="icon-f-39"></i>THÊM VÀO GIỎ HÀNG</a>
                                     </div>
                                 </div>
                             </div>
@@ -122,14 +122,7 @@ require_once 'header.php';
                             <div class="tt-wrapper">
                                 <div class="tt-add-info">
                                     <ul>
-                                        <li>Chuyên mục:
-                                            <?php
-                                            foreach ($product_categorys as $product_category){
-                                                $post_category = $db->from(_TABLE_CATEGORY)->where('category_id', $product_category['metadata_value'])->fetch_first();
-                                                echo $post_category['category_name'].', ';
-                                            }
-                                            ?>
-                                        </li>
+                                        <li>Chuyên mục: <a href="<?=$function->getUrlCategory($product_category['category_id'])?>"><?=$product_category['category_name']?></a></li>
                                         <li>Hãng: <?=$product_brand['category_name']?></li>
                                     </ul>
                                 </div>
@@ -162,91 +155,16 @@ require_once 'header.php';
                 </div>
                 <div class="tt-carousel-products row arrow-location-right-top tt-alignment-img tt-layout-product-item slick-animated-show-js">
                     <?php
-                    $db->select()->from(_TABLE_METADATA);
-                    $db->join(_TABLE_PRODUCT, 'dong_product.product_id = dong_metadata.metadata_value');
-                    $db->where(array('metadata_type' => 'category_product', 'metadata_suorce' => $product_categorys[0]['metadata_value'], 'dong_product.product_gender' => $product['product_gender']));
+                    $db->from(_TABLE_PRODUCT)->where(array('product_status !=' => 0, 'product_category' => $product['product_category']));
+                    $db->order_by('product_id', 'DESC');
                     $db->limit(8);
                     foreach ($db->fetch() as $product_list) {
-                        $db->select('media_source')->from(_TABLE_MEDIA)->where(array('media_type' => 'images_product', 'media_store' => 'local', 'media_parent' => $product_list['product_id']));
-                        $db->limit(1);
-                        $images_1 = $db->fetch_first();
-                        $db->select('media_source')->from(_TABLE_MEDIA)->where(array('media_type' => 'images_product', 'media_store' => 'local', 'media_parent' => $product_list['product_id']));
-                        $db->limit(2);
-                        $images_2 = $db->fetch_first();
-                        $product_metadata = $db->from(_TABLE_METADATA)->where(array('metadata_type' => 'category_product', 'metadata_suorce' => $product_list['product_id']))->fetch_first();
-                        $product_category = $db->from(_TABLE_CATEGORY)->where(array('category_id' => $product_metadata['metadata_value']))->fetch_first();
-                        ?>
-                        <div class="col-2 col-md-4 col-lg-3">
-                            <div class="tt-product thumbprod-center">
-                                <div class="tt-image-box">
-                                    <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView" data-tooltip="Quick View" data-tposition="left"></a>
-                                    <a href="#" class="tt-btn-wishlist" data-tooltip="Add to Wishlist" data-tposition="left"></a>
-                                    <a href="#" class="tt-btn-compare" data-tooltip="Add to Compare" data-tposition="left"></a>
-                                    <a href="<?=$function->getUrlProduct($product_list['product_id'])?>">
-                                        <span class="tt-img"><img src="<?= _URL_HOME.'/'.$images_1['media_source']?>" alt=""></span>
-                                        <span class="tt-img-roll-over"><img src="<?= _URL_HOME.'/'.$images_2['media_source']?>" alt=""></span>
-                                        <?=$product_list['product_sale'] > 0 ? '<span class="tt-label-location"><span class="tt-label-new">Giảm giá '. $product_list['product_sale'] .'%</span></span>' : ''?>
-                                    </a>
-                                </div>
-                                <div class="tt-description">
-                                    <div class="tt-row"><ul class="tt-add-info"><li><a href="#"><?=$product_category['category_name']?></a></li></ul></div>
-                                    <h2 class="tt-title"><a href="<?=$function->getUrlProduct($product_list['product_id'])?>"><?=$product_list['product_name']?></a></h2>
-                                    <div class="tt-price"><?=$function->convertNumberMoney($product_list['product_price_vn'])?>₫</div>
-                                    <div class="tt-product-inside-hover">
-                                        <div class="tt-row-btn">
-                                            <a href="javascript:;" class="tt-btn-addtocart thumbprod-button-bg" id="">THÊM VÀO GIỎ HÀNG</a>
-                                        </div>
-                                        <div class="tt-row-btn">
-                                            <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"></a>
-                                            <a href="#" class="tt-btn-wishlist"></a>
-                                            <a href="#" class="tt-btn-compare"></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <?php
+                        echo $function->getProduct($product_list['product_id'], array('type' => 'home', 'layout' => 'col-2 col-md-4 col-lg-3'));
                     }
                     ?>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Modal Add To Cart -->
-    <div class="modal  fade"  id="modalAddToCartProduct" tabindex="-1" role="dialog" aria-label="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content ">
-                <div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="icon icon-clear"></span></button></div>
-                <div class="modal-body">
-                    <div class="tt-modal-addtocart mobile">
-                        <div class="tt-modal-messages"><i class="icon-f-68"></i>Đã thêm sản phẩm vào giỏ</div>
-                        <a href="#" class="btn-link btn-close-popup">Tiếp tục mua hàng</a>
-                        <a href="<?=_URL_CART?>" class="btn-link">XEM GIỎ HÀNG</a>
-                    </div>
-                    <div class="tt-modal-addtocart desctope">
-                        <div class="row">
-                            <div class="col-12 col-lg-6">
-                                <div class="tt-modal-messages"><i class="icon-f-68"></i>Đã thêm sản phẩm vào giỏ</div>
-                                <div class="tt-modal-product">
-                                    <div class="tt-img"><img src="'. _URL_HOME .'/'. $images_1['media_source'] .'" data-src="'. _URL_HOME .'/'. $images_1['media_source'] .'" alt=""></div>
-                                    <h2 class="tt-title"><a href="'. $this->getUrlProduct($product['product_id']) .'">'. $product['product_name'] .'</a></h2>
-                                    <div class="tt-qty">Số lượng: <span>1</span></div>
-                                </div>
-                                <div class="tt-product-total"><div class="tt-total">GIÁ TIỀN: <span class="tt-price">'. $this->convertNumberMoney($product['product_price_vn']) .'đ</span></div></div>
-                            </div>
-                            <div class="col-12 col-lg-6">
-                                <a href="#" class="tt-cart-total">Bạn có '. (count($_SESSION['cart']) + 1) .' sản phẩm trong giỏ hàng
-                                    <div class="tt-total">TỔNG TIỀN: <span class="tt-price">'. $this->convertNumberMoney($this->sumPriceCart() + $product['product_price_vn']) .'đ</span></div>
-                                </a>
-                                <a href="'. _URL_HOME .'/cart" class="btn btn-border btn-close-popup">XEM GIỎ HÀNG</a>
-                                <a href="'. _URL_HOME .'/cart" class="btn">THANH TOÁN</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Modal Add To Cart -->
 <?php
 require_once 'footer.php';

@@ -29,7 +29,6 @@ switch ($act){
                     foreach ($_SESSION['cart'] AS &$cart){
                         if($cart['cartId'] == $cartId){
                             $cart['quantily']               = $quantily ? $quantily : ($type_quantily == 'minus' ? ($cart['quantily'] >= 2 ? $cart['quantily'] - 1 : $cart['quantily']) : $cart['quantily'] + 1);
-                            $flag                           = false;
                         }
                     }
                     $response['response']           = 200;

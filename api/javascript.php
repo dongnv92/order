@@ -19,14 +19,18 @@ switch ($act){
                     var productQuantily = $('input[name=quantily]').val();
                     var productSize     = $('li[data-content=product_size][class=active] a').html();
                     var productcolor    = $('li[data-content=product_color][class=active] a span img').attr('src');
+                    var productUrl      = $(this).attr('data-goto');
                     $.ajax({
-                        url     : '<?=_URL_HOME?>/api/ajax.php',
-                        method  : 'GET',
-                        dataType: 'json',
-                        data    : {'act' : 'cart', 'type' : 'add', 'id' : productId, 'size' : productSize, 'color' : productcolor, 'quantily' : productQuantily},
-                        success : function (data) {
+                        url         : '<?=_URL_HOME?>/api/ajax.php',
+                        method      : 'GET',
+                        dataType    : 'json',
+                        data        : {'act' : 'cart', 'type' : 'add', 'id' : productId, 'size' : productSize, 'color' : productcolor, 'quantily' : productQuantily},
+                        beforeSend  : function(){
+                            $('#productAddToCart').text('ĐANG THÊM VÀO GIỎ HÀNG ...');
+                        },
+                        success     : function (data) {
                             if(data.response == 200){
-
+                                $(location).attr('href', productUrl);
                             }
                         }
                     });

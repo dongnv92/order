@@ -90,31 +90,8 @@ require_once 'header.php';
                                 <p>Nhập thông tin của bạn để chúng tôi liên hệ xác nhận.</p>
                                 <form class="form-default">
                                     <div class="form-group">
-                                        <label for="address_country">COUNTRY <sup>*</sup></label>
-                                        <select id="address_country" class="form-control">
-                                            <option>Austria</option>
-                                            <option>Belgium</option>
-                                            <option>Cyprus</option>
-                                            <option>Croatia</option>
-                                            <option>Czech Republic</option>
-                                            <option>Denmark</option>
-                                            <option>Finland</option>
-                                            <option>France</option>
-                                            <option>Germany</option>
-                                            <option>Greece</option>
-                                            <option>Hungary</option>
-                                            <option>Ireland</option>
-                                            <option>France</option>
-                                            <option>Italy</option>
-                                            <option>Luxembourg</option>
-                                            <option>Netherlands</option>
-                                            <option>Poland</option>
-                                            <option>Portugal</option>
-                                            <option>Slovakia</option>
-                                            <option>Slovenia</option>
-                                            <option>Spain</option>
-                                            <option>United Kingdom</option>
-                                        </select>
+                                        <label for="address_country">Họ tên <sup>*</sup></label>
+                                        <input type="text" class="form-control" placeholder="Nhập họ tên">
                                     </div>
                                     <div class="form-group">
                                         <label for="address_province">STATE/PROVINCE <sup>*</sup></label>

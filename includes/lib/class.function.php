@@ -156,6 +156,10 @@ class orderFunction{
         return _URL_PRODUCT.'/'.$product['product_url'].'.html';
     }
 
+    function getCurrentDomain(){
+        return "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+    }
+
     // Function hiển thị chuyên mục đệ quy
     function showCategories($categories, $parent_id = 0, $char = '', $display = 'table', $option = ''){
         global $db;
@@ -405,7 +409,7 @@ class orderFunction{
                 <div class="tt-dropdown-inner">
                     <div class="tt-cart-layout">';
                         if($cart['count_cart'] == 0){
-                            $text .= '<a href="'. _URL_HOME .'" class="tt-cart-empty"><i class="icon-f-39"></i><p>Chưa có sản phẩm nào trong giỏ hàng</p></a>';
+                            $text .= '<a href="'. _URL_CART .'" class="tt-cart-empty"><i class="icon-f-39"></i><p>Chưa có sản phẩm nào trong giỏ hàng</p></a>';
                         }else{
                             $text .= '
                             <div class="tt-cart-content">

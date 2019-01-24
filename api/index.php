@@ -13,6 +13,31 @@ if(!$function->checkToken($token)){
 switch ($act){
     case 'cart':
         switch ($type){
+            case 'add':
+                // Kiểm tra sản phẩm có tồn tại không?
+                if(!$id || !$function->checkData(_TABLE_PRODUCT, array('product_id' => $id))){
+                    echo '<center><h1>SẢN PHẨM KHÔNG TỒN TẠI HOẶC ĐÃ BỊ XÓA</h1>Sản phẩm không tồn tại trên hệ thống hoặc đã bị xóa. Vui lòng thử lại. <a href="'. _URL_REFERER .'">Quay lại</a> </center>';
+                    exit();
+                }
+
+                $quantily       = isset($_GET['quantily'])      && !empty($_GET['quantily'])        ? $_GET['quantily']     : '';
+                $type_quantily  = isset($_GET['type_quantily']) && !empty($_GET['type_quantily'])   ? $_GET['type_quantily']: '';
+                $color          = isset($_GET['color'])         && !empty($_GET['color'])           ? $_GET['color']        : '';
+                $size           = isset($_GET['size'])          && !empty($_GET['size'])            ? $_GET['size']         : '';
+                $cartId         = isset($_GET['cartId'])        && !empty($_GET['cartId'])          ? $_GET['cartId']       : md5($id.($color ? '_'.$color : '').($size ? '_'.$size : ''));
+
+                // Nếu sản phẩm đã có trong giỏ hàng thì cập nhập thêm số lượng
+                if($function->checkArray($_SESSION['cart'], 'cartId', $cartId)){
+                    foreach ($_SESSION['cart'] AS &$cart){
+                        if($cart['cartId'] == $cartId){
+                            $cart['quantily']               = $quantily ? $quantily : ($type_quantily == 'minus' ? ($cart['quantily'] >= 2 ? $cart['quantily'] - 1 : $cart['quantily']) : $cart['quantily'] + 1);
+                        }
+                    }
+                }else{ // Nếu sản phẩm chưa có trong giỏ hàng thì thêm mới
+                    $_SESSION['cart'][]             = array('productId' => $id, 'quantily' => $quantily ? $quantily : 1, 'color' => $color, 'size' => $size, 'cartId' => $cartId);
+                }
+                $function->redirect(_URL_REFERER);
+                break;
             case 'delete_all':
                 unset($_SESSION['cart']);
                 $function->redirect(_URL_REFERER);
