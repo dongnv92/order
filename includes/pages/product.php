@@ -62,7 +62,7 @@ require_once 'header.php';
                         <div class="tt-product-single-info">
                             <h3 class="tt-title"><?=$product['product_name']?></h3>
                             <div class="tt-price">
-                                <span class="old-price" style="color: #0c84d1"><small><?=$function->convertNumberMoney($product['product_price_default'] * _CONFIG_NDT)?>₫</small></span>
+                                <span class="old-price" style="color: #0c84d1"><small><?=$function->convertNumberMoney(($product['product_price_default'] * _CONFIG_NDT))?>₫</small></span>
                                 <span class="new-price"><?=$function->convertNumberMoney($product['product_price_vn'])?>₫</span>
                                 <!--<span class="new-price"><small><?/*=$product['product_price_promotion']*/?>¥</small></span>-->
                             </div>

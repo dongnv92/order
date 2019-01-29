@@ -18,6 +18,9 @@ require_once '../core.php';
     <link rel="shortcut icon" href="<?=_URL_HOME?>/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="<?=_URL_STYLE?>/css/theme.css">
+    <?php foreach ($css_plus AS $css){?>
+        <link rel="stylesheet" type="text/css" href="<?php echo $css;?>">
+    <?php }?>
 </head>
 <body>
 <div id="loader-wrapper">

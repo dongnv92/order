@@ -112,5 +112,8 @@ require_once '../../includes/core.php';
 <script src="<?=_URL_STYLE?>/external/form/jquery.form.js"></script>
 <script src="<?=_URL_STYLE?>/external/form/jquery.validate.min.js"></script>
 <script src="<?=_URL_STYLE?>/external/form/jquery.form-init.js"></script>
+<?php foreach ($js_plus AS $js){?>
+    <script src="<?php echo $js;?>" type="text/javascript"></script>
+<?php } ?>
 </body>
 </html>

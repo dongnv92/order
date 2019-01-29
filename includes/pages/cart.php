@@ -94,49 +94,31 @@ require_once 'header.php';
                                         <input type="text" class="form-control" placeholder="Nhập họ tên">
                                     </div>
                                     <div class="form-group">
-                                        <label for="address_province">STATE/PROVINCE <sup>*</sup></label>
-                                        <select id="address_province" class="form-control">
-                                            <option>State/Province</option>
-                                        </select>
+                                        <label for="address_province">Số điện thoại <sup>*</sup></label>
+                                        <input type="text" class="form-control" placeholder="Nhập số điện thoại">
                                     </div>
                                     <div class="form-group">
-                                        <label for="address_zip">ZIP/POSTAL CODE <sup>*</sup></label>
-                                        <input type="text" name="name" class="form-control" id="address_zip" placeholder="Zip/Postal Code">
+                                        <label for="address_province">Số địa chỉ cụ thể <sup>*</sup></label>
+                                        <input type="text" class="form-control" placeholder="Nhập địa chỉ nhận hàng">
                                     </div>
-                                    <a href="#" class="btn btn-border">CALCULATE SHIPPING</a>
-                                    <p>
-                                        There is one shipping rate available for Alabama, Tanzania, United Republic Of.
-                                    </p>
-                                    <ul class="tt-list-dot list-dot-large">
-                                        <li><a href="#">International Shipping at $20.00</a></li>
-                                    </ul>
                                 </form>
                             </div>
                             <div class="tt-shopcart-box">
-                                <h4 class="tt-title">
-                                    NOTE
-                                </h4>
-                                <p>Add special instructions for your order...</p>
+                                <p>Ghi Chú</p>
                                 <form class="form-default">
-                                    <textarea class="form-control" rows="7"></textarea>
+                                    <textarea class="form-control" rows="6"></textarea>
                                 </form>
                             </div>
                             <div class="tt-shopcart-box tt-boredr-large">
                                 <table class="tt-shopcart-table01">
-                                    <tbody>
-                                    <tr>
-                                        <th>SUBTOTAL</th>
-                                        <td>$324</td>
-                                    </tr>
-                                    </tbody>
                                     <tfoot>
                                     <tr>
-                                        <th>GRAND TOTAL</th>
-                                        <td>$324</td>
+                                        <th>TỔNG TIỀN</th>
+                                        <td><?=$function->sumPriceCart()?></td>
                                     </tr>
                                     </tfoot>
                                 </table>
-                                <a href="#" class="btn btn-lg"><span class="icon icon-check_circle"></span>PROCEED TO CHECKOUT</a>
+                                <a href="#" class="btn btn-lg"><span class="icon icon-check_circle"></span>ĐẶT HÀNG</a>
                             </div>
                         </div>
                     </div>
