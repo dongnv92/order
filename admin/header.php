@@ -110,6 +110,16 @@ $header['title'] = isset($header['title']) && !empty($header['title']) ? $header
                     <li <?php echo ($admin_module == 'category' && $type == 'quality') ? 'class="active"' : '';?>><a class="menu-item" href="<?php echo _URL_ADMIN;?>/category.php?type=quality"><i class="la la-certificate"></i> Loại sản phẩm</a></li>
                 </ul>
             </li>
+            <li class=" nav-item">
+                <a href="#"><i class="ft-shopping-cart"></i><span class="ft-edit">Sản Phẩm</span></a>
+                <ul class="menu-content">
+                    <li <?php echo ($admin_module == 'product' && in_array($act, array('', 'update'))) ? 'class="active"' : '';?>><a class="menu-item" href="<?php echo _URL_ADMIN;?>/product.php"><i class="ft-list"></i> Danh sách sản phẩm</a></li>
+                    <li <?php echo ($admin_module == 'product' && $act == 'add') ? 'class="active"' : '';?>><a class="menu-item" href="<?php echo _URL_ADMIN;?>/product.php?act=add"><i class="ft-plus"></i> Thêm sản phẩm</a></li>
+                    <li <?php echo ($admin_module == 'category' && $type == 'shop') ? 'class="active"' : '';?>><a class="menu-item" href="<?php echo _URL_ADMIN;?>/category.php?type=shop"><i class="ft-hash"></i> Chuyên mục</a></li>
+                    <li <?php echo ($admin_module == 'category' && $type == 'brand') ? 'class="active"' : '';?>><a class="menu-item" href="<?php echo _URL_ADMIN;?>/category.php?type=brand"><i class="la la-twitter-square"></i> Thương Hiệu</a></li>
+                    <li <?php echo ($admin_module == 'category' && $type == 'quality') ? 'class="active"' : '';?>><a class="menu-item" href="<?php echo _URL_ADMIN;?>/category.php?type=quality"><i class="la la-certificate"></i> Loại sản phẩm</a></li>
+                </ul>
+            </li>
             <li class=" navigation-header"><span data-i18n="nav.category.layouts">Điều hướng</span><i class="la la-ellipsis-h ft-minus" data-toggle="tooltip" data-placement="right" data-original-title="Layouts"></i></li>
             <li class=" nav-item"><a href="<?php echo _URL_HOME;?>" target="_blank"><i class="la la-home"></i><span class="menu-title">Trang Chủ</span></a></li>
             <li class=" nav-item"><a href="<?php echo _URL_LOGOUT;?>"><i class="la la-long-arrow-left"></i><span class="menu-title">Đăng xuất</span></a></li>

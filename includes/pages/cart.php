@@ -8,6 +8,59 @@
 require_once '../core.php';
 $header['title'] = 'Giỏ hàng của bạn';
 require_once 'header.php';
+if($submit){
+    $bill_name      = isset($_POST['bill_name'])    && !empty($_POST['bill_name'])      ? $_POST['bill_name']       : $product['bill_name'];
+    $bill_phone     = isset($_POST['bill_phone'])   && !empty($_POST['bill_phone'])     ? $_POST['bill_phone']      : $product['bill_phone'];
+    $bill_address   = isset($_POST['bill_address']) && !empty($_POST['bill_address'])   ? $_POST['bill_address']    : $product['bill_address'];
+    $bill_note      = isset($_POST['bill_note'])    && !empty($_POST['bill_note'])      ? $_POST['bill_note']       : $product['bill_note'];
+    $error          = array();
+    if(!$bill_name){
+        $error['bill_name']     = 'Bạn cần nhập họ tên';
+    }
+    if(!$bill_phone){
+        $error['bill_phone']    = 'Bạn cần nhập số điện thoại';
+    }
+    if(strlen($bill_phone) != 10 || !is_numeric($bill_phone)){
+        $error['bill_phone']    = 'Số điện thoại không hợp lệ';
+    }
+    if(!$bill_address){
+        $error['bill_address']  = 'Bạn cần nhập địa chỉ';
+    }
+
+    if(!$error){
+        $data_bill = array(
+            'bill_code'         => $function->createBillCode(),
+            'bill_name'         => $bill_name,
+            'bill_phone'        => $bill_phone,
+            'bill_address'      => $bill_address,
+            'bill_note'         => $bill_note,
+            'bill_user'         => $user['user_id']?$user['user_id']:0,
+            'bill_user_process' => 0,
+            'bill_total_money'  => $function->sumPriceCart(),
+            'bill_status'       => 0,
+            'bill_time'         => date('Y/m/d H:i:s', _CONGIF_TIME)
+        );
+        $bill = $db->insert(_TABLE_BILL, $data_bill);
+        if($bill){
+            foreach ($_SESSION['cart'] as $cart){
+                $product_cart = $db->select()->from(_TABLE_PRODUCT)->where('product_id', $cart['productId'])->fetch_first();
+                $data_bill_product = array(
+                    'bill_product_bill'         => $bill,
+                    'bill_product_product'      => $cart['productId'],
+                    'bill_product_size'         => $cart['size'],
+                    'bill_product_color'        => $cart['color'],
+                    'bill_product_quantity'     => $cart['quantily'],
+                    'bill_product_price'        => $product_cart['product_price_vn'],
+                    'bill_product_total_price'  => ($product_cart['product_price_vn'] * $cart['quantily']),
+                    'bill_product_time'         => date('Y/m/d H:i:s', _CONGIF_TIME),
+                );
+                $db->insert(_TABLE_BILL_PRODUCT, $data_bill_product);
+            }
+            unset($_SESSION['cart']);
+            $function->redirect($function->getCurrentDomain());
+        }
+    }
+}
 ?>
     <div class="tt-breadcrumb">
         <div class="container">
@@ -84,43 +137,44 @@ require_once 'header.php';
                         </div>
                     </div>
                     <div class="col-sm-12 col-xl-4">
-                        <div class="tt-shopcart-wrapper">
-                            <div class="tt-shopcart-box">
-                                <h4 class="tt-title">THÔNG TIN KHÁCH HÀNG</h4>
-                                <p>Nhập thông tin của bạn để chúng tôi liên hệ xác nhận.</p>
-                                <form class="form-default">
+                        <form class="form-default" action="" method="post">
+                            <div class="tt-shopcart-wrapper">
+                                <div class="tt-shopcart-box">
+                                    <h4 class="tt-title">THÔNG TIN KHÁCH HÀNG</h4>
+                                    <p>Nhập thông tin của bạn để chúng tôi liên hệ xác nhận.</p>
                                     <div class="form-group">
                                         <label for="address_country">Họ tên <sup>*</sup></label>
-                                        <input type="text" class="form-control" placeholder="Nhập họ tên">
+                                        <input type="text" class="form-control" required name="bill_name" value="<?=$bill_name?>" placeholder="Nhập họ tên">
+                                        <?=$error['bill_name']?'<span class="text-danger"><small>'. $error['bill_name'] .'</small></span>':''?>
                                     </div>
                                     <div class="form-group">
                                         <label for="address_province">Số điện thoại <sup>*</sup></label>
-                                        <input type="text" class="form-control" placeholder="Nhập số điện thoại">
+                                        <input type="text" class="form-control" required name="bill_phone" value="<?=$bill_phone?>" placeholder="Nhập số điện thoại">
+                                        <?=$error['bill_phone']?'<span class="text-danger"><small>'. $error['bill_phone'] .'</small></span>':''?>
                                     </div>
                                     <div class="form-group">
                                         <label for="address_province">Số địa chỉ cụ thể <sup>*</sup></label>
-                                        <input type="text" class="form-control" placeholder="Nhập địa chỉ nhận hàng">
+                                        <input type="text" class="form-control" required name="bill_address" value="<?=$bill_address?>" placeholder="Nhập địa chỉ nhận hàng">
+                                        <?=$error['bill_address']?'<span class="text-danger"><small>'. $error['bill_address'] .'</small></span>':''?>
                                     </div>
-                                </form>
+                                </div>
+                                <div class="tt-shopcart-box">
+                                    <p>Ghi Chú</p>
+                                    <textarea class="form-control" name="bill_note" rows="6"><?=$bill_note?></textarea>
+                                </div>
+                                <div class="tt-shopcart-box tt-boredr-large">
+                                    <table class="tt-shopcart-table01">
+                                        <tfoot>
+                                        <tr>
+                                            <th>TỔNG TIỀN</th>
+                                            <td><?=$function->convertNumberMoney($function->sumPriceCart()).'đ'?></td>
+                                        </tr>
+                                        </tfoot>
+                                    </table>
+                                    <input type="submit" name="submit" class="btn btn-lg" value="ĐẶT HÀNG">
+                                </div>
                             </div>
-                            <div class="tt-shopcart-box">
-                                <p>Ghi Chú</p>
-                                <form class="form-default">
-                                    <textarea class="form-control" rows="6"></textarea>
-                                </form>
-                            </div>
-                            <div class="tt-shopcart-box tt-boredr-large">
-                                <table class="tt-shopcart-table01">
-                                    <tfoot>
-                                    <tr>
-                                        <th>TỔNG TIỀN</th>
-                                        <td><?=$function->sumPriceCart()?></td>
-                                    </tr>
-                                    </tfoot>
-                                </table>
-                                <a href="#" class="btn btn-lg"><span class="icon icon-check_circle"></span>ĐẶT HÀNG</a>
-                            </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>

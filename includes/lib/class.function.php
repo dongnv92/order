@@ -192,6 +192,11 @@ class orderFunction{
         }
     }
 
+    function createBillCode(){
+        $random_string = substr(str_shuffle("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 4);
+        return $random_string;
+    }
+
     // Tạo ngẫu nhiên các ký tự
     public function randomString($length = 10){
         $random_string = substr(str_shuffle("_0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, $length);
@@ -484,51 +489,13 @@ class orderFunction{
                         <div class="tt-price">'. $this->convertNumberMoney($product['product_price_vn']) .'₫</div>
                         <div class="tt-product-inside-hover">
                             <div class="tt-row-btn">
-                                <a href="javascript:;" class="tt-btn-addtocart thumbprod-button-bg" data-toggle="modal" data-target="#modalAddToCartProduct_'. $product['product_id'] .'" data-content="'. $product['product_id'] .'" data-label="addToCart">THÊM VÀO GIỎ HÀNG</a>
+                                <a href="javascript:;" class="tt-btn-addtocart thumbprod-button-bg" data-goto="'. $this->getCurrentDomain() .'" data-toggle="modal" data-target="#modalAddToCartProduct_'. $product['product_id'] .'" data-content="'. $product['product_id'] .'" data-label="addToCart">THÊM VÀO GIỎ HÀNG</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- Product Detail -->
-            
-            <!-- Product Modal -->
-            <div class="modal  fade"  id="modalAddToCartProduct_'. $product['product_id'] .'" tabindex="-1" role="dialog" aria-label="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content ">
-                        <div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="icon icon-clear"></span></button></div>
-                        <div class="modal-body">
-                            <div class="tt-modal-addtocart mobile">
-                                <div class="tt-modal-messages"><i class="icon-f-68"></i>Đã thêm sản phẩm vào giỏ</div>
-                                <a href="#" class="btn-link btn-close-popup">Tiếp tục mua hàng</a>
-                                <a href="page404.html" class="btn-link">XEM GIỎ HÀNG</a>
-                            </div>
-                            <div class="tt-modal-addtocart desctope">
-                                <div class="row">
-                                    <div class="col-12 col-lg-6">
-                                        <div class="tt-modal-messages"><i class="icon-f-68"></i>Đã thêm sản phẩm vào giỏ</div>
-                                        <div class="tt-modal-product">
-                                            <div class="tt-img"><img src="'. _URL_HOME .'/'. $images_1['media_source'] .'" data-src="'. _URL_HOME .'/'. $images_1['media_source'] .'" alt=""></div>
-                                            <h2 class="tt-title"><a href="'. $this->getUrlProduct($product['product_id']) .'">'. $product['product_name'] .'</a></h2>
-                                            <div class="tt-qty">Số lượng: <span>1</span></div>
-                                        </div>
-                                        <div class="tt-product-total"><div class="tt-total">GIÁ TIỀN: <span class="tt-price">'. $this->convertNumberMoney($product['product_price_vn']) .'đ</span></div></div>
-                                    </div>
-                                    <div class="col-12 col-lg-6">
-                                        <a href="#" class="tt-cart-total">Bạn có '. (count($_SESSION['cart']) + 1) .' sản phẩm trong giỏ hàng
-                                            <div class="tt-total">TỔNG TIỀN: <span class="tt-price">'. $this->convertNumberMoney($this->sumPriceCart() + $product['product_price_vn']) .'đ</span></div>
-                                        </a>
-                                        <a href="'. _URL_HOME .'/cart" class="btn btn-border btn-close-popup">XEM GIỎ HÀNG</a>
-                                        <a href="'. _URL_HOME .'/cart" class="btn">THANH TOÁN</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Product Modal -->
-            ';
+            <!-- Product Detail -->';
         }
         return $text;
     }

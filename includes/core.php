@@ -47,6 +47,8 @@ define('_TABLE_CATEGORY','dong_category');
 define('_TABLE_MEDIA','dong_media');
 define('_TABLE_METADATA','dong_metadata');
 define('_TABLE_PRODUCT','dong_product');
+define('_TABLE_BILL','dong_bill');
+define('_TABLE_BILL_PRODUCT','dong_bill_product');
 
 // Đặt các giá trị hằng số cho thông tin kết nối cơ sở dữ liệu
 define('_DB_HOST','localhost');
