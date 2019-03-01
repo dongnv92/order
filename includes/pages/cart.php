@@ -6,13 +6,12 @@
  * Time: 16:23
  */
 require_once '../core.php';
-$header['title'] = 'Giỏ hàng của bạn';
-require_once 'header.php';
+$bill_name      = isset($_POST['bill_name'])    && !empty($_POST['bill_name'])      ? $_POST['bill_name']       : $user['user_name'];
+$bill_phone     = isset($_POST['bill_phone'])   && !empty($_POST['bill_phone'])     ? $_POST['bill_phone']      : $user['user_phone'];
+$bill_address   = isset($_POST['bill_address']) && !empty($_POST['bill_address'])   ? $_POST['bill_address']    : $user['user_address'];
+$bill_note      = isset($_POST['bill_note'])    && !empty($_POST['bill_note'])      ? $_POST['bill_note']       : '';
+
 if($submit){
-    $bill_name      = isset($_POST['bill_name'])    && !empty($_POST['bill_name'])      ? $_POST['bill_name']       : $product['bill_name'];
-    $bill_phone     = isset($_POST['bill_phone'])   && !empty($_POST['bill_phone'])     ? $_POST['bill_phone']      : $product['bill_phone'];
-    $bill_address   = isset($_POST['bill_address']) && !empty($_POST['bill_address'])   ? $_POST['bill_address']    : $product['bill_address'];
-    $bill_note      = isset($_POST['bill_note'])    && !empty($_POST['bill_note'])      ? $_POST['bill_note']       : $product['bill_note'];
     $error          = array();
     if(!$bill_name){
         $error['bill_name']     = 'Bạn cần nhập họ tên';
@@ -29,12 +28,12 @@ if($submit){
 
     if(!$error){
         $data_bill = array(
-            'bill_code'         => $function->createBillCode(),
+            'bill_code'         => $function->createBillCode(5),
             'bill_name'         => $bill_name,
             'bill_phone'        => $bill_phone,
             'bill_address'      => $bill_address,
             'bill_note'         => $bill_note,
-            'bill_user'         => $user['user_id']?$user['user_id']:0,
+            'bill_user'         => $user?$user['user_id']:0,
             'bill_user_process' => 0,
             'bill_total_money'  => $function->sumPriceCart(),
             'bill_status'       => 0,
@@ -57,16 +56,40 @@ if($submit){
                 $db->insert(_TABLE_BILL_PRODUCT, $data_bill_product);
             }
             unset($_SESSION['cart']);
-            $function->redirect($function->getCurrentDomain());
+            $header['title'] = 'Giỏ hàng của bạn';
+            require_once 'header.php';
+            ?>
+            <div class="tt-breadcrumb">
+                <div class="container">
+                    <ul>
+                        <li><a href="<?=_URL_HOME?>">Trang chủ</a></li>
+                        <li>Giỏ hàng của bạn</li>
+                    </ul>
+                </div>
+            </div>
+            <div id="tt-pageContent">
+                <div class="container-indent nomargin">
+                    <div class="tt-empty-cart">
+                        <span class="tt-icon icon-f-39"></span>
+                        <h1 class="tt-title">CẢM ƠN BẠN ĐÃ ĐẶT HÀNG</h1>
+                        <p>Đơn hàng của bạn đã được tạo, chúng tôi sẽ liên hệ với bạn sớm nhất để xác nhận.</p>
+                        <a href="<?=_URL_HOME?>" class="btn">TIẾP TỤC MUA HÀNG</a>
+                    </div>
+                </div>
+            </div>
+            <?php
+            require_once 'footer.php';
         }
     }
 }
+$header['title'] = 'Giỏ hàng của bạn';
+require_once 'header.php';
 ?>
     <div class="tt-breadcrumb">
         <div class="container">
             <ul>
                 <li><a href="<?=_URL_HOME?>">Trang chủ</a></li>
-                <li><a href="<?=_URL_HOME?>/cart">Giỏ hàng của bạn</a></li>
+                <li><a href="<?=_URL_CART?>">Giỏ hàng của bạn</a></li>
             </ul>
         </div>
     </div>

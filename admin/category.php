@@ -13,7 +13,7 @@ $admin_module   = 'category';
 
 switch ($act){
     default:
-        if(!in_array($type, array('shop', 'brand', 'quality'))){
+        if(!in_array($type, array('shop', 'brand', 'quality', 'role', 'payment_method'))){
             $admin_title = 'Chuyên Mục';
             require_once 'header.php';
             echo $function->getPanelError(array('title' => 'Trang Không Tồn Tại', 'content' => 'Không đúng định dạng chuyên mục !'));
@@ -72,7 +72,28 @@ switch ($act){
             'app-assets/vendors/js/extensions/sweetalert.min.js',
             'app-assets/js/scripts/extensions/sweet-alerts.min.js'
         );
-        $admin_title = 'Chuyên Mục';
+
+        switch ($act){
+            default:
+                switch ($type){
+                    case 'role':
+                        $header['title'] = 'Vai trò thành viên';
+                        break;
+                    case 'shop':
+                        $header['title'] = 'Chuyên mục sản phẩm';
+                        break;
+                    case 'brand':
+                        $header['title'] = 'Danh sách thương hiệu';
+                        break;
+                    case 'quality':
+                        $header['title'] = 'Danh sách loại sản phẩm';
+                        break;
+                    case 'payment_method':
+                        $header['title'] = 'Hình thức thanh toán';
+                        break;
+                }
+                break;
+        }
         require_once 'header.php';
         ?>
         <div class="row">
@@ -112,7 +133,7 @@ switch ($act){
                         <div class="table-responsive">
                             <table class="table mb-0" id="table_content">
                                 <tbody>
-                                <?php $function->showCategories($db->select('category_id, category_name, category_parent')->from(_TABLE_CATEGORY)->where(array('category_type' => $type))->fetch(), 0, '','table'); ?>
+                                <?php $function->showCategories($db->select('category_id, category_name, category_parent, category_type')->from(_TABLE_CATEGORY)->where(array('category_type' => $type))->fetch(), 0, '','table'); ?>
                                 </tbody>
                             </table>
                         </div>

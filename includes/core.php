@@ -30,9 +30,11 @@ define('_CONFIG_PAGINATION_PRODUCT', 15);
 define('_CONFIG_NDT', 3500);
 
 // Đặt các giá trị hằng số các đường dẫn
-define('_URL_HOME','http://order.xoidua.com');
+//define('_URL_HOME','http://order.xoidua.com');
+define('_URL_HOME','http://localhost/dong/order');
 define('_URL_LOGIN',_URL_HOME.'/login');
 define('_URL_LOGOUT',_URL_HOME.'/logout');
+define('_URL_REGISTER',_URL_HOME.'/register');
 define('_URL_ADMIN',_URL_HOME.'/admin');
 define('_URL_BACK', isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : _URL_ADMIN);
 define('_URL_STYLE', _URL_HOME.'/assets');
@@ -51,10 +53,16 @@ define('_TABLE_BILL','dong_bill');
 define('_TABLE_BILL_PRODUCT','dong_bill_product');
 
 // Đặt các giá trị hằng số cho thông tin kết nối cơ sở dữ liệu
-define('_DB_HOST','localhost');
+/*define('_DB_HOST','localhost');
 define('_DB_USERNAME','xoiduaco');
 define('_DB_PASSWORD','Nkthanh88...');
-define('_DB_DATABASE','xoiduaco_order');
+define('_DB_DATABASE','xoiduaco_order');*/
+
+define('_DB_HOST','localhost');
+define('_DB_USERNAME','root');
+define('_DB_PASSWORD','');
+define('_DB_DATABASE','order');
+
 
 $db     = new Database(_DB_HOST, _DB_USERNAME,_DB_PASSWORD,_DB_DATABASE);
 

@@ -944,9 +944,10 @@ switch ($act){
         $product_where = array();
         $product_where['product_status !='] = 0;
         // Tính tổng số lượng product
-        $db->select('product_id')->from(_TABLE_PRODUCT)->where($product_where)->fetch();
+        $db->select('product_id')->from(_TABLE_PRODUCT)->where($product_where)->execute();
+        $pagination['count']       = $db->affected_rows;
         $pagination['page_row']    = _CONFIG_PAGINATION;
-        $pagination['page_num']    = ceil($db->affected_rows/$pagination['page_row']);
+        $pagination['page_num']    = ceil($pagination['count']/$pagination['page_row']);
         $pagination['url']         = _URL_ADMIN.'/product.php?page={page}';
         $page_start                = ($page-1) * $pagination['page_row'];
 
@@ -974,7 +975,7 @@ switch ($act){
         $header['breadcrumbs']  = array(_URL_ADMIN.'/product.php' => 'Sản phẩm', _URL_ADMIN.'/product.php' => 'Danh sách sản phẩm', _URL_ADMIN.'/product.php?act=add' => 'Thêm sản phẩm');
         $header['title']        = 'Danh sách sản phẩm';
         require_once 'header.php';
-        echo $function->breadcrumbs($header['title'], $header['breadcrumbs']);
+        echo $function->breadcrumbs($header['title'].' ('. $pagination['count'] .')', $header['breadcrumbs']);
         ?>
         <div class="row clearfix">
             <div class="col-lg-12">

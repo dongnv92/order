@@ -7,6 +7,54 @@
  */
 require_once '../includes/core.php';
 $header['title'] = isset($header['title']) && !empty($header['title']) ? $header['title'] : 'SHOP ORDER';
+
+$db->select('bill_id')->from(_TABLE_BILL)->where('bill_user', $user['user_id'])->execute();
+$bill_all = $db->affected_rows;
+if($bill_all > 0){
+    $bill_all = '<div class="badge badge-pill badge-info float-right">'. $bill_all .'</div>';
+}else{
+    $bill_all = '';
+}
+
+$db->select('bill_id')->from(_TABLE_BILL)->where(array('bill_user' => $user['user_id'], 'bill_status' => 0))->execute();
+$bill_0 = $db->affected_rows;
+if($bill_0 > 0){
+    $bill_0 = '<div class="badge badge-pill badge-info float-right">'. $bill_0 .'</div>';
+}else{
+    $bill_0 = '';
+}
+
+$db->select('bill_id')->from(_TABLE_BILL)->where(array('bill_user' => $user['user_id'], 'bill_status' => 1))->execute();
+$bill_1 = $db->affected_rows;
+if($bill_1 > 0){
+    $bill_1 = '<div class="badge badge-pill badge-info float-right">'. $bill_1 .'</div>';
+}else{
+    $bill_1 = '';
+}
+
+$db->select('bill_id')->from(_TABLE_BILL)->where(array('bill_user' => $user['user_id'], 'bill_status' => 2))->execute();
+$bill_2 = $db->affected_rows;
+if($bill_2 > 0){
+    $bill_2 = '<div class="badge badge-pill badge-info float-right">'. $bill_2 .'</div>';
+}else{
+    $bill_2 = '';
+}
+
+$db->select('bill_id')->from(_TABLE_BILL)->where(array('bill_user' => $user['user_id'], 'bill_status' => 3))->execute();
+$bill_3 = $db->affected_rows;
+if($bill_3 > 0){
+    $bill_3 = '<div class="badge badge-pill badge-info float-right">'. $bill_3 .'</div>';
+}else{
+    $bill_3 = '';
+}
+
+$db->select('bill_id')->from(_TABLE_BILL)->where(array('bill_user' => $user['user_id'], 'bill_status' => 4))->execute();
+$bill_4 = $db->affected_rows;
+if($bill_4 > 0){
+    $bill_4 = '<div class="badge badge-pill badge-info float-right">'. $bill_4 .'</div>';
+}else{
+    $bill_4 = '';
+}
 ?>
 <!DOCTYPE html>
 <html class="loading" lang="en" data-textdirection="ltr">
@@ -98,10 +146,95 @@ $header['title'] = isset($header['title']) && !empty($header['title']) ? $header
     <div class="main-menu-content">
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
             <li class=" navigation-header">
-                <span data-i18n="nav.category.layouts">Nội dung</span><i class="la la-ellipsis-h ft-minus" data-toggle="tooltip" data-placement="right" data-original-title="Layouts"></i>
+                <span data-i18n="nav.category.layouts">Nội dung</span>
+                <i class="la la-ellipsis-h ft-minus" data-toggle="tooltip" data-placement="right" data-original-title="Layouts"></i>
             </li>
             <li class=" nav-item">
-                <a href="#"><i class="ft-shopping-cart"></i><span class="menu-title">Sản Phẩm</span></a>
+                <a href="#"><i class="la la-list-alt"></i><span class="menu-title">Đơn hàng</span></a>
+                <ul class="menu-content">
+                    <li <?php echo ($admin_module == 'purchase' && in_array($type, array('')) && !$act) ? 'class="active"' : '';?>>
+                        <a class="menu-item" href="<?php echo _URL_ADMIN;?>/purchase.php"><i class="ft-list"></i> Đơn hàng của bạn <?=$bill_all?></a>
+                    </li>
+                    <li <?php echo ($admin_module == 'purchase' && in_array($type, array('review')) && !$act) ? 'class="active"' : '';?>>
+                        <a class="menu-item" href="<?php echo _URL_ADMIN;?>/purchase.php?type=review"><i class="ft-clock"></i> Đang xét duyệt <?=$bill_0?></a>
+                    </li>
+                    <li <?php echo ($admin_module == 'purchase' && in_array($type, array('pickup')) && !$act) ? 'class="active"' : '';?>>
+                        <a class="menu-item" href="<?php echo _URL_ADMIN;?>/purchase.php?type=pickup"><i class="la la-coffee"></i> Đang lấy hàng <?=$bill_1?></a>
+                    </li>
+                    <li <?php echo ($admin_module == 'purchase' && in_array($type, array('delivery')) && !$act) ? 'class="active"' : '';?>>
+                        <a class="menu-item" href="<?php echo _URL_ADMIN;?>/purchase.php?type=delivery"><i class="la la-truck"></i> Đang giao <?=$bill_2?></a>
+                    </li>
+                    <li <?php echo ($admin_module == 'purchase' && in_array($type, array('done')) && !$act) ? 'class="active"' : '';?>>
+                        <a class="menu-item" href="<?php echo _URL_ADMIN;?>/purchase.php?type=done"><i class="la la-hand-peace-o"></i> Đã giao <?=$bill_3?></a>
+                    </li>
+                    <li <?php echo ($admin_module == 'purchase' && in_array($type, array('cancel')) && !$act) ? 'class="active"' : '';?>>
+                        <a class="menu-item" href="<?php echo _URL_ADMIN;?>/purchase.php?type=cancel"><i class="la la-undo"></i> Đã hủy <?=$bill_4?></a>
+                    </li>
+                </ul>
+            </li>
+            <li class=" nav-item">
+                <a href="#"><i class="la la-money"></i><span class="menu-title">Hóa đơn</span></a>
+                <ul class="menu-content">
+                    <li <?php echo ($admin_module == 'payment' && in_array($type, array(''))) ? 'class="active"' : '';?>><a class="menu-item" href="<?php echo _URL_ADMIN;?>/payment.php"><i class="la la-clipboard"></i> Hóa đơn của bạn</a></li>
+                </ul>
+            </li>
+            <?php
+                if(in_array($user['user_role'], array(35))){
+                    $db->select('bill_id')->from(_TABLE_BILL)->execute();
+                    $bill_all = $db->affected_rows;
+                    if($bill_all > 0){
+                        $bill_all = '<div class="badge badge-pill badge-info float-right">'. $bill_all .'</div>';
+                    }else{
+                        $bill_all = '';
+                    }
+
+                    $db->select('bill_id')->from(_TABLE_BILL)->where('bill_status', 0)->execute();
+                    $bill_0 = $db->affected_rows;
+                    if($bill_0 > 0){
+                        $bill_0 = '<div class="badge badge-pill badge-info float-right">'. $bill_0 .'</div>';
+                    }else{
+                        $bill_0 = '';
+                    }
+
+                    $db->select('bill_id')->from(_TABLE_BILL)->where('bill_status', 1)->execute();
+                    $bill_1 = $db->affected_rows;
+                    if($bill_1 > 0){
+                        $bill_1 = '<div class="badge badge-pill badge-info float-right">'. $bill_1 .'</div>';
+                    }else{
+                        $bill_1 = '';
+                    }
+
+                    $db->select('bill_id')->from(_TABLE_BILL)->where('bill_status', 2)->execute();
+                    $bill_2 = $db->affected_rows;
+                    if($bill_2 > 0){
+                        $bill_2 = '<div class="badge badge-pill badge-info float-right">'. $bill_2 .'</div>';
+                    }else{
+                        $bill_2 = '';
+                    }
+
+                    $db->select('bill_id')->from(_TABLE_BILL)->where('bill_status', 3)->execute();
+                    $bill_3 = $db->affected_rows;
+                    if($bill_3 > 0){
+                        $bill_3 = '<div class="badge badge-pill badge-info float-right">'. $bill_3 .'</div>';
+                    }else{
+                        $bill_3 = '';
+                    }
+
+                    $db->select('bill_id')->from(_TABLE_BILL)->where('bill_status', 4)->execute();
+                    $bill_4 = $db->affected_rows;
+                    if($bill_4 > 0){
+                        $bill_4 = '<div class="badge badge-pill badge-info float-right">'. $bill_4 .'</div>';
+                    }else{
+                        $bill_4 = '';
+                    }
+            ?>
+            <!-- BAN QUẢN TRỊ -->
+            <li class=" navigation-header">
+                <span data-i18n="nav.category.layouts">Ban Quản Trị</span>
+                <i class="la la-diamond ft-minus" data-toggle="tooltip" data-placement="right" data-original-title="Layouts"></i>
+            </li>
+            <li class=" nav-item">
+                <a href="#"><i class="ft-shopping-cart"></i><span class="menu-title">Sản phẩm</span></a>
                 <ul class="menu-content">
                     <li <?php echo ($admin_module == 'product' && in_array($act, array('', 'update'))) ? 'class="active"' : '';?>><a class="menu-item" href="<?php echo _URL_ADMIN;?>/product.php"><i class="ft-list"></i> Danh sách sản phẩm</a></li>
                     <li <?php echo ($admin_module == 'product' && $act == 'add') ? 'class="active"' : '';?>><a class="menu-item" href="<?php echo _URL_ADMIN;?>/product.php?act=add"><i class="ft-plus"></i> Thêm sản phẩm</a></li>
@@ -111,16 +244,61 @@ $header['title'] = isset($header['title']) && !empty($header['title']) ? $header
                 </ul>
             </li>
             <li class=" nav-item">
-                <a href="#"><i class="ft-shopping-cart"></i><span class="ft-edit">Sản Phẩm</span></a>
+                <a href="#"><i class="la la-list-alt"></i><span class="menu-title">Quản lý đơn hàng</span></a>
                 <ul class="menu-content">
-                    <li <?php echo ($admin_module == 'product' && in_array($act, array('', 'update'))) ? 'class="active"' : '';?>><a class="menu-item" href="<?php echo _URL_ADMIN;?>/product.php"><i class="ft-list"></i> Danh sách sản phẩm</a></li>
-                    <li <?php echo ($admin_module == 'product' && $act == 'add') ? 'class="active"' : '';?>><a class="menu-item" href="<?php echo _URL_ADMIN;?>/product.php?act=add"><i class="ft-plus"></i> Thêm sản phẩm</a></li>
-                    <li <?php echo ($admin_module == 'category' && $type == 'shop') ? 'class="active"' : '';?>><a class="menu-item" href="<?php echo _URL_ADMIN;?>/category.php?type=shop"><i class="ft-hash"></i> Chuyên mục</a></li>
-                    <li <?php echo ($admin_module == 'category' && $type == 'brand') ? 'class="active"' : '';?>><a class="menu-item" href="<?php echo _URL_ADMIN;?>/category.php?type=brand"><i class="la la-twitter-square"></i> Thương Hiệu</a></li>
-                    <li <?php echo ($admin_module == 'category' && $type == 'quality') ? 'class="active"' : '';?>><a class="menu-item" href="<?php echo _URL_ADMIN;?>/category.php?type=quality"><i class="la la-certificate"></i> Loại sản phẩm</a></li>
+                    <li <?php echo ($admin_module == 'purchase' && $act == 'all_purchase'  && !$type) ? 'class="active"' : '';?>>
+                        <a class="menu-item" href="<?php echo _URL_ADMIN;?>/purchase.php?act=all_purchase">
+                            <i class="ft-list"></i> Tất cả đơn hàng <?=$bill_all?>
+                        </a>
+                    </li>
+                    <li <?php echo ($admin_module == 'purchase' && in_array($type, array('review')) && $act == 'all_purchase') ? 'class="active"' : '';?>>
+                        <a class="menu-item" href="<?php echo _URL_ADMIN;?>/purchase.php?type=review&act=all_purchase">
+                            <i class="ft-clock"></i> Đang xét duyệt <?=$bill_0?>
+                        </a>
+                    </li>
+                    <li <?php echo ($admin_module == 'purchase' && in_array($type, array('pickup')) && $act == 'all_purchase') ? 'class="active"' : '';?>>
+                        <a class="menu-item" href="<?php echo _URL_ADMIN;?>/purchase.php?type=pickup&act=all_purchase">
+                            <i class="la la-coffee"></i> Đang lấy hàng <?=$bill_1?>
+                        </a>
+                    </li>
+                    <li <?php echo ($admin_module == 'purchase' && in_array($type, array('delivery')) && $act == 'all_purchase') ? 'class="active"' : '';?>>
+                        <a class="menu-item" href="<?php echo _URL_ADMIN;?>/purchase.php?type=delivery&act=all_purchase">
+                            <i class="la la-truck"></i> Đang giao <?=$bill_2?>
+                        </a>
+                    </li>
+                    <li <?php echo ($admin_module == 'purchase' && in_array($type, array('done')) && $act == 'all_purchase') ? 'class="active"' : '';?>>
+                        <a class="menu-item" href="<?php echo _URL_ADMIN;?>/purchase.php?type=done&act=all_purchase">
+                            <i class="la la-hand-peace-o"></i> Đã giao <?=$bill_3?>
+                        </a>
+                    </li>
+                    <li <?php echo ($admin_module == 'purchase' && in_array($type, array('cancel')) && $act == 'all_purchase') ? 'class="active"' : '';?>>
+                        <a class="menu-item" href="<?php echo _URL_ADMIN;?>/purchase.php?type=cancel&act=all_purchase">
+                            <i class="la la-undo"></i> Đã hủy <?=$bill_4?>
+                        </a>
+                    </li>
                 </ul>
             </li>
-            <li class=" navigation-header"><span data-i18n="nav.category.layouts">Điều hướng</span><i class="la la-ellipsis-h ft-minus" data-toggle="tooltip" data-placement="right" data-original-title="Layouts"></i></li>
+            <li class=" nav-item">
+                <a href="#"><i class="la la-cogs"></i><span class="menu-title">Cài đặt</span></a>
+                <ul class="menu-content">
+                    <li <?php echo ($admin_module == 'category' && in_array($type, array('payment_method'))) ? 'class="active"' : '';?>>
+                        <a class="menu-item" href="<?php echo _URL_ADMIN;?>/category.php?type=payment_method">
+                            <i class="la la-credit-card"></i> Hình thức thanh toán
+                        </a>
+                    </li>
+                    <li <?php echo ($admin_module == 'category' && in_array($type, array('role'))) ? 'class="active"' : '';?>>
+                        <a class="menu-item" href="<?php echo _URL_ADMIN;?>/category.php?type=role">
+                            <i class="ft-users"></i> Vai trò thành viên
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <!-- BAN QUẢN TRỊ -->
+            <?php }?>
+            <li class=" navigation-header">
+                <span data-i18n="nav.category.layouts">Điều hướng</span>
+                <i class="la la-ellipsis-h ft-minus" data-toggle="tooltip" data-placement="right" data-original-title="Layouts"></i>
+            </li>
             <li class=" nav-item"><a href="<?php echo _URL_HOME;?>" target="_blank"><i class="la la-home"></i><span class="menu-title">Trang Chủ</span></a></li>
             <li class=" nav-item"><a href="<?php echo _URL_LOGOUT;?>"><i class="la la-long-arrow-left"></i><span class="menu-title">Đăng xuất</span></a></li>
         </ul>

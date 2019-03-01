@@ -8,6 +8,48 @@
 
 class orderFunction{
 
+    function checkRole($action, $value){
+        global $user, $db;
+        if($user['user_role'] == 35){
+            return true;
+        }
+
+        switch ($action){
+            case 'bill':
+                $bill = $db->select('bill_user')->from(_TABLE_BILL)->where('bill_code', $value)->fetch_first();
+                if($bill['bill_user'] == $user['user_id']){
+                    return true;
+                }else{
+                    return false;
+                }
+                break;
+        }
+        return false;
+    }
+
+    function getStatus($key, $value){
+        switch ($key){
+            case 'dong_bill':
+                $return = array(
+                    0 => 'Đang chờ xét duyệt',
+                    1 => 'Đang chờ lấy hàng',
+                    2 => 'Đang giao hàng',
+                    3 => 'Đã giao hàng',
+                    4 => 'Đã hủy'
+                );
+                break;
+            case 'dong_payment':
+                $return = array(
+                    0 => 'Đã thanh toán',
+                    1 => 'Chưa thanh toán',
+                    2 => 'Hủy thanh toán',
+                    3 => 'Hoàn tiền'
+                );
+                break;
+        }
+        return $return[$value];
+    }
+
     // Tạo Mã Token
     function createToken(){
         $key_start  = 'DONG';
@@ -162,12 +204,11 @@ class orderFunction{
 
     // Function hiển thị chuyên mục đệ quy
     function showCategories($categories, $parent_id = 0, $char = '', $display = 'table', $option = ''){
-        global $db;
         foreach ($categories as $key => $item) {
             if ($item['category_parent'] == $parent_id){
                 if($display == 'table'){
                     echo '<tr id="tr_'. $item['category_id'] .'">
-                    <td width="80%">'. $char . $item['category_name'] .'</td>
+                    <td width="80%"><a href="'. _URL_ADMIN .'/category.php?act=update&id='. $item['category_id'] .'&type='. $item['category_type'] .'">'. $char . $item['category_name'] .'</a></td>
                     <td class="text-right"><a title="delete" class="btn btn-outline-danger round btn-sm" id="'. $item['category_id'] .'" href="javascript:;">Xóa</a>
                     </td>
                     </tr>';
@@ -192,8 +233,11 @@ class orderFunction{
         }
     }
 
-    function createBillCode(){
-        $random_string = substr(str_shuffle("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 4);
+    function createBillCode($length = 5){
+        global $db;
+        do{
+            $random_string = substr(str_shuffle("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, $length);
+        }while($db->select('bill_code')->from(_TABLE_BILL)->where('bill_code', $random_string)->fetch());
         return $random_string;
     }
 
