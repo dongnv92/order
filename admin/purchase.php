@@ -11,6 +11,9 @@ if(!$user){$function->redirect(_URL_LOGIN);}
 $admin_module   = 'purchase';
 
 switch ($act){
+    case 'add_payment':
+
+        break;
     case 'detail':
         $bill_code          = isset($_GET['billcode']) && !empty($_GET['billcode']) ? $_GET['billcode'] : '';
         $bill               = $db->from(_TABLE_BILL)->where('bill_code', $bill_code)->fetch_first();
@@ -26,8 +29,33 @@ switch ($act){
 
         $header['title']        = 'Chi tiết đơn hàng '.$bill['bill_code'];
         $header['breadcrumbs']  = array(_URL_ADMIN.'/purchase.php' => 'Đơn hàng', $function->getCurrentDomain() => 'Xem đơn hàng');
-        $css_plus               = array(_URL_ADMIN.'/app-assets/css/plugins/forms/wizard.css');
-        $js_plus                = array(_URL_ADMIN.'/app-assets/js/scripts/forms/wizard-steps.js');
+        $css_plus       = array(
+            'app-assets/vendors/css/forms/icheck/icheck.css',
+            'app-assets/vendors/css/forms/icheck/custom.css',
+            'app-assets/vendors/css/editors/tinymce/tinymce.min.css',
+            'app-assets/vendors/css/forms/selects/select2.min.css',
+            'app-assets/vendors/css/forms/toggle/bootstrap-switch.min.css',
+            'app-assets/vendors/css/forms/toggle/switchery.min.css',
+            'app-assets/css/plugins/forms/switch.min.css',
+            'app-assets/css/core/colors/palette-switch.min.css',
+            'app-assets/vendors/css/extensions/sweetalert.css',
+            'app-assets/css/plugins/forms/wizard.css'
+        );
+        $js_plus        = array(
+            'app-assets/vendors/js/forms/icheck/icheck.min.js',
+            'app-assets/js/scripts/forms/checkbox-radio.js',
+            'app-assets/vendors/js/editors/tinymce/tinymce.js',
+            'app-assets/js/scripts/editors/editor-tinymce.min.js',
+            'app-assets/vendors/js/forms/select/select2.full.min.js',
+            'app-assets/js/scripts/forms/select/form-select2.min.js',
+            'app-assets/vendors/js/forms/toggle/bootstrap-switch.min.js',
+            'app-assets/vendors/js/forms/toggle/bootstrap-checkbox.min.js',
+            'app-assets/vendors/js/forms/toggle/switchery.min.js',
+            'app-assets/js/scripts/forms/switch.min.js',
+            'app-assets/vendors/js/extensions/sweetalert.min.js',
+            'app-assets/js/scripts/extensions/sweet-alerts.min.js',
+            'app-assets/js/scripts/forms/wizard-steps.js'
+        );
         require_once 'header.php';
         echo $function->breadcrumbs($header['title'], $header['breadcrumbs']);
         switch ($bill['bill_status']){
@@ -72,31 +100,36 @@ switch ($act){
                                     <li role="tab" class="<?=$class_?>" aria-disabled="false" aria-selected="false">
                                         <a id="steps-uid-2-t-0" href="javascript:;" aria-controls="steps-uid-2-p-0">
                                             <span class="step"><i class="la la-file-text-o"></i></span>
-                                            <strong>Đơn hàng đã đặt</strong><br /><?=date('H:i:s d/m/Y', strtotime($bill['bill_time']))?>
+                                            <strong>Đơn hàng đã đặt</strong><br />
+                                            <?=date('H:i:s d/m/Y', strtotime($bill['bill_time']))?>
                                         </a>
                                     </li>
-                                    <li role="tab" class="<?=$class_0?>" aria-disabled="false" aria-selected="false">
-                                        <a id="steps-uid-2-t-0" href="javascript:;" aria-controls="steps-uid-2-p-0">
+                                    <li role="tab" class="<?=$class_0?>" aria-disabled="false" aria-selected="true">
+                                        <a id="steps-uid-2-t-0" href="javascript:;" data-label="update_status" data-num="1" aria-controls="steps-uid-2-p-0">
                                             <span class="step"><i class="la la-clock-o"></i></span>
                                             <strong>Đang chờ xét duyệt</strong><br />
+                                            <?=$bill['bill_time_status_1'] ? date('H:i:s d/m/Y', strtotime($bill['bill_time_status_1'])) : ''?>
                                         </a>
                                     </li>
                                     <li role="tab" class="<?=$class_1?>" aria-disabled="false" aria-selected="true">
-                                        <a id="steps-uid-2-t-1" href="javascript:;" aria-controls="steps-uid-2-p-1">
+                                        <a id="steps-uid-2-t-1" href="javascript:;" data-label="update_status" data-num="2" aria-controls="steps-uid-2-p-1">
                                             <span class="step"><i class="ft-shopping-cart"></i></span>
-                                            <strong>Đang chờ lấy hàng</strong>
+                                            <strong>Đang chờ lấy hàng</strong><br />
+                                            <?=$bill['bill_time_status_2'] ? date('H:i:s d/m/Y', strtotime($bill['bill_time_status_2'])) : ''?>
                                         </a>
                                     </li>
                                     <li role="tab" class="<?=$class_2?>" aria-disabled="true">
-                                        <a id="steps-uid-2-t-2" href="javascript:;" aria-controls="steps-uid-2-p-2">
+                                        <a id="steps-uid-2-t-2" href="javascript:;" data-label="update_status" data-num="3" aria-controls="steps-uid-2-p-2">
                                             <span class="step"><i class="step-icon la la-truck"></i></span>
-                                            <strong>Đang giao hàng</strong>
+                                            <strong>Đang giao hàng</strong><br />
+                                            <?=$bill['bill_time_status_3'] ? date('H:i:s d/m/Y', strtotime($bill['bill_time_status_3'])) : ''?>
                                         </a>
                                     </li>
                                     <li role="tab" class="<?=$class_3?>" aria-disabled="true">
-                                        <a id="steps-uid-2-t-2" href="javascript:;" aria-controls="steps-uid-2-p-2">
+                                        <a id="steps-uid-2-t-2" href="javascript:;" data-label="update_status" data-num="4" aria-controls="steps-uid-2-p-2">
                                             <span class="step"><i class="ft-check-circle"></i></span>
-                                            <strong>Đơn hàng đã nhận</strong>
+                                            <strong>Đơn hàng đã nhận</strong><br />
+                                            <?=$bill['bill_time_status_4'] ? date('H:i:s d/m/Y', strtotime($bill['bill_time_status_4'])) : ''?>
                                         </a>
                                     </li>
                                 </ul>
@@ -194,6 +227,16 @@ switch ($act){
                 <div class="card">
                     <div class="card-header mb-3">
                         <h4 class="card-title">Lịch sử thanh toán</h4>
+                        <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
+                        <?php if(in_array($user['user_role'], array(35))) {?>
+                        <div class="heading-elements">
+                            <ul class="list-inline mb-0">
+                                <li>
+                                    <a class="btn btn-sm btn-outline-blue box-shadow-2 round btn-min-width pull-right" href="#">Thêm thanh toán</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <?php }?>
                     </div>
                     <div class="card-content">
                         <ul class="list-group mb-3">
@@ -203,6 +246,50 @@ switch ($act){
                 </div>
             </div>
         </div>
+        <script language="JavaScript">
+            $(document).ready(function () {
+                $('a[data-label=update_status]').click(function () {
+                    var status = $(this).attr('data-num');
+                    swal({
+                        title: "Update trạng thái đơn hàng?",
+                        text: "Bạn có chắc chắn muốn cập nhập trạng thái đơn hàng không!",
+                        icon: "warning",
+                        buttons: {
+                            cancel: {
+                                text: "Quay Lại",
+                                value: null,
+                                visible: true,
+                                className: "",
+                                closeModal: true,
+                            },
+                            confirm: {
+                                text: "Update",
+                                value: true,
+                                visible: true,
+                                className: "",
+                                closeModal: false
+                            }
+                        }
+                    }).then((isConfirm) => {
+                        if (isConfirm) {
+                            $.ajax({
+                                url     : '<?=_URL_HOME?>/api/ajax.php',
+                                method  : 'GET',
+                                dataType: 'json',
+                                data    : {'act' : 'update_status_bill', 'billcode' : '<?=$bill_code?>', 'status' : status},
+                                success : function (data) {
+                                    if(data.response == 200){
+                                        swal("Cập nhập trạng thái Bill", data.message, "success");
+                                    }else{
+                                        swal("Error!", data.message, "error");
+                                    }
+                                }
+                            });
+                        }
+                    });
+                });
+            });
+        </script>
         <!-- CONTACT -->
         <?php
         require_once 'footer.php';
@@ -393,5 +480,3 @@ switch ($act){
         require_once 'footer.php';
         break;
 }
-
-

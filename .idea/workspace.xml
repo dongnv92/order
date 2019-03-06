@@ -11,22 +11,14 @@
   <component name="FileEditorManager">
     <leaf>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/admin/header.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="170" column="150" selection-start-line="170" selection-start-column="150" selection-end-line="170" selection-end-column="150" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/admin/purchase.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="305">
-              <caret line="307" column="54" selection-start-line="307" selection-start-column="38" selection-end-line="307" selection-end-column="54" />
+            <state relative-caret-position="255">
+              <caret line="15" column="14" selection-start-line="15" selection-start-column="14" selection-end-line="15" selection-end-column="14" />
               <folding>
-                <element signature="e#249#11701#0#PHP" />
-                <element signature="e#11706#16712#0#PHP" />
+                <element signature="e#249#16601#0#PHP" />
+                <element signature="e#11706#16734#0#PHP" />
+                <element signature="e#16739#21490#0#PHP" />
               </folding>
             </state>
           </provider>
@@ -53,7 +45,6 @@
         <option value="$PROJECT_DIR$/includes/pages/home.php" />
         <option value="$PROJECT_DIR$/.htaccess" />
         <option value="$PROJECT_DIR$/includes/pages/list_product.php" />
-        <option value="$PROJECT_DIR$/api/ajax.php" />
         <option value="$PROJECT_DIR$/api/index.php" />
         <option value="$PROJECT_DIR$/includes/pages/product.php" />
         <option value="$PROJECT_DIR$/includes/pages/footer.php" />
@@ -78,9 +69,10 @@
         <option value="$PROJECT_DIR$/includes/pages/cart.php" />
         <option value="$PROJECT_DIR$/includes/lib/class.function.php" />
         <option value="$PROJECT_DIR$/admin/category.php" />
-        <option value="$PROJECT_DIR$/admin/product.php" />
-        <option value="$PROJECT_DIR$/admin/purchase.php" />
         <option value="$PROJECT_DIR$/admin/header.php" />
+        <option value="$PROJECT_DIR$/admin/product.php" />
+        <option value="$PROJECT_DIR$/api/ajax.php" />
+        <option value="$PROJECT_DIR$/admin/purchase.php" />
       </list>
     </option>
   </component>
@@ -108,6 +100,11 @@
               <item name="order" type="b2602c69:ProjectViewProjectNode" />
               <item name="order" type="462c0819:PsiDirectoryNode" />
               <item name="admin" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="order" type="b2602c69:ProjectViewProjectNode" />
+              <item name="order" type="462c0819:PsiDirectoryNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -186,17 +183,19 @@
       <workItem from="1550807338072" duration="55000" />
       <workItem from="1551403873198" duration="31000" />
       <workItem from="1551403952827" duration="12957000" />
+      <workItem from="1551663269019" duration="1831000" />
+      <workItem from="1551844002978" duration="11983000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="221225000" />
+    <option name="totallyTimeSpent" value="235039000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="32" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.10714286" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.07675906" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -298,30 +297,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/api/javascript.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="54" column="56" lean-forward="true" selection-start-line="54" selection-start-column="56" selection-end-line="54" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/includes/pages/product.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1887">
           <caret line="111" column="74" lean-forward="true" selection-start-line="111" selection-start-column="74" selection-end-line="111" selection-end-column="108" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/ajax.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="16" selection-start-line="9" selection-start-column="16" selection-end-line="9" selection-end-column="16" />
-          <folding>
-            <element signature="e#143#4206#0#PHP" />
-            <element signature="e#4211#5115#0#PHP" />
-            <element signature="e#5120#5927#0#PHP" />
-            <element signature="e#5932#8615#0#PHP" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -512,11 +491,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/assets/css/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-19482" />
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/css/style.css" />
     <entry file="file://$PROJECT_DIR$/includes/pages/cart.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
@@ -552,10 +527,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/admin/header.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-833">
+          <caret line="170" column="150" selection-start-line="170" selection-start-column="150" selection-end-line="170" selection-end-column="150" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/javascript.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="918">
+          <caret line="54" column="56" lean-forward="true" selection-start-line="54" selection-start-column="56" selection-end-line="54" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/admin/product.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="22" column="18" lean-forward="true" selection-start-line="19" selection-start-column="12" selection-end-line="22" selection-end-column="18" />
+        <state relative-caret-position="702">
+          <caret line="177" column="10" lean-forward="true" selection-start-line="153" selection-start-column="8" selection-end-line="177" selection-end-column="10" />
           <folding>
             <element signature="e#30895#62291#0#PHP" />
             <element signature="e#62296#71788#0#PHP" />
@@ -563,21 +552,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin/purchase.php">
+    <entry file="file://$PROJECT_DIR$/api/ajax.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="305">
-          <caret line="307" column="54" selection-start-line="307" selection-start-column="38" selection-end-line="307" selection-end-column="54" />
-          <folding>
-            <element signature="e#249#11701#0#PHP" />
-            <element signature="e#11706#16712#0#PHP" />
-          </folding>
+        <state relative-caret-position="425">
+          <caret line="25" column="117" selection-start-line="25" selection-start-column="100" selection-end-line="25" selection-end-column="117" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin/header.php">
+    <entry file="file://$PROJECT_DIR$/admin/purchase.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="170" column="150" selection-start-line="170" selection-start-column="150" selection-end-line="170" selection-end-column="150" />
+        <state relative-caret-position="255">
+          <caret line="15" column="14" selection-start-line="15" selection-start-column="14" selection-end-line="15" selection-end-column="14" />
+          <folding>
+            <element signature="e#249#16601#0#PHP" />
+            <element signature="e#11706#16734#0#PHP" />
+            <element signature="e#16739#21490#0#PHP" />
+          </folding>
         </state>
       </provider>
     </entry>

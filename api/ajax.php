@@ -7,6 +7,34 @@
  */
 require_once '../includes/core.php';
 switch ($act){
+    case 'update_status_bill':
+        $billcode   = isset($_GET['billcode'])  && !empty($_GET['billcode'])    ? $_GET['billcode'] : '';
+        $status     = isset($_GET['status'])    && !empty($_GET['status'])      ? $_GET['status']   : '';
+        $bill       = $db->from(_TABLE_BILL)->where('bill_code', $billcode)->fetch_first();
+        if(!$bill){
+            $response['response']   = 404;
+            $response['message']    = 'Billcode không tồn tại';
+            echo json_encode($response);
+            break;
+        }
+        if($status != $bill['bill_status'] + 1){
+            $response['response']   = 400;
+            $response['message']    = 'Không thể update đơn hàng này';
+            echo json_encode($response);
+            break;
+        }
+        if($db->where('bill_code', $billcode)->update(_TABLE_BILL, array('bill_status' => $status, 'bill_time_status_'.$status => date('Y-m-d H:i:s')))->execute()){
+            $response['response']   = 200;
+            $response['message']    = 'Update Bill Status Success !!!';
+            echo json_encode($response);
+            break;
+        }else{
+            $response['response']   = 201;
+            $response['message']    = 'Update Bill Status False !!!';
+            echo json_encode($response);
+            break;
+        }
+        break;
     case 'cart':
         switch ($type){
             case 'add':
