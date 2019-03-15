@@ -12,7 +12,30 @@ $admin_module   = 'purchase';
 
 switch ($act){
     case 'add_payment':
+        $bill_code          = isset($_GET['billcode']) && !empty($_GET['billcode']) ? $_GET['billcode'] : '';
+        $bill               = $db->from(_TABLE_BILL)->where('bill_code', $bill_code)->fetch_first();
+        // Kiểm tra đơn hàng có tồn tại không
+        if(!$bill){
+            require_once 'header.php';
+            echo $function->getPanelError(array('title' => 'Thêm thanh toán', 'content' => 'Hóa đơn này không tồn tại!'));
+            require_once 'footer.php';
+            break;
+        }
+        // Kiểm tra quyền truy cập
+        if(!$function->checkRole('add_payment')){
+            require_once 'header.php';
+            echo $function->getPanelError(array('title' => 'Thêm thanh toán', 'content' => 'Bạn không thể thêm thanh toán!'));
+            require_once 'footer.php';
+            break;
+        }
+        $header['title']        = 'Thêm thanh toán đơn hàng '.$bill['bill_code'];
+        $header['breadcrumbs']  = array(_URL_ADMIN.'/purchase.php' => 'Đơn hàng', _URL_ADMIN.'/purchase.php?act=detail&billcode='.$bill['bill_code'] => 'Xem đơn hàng');
+        require_once 'header.php';
+        echo $function->breadcrumbs($header['title'], $header['breadcrumbs']);
 
+
+
+        require_once 'footer.php';
         break;
     case 'detail':
         $bill_code          = isset($_GET['billcode']) && !empty($_GET['billcode']) ? $_GET['billcode'] : '';
@@ -39,6 +62,9 @@ switch ($act){
             'app-assets/css/plugins/forms/switch.min.css',
             'app-assets/css/core/colors/palette-switch.min.css',
             'app-assets/vendors/css/extensions/sweetalert.css',
+            'app-assets/css/colors.min.css',
+            'app-assets/css/plugins/forms/checkboxes-radios.min.css',
+            'app-assets/css/core/colors/palette-gradient.min.css',
             'app-assets/css/plugins/forms/wizard.css'
         );
         $js_plus        = array(
@@ -54,6 +80,7 @@ switch ($act){
             'app-assets/js/scripts/forms/switch.min.js',
             'app-assets/vendors/js/extensions/sweetalert.min.js',
             'app-assets/js/scripts/extensions/sweet-alerts.min.js',
+            'app-assets/js/scripts/forms/checkbox-radio.min.js',
             'app-assets/js/scripts/forms/wizard-steps.js'
         );
         require_once 'header.php';
@@ -232,7 +259,7 @@ switch ($act){
                         <div class="heading-elements">
                             <ul class="list-inline mb-0">
                                 <li>
-                                    <a class="btn btn-sm btn-outline-blue box-shadow-2 round btn-min-width pull-right" href="#">Thêm thanh toán</a>
+                                    <a class="btn btn-sm btn-outline-blue box-shadow-2 round btn-min-width pull-right" href="purchase.php?act=add_payment&billcode=<?=$bill['bill_code']?>">Thêm thanh toán</a>
                                 </li>
                             </ul>
                         </div>
@@ -240,14 +267,110 @@ switch ($act){
                     </div>
                     <div class="card-content">
                         <ul class="list-group mb-3">
-                            
+                            <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                <div><h6 class="my-0">Tổng tiền cần thanh toán</h6></div>
+                                <span class="text-muted"><?=$function->convertNumberMoney($bill['bill_total_money'])?>đ</span>
+                            </li>
+                            <?php
+                            $n = 0;
+                            foreach ($db->select()->from(_TABLE_PAYMENT)->where('payment_bill', $bill_code)->fetch() as $list_payment){
+                                $n++;
+                                echo '<li class="list-group-item d-flex justify-content-between lh-condensed">
+                                    <div>
+                                        <h6 class="my-0">Thanh toán lần '. $n .'</h6>
+                                    </div>
+                                    <span class="text-muted">'. $function->convertNumberMoney($list_payment['payment_money']) .'đ</span>
+                                </li>';
+                            }
+                            ?>
+                            <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                <div><h6 class="my-0">Tổng tiền đã thanh toán</h6></div>
+                                <span class="text-muted"><?=$function->convertNumberMoney($function->getSumPayment($bill_code))?>đ</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                <div><h6 class="my-0">Tổng tiền chưa thanh toán</h6></div>
+                                <span class="text-muted"><?=$function->convertNumberMoney($bill['bill_total_money'] - $function->getSumPayment($bill_code))?>đ</span>
+                            </li>
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="row">
+            <?php if(in_array($user['user_role'], array(35))) {?>
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header"><h4 class="card-title" id="basic-layout-round-controls">Thêm thanh toán</h4></div>
+                        <div class="card-content collapse show">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-body skin skin-flat">
+                                            <div class="form-group">
+                                                <label>Số tiền khách hàng đã thanh toán</label>
+                                                <input type="text" class="form-control round" placeholder="Số tiền khách hàng đã thanh toán" name="payment_money">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Hình Thức Thanh Toán</label>
+                                                <?php
+                                                foreach ($db->select()->from(_TABLE_CATEGORY)->where('category_type', 'payment_method')->fetch() AS $payment_method){
+                                                    echo '<fieldset><input type="radio" name="payment_method" value="'. $payment_method['category_id'] .'" id="'. $payment_method['category_id'] .'"><label for="'. $payment_method['category_id'] .'">'. $payment_method['category_name'] .'</label></fieldset>'."\n";
+                                                }
+                                                ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Ghi chú</label>
+                                            <textarea rows="9" class="form-control" name="payment_note" placeholder="Ghi chú" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Ghi chú" data-original-title="" title=""></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-actions text-center">
+                                    <button type="submit" id="button_add_payment" class="btn round btn-outline-info">Thêm thanh toán</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php }?>
+        </div>
         <script language="JavaScript">
             $(document).ready(function () {
+                // Thêm thanh toán
+                $('#button_add_payment').click(function () {
+                    var payment_money   = $('input[name=payment_money]').val();
+                    var payment_method  = $('input[name=payment_method]:checked').val();
+                    var payment_note    = $('textarea[name=payment_note]').val();
+                    //Kiểm tra các giá trị vừa nhập
+                    if(!payment_money){
+                        swal("Thêm tiền thanh toán", "Bạn chưa nhập số tiền", "error");
+                        return false;
+                    }
+                    if(isNaN(payment_money)){
+                        swal("Thêm tiền thanh toán", "Số tiền nhập phải là dạng số", "error");
+                        return false;
+                    }
+                    if(!payment_method){
+                        swal("Thêm tiền thanh toán", "Bạn chưa chọn phương thức thanh toán", "error");
+                        return false;
+                    }
+                    $.ajax({
+                        url     : '<?=_URL_HOME?>/api/ajax.php',
+                        method  : 'POST',
+                        dataType: 'json',
+                        data    : {'act' : 'add_payment', 'billcode' : '<?=$bill_code?>', 'payment_money' : payment_money, 'payment_method' : payment_method, 'payment_note' : payment_note},
+                        success : function (data) {
+                            if(data.response == 200){
+                                $(location).attr('href', '<?=$function->getCurrentDomain()?>');
+                            }else{
+                                swal("Error!", data.message, "error");
+                            }
+                        }
+                    });
+                });
+
                 $('a[data-label=update_status]').click(function () {
                     var status = $(this).attr('data-num');
                     swal({

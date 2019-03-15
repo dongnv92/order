@@ -8,23 +8,39 @@
 
 class orderFunction{
 
-    function checkRole($action, $value){
+    function getSumPayment($bill){
+        global $db;
+        $sum = $db->select("SUM(`payment_money`) AS sum_money")->from(_TABLE_PAYMENT)->where('payment_bill', $bill)->fetch_first();
+        return $sum['sum_money'];
+    }
+
+    function checkRole($action, $value = ''){
         global $user, $db;
-        if($user['user_role'] == 35){
-            return true;
-        }
+        $return = false;
 
         switch ($action){
             case 'bill':
                 $bill = $db->select('bill_user')->from(_TABLE_BILL)->where('bill_code', $value)->fetch_first();
                 if($bill['bill_user'] == $user['user_id']){
-                    return true;
+                    $return = true;
                 }else{
-                    return false;
+                    if($user['user_role'] == 35){
+                        $return = true;
+                    }else{
+                        $return = false;
+                    }
+                }
+                break;
+            case 'add_payment':
+                if(in_array($user['user_role'], array(35))){
+                    $return = true;
+                }else{
+                    $return = false;
                 }
                 break;
         }
-        return false;
+
+        return $return;
     }
 
     function getStatus($key, $value){

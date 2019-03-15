@@ -7,6 +7,49 @@
  */
 require_once '../includes/core.php';
 switch ($act){
+    case 'add_payment':
+        global $user;
+        $billcode       = isset($_REQUEST['billcode'])         && !empty($_REQUEST['billcode'])       ? $_REQUEST['billcode']        : '';
+        $payment_money  = isset($_REQUEST['payment_money'])    && !empty($_REQUEST['payment_money'])  ? $_REQUEST['payment_money']   : '';
+        $payment_method = isset($_REQUEST['payment_method'])   && !empty($_REQUEST['payment_method']) ? $_REQUEST['payment_method']  : '';
+        $payment_note   = isset($_REQUEST['payment_note'])     && !empty($_REQUEST['payment_note'])   ? $_REQUEST['payment_note']    : '';
+        $bill           = $db->from(_TABLE_BILL)->where('bill_code', $billcode)->fetch_first();
+        if(!$bill){
+            $response['response']   = 404;
+            $response['message']    = 'Billcode không tồn tại';
+            echo json_encode($response);
+            break;
+        }
+        if(!$payment_money || !$payment_method){
+            $response['response']   = 404;
+            $response['message']    = 'Bạn cần nhập số tiền hoặc phương thức thanh toán';
+            echo json_encode($response);
+            break;
+        }
+        if(!is_numeric($payment_money)){
+            $response['response']   = 400;
+            $response['message']    = 'Số tiền phải là dạng số';
+            echo json_encode($response);
+            break;
+        }
+        $data = array(
+            'payment_bill'      => $billcode,
+            'payment_method'    => $payment_method,
+            'payment_money'     => $payment_money,
+            'payment_user'      => $user['user_id'],
+            'payment_note'      => $payment_note,
+            'payment_date'      => date('Y-m-d H:i:s', _CONGIF_TIME)
+        );
+        if($db->insert(_TABLE_PAYMENT, $data)){
+            $response['response']   = 200;
+            $response['message']    = 'Thêm thanh toán thành công';
+            echo json_encode($response);
+            break;
+        }
+        $response['response']   = 201;
+        $response['message']    = 'Thêm thanh toán không thành công';
+        echo json_encode($response);
+        break;
     case 'update_status_bill':
         $billcode   = isset($_GET['billcode'])  && !empty($_GET['billcode'])    ? $_GET['billcode'] : '';
         $status     = isset($_GET['status'])    && !empty($_GET['status'])      ? $_GET['status']   : '';

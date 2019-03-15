@@ -51,6 +51,7 @@ define('_TABLE_METADATA','dong_metadata');
 define('_TABLE_PRODUCT','dong_product');
 define('_TABLE_BILL','dong_bill');
 define('_TABLE_BILL_PRODUCT','dong_bill_product');
+define('_TABLE_PAYMENT','dong_payment');
 
 // Đặt các giá trị hằng số cho thông tin kết nối cơ sở dữ liệu
 /*define('_DB_HOST','localhost');
