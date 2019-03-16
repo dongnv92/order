@@ -192,7 +192,7 @@ switch ($act){
         echo json_encode($response);
         break;
     case 'add_product':
-        $product                                = file_get_contents(_URL_HOME.'/api/?act=get_tmall&url='.urlencode($url));
+        $product                                = file_get_contents(_URL_HOME.'/api/?act=get_tmall&token='. $function->createToken() .'&url='.urlencode($url));
         $product                                = json_decode($product, true);
         $response                               = array();
         $response['product_price_default']      = trim($product['product_price_default']);
