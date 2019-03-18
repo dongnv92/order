@@ -530,32 +530,51 @@ class orderFunction{
         $images_1 = $db->select('media_id, media_source')->from(_TABLE_MEDIA)->where(array('media_type' => 'images_product', 'media_store' => 'local', 'media_parent' => $product['product_id']))->fetch_first();
         $images_2 = $db->select('media_source')->from(_TABLE_MEDIA)->where(array('media_type' => 'images_product', 'media_store' => 'local', 'media_parent' => $product['product_id'], 'media_id <>' => $images_1['media_id']))->fetch_first();
         $product_category = $db->select('category_id, category_name')->from(_TABLE_CATEGORY)->where(array('category_id' => $product['product_category']))->fetch_first();
-        if($option['type'] == 'home'){
-            $text .= '
-            <!-- Product Detail -->
-            <div class="'. $option['layout'] .'">
-                <div class="tt-product thumbprod-center">
-                    <div class="tt-image-box">
-                        <a href="#" class="tt-btn-wishlist" data-tooltip="Yêu Thích" data-tposition="left"></a>
-                        <a href="'. $this->getUrlProduct($productId) .'">
-                            <span class="tt-img"><img src="'. _URL_HOME .'/'.$images_1['media_source'].'" alt=""></span>
-                            <span class="tt-img-roll-over"><img src="'. _URL_HOME .'/'. $images_2['media_source'] .'" alt=""></span>
-                            '. ($product['product_sale'] > 0 ? '<span class="tt-label-location"><span class="tt-label-new">Giảm giá '. $product['product_sale'] .'%</span></span>' : '') .'
-                        </a>
-                    </div>
-                    <div class="tt-description">
-                        <div class="tt-row"><ul class="tt-add-info"><li><a href="'. $this->getUrlCategory($product_category['category_id']).'">'. $product_category['category_name'] .'</a></li></ul></div>
-                        <h2 class="tt-title"><a href="'. $this->getUrlProduct($product['product_id']) .'">'. $product['product_name'] .'</a></h2>
-                        <div class="tt-price">'. $this->convertNumberMoney($product['product_price_vn']) .'₫</div>
-                        <div class="tt-product-inside-hover">
-                            <div class="tt-row-btn">
-                                <a href="javascript:;" class="tt-btn-addtocart thumbprod-button-bg" data-goto="'. $this->getCurrentDomain() .'" data-toggle="modal" data-target="#modalAddToCartProduct_'. $product['product_id'] .'" data-content="'. $product['product_id'] .'" data-label="addToCart">THÊM VÀO GIỎ HÀNG</a>
+        switch ($option['type']){
+            case 'home':
+                $text .= '
+                <!-- Product Detail -->
+                <div class="'. $option['layout'] .'">
+                    <div class="tt-product thumbprod-center">
+                        <div class="tt-image-box">
+                            <a href="#" class="tt-btn-wishlist" data-tooltip="Yêu Thích" data-tposition="left"></a>
+                            <a href="'. $this->getUrlProduct($productId) .'">
+                                <span class="tt-img"><img src="'. _URL_HOME .'/'.$images_1['media_source'].'" alt="'. $product['product_name'] .'"></span>
+                                <span class="tt-img-roll-over"><img src="'. _URL_HOME .'/'. $images_2['media_source'] .'" alt="'. $product['product_name'] .'"></span>
+                                '. ($product['product_sale'] > 0 ? '<span class="tt-label-location"><span class="tt-label-new">Giảm giá '. $product['product_sale'] .'%</span></span>' : '') .'
+                            </a>
+                        </div>
+                        <div class="tt-description">
+                            <div class="tt-row"><ul class="tt-add-info"><li><a href="'. $this->getUrlCategory($product_category['category_id']).'">'. $product_category['category_name'] .'</a></li></ul></div>
+                            <h2 class="tt-title"><a href="'. $this->getUrlProduct($product['product_id']) .'">'. $product['product_name'] .'</a></h2>
+                            <div class="tt-price">'. $this->convertNumberMoney($product['product_price_vn']) .'₫</div>
+                            <div class="tt-product-inside-hover">
+                                <div class="tt-row-btn">
+                                    <a href="javascript:;" class="tt-btn-addtocart thumbprod-button-bg" data-goto="'. $this->getCurrentDomain() .'" data-toggle="modal" data-target="#modalAddToCartProduct_'. $product['product_id'] .'" data-content="'. $product['product_id'] .'" data-label="addToCart">THÊM VÀO GIỎ HÀNG</a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <!-- Product Detail -->';
+                <!-- Product Detail -->';
+                break;
+            case 'sidebar':
+                $text .= '
+                <a class="tt-item" href="'. $this->getUrlProduct($productId) .'">
+                    <div class="tt-img">
+                        <span class="tt-img-default"><img src="'. _URL_HOME .'/'.$images_1['media_source'].'" alt="'. $product['product_name'] .'" class="loading" data-was-processed="true"></span>
+                        <span class="tt-img-roll-over"><img src="'. _URL_HOME .'/'. $images_2['media_source'] .'" alt="'. $product['product_name'] .'" class="loading" data-was-processed="true"></span>
+                    </div>
+                    <div class="tt-content">
+                        <h6 class="tt-title">'. $product['product_name'] .'</h6>
+                        <div class="tt-price">
+                            <span class="sale-price">'. $this->convertNumberMoney($product['product_price_vn']) .'₫</span>
+                            <span class="old-price">'. $this->convertNumberMoney($product['product_price_default'] * _CONFIG_NDT) .'₫</span>
+                        </div>
+                    </div>
+                </a>
+                ';
+                break;
         }
         return $text;
     }

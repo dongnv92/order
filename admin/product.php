@@ -786,7 +786,7 @@ switch ($act){
                                     <div class="form-group">
                                         <label for="timesheetinput5">Giá gốc</label>
                                         <div class="position-relative has-icon-left">
-                                            <input type="number" class="form-control round border-blue" value="<?=$product_price_default?>" name="product_price_default">
+                                            <input type="number" class="form-control round border-blue" value="<?=$product_price_default*_CONFIG_NDT?>" name="product_price_default">
                                             <div class="form-control-position">
                                                 <i class="la la-cny"></i>
                                             </div>
@@ -798,7 +798,7 @@ switch ($act){
                                     <div class="form-group">
                                         <label for="timesheetinput6">Giá khuyến mãi</label>
                                         <div class="position-relative has-icon-left">
-                                            <input type="number" class="form-control round border-blue" value="<?=$product_price_promotion?>" name="product_price_promotion">
+                                            <input type="number" class="form-control round border-blue" value="<?=$product_price_promotion*_CONFIG_NDT?>" name="product_price_promotion">
                                             <div class="form-control-position">
                                                 <i class="la la-cny"></i>
                                             </div>

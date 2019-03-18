@@ -138,53 +138,23 @@ require_once 'header.php';
                 <div class="row justify-content-center">
                     <div class="col-md-2">
                         <div class="tt-collapse open">
-                            <h3 class="tt-collapse-title">SALE PRODUCTS</h3>
+                            <h3 class="tt-collapse-title">NGẪU NHIÊN</h3>
                             <div class="tt-collapse-content" style="">
                                 <div class="tt-aside">
-                                    <a class="tt-item" href="product.html">
-                                        <div class="tt-img">
-                                            <span class="tt-img-default"><img src="images/product/product-01.jpg" alt="" class="loading" data-was-processed="true"></span>
-                                            <span class="tt-img-roll-over"><img src="images/product/product-01-02.jpg" alt="" class="loading" data-was-processed="true"></span>
-                                        </div>
-                                        <div class="tt-content">
-                                            <h6 class="tt-title">Flared Shift Dress</h6>
-                                            <div class="tt-price">
-                                                <span class="sale-price">$14</span>
-                                                <span class="old-price">$24</span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <a class="tt-item" href="product.html">
-                                        <div class="tt-img">
-                                            <span class="tt-img-default"><img src="images/product/product-02.jpg" alt="" class="loading" data-was-processed="true"></span>
-                                            <span class="tt-img-roll-over"><img src="images/product/product-02-02.jpg" alt="" class="loading" data-was-processed="true"></span>
-                                        </div>
-                                        <div class="tt-content">
-                                            <h6 class="tt-title">Flared Shift Dress</h6>
-                                            <div class="tt-price">
-                                                <span class="sale-price">$14</span>
-                                                <span class="old-price">$24</span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <a class="tt-item" href="product.html">
-                                        <div class="tt-img">
-                                            <span class="tt-img-default"><img src="images/product/product-03.jpg" alt="" class="loading" data-was-processed="true"></span>
-                                            <span class="tt-img-roll-over"><img src="images/product/product-03-02.jpg" alt="" class="loading" data-was-processed="true"></span>
-                                        </div>
-                                        <div class="tt-content">
-                                            <h6 class="tt-title">Flared Shift Dress</h6>
-                                            <div class="tt-price">
-                                                <span class="sale-price">$14</span>
-                                                <span class="old-price">$24</span>
-                                            </div>
-                                        </div>
-                                    </a>
+                                    <?php
+                                    $db->select('product_id')->from(_TABLE_PRODUCT);
+                                    $db->where('product_status != 0');
+                                    $db->order_by('rand()');
+                                    $db->limit(5);
+                                    foreach ($db->fetch() as $product_rand){
+                                        echo $function->getProduct($product_rand['product_id'], array('type' => 'sidebar'));
+                                    }
+                                    ?>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-xs-12 col-md-10 col-lg-8 col-md-auto">
+                    <div class="col-md-10">
                         <div class="tt-post-single">
                             <div class="tt-post-content">
                                 <h2 class="tt-title">MÔ TẢ SẢN PHẨM</h2>

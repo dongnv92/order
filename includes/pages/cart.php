@@ -25,6 +25,11 @@ if($submit){
     if(!$bill_address){
         $error['bill_address']  = 'Bạn cần nhập địa chỉ';
     }
+    if(count($_SESSION['cart']) == 0){
+        $function->redirect(_URL_CART);
+        $error['cart']  = 'Bạn chưa có sản phẩm nào';
+        exit();
+    }
 
     if(!$error){
         $data_bill = array(
