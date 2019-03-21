@@ -6,17 +6,30 @@
  * Time: 10:06
  */
 require_once '../core.php';
+$header['title']        = $header['title']          ? $header['title']          : 'Chuyên Order Hàng Trung Quốc';
+$header['keywords']     = $header['keywords']       ? $header['keywords']       : 'Order Trung Quốc, Order Quảng Châu, Order Taobao, vận chuyển hàng Trung Quốc giá rẻ, uy tín toàn quốc, order hang trung quoc';
+$header['description']  = $header['description']    ? $header['description']    : 'Order Trung Quốc cung cấp các dịch vụ tư vấn, hỗ trợ đặt hàng, vận chuyển hàng Trung Quốc về Việt Nam từ các website thương mại lớn như : taobao.com, tmall.com, 1688.com, alibaba.com ... uy tín giá rẻ trách nhiệm cao';
+$header['images']       = $header['images']         ? $header['images']         : _URL_HOME.'/assets/images/system/noimages.png';
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title><?=$header['title']?$header['title']:'Chuyên Order Hàng Trung Quốc'?></title>
-    <meta name="keywords" content="Order Trung Quốc, Order Quảng Châu, Order Taobao, vận chuyển hàng Trung Quốc giá rẻ, uy tín toàn quốc, order hang trung quoc">
-    <meta name="description" content="Order Trung Quốc cung cấp các dịch vụ tư vấn, hỗ trợ đặt hàng, vận chuyển hàng Trung Quốc về Việt Nam từ các website thương mại lớn như : taobao.com, tmall.com, 1688.com, alibaba.com ... uy tín giá rẻ trách nhiệm cao">
-    <meta name="author" content="wokiee">
-    <link rel="shortcut icon" href="<?=_URL_HOME?>/favicon.ico">
+    <title><?=$header['title']?></title>
+    <meta name="keywords" content="<?=$header['keywords']?>">
+    <meta name="description" content="<?=$header['description']?>">
+    <meta name="author" content="buynhanh.com">
+    <link rel="shortcut icon" href="<?=_URL_HOME?>/favicon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta property="og:description" content="<?=$header['description']?>" data-react-helmet="true">
+    <meta name="robots" content="index, follow" data-react-helmet="true">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="<?=$header['title']?>" data-react-helmet="true">
+    <meta property="og:url" content="<?=$function->getCurrentDomain()?>" data-react-helmet="true">
+    <meta property="og:image" content="<?=$header['images']?>" data-react-helmet="true">
+    <meta property="og:image:type" content="image/jpeg" data-react-helmet="true">
+    <meta property="fb:app_id" content="727590360722146" data-react-helmet="true">
     <link rel="stylesheet" href="<?=_URL_STYLE?>/css/theme.css">
     <?php foreach ($css_plus AS $css){?>
         <link rel="stylesheet" type="text/css" href="<?php echo $css;?>">
@@ -122,7 +135,7 @@ require_once '../core.php';
             <div class="row">
                 <div class="tt-logo-container">
                     <!-- mobile logo -->
-                    <a class="tt-logo tt-logo-alignment" href="index.html"><img src="http://softali.net/victor/wookie/html/images/custom/logo.png" alt=""></a>
+                    <a class="tt-logo tt-logo-alignment" href="<?=_URL_HOME?>"><img src="<?=_URL_HOME?>/assets/images/system/logo3.png" alt=""></a>
                     <!-- /mobile logo -->
                 </div>
             </div>
@@ -134,7 +147,7 @@ require_once '../core.php';
             <div class="tt-header-holder">
                 <div class="tt-col-obj tt-obj-logo">
                     <!-- logo -->
-                    <a class="tt-logo tt-logo-alignment" href="<?=_URL_HOME?>"><img src="http://softali.net/victor/wookie/html/images/custom/logo.png" alt=""></a>
+                    <a class="tt-logo tt-logo-alignment" href="<?=_URL_HOME?>"><img src="<?=_URL_HOME?>/assets/images/system/logo3.png" alt=""></a>
                     <!-- /logo -->
                 </div>
                 <div class="tt-col-obj tt-obj-search-type2">

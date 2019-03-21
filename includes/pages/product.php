@@ -1,13 +1,14 @@
 <?php
 require_once '../../includes/core.php';
 $product            = $db->from(_TABLE_PRODUCT)->where('product_url', $url)->fetch_first();
-$header['title']    = $product['product_name'];
 $images_first       = $db->select('media_source')->from(_TABLE_MEDIA)->where(array('media_type' => 'images_product', 'media_store' => 'local', 'media_parent' => $product['product_id']))->fetch_first();
 $product_category   = $db->from(_TABLE_CATEGORY)->where('category_id', $product['product_category'])->fetch_first();;
 $product_brand      = $db->from(_TABLE_CATEGORY)->where('category_id', $product['product_brand'])->fetch_first();
+$images_thumb       = $db->select('media_source')->from(_TABLE_MEDIA)->where(array('media_type' => 'images_product', 'media_store' => 'local', 'media_parent' => $product['product_id']))->fetch_first();
+$header['title']    = $product['product_name'];
+$header['images']   = _URL_HOME.'/'.$images_thumb['media_source'];
 require_once 'header.php';
 ?>
-
     <div class="tt-breadcrumb">
         <div class="container">
             <ul>

@@ -6,7 +6,7 @@
  * Time: 16:03
  */
 require_once '../../includes/core.php';
-$header['title'] = 'Trang chủ';
+$header['title'] = 'Trang chủ | BUY NHANH | Order hàng trung quốc';
 require_once 'header.php';
 ?>
 <div id="tt-pageContent">
