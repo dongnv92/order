@@ -34,6 +34,16 @@ $header['images']       = $header['images']         ? $header['images']         
     <?php foreach ($css_plus AS $css){?>
         <link rel="stylesheet" type="text/css" href="<?php echo $css;?>">
     <?php }?>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-136787704-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-136787704-1');
+    </script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
 </head>
 <body>
 <div id="loader-wrapper">
