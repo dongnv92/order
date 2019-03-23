@@ -54,15 +54,15 @@ define('_TABLE_BILL_PRODUCT','dong_bill_product');
 define('_TABLE_PAYMENT','dong_payment');
 
 // Đặt các giá trị hằng số cho thông tin kết nối cơ sở dữ liệu
-define('_DB_HOST','localhost');
+/*define('_DB_HOST','localhost');
 define('_DB_USERNAME','xoiduaco');
 define('_DB_PASSWORD','Nkthanh88...');
-define('_DB_DATABASE','xoiduaco_order');
+define('_DB_DATABASE','xoiduaco_order');*/
 
-/*define('_DB_HOST','localhost');
+define('_DB_HOST','localhost');
 define('_DB_USERNAME','root');
 define('_DB_PASSWORD','');
-define('_DB_DATABASE','order');*/
+define('_DB_DATABASE','order');
 
 
 $db     = new Database(_DB_HOST, _DB_USERNAME,_DB_PASSWORD,_DB_DATABASE);
