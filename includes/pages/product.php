@@ -68,6 +68,8 @@ require_once 'header.php';
                                 <!--<span class="new-price"><small><?/*=$product['product_price_promotion']*/?>¥</small></span>-->
                             </div>
                             <div class="tt-swatches-container">
+                                <!-- SIZE -->
+                                <?php if(count($product['product_size']) > 1) {?>
                                 <div class="tt-wrapper">
                                     <div class="tt-title-options">SIZE:</div>
                                     <ul class="tt-options-swatch options-large">
@@ -78,10 +80,10 @@ require_once 'header.php';
                                         ?>
                                     </ul>
                                 </div>
-                                <div class="tt-wrapper product-information-buttons">
-                                    <a data-toggle="modal" data-target="#modalProductInfo" href="#">Size Guide</a>
-                                    <a data-toggle="modal" data-target="#modalProductInfo-02" href="#">Shipping</a>
-                                </div>
+                                <?php }?>
+                                <!-- SIZE -->
+                                <!-- COLOR -->
+                                <?php if(count($product['product_color']) > 1) {?>
                                 <div class="tt-wrapper">
                                     <div class="tt-title-options">Màu:</div>
                                     <ul class="tt-options-swatch options-large">
@@ -99,6 +101,8 @@ require_once 'header.php';
                                         ?>
                                     </ul>
                                 </div>
+                                <?php }?>
+                                <!-- COLOR -->
                             </div>
                             <div class="tt-wrapper">
                                 <div class="tt-row-custom-01">
@@ -117,14 +121,14 @@ require_once 'header.php';
                             <div class="tt-wrapper">
                                 <ul class="tt-list-btn">
                                     <li><a class="btn-link" href="#"><i class="icon-n-072"></i>THÊM VÀO YÊU THÍCH</a></li>
-                                    <li><a class="btn-link" href="#"><i class="icon-n-08"></i>LINK SẢN PHẨM GỐC</a></li>
                                 </ul>
                             </div>
                             <div class="tt-wrapper">
                                 <div class="tt-add-info">
                                     <ul>
+                                        <li>Mã sản phẩm: <?=$product['product_code']?></li>
                                         <li>Chuyên mục: <a href="<?=$function->getUrlCategory($product_category['category_id'])?>"><?=$product_category['category_name']?></a></li>
-                                        <li>Hãng: <?=$product_brand['category_name']?></li>
+                                        <?=$product_brand['category_name'] ? '<li>Hãng: '.$product_brand['category_name'].'</li>' : ''?>
                                     </ul>
                                 </div>
                             </div>

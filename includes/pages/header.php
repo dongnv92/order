@@ -57,6 +57,34 @@ $header['images']       = $header['images']         ? $header['images']         
         <div class="dot"></div>
     </div>
 </div>
+<!-- Chat Message -->
+<!-- Load Facebook SDK for JavaScript -->
+<div id="fb-root"></div>
+<script>
+    window.fbAsyncInit = function() {
+        FB.init({
+            xfbml            : true,
+            version          : 'v3.2'
+        });
+    };
+
+    (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+
+<!-- Your customer chat code -->
+<div class="fb-customerchat"
+     attribution=setup_tool
+     page_id="365394414306312"
+     theme_color="#6699cc"
+     logged_in_greeting="Chào bạn, tôi có thể giúp gì cho bạn? Hãy chát với chúng tôi, cảm ơn !!!"
+     logged_out_greeting="Chào bạn, tôi có thể giúp gì cho bạn? Hãy chát với chúng tôi, cảm ơn !!!">
+</div>
+<!-- Chat Message -->
 <header>
     <!-- tt-mobile menu -->
     <nav class="panel-menu mobile-main-menu">
@@ -77,6 +105,36 @@ $header['images']       = $header['images']         ? $header['images']         
                 <ul>
                     <li>
                         <a href="<?=$function->getUrlCategory(1)?>?gender=make">NAM</a>
+                        <ul>
+                            <li><a href="<?=$function->getUrlCategory(2)?>?gender=make">Giày thể thao</a></li>
+                            <li><a href="<?=$function->getUrlCategory(3)?>?gender=make">Giày thường</a></li>
+                            <li><a href="<?=$function->getUrlCategory(13)?>?gender=make">Giày vải</a></li>
+                            <li><a href="<?=$function->getUrlCategory(18)?>?gender=make">Giày tây</a></li>
+                            <li><a href="<?=$function->getUrlCategory(19)?>?gender=make">Giày Sneakers</a></li>
+                            <li><a href="<?=$function->getUrlCategory(20)?>?gender=make">Giày Sandals</a></li>
+                            <li><a href="<?=$function->getUrlCategory(21)?>?gender=make">Giày Lười</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="<?=$function->getUrlCategory(1)?>?gender=femake">NỮ</a>
+                        <ul>
+                            <li><a href="<?=$function->getUrlCategory(2)?>?gender=femake">Giày thể thao</a></li>
+                            <li><a href="<?=$function->getUrlCategory(3)?>?gender=femake">Giày thường</a></li>
+                            <li><a href="<?=$function->getUrlCategory(13)?>?gender=femake">Giày vải</a></li>
+                            <li><a href="<?=$function->getUrlCategory(19)?>?gender=femake">Giày Sneakers</a></li>
+                            <li><a href="<?=$function->getUrlCategory(20)?>?gender=femake">Giày Sandals</a></li>
+                            <li><a href="<?=$function->getUrlCategory(29)?>?gender=femake">Giày cao gót</a></li>
+                            <li><a href="<?=$function->getUrlCategory(30)?>?gender=femake">Giày đế bằng</a></li>
+                            <li><a href="<?=$function->getUrlCategory(31)?>?gender=femake">Bốt</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="<?=$function->getUrlCategory(1)?>"><i class="icon-women"></i><span>Trang Sức</span></a>
+                <ul>
+                    <li>
+                        <a href="<?=$function->getUrlCategory(1)?>?gender=make">Vòng Đeo T</a>
                         <ul>
                             <li><a href="<?=$function->getUrlCategory(2)?>?gender=make">Giày thể thao</a></li>
                             <li><a href="<?=$function->getUrlCategory(3)?>?gender=make">Giày thường</a></li>
