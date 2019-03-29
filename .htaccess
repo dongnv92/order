@@ -3,6 +3,7 @@ php_value allow_url_fopen On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^login$ login.php [L]
+RewriteRule ^register$ register.php [L]
 RewriteRule ^logout$ logout.php [L]
 RewriteRule ^$ includes/pages/home.php [L]
 RewriteRule ^new$ includes/pages/list_product.php [L]

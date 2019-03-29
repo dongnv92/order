@@ -21,6 +21,7 @@ if($submit){
         $db->open_where();
         $db->where('user_login', $username);
         $db->or_where('user_email', $username);
+        $db->or_where('user_phone', $username);
         $db->close_where();
         $row = $db->fetch_first();
         if(!$username || !$password){
@@ -54,8 +55,8 @@ if($submit){
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
     <meta name="author" content="DONG NGUYEN">
     <title>Đăng nhập</title>
-    <link rel="apple-touch-icon" href="style/layouts/imgs/favicon.ico">
-    <link rel="shortcut icon" type="image/x-icon" href="style/layouts/imgs/favicon.ico">
+    <link rel="apple-touch-icon" href="favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.png">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Quicksand:300,400,500,700" rel="stylesheet">
     <link href="https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome.min.css" rel="stylesheet">
     <!-- BEGIN VENDOR CSS-->
@@ -87,12 +88,10 @@ if($submit){
                             <div class="card-header border-0">
                                 <div class="card-title text-center">
                                     <div class="p-1">
-                                        <img src="<?=_URL_STYLE?>/images/system/logo.png" height="70px" alt="branding logo">
+                                        <a href="<?=_URL_HOME?>"><img src="assets/images/system/logo3.png" height="70px" alt="Đăng nhập"></a>
                                     </div>
                                 </div>
-                                <h6 class="card-subtitle line-on-side text-muted text-center font-small-3 pt-2">
-                                    <span>Đăng nhập hệ thống</span>
-                                </h6>
+                                <h6 class="card-subtitle line-on-side text-muted text-center font-small-3 pt-2"><span>Đăng nhập hệ thống</span></h6>
                             </div>
                             <div class="card-content">
                                 <?php
@@ -129,10 +128,10 @@ if($submit){
                             <div class="card-footer">
                                 <div class="">
                                     <p class="float-sm-left text-center m-0">
-                                        <a href="#" class="card-link">ORDER HÀNG TRUNG QUỐC</a>
+                                        <a href="<?=_URL_HOME?>" class="card-link">TRANG CHỦ</a>
                                     </p>
                                     <p class="float-sm-right text-center m-0">
-                                        <a href="#" class="card-link">LIÊN HỆ</a>
+                                        <a href="<?=_URL_REGISTER?>" class="card-link">ĐĂNG KÝ</a>
                                     </p>
                                 </div>
                             </div>

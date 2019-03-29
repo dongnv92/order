@@ -31,6 +31,7 @@ $header['images']       = $header['images']         ? $header['images']         
     <meta property="og:image:type" content="image/jpeg" data-react-helmet="true">
     <meta property="fb:app_id" content="727590360722146" data-react-helmet="true">
     <link rel="stylesheet" href="<?=_URL_STYLE?>/css/theme.css">
+    <link rel="stylesheet" href="<?=_URL_STYLE?>/icon/css/all.css">
     <?php foreach ($css_plus AS $css){?>
         <link rel="stylesheet" type="text/css" href="<?php echo $css;?>">
     <?php }?>
@@ -133,31 +134,7 @@ $header['images']       = $header['images']         ? $header['images']         
             <li>
                 <a href="<?=$function->getUrlCategory(1)?>"><i class="icon-women"></i><span>Trang Sức</span></a>
                 <ul>
-                    <li>
-                        <a href="<?=$function->getUrlCategory(1)?>?gender=make">Vòng Đeo T</a>
-                        <ul>
-                            <li><a href="<?=$function->getUrlCategory(2)?>?gender=make">Giày thể thao</a></li>
-                            <li><a href="<?=$function->getUrlCategory(3)?>?gender=make">Giày thường</a></li>
-                            <li><a href="<?=$function->getUrlCategory(13)?>?gender=make">Giày vải</a></li>
-                            <li><a href="<?=$function->getUrlCategory(18)?>?gender=make">Giày tây</a></li>
-                            <li><a href="<?=$function->getUrlCategory(19)?>?gender=make">Giày Sneakers</a></li>
-                            <li><a href="<?=$function->getUrlCategory(20)?>?gender=make">Giày Sandals</a></li>
-                            <li><a href="<?=$function->getUrlCategory(21)?>?gender=make">Giày Lười</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="<?=$function->getUrlCategory(1)?>?gender=femake">NỮ</a>
-                        <ul>
-                            <li><a href="<?=$function->getUrlCategory(2)?>?gender=femake">Giày thể thao</a></li>
-                            <li><a href="<?=$function->getUrlCategory(3)?>?gender=femake">Giày thường</a></li>
-                            <li><a href="<?=$function->getUrlCategory(13)?>?gender=femake">Giày vải</a></li>
-                            <li><a href="<?=$function->getUrlCategory(19)?>?gender=femake">Giày Sneakers</a></li>
-                            <li><a href="<?=$function->getUrlCategory(20)?>?gender=femake">Giày Sandals</a></li>
-                            <li><a href="<?=$function->getUrlCategory(29)?>?gender=femake">Giày cao gót</a></li>
-                            <li><a href="<?=$function->getUrlCategory(30)?>?gender=femake">Giày đế bằng</a></li>
-                            <li><a href="<?=$function->getUrlCategory(31)?>?gender=femake">Bốt</a></li>
-                        </ul>
-                    </li>
+                    <li><a href="<?=$function->getUrlCategory(43)?>">Vòng Đeo Tay</a></li>
                 </ul>
             </li>
         </ul>
@@ -248,7 +225,7 @@ $header['images']       = $header['images']         ? $header['images']         
                             <nav>
                                 <ul>
                                     <li>
-                                        <a href="<?=$function->getUrlCategory(1)?>"><i class="icon-women"></i><span>GIÀY - DÉP</span></a>
+                                        <a href="<?=$function->getUrlCategory(1)?>"><i class="fas fa-shoe-prints"></i> <span>GIÀY - DÉP</span></a>
                                         <div class="dropdown-menu size-md">
                                             <div class="dropdown-menu-wrapper">
                                                 <div class="row">
@@ -285,6 +262,7 @@ $header['images']       = $header['images']         ? $header['images']         
                                             </div>
                                         </div>
                                     </li>
+                                    <li><a href="<?=$function->getUrlCategory(42)?>"><i class="fas fa-glasses"></i> <span>Trang Sức</span></a></li>
                                 </ul>
                             </nav>
                         </div>

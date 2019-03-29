@@ -30,8 +30,8 @@ define('_CONFIG_PAGINATION_PRODUCT', 15);
 define('_CONFIG_NDT', 3500);
 
 // Đặt các giá trị hằng số các đường dẫn
-//define('_URL_HOME','http://order.xoidua.com');
-define('_URL_HOME','http://buynhanh.com');
+define('_URL_HOME','http://localhost/dong/order');
+//define('_URL_HOME','http://buynhanh.com');
 define('_URL_LOGIN',_URL_HOME.'/login');
 define('_URL_LOGOUT',_URL_HOME.'/logout');
 define('_URL_REGISTER',_URL_HOME.'/register');

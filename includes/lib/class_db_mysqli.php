@@ -625,7 +625,8 @@ class Database
 
         foreach ($data as $key => $value) {
             $keys[] = "`$key`";
-            if (strpos($value, '()') == true OR is_numeric($value))
+            // old: if (strpos($value, '()') == true OR is_numeric($value))
+            if (strpos($value, '()') == true)
                 $values[] = "$value";
             else
                 $values[] = "'$value'";

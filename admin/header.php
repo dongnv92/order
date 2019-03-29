@@ -62,10 +62,10 @@ if($bill_4 > 0){
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-    <meta name="author" content="DONG NGUYN">
+    <meta name="author" content="BUYNHANH.COM">
     <title><?=$header['title']?></title>
-    <link rel="apple-touch-icon" href="<?=_URL_HOME?>/favicon.ico">
-    <link rel="shortcut icon" type="image/x-icon" href="<?=_URL_HOME?>/favicon.ico">
+    <link rel="apple-touch-icon" href="<?=_URL_HOME?>/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="<?=_URL_HOME?>/favicon.png">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Quicksand:300,400,500,700" rel="stylesheet">
     <link href="https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="app-assets/css/vendors.css">
@@ -87,8 +87,8 @@ if($bill_4 > 0){
                 <li class="nav-item mobile-menu d-md-none mr-auto"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="ft-menu font-large-1"></i></a></li>
                 <li class="nav-item">
                     <a class="navbar-brand" href="<?php echo _URL_ADMIN;?>">
-                        <img class="brand-logo" alt="modern admin logo" src="<?=_URL_HOME?>/assets/images/system/logo.png">
-                        <h3 class="brand-text">SHOP ORDER</h3>
+                        <img class="brand-logo" alt="modern admin logo" src="<?=_URL_HOME?>/assets/images/system/logo3.png">
+                        <h3 class="brand-text">BUYNHANH.COM</h3>
                     </a>
                 </li>
                 <li class="nav-item d-md-none">
@@ -109,7 +109,7 @@ if($bill_4 > 0){
                 <ul class="nav navbar-nav float-right">
                     <li class="dropdown dropdown-user nav-item">
                         <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
-                            <span class="mr-1">Hi,<span class="user-name text-bold-700"><?php echo $user['users_name'];?></span></span>
+                            <span class="mr-1">Xin chào ,<span class="user-name text-bold-700"><?php echo $user['user_name'];?></span></span>
                             <span class="avatar avatar-online"><img src="<?php echo 'images/avatar.png'; ?>" alt="avatar"><i></i></span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
@@ -117,7 +117,7 @@ if($bill_4 > 0){
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="#"><i class="la la-gears"></i> Sửa trang cá nhân</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#"><i class="ft-power"></i> Thoát</a>
+                            <a class="dropdown-item" href="<?=_URL_LOGOUT?>"><i class="ft-power"></i> Thoát</a>
                         </div>
                     </li>
                     <li class="dropdown dropdown-notification nav-item">
@@ -289,6 +289,21 @@ if($bill_4 > 0){
                     <li <?php echo ($admin_module == 'category' && in_array($type, array('role'))) ? 'class="active"' : '';?>>
                         <a class="menu-item" href="<?php echo _URL_ADMIN;?>/category.php?type=role">
                             <i class="ft-users"></i> Vai trò thành viên
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class=" nav-item">
+                <a href="#"><i class="ft-users"></i><span class="menu-title">Quản lý thành viên</span></a>
+                <ul class="menu-content">
+                    <li <?php echo ($admin_module == 'users' && !$act) ? 'class="active"' : '';?>>
+                        <a class="menu-item" href="<?php echo _URL_ADMIN;?>/users.php">
+                            <i class="ft-user"></i> Danh sách thành viên
+                        </a>
+                    </li>
+                    <li <?php echo ($admin_module == 'users' && $act == 'add') ? 'class="active"' : '';?>>
+                        <a class="menu-item" href="<?php echo _URL_ADMIN;?>/users.php?act=add">
+                            <i class="ft-user-plus"></i> Thêm thành viên
                         </a>
                     </li>
                 </ul>

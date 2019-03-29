@@ -62,6 +62,12 @@ class orderFunction{
                     3 => 'Hoàn tiền'
                 );
                 break;
+            case _TABLE_USER:
+                $return = array(
+                    0 => 'Tạm khóa',
+                    1 => 'Đang hoạt động'
+                );
+                break;
         }
         return $return[$value];
     }
