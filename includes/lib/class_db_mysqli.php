@@ -627,9 +627,9 @@ class Database
             $keys[] = "`$key`";
             // old: if (strpos($value, '()') == true OR is_numeric($value))
             if (strpos($value, '()') == true)
-                $values[] = "$value";
+                $values[] = $this->escape($value);
             else
-                $values[] = "'$value'";
+                $values[] = "'". $this->escape($value) ."'";
         }
         $this->_query = "INSERT INTO " . $table . " (" . implode(', ', $keys) . ") VALUES (" . implode(', ', $values) . ");";
         $this->execute();
@@ -665,10 +665,11 @@ class Database
             $table = $this->table_prefix . $table;
 
         foreach ($data as $key => $val) {
-            if (strpos($val, '()') == true OR is_numeric($val))
-                $valstr[] = "`$key`" . " = $val";
+            //if (strpos($val, '()') == true OR is_numeric($val))
+            if (strpos($val, '()') == true)
+                $valstr[] = "`$key` = ". $this->escape($val);
             else
-                $valstr[] = "`$key`" . " = '$val'";
+                $valstr[] = "`$key`" . " = '". $this->escape($val) ."'";
         }
 
         $this->_query = "UPDATE " . $table . " SET " . implode(', ', $valstr);

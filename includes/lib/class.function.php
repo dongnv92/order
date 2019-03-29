@@ -442,7 +442,7 @@ class orderFunction{
                 return '<div class="alert round bg-success alert-icon-left alert-dismissible mb-2" role="alert"><span class="alert-icon"><i class="la la-thumbs-o-up"></i></span><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>'. $content .'</div>';
                 break;
             case 'help_error':
-                return '<p class="text-left"><small class="text-muted text-danger">'. $content .'</small></p>';
+                return '<p class="text-left"><small class="text-danger"><i>'. $content .'</i></small></p>';
                 break;
         }
     }

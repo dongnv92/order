@@ -296,7 +296,7 @@ if($bill_4 > 0){
             <li class=" nav-item">
                 <a href="#"><i class="ft-users"></i><span class="menu-title">Quản lý thành viên</span></a>
                 <ul class="menu-content">
-                    <li <?php echo ($admin_module == 'users' && !$act) ? 'class="active"' : '';?>>
+                    <li <?php echo ($admin_module == 'users' && in_array($act, array('', 'update'))) ? 'class="active"' : '';?>>
                         <a class="menu-item" href="<?php echo _URL_ADMIN;?>/users.php">
                             <i class="ft-user"></i> Danh sách thành viên
                         </a>
