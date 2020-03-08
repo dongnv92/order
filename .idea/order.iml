@@ -5,5 +5,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="social" />
+    <orderEntry type="module" module-name="ttytml" />
+    <orderEntry type="module" module-name="firebase" />
   </component>
 </module>

@@ -22,61 +22,35 @@ switch ($act){
             require_once 'footer.php';
             break;
         }
-        $product_name               = isset($_POST['product_name'])             && !empty($_POST['product_name'])               ? $_POST['product_name']                : $product['product_name'];
-        $product_content            = isset($_POST['product_content'])          && !empty($_POST['product_content'])            ? $_POST['product_content']             : $product['product_content'];
-        $product_suorce             = isset($_POST['product_suorce'])           && !empty($_POST['product_suorce'])             ? $_POST['product_suorce']              : $product['product_suorce'];
-        $product_status             = isset($_POST['product_status'])           && !empty($_POST['product_status'])             ? $_POST['product_status']              : $product['product_status'];
-        $product_price_default      = isset($_POST['product_price_default'])    && !empty($_POST['product_price_default'])      ? $_POST['product_price_default']       : $product['product_price_default'];
-        $product_price_promotion    = isset($_POST['product_price_promotion'])  && !empty($_POST['product_price_promotion'])    ? $_POST['product_price_promotion']     : $product['product_price_promotion'];
-        $product_price_vn           = isset($_POST['product_price_vn'])         && !empty($_POST['product_price_vn'])           ? $_POST['product_price_vn']            : $product['product_price_vn'];
-        $product_brand              = isset($_POST['product_brand'])            && !empty($_POST['product_brand'])              ? $_POST['product_brand']               : $product['product_brand'];
-        $product_quality            = isset($_POST['product_quality'])          && !empty($_POST['product_quality'])            ? $_POST['product_quality']             : $product['product_quality'];
-        $product_size               = isset($_POST['product_size'])             && !empty($_POST['product_size'])               ? $_POST['product_size']                : unserialize($product['product_size']);
-        $product_color              = isset($_POST['product_color'])            && !empty($_POST['product_color'])              ? $_POST['product_color']               : unserialize($product['product_color']);
-        $product_category           = isset($_POST['product_category'])         && !empty($_POST['product_category'])           ? $_POST['product_category']            : $product['product_category'];
-        $product_gender             = isset($_POST['product_gender'])           && !empty($_POST['product_gender'])             ? $_POST['product_gender']              : $product['product_gender'];
-        $product_sale               = ceil(($product_price_promotion/$product_price_default)*100);
+        $product_name       = isset($_POST['product_name'])     && !empty($_POST['product_name'])       ? $_POST['product_name']        : $product['product_name'];
+        $product_content    = isset($_POST['product_content'])  && !empty($_POST['product_content'])    ? $_POST['product_content']     : $product['product_content'];
+        $product_status     = isset($_POST['product_status'])   && !empty($_POST['product_status'])     ? $_POST['product_status']      : $product['product_status'];
+        $product_price      = isset($_POST['product_price'])    && !empty($_POST['product_price'])      ? $_POST['product_price']       : $product['product_price'];
+        $product_category   = isset($_POST['product_category']) && !empty($_POST['product_category'])   ? $_POST['product_category']    : $product['product_category'];
 
         if($submit){
             $error = array();
             if(!$product_name){
                 $error['product_name']  = 'Bạn cần nhập tên sản phẩm';
             }
-            if($product_suorce && !filter_var($product_suorce, FILTER_VALIDATE_URL)){
-                $error['product_suorce']= 'Nguồn sản phẩm không đúng định dạng URL';
-            }
-            if(!$product_price_vn){
-                $error['product_price_vn']  = 'Bạn cần nhập giá Việt Nam';
+            if(!$product_price){
+                $error['product_price']  = 'Bạn cần nhập giá sản phẩm';
             }
             if(!$product_category){
                 $error['product_category']  = 'Bạn hãy chọn 1 chuyên mục';
             }
-            if($product_price_default && !is_numeric($product_price_default)){
-                $error['product_price_default']  = 'Số tiền phải là dạng số';
-            }
-            if($product_price_promotion && !is_numeric($product_price_promotion)){
-                $error['product_price_promotion']  = 'Số tiền phải là dạng số';
-            }
-            if($product_price_vn && !is_numeric($product_price_vn)){
-                $error['product_price_vn']  = 'Số tiền phải là dạng số';
+            if($product_price && !is_numeric($product_price)){
+                $error['product_price']  = 'Số tiền phải là dạng số';
             }
 
             if(!$error){
                 $data_product = array(
-                    'product_name'              => $product_name,
-                    'product_content'           => $product_content,
-                    'product_category'          => $product_category,
-                    'product_brand'             => $product_brand,
-                    'product_gender'            => $product_gender,
-                    'product_quality'           => $product_quality,
-                    'product_price_default'     => $product_price_default,
-                    'product_price_promotion'   => $product_price_promotion,
-                    'product_sale'              => $product_sale,
-                    'product_price_vn'          => $product_price_vn,
-                    'product_size'              => serialize($product_size),
-                    'product_color'             => serialize($product_color),
-                    'product_status'            => $product_status,
-                    'product_time'              => _CONGIF_TIME
+                    'product_name'      => $product_name,
+                    'product_content'   => $product_content,
+                    'product_category'  => $product_category,
+                    'product_price'     => $product_price,
+                    'product_status'    => $product_status,
+                    'product_time'      => _CONGIF_TIME
                 );
                 $product_update = $db->where('product_id', $id)->update(_TABLE_PRODUCT, $data_product);
                 // nếu thêm dữ liệu lỗi thì break
@@ -191,14 +165,6 @@ switch ($act){
                             <div class="form-group">
                                 <textarea class="tinymce round" name="product_content"><?=$product_content?></textarea>
                             </div>
-                            <div class="form-group">
-                                <label class="label">Link gốc sản phẩm</label>
-                                <input type="text" class="form-control round border-blue" disabled value="<?=$product_suorce?>" placeholder="Link sản phẩm gốc, VD: https://detail.tmall.com/item.htm?id=574580973041">
-                                <?php echo $error['product_suorce'] ? $function->getAlert('help_error', $error['product_suorce']) : '';?>
-                            </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control round border-blue" disabled value="<?=_URL_PRODUCT.'/'.$product['product_url'].'.html'?>" placeholder="URL sản phẩm">
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -239,30 +205,6 @@ switch ($act){
                                     </div>
                                 </fieldset>
                             </div>
-                            <h4 class="card-title">Giới tính</h4>
-                            <hr>
-                            <div class="form-group">
-                                <fieldset>
-                                    <div class="row skin skin-flat">
-                                        <div class="col-6 text-left">
-                                            <input type="radio" <?php echo ($product_gender == 1) ? 'checked' : '';?> name="product_gender" id="product_gender_1" value="1">
-                                        </div>
-                                        <div class="col-6 text-right">
-                                            <label for="product_gender_1">NAM</label>
-                                        </div>
-                                    </div>
-                                </fieldset>
-                                <fieldset>
-                                    <div class="row skin skin-flat">
-                                        <div class="col-6 text-left">
-                                            <input type="radio" <?php echo ($product_gender == 2) ? 'checked' : '';?> name="product_gender" id="product_gender_2" value="2">
-                                        </div>
-                                        <div class="col-6 text-right">
-                                            <label for="product_gender_2">NỮ</label>
-                                        </div>
-                                    </div>
-                                </fieldset>
-                            </div>
                             <div class="text-center">
                                 <button class="btn btn-outline-danger round">Xóa</button>
                                 <a href="<?=$function->getUrlProduct($id)?>" target="_blank" class="btn btn-outline-blue round">Xem</a>
@@ -275,41 +217,15 @@ switch ($act){
                         <div class="card-body">
                             <h4 class="card-title">Giá sản phẩm</h4>
                             <hr>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="timesheetinput5">Giá gốc</label>
-                                        <div class="position-relative has-icon-left">
-                                            <input type="number" class="form-control round border-blue" value="<?=$product_price_default?>" name="product_price_default">
-                                            <div class="form-control-position">
-                                                <i class="la la-cny"></i>
-                                            </div>
-                                        </div>
-                                        <?php echo $error['product_price_default'] ? $function->getAlert('help_error', $error['product_price_default']) : '';?>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="timesheetinput6">Giá khuyến mãi</label>
-                                        <div class="position-relative has-icon-left">
-                                            <input type="number" class="form-control round border-blue" value="<?=$product_price_promotion?>" name="product_price_promotion">
-                                            <div class="form-control-position">
-                                                <i class="la la-cny"></i>
-                                            </div>
-                                        </div>
-                                        <?php echo $error['product_price_promotion'] ? $function->getAlert('help_error', $error['product_price_promotion']) : '';?>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="form-group">
-                                <label for="timesheetinput6">Giá Việt Nam Đồng</label>
+                                <label for="timesheetinput6">Giá Sản Phẩm</label>
                                 <div class="position-relative has-icon-left">
-                                    <input type="number" required class="form-control round border-blue" value="<?=$product_price_vn?>" name="product_price_vn">
+                                    <input type="number" required class="form-control round border-blue" value="<?=$product_price?>" name="product_price">
                                     <div class="form-control-position">
                                         <i class="la la-vimeo"></i>
                                     </div>
                                 </div>
-                                <?php echo $error['product_price_vn'] ? $function->getAlert('help_error', $error['product_price_vn']) : '';?>
+                                <?php echo $error['product_price'] ? $function->getAlert('help_error', $error['product_price']) : '';?>
                             </div>
                         </div>
                     </div>
@@ -343,68 +259,6 @@ switch ($act){
                                 </select>
                                 <?php echo $error['product_category'] ? $function->getAlert('help_error', $error['product_category']) : '';?>
                             </fieldset>
-                            <fieldset class="form-group">
-                                <label>Thương Hiệu</label><br />
-                                <select name="product_brand" id="category_select" class="select2 form-control border-grey-blue">
-                                    <option value="">Trống</option>
-                                    <?php
-                                        foreach ($db->select('category_id, category_name, category_parent')->from(_TABLE_CATEGORY)->where(array('category_type' => 'brand'))->fetch() as $category){
-                                            echo '<option value="'. $category['category_id'] .'" '. (($category['category_id'] == $product_brand) ? 'selected' : '') .'>'. $category['category_name'] .'</option>';
-                                        }
-                                    ?>
-                                </select>
-                                <?php echo $error['product_brand'] ? $function->getAlert('help_error', $error['product_brand']) : '';?>
-                            </fieldset>
-                            <fieldset class="form-group">
-                                <label>Loại sản phẩm</label><br />
-                                <select name="product_quality" id="category_select" class="select2 form-control border-grey-blue">
-                                    <option value="">Trống</option>
-                                    <?php
-                                    foreach ($db->select('category_id, category_name, category_parent')->from(_TABLE_CATEGORY)->where(array('category_type' => 'quality'))->fetch() as $category){
-                                        echo '<option value="'. $category['category_id'] .'" '. (($category['category_id'] == $product_quality) ? 'selected' : '') .'>'. $category['category_name'] .'</option>';
-                                    }
-                                    ?>
-                                </select>
-                                <?php echo $error['product_quality'] ? $function->getAlert('help_error', $error['product_quality']) : '';?>
-                            </fieldset>
-                        </div>
-                    </div>
-                    <div class="card border-left-blue border-right-blue">
-                        <div class="card-body">
-                            <h4 class="card-title">SIZE</h4><hr />
-                            <div class="row skin skin-flat">
-                                <div class="col-md-6 col-sm-12" id="ajax_size">
-                                    <?php
-                                    foreach ($product_size as $size){
-                                        echo '<fieldset>
-                                        <div class="row">
-                                            <div class="col-6 text-center"><input type="checkbox" checked name="product_size[]" id="'. $size .'" value="'. $size .'"></div>
-                                            <div class="col-6 text-center"><label for="'. $size .'">'. $size .'</label></div>
-                                        </div>
-                                        </fieldset>';
-                                    }
-                                    ?>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card border-left-blue border-right-blue">
-                        <div class="card-body">
-                            <h4 class="card-title">MÀU</h4><hr />
-                            <div class="row skin skin-flat">
-                                <div class="col-md-6 col-sm-12" id="ajax_color">
-                                <?php
-                                foreach ($product_color as $color){
-                                    echo '<fieldset>
-                                    <div class="row">
-                                        <div class="col-6 text-left"><input type="checkbox" checked name="product_color[]" id="'. $color .'" value="'. $color .'"></div>
-                                        <div class="col-6 text-right"><label for="'. $color .'"><img src="'. _URL_HOME.'/'.$color .'" width="50px" height="50px" class="round"></label></div>
-                                    </div>
-                                    </fieldset>';
-                                }
-                                ?>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -462,47 +316,26 @@ switch ($act){
         break;
     case 'add':
         if($submit){
-            $product_name               = isset($_POST['product_name'])             && !empty($_POST['product_name'])               ? $_POST['product_name']                : '';
-            $product_content            = isset($_POST['product_content'])          && !empty($_POST['product_content'])            ? $_POST['product_content']             : '';
-            $product_url                = isset($_POST['product_url'])              && !empty($_POST['product_url'])                ? $_POST['product_url']                 : '';
-            $product_suorce             = isset($_POST['product_suorce'])           && !empty($_POST['product_suorce'])             ? $_POST['product_suorce']              : '';
-            $product_status             = isset($_POST['product_status'])           && !empty($_POST['product_status'])             ? $_POST['product_status']              : 0;
-            $product_price_default      = isset($_POST['product_price_default'])    && !empty($_POST['product_price_default'])      ? $_POST['product_price_default']       : '';
-            $product_price_promotion    = isset($_POST['product_price_promotion'])  && !empty($_POST['product_price_promotion'])    ? $_POST['product_price_promotion']     : '';
-            $product_price_vn           = isset($_POST['product_price_vn'])         && !empty($_POST['product_price_vn'])           ? $_POST['product_price_vn']            : '';
-            $product_category           = isset($_POST['product_category'])         && !empty($_POST['product_category'])           ? $_POST['product_category']            : '';
-            $product_brand              = isset($_POST['product_brand'])            && !empty($_POST['product_brand'])              ? $_POST['product_brand']               : '';
-            $product_quality            = isset($_POST['product_quality'])          && !empty($_POST['product_quality'])            ? $_POST['product_quality']             : '';
-            $product_size               = isset($_POST['product_size'])             && !empty($_POST['product_size'])               ? $_POST['product_size']                : '';
-            $product_color              = isset($_POST['product_color'])            && !empty($_POST['product_color'])              ? $_POST['product_color']               : '';
-            $product_images             = isset($_POST['product_images'])           && !empty($_POST['product_images'])             ? $_POST['product_images']              : '';
-            $product_gender             = isset($_POST['product_gender'])           && !empty($_POST['product_gender'])             ? $_POST['product_gender']              : '';
-            $product_sale               = ceil(($product_price_promotion/$product_price_default)*100);
+            $product_name       = isset($_POST['product_name'])     && !empty($_POST['product_name'])       ? $_POST['product_name']        : '';
+            $product_content    = isset($_POST['product_content'])  && !empty($_POST['product_content'])    ? $_POST['product_content']     : '';
+            $product_url        = isset($_POST['product_url'])      && !empty($_POST['product_url'])        ? $_POST['product_url']         : '';
+            $product_status     = isset($_POST['product_status'])   && !empty($_POST['product_status'])     ? $_POST['product_status']      : 0;
+            $product_price      = isset($_POST['product_price'])    && !empty($_POST['product_price'])      ? $_POST['product_price']       : '';
+            $product_category   = isset($_POST['product_category']) && !empty($_POST['product_category'])   ? $_POST['product_category']    : '';
+            $product_images     = isset($_POST['product_images'])   && !empty($_POST['product_images'])     ? $_POST['product_images']      : '';
             $error = array();
 
             if(!$product_name){
                 $error['product_name']  = 'Bạn cần nhập tên sản phẩm';
             }
-            if($product_suorce && !filter_var($product_suorce, FILTER_VALIDATE_URL)){
-                $error['product_suorce']= 'Nguồn sản phẩm không đúng định dạng URL';
-            }
-            if($db->select('product_id')->from(_TABLE_PRODUCT)->where('product_suorce', $product_suorce)->execute()->affected_rows > 0){
-                $error['product_suorce']= 'Nguồn này đã được sử dụng';
-            }
-            if(!$product_price_vn){
-                $error['product_price_vn']  = 'Bạn cần nhập giá Việt Nam';
+            if(!$product_price){
+                $error['product_price']  = 'Bạn cần nhập giá Việt Nam';
             }
             if(!$product_category){
                 $error['product_category']  = 'Bạn hãy chọn 1 chuyên mục';
             }
-            if($product_price_default && !is_numeric($product_price_default)){
-                $error['product_price_default']  = 'Số tiền phải là dạng số';
-            }
-            if($product_price_promotion && !is_numeric($product_price_promotion)){
-                $error['product_price_promotion']  = 'Số tiền phải là dạng số';
-            }
-            if($product_price_vn && !is_numeric($product_price_vn)){
-                $error['product_price_vn']  = 'Số tiền phải là dạng số';
+            if($product_price && !is_numeric($product_price)){
+                $error['product_price']  = 'Số tiền phải là dạng số';
             }
             if(!$product_url){
                 $product_url = $function->makeSlug($product_name);
@@ -512,33 +345,15 @@ switch ($act){
             }
 
             if(!$error){
-                $list_color = array();
-                foreach ($product_color as $color){
-                    if(filter_var($color, FILTER_VALIDATE_URL)){
-                        if(copy($color, '../'._CONGIF_FOLDER_IMAGES_PRODUCT_COLOR.'/'.basename($color))){
-                            $list_color[] = _CONGIF_FOLDER_IMAGES_PRODUCT_COLOR.'/'.basename($color);
-                        }
-                    }
-                }
-
                 $data_product = array(
-                    'product_name'              => $product_name,
-                    'product_url'               => $product_url,
-                    'product_content'           => $product_content,
-                    'product_category'          => $product_category,
-                    'product_suorce'            => $product_suorce,
-                    'product_brand'             => $product_brand,
-                    'product_quality'           => $product_quality,
-                    'product_price_default'     => $product_price_default,
-                    'product_price_promotion'   => $product_price_promotion,
-                    'product_sale'              => $product_sale,
-                    'product_price_vn'          => $product_price_vn,
-                    'product_size'              => serialize($product_size),
-                    'product_color'             => serialize($list_color),
-                    'product_user'              => $user['user_id'],
-                    'product_status'            => $product_status,
-                    'product_gender'            => $product_gender,
-                    'product_time'              => _CONGIF_TIME
+                    'product_name'      => $product_name,
+                    'product_url'       => $product_url,
+                    'product_content'   => $product_content,
+                    'product_category'  => $product_category,
+                    'product_price'     => $product_price,
+                    'product_user'      => $user['user_id'],
+                    'product_status'    => $product_status,
+                    'product_time'      => _CONGIF_TIME
                 );
                 $product_id = $db->insert(_TABLE_PRODUCT, $data_product);
                 // nếu thêm dữ liệu lỗi thì break
@@ -694,17 +509,6 @@ switch ($act){
                                 <textarea class="tinymce round" name="product_content"><?=$product_content?></textarea>
                             </div>
                             <div class="form-group">
-                                <div class="row">
-                                    <div class="col-md-10">
-                                        <input type="text" class="form-control round border-blue" name="product_suorce" value="<?=$product_suorce?>" placeholder="Link sản phẩm gốc, VD: https://detail.tmall.com/item.htm?id=574580973041">
-                                    </div>
-                                    <div class="col-md-2 text-right">
-                                        <button class="btn round btn-outline-blue" id="connect_ajax">Lấy thông tin</button>
-                                    </div>
-                                    <?php echo $error['product_suorce'] ? $function->getAlert('help_error', $error['product_suorce']) : '';?>
-                                </div>
-                            </div>
-                            <div class="form-group">
                                 <input type="text" name="product_url" class="form-control round border-blue" placeholder="URL bài viết">
                             </div>
                         </div>
@@ -747,30 +551,6 @@ switch ($act){
                                     </div>
                                 </fieldset>
                             </div>
-                            <h4 class="card-title">Giới tính</h4>
-                            <hr>
-                            <div class="form-group">
-                                <fieldset>
-                                    <div class="row skin skin-flat">
-                                        <div class="col-6 text-left">
-                                            <input type="radio" <?php echo ($submit && $product_gender == 1) ? 'checked' : '';?> name="product_gender" id="product_gender_1" value="1">
-                                        </div>
-                                        <div class="col-6 text-right">
-                                            <label for="product_gender_1">NAM</label>
-                                        </div>
-                                    </div>
-                                </fieldset>
-                                <fieldset>
-                                    <div class="row skin skin-flat">
-                                        <div class="col-6 text-left">
-                                            <input type="radio" <?php echo ($submit && $product_gender == 2) ? 'checked' : '';?> name="product_gender" id="product_gender_2" value="2">
-                                        </div>
-                                        <div class="col-6 text-right">
-                                            <label for="product_gender_2">NỮ</label>
-                                        </div>
-                                    </div>
-                                </fieldset>
-                            </div>
                             <div class="text-center">
                                 <input class="btn round btn-outline-blue" type="submit" name="submit" value="Thêm sản phẩm">
                             </div>
@@ -781,41 +561,15 @@ switch ($act){
                         <div class="card-body">
                             <h4 class="card-title">Giá sản phẩm</h4>
                             <hr>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="timesheetinput5">Giá gốc</label>
-                                        <div class="position-relative has-icon-left">
-                                            <input type="number" class="form-control round border-blue" value="<?=$product_price_default*_CONFIG_NDT?>" name="product_price_default">
-                                            <div class="form-control-position">
-                                                <i class="la la-cny"></i>
-                                            </div>
-                                        </div>
-                                        <?php echo $error['product_price_default'] ? $function->getAlert('help_error', $error['product_price_default']) : '';?>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="timesheetinput6">Giá khuyến mãi</label>
-                                        <div class="position-relative has-icon-left">
-                                            <input type="number" class="form-control round border-blue" value="<?=$product_price_promotion*_CONFIG_NDT?>" name="product_price_promotion">
-                                            <div class="form-control-position">
-                                                <i class="la la-cny"></i>
-                                            </div>
-                                        </div>
-                                        <?php echo $error['product_price_promotion'] ? $function->getAlert('help_error', $error['product_price_promotion']) : '';?>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="form-group">
-                                <label for="timesheetinput6">Giá Việt Nam Đồng</label>
+                                <label for="timesheetinput6">Giá sản phẩm</label>
                                 <div class="position-relative has-icon-left">
-                                    <input type="number" required class="form-control round border-blue" value="<?=$product_price_vn?>" name="product_price_vn">
+                                    <input type="number" required class="form-control round border-blue" value="<?=$product_price?>" name="product_price">
                                     <div class="form-control-position">
                                         <i class="la la-vimeo"></i>
                                     </div>
                                 </div>
-                                <?php echo $error['product_price_vn'] ? $function->getAlert('help_error', $error['product_price_vn']) : '';?>
+                                <?php echo $error['product_price'] ? $function->getAlert('help_error', $error['product_price']) : '';?>
                             </div>
                         </div>
                     </div>
@@ -823,17 +577,12 @@ switch ($act){
                     <div class="card border-left-blue border-right-blue">
                         <div class="card-body">
                             <h4 class="card-title">Ảnh sản phẩm</h4>
-                            <hr>
-                            <div class="row" id="ajax_images">
-
-                            </div>
-                            <hr />
                             <input type="file" id="product_images_upload" class="round" name="product_images_upload[]" multiple>
                         </div>
                     </div>
                     <div class="card border-left-blue border-right-blue">
                         <div class="card-body">
-                            <h4 class="card-title">Chuyên mục & hãng</h4><hr>
+                            <h4 class="card-title">Chuyên mục</h4><hr>
                             <fieldset class="form-group">
                                 <label><strong class="text-danger">(*)</strong> Chuyên Mục</label><br />
                                 <select name="product_category" id="category_select" class="select2 form-control border-grey-blue" required>
@@ -841,42 +590,6 @@ switch ($act){
                                 </select>
                                 <?php echo $error['product_category'] ? $function->getAlert('help_error', $error['product_category']) : '';?>
                             </fieldset>
-                            <fieldset class="form-group">
-                                <label>Thương Hiệu</label><br />
-                                <select name="product_brand" id="category_select" class="select2 form-control border-grey-blue">
-                                    <option value="">Trống</option>
-                                    <?php $function->showCategories($db->select('category_id, category_name, category_parent')->from(_TABLE_CATEGORY)->where(array('category_type' => 'brand'))->fetch(), 0, '','select'); ?>
-                                </select>
-                                <?php echo $error['product_brand'] ? $function->getAlert('help_error', $error['product_brand']) : '';?>
-                            </fieldset>
-                            <fieldset class="form-group">
-                                <label>Loại sản phẩm</label><br />
-                                <select name="product_quality" id="category_select" class="select2 form-control border-grey-blue">
-                                    <option value="">Trống</option>
-                                    <?php $function->showCategories($db->select('category_id, category_name, category_parent')->from(_TABLE_CATEGORY)->where(array('category_type' => 'quality'))->fetch(), 0, '','select'); ?>
-                                </select>
-                                <?php echo $error['product_quality'] ? $function->getAlert('help_error', $error['product_quality']) : '';?>
-                            </fieldset>
-                        </div>
-                    </div>
-                    <div class="card border-left-blue border-right-blue">
-                        <div class="card-body">
-                            <h4 class="card-title">SIZE</h4><hr />
-                            <div class="row skin skin-flat">
-                                <div class="col-md-6 col-sm-12" id="ajax_size">
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card border-left-blue border-right-blue">
-                        <div class="card-body">
-                            <h4 class="card-title">MÀU</h4><hr />
-                            <div class="row skin skin-flat">
-                                <div class="col-md-6 col-sm-12" id="ajax_color">
-
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -986,9 +699,7 @@ switch ($act){
                             <tr>
                                 <th width="5%">Ảnh</th>
                                 <th width="40%">Tên sản phẩm</th>
-                                <th data-breakpoints="sm xs" width="5%">Giá chuẩn (¥)</th>
-                                <th data-breakpoints="sm xs" width="5%">Giá khuyến mãi (¥)</th>
-                                <th data-breakpoints="sm xs" width="10%">Giá Việt Nam (₫)</th>
+                                <th data-breakpoints="sm xs" width="10%">Giá sản phẩm</th>
                                 <th data-breakpoints="sm xs" width="10%">Chuyên mục</th>
                                 <th data-breakpoints="sm xs" width="5%">Nổi bật</th>
                                 <th data-breakpoints="sm xs" width="10%">Người Đăng</th>
@@ -999,18 +710,16 @@ switch ($act){
                             <?php
                             foreach ($data as $row){
                                 $product_user       = $db->select()->from(_TABLE_USER)->where('user_id', $row['product_user'])->fetch_first();
-                                $product_images     = $db->select()->from(_TABLE_MEDIA)->where(array('media_store' => 'remote', 'media_type' => 'images_product', 'media_parent' => $row['product_id']))->fetch_first();
+                                $product_images     = $db->select()->from(_TABLE_MEDIA)->where(array('media_type' => 'images_product', 'media_parent' => $row['product_id']))->fetch_first();
                                 $product_category   = $db->select('category_name')->from(_TABLE_CATEGORY)->where('category_id', $row['product_category'])->fetch_first();
                                 echo '<tr id="tr_'. $row['product_id'] .'">';
-                                    echo '<td><img class="rounded" src="'. $product_images['media_source'] .'" height="50" /></td>';
+                                    echo '<td><img style="max-height: 50px; max-width: 50px" class="rounded" src="'. ($product_images['media_store'] == 'local' ? _URL_HOME.'/' : '').$product_images['media_source'] .'" height="50" /></td>';
                                     echo '<td data-hover="product_name" data-content="'. $row['product_id'] .'">
                                             <a href="product.php?act=update&id='. $row['product_id'] .'"><strong>'. $row['product_name'] .'</strong></a>
                                             <span style="display: none" id="product_manager_'. $row['product_id'] .'"><br />
                                             <a href="">Xem</a> - <a href="product.php?act=update&id='. $row['product_id'] .'">Chỉnh sửa</a> - <a href="javascript:;" data-hover="product_delete" data-num="'. $row['product_id'] .'" class="text-danger">Xóa</a></span>
                                          </td>';
-                                    echo '<td>'. $row['product_price_default'] .' ¥</td>';
-                                    echo '<td>'. $row['product_price_promotion'] .' ¥</td>';
-                                    echo '<td>'. number_format($row['product_price_vn'], 0,'', '.') .' ₫</td>';
+                                    echo '<td>'. number_format($row['product_price'], 0,'', '.') .' ₫</td>';
                                     echo '<td>'. $product_category['category_name'] .'</td>';
                                     echo '<td><input data-content="'. $row['product_id'] .'" name="product_status" type="checkbox" '. (($row['product_status'] == 2) ? 'checked' : '') .' class="switchery" data-size="xs" data-color="primary"/></td>';
                                     echo '<td>'. $product_user['user_name'] .'</td>';
