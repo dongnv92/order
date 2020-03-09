@@ -28,7 +28,7 @@ $header         = $header ? $header : $header_default;
         <div class="container">
             <nav>
                 <ul id="menu-top-bar-left" class="nav nav-inline pull-left animate-dropdown flip">
-                    <li class="menu-item animate-dropdown"><a title="Chào mừng bạn đến với KINI.VN" href="#">Chào mừng bạn đến với KINI.VN</a></li>
+                    <li class="menu-item animate-dropdown"><a title="Chào mừng bạn đến với KINI.VN">Chào mừng bạn đến với KINI.VN</a></li>
                 </ul>
             </nav>
             <nav>
@@ -53,10 +53,10 @@ $header         = $header ? $header : $header_default;
                 <form class="navbar-search" method="get" action="/">
                     <label class="sr-only screen-reader-text" for="search">Search for:</label>
                     <div class="input-group">
-                        <input type="text" id="search" class="form-control search-field" dir="ltr" value="" name="s" placeholder="Search for products" />
+                        <input type="text" id="search" class="form-control search-field" dir="ltr" value="" name="s" placeholder="Tìm kiếm sản phẩm" />
                         <div class="input-group-addon search-categories">
                             <select name='product_cat' id='product_cat' class='postform resizeselect' >
-                                <option value='0' selected='selected'>All Categories</option>
+                                <option value='0' selected='selected'>Tất cả chuyên mục</option>
                                 <option class="level-0" value="laptops-laptops-computers">Laptops</option>
                                 <option class="level-0" value="ultrabooks-laptops-computers">Ultrabooks</option>
                                 <option class="level-0" value="mac-computers-laptops">Mac Computers</option>
@@ -158,7 +158,7 @@ $header         = $header ? $header : $header_default;
                 <div class="col-xs-12 col-lg-3">
                     <nav>
                         <ul class="list-group vertical-menu yamm make-absolute">
-                            <li class="list-group-item"><span><i class="fa fa-list-ul"></i> All Departments</span></li>
+                            <li class="list-group-item"><span><i class="fa fa-list-ul"></i> Danh sách chuyên mục</span></li>
 
                             <li class="highlight menu-item animate-dropdown"><a title="Value of the Day" href="home-v2.html">Value of the Day</a></li>
 

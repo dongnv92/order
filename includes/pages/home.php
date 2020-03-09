@@ -1,6 +1,6 @@
 <?php
-require_once 'src/init.php';
-require_once 'src/pages/frontend/header_home.php';
+require_once '../core.php';
+require_once 'header_home.php';
 ?>
 <div id="content" class="site-content" tabindex="-1">
 <div class="container">
@@ -8,10 +8,8 @@ require_once 'src/pages/frontend/header_home.php';
         <main id="main" class="site-main">
             <div class="home-v1-slider" >
                 <!-- ========================================== SECTION – HERO : END========================================= -->
-
                 <div id="owl-main" class="owl-carousel owl-inner-nav owl-ui-sm">
-
-                    <div class="item" style="background-image: url(assets/images/slider/banner-2.jpg);">
+                    <div class="item" style="background-image: url(<?=_URL_HOME.'/assets/images/products/home_banner_1.jpg'?>);">
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-offset-3 col-md-5">
@@ -2275,4 +2273,4 @@ require_once 'src/pages/frontend/header_home.php';
 </div>
 
 <?php
-require_once 'src/pages/frontend/footer.php';
+require_once 'footer.php';
