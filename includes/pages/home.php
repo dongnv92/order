@@ -14,14 +14,14 @@ require_once 'header_home.php';
                             <div class="row">
                                 <div class="col-md-offset-3 col-md-5">
                                     <div class="caption vertical-center text-left">
-                                        <div class="hero-1 fadeInDown-1">
+                                        <div class="hero-1 fadeInDown-1" style="color: white">
                                             The New <br> Standard
                                         </div>
 
-                                        <div class="hero-subtitle fadeInDown-2">
+                                        <div class="hero-subtitle fadeInDown-2" style="color: white">
                                             under favorable smartwatches
                                         </div>
-                                        <div class="hero-v2-price fadeInDown-3">
+                                        <div class="hero-v2-price fadeInDown-3"  style="color: white">
                                             from <br><span>$749</span>
                                         </div>
                                         <div class="hero-action-btn fadeInDown-4">
@@ -138,109 +138,17 @@ require_once 'header_home.php';
             </div>
 
             <div class="home-v1-deals-and-tabs deals-and-tabs row animate-in-view fadeIn animated" data-animation="fadeIn">
-                <div class="deals-block col-lg-4">
-                    <section class="section-onsale-product">
-                        <header>
-                            <h2 class="h1">Special Offer</h2>
-                            <div class="savings">
-                                <span class="savings-text">Save <span class="amount">$20.00</span></span>
-                            </div>
-                        </header><!-- /header -->
-
-                        <div class="onsale-products">
-                            <div class="onsale-product">
-                                <a href="shop.html">
-                                    <div class="product-thumbnail">
-                                        <img class="wp-post-image" data-echo="assets/images/onsale-product.jpg" src="assets/images/blank.gif" alt=""></div>
-
-                                        <h3>Game Console Controller <br>+ USB 3.0 Cable</h3>
-                                </a>
-
-                                <span class="price">
-                                    <span class="electro-price">
-                                        <ins><span class="amount">$79.00</span></ins>
-                                        <del><span class="amount">$99.00</span></del>
-                                    </span>
-                                </span><!-- /.price -->
-
-                                <div class="deal-progress">
-                                    <div class="deal-stock">
-                                        <span class="stock-sold">Already Sold: <strong>2</strong></span>
-                                        <span class="stock-available">Available: <strong>26</strong></span>
-                                    </div>
-
-                                    <div class="progress">
-                                        <span class="progress-bar" style="width:8%">8</span>
-                                    </div>
-                                </div><!-- /.deal-progress -->
-
-                                <div class="deal-countdown-timer">
-                                    <div class="marketing-text text-xs-center">Hurry Up! Offer ends in:	</div>
-
-
-                                    <div id="deal-countdown" class="countdown">
-                                        <span data-value="0" class="days"><span class="value">0</span><b>Days</b></span>
-                                        <span class="hours"><span class="value">7</span><b>Hours</b></span>
-                                        <span class="minutes"><span class="value">29</span><b>Mins</b></span>
-                                        <span class="seconds"><span class="value">13</span><b>Secs</b></span>
-                                    </div>
-                                    <span class="deal-end-date" style="display:none;">2016-12-31</span>
-                                    <script>
-                                    // set the date we're counting down to
-                                    var deal_end_date = document.querySelector(".deal-end-date").textContent;
-                                    var target_date = new Date( deal_end_date ).getTime();
-
-                                    // variables for time units
-                                    var days, hours, minutes, seconds;
-
-                                    // get tag element
-                                    var countdown = document.getElementById( 'deal-countdown' );
-
-                                    // update the tag with id "countdown" every 1 second
-                                    setInterval( function () {
-
-                                    // find the amount of "seconds" between now and target
-                                    var current_date = new Date().getTime();
-                                    var seconds_left = (target_date - current_date) / 1000;
-
-                                    // do some time calculations
-                                    days = parseInt(seconds_left / 86400);
-                                    seconds_left = seconds_left % 86400;
-
-                                    hours = parseInt(seconds_left / 3600);
-                                    seconds_left = seconds_left % 3600;
-
-                                    minutes = parseInt(seconds_left / 60);
-                                    seconds = parseInt(seconds_left % 60);
-
-                                    // format countdown string + set tag value
-                                    countdown.innerHTML = '<span data-value="' + days + '" class="days"><span class="value">' + days +  '</span><b>Days</b></span><span class="hours"><span class="value">' + hours + '</span><b>Hours</b></span><span class="minutes"><span class="value">'
-                                    + minutes + '</span><b>Mins</b></span><span class="seconds"><span class="value">' + seconds + '</span><b>Secs</b></span>';
-
-                                    }, 1000 );
-                                    </script>
-                                </div><!-- /.deal-countdown-timer -->
-                            </div><!-- /.onsale-product -->
-                        </div><!-- /.onsale-products -->
-                    </section><!-- /.section-onsale-product -->
-                </div><!-- /.col -->
-
-
-                <div class="tabs-block col-lg-8">
+                <div class="tabs-block col-lg-12">
                     <div class="products-carousel-tabs">
                         <ul class="nav nav-inline">
-                            <li class="nav-item"><a class="nav-link active" href="#tab-products-1" data-toggle="tab">Featured</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#tab-products-2" data-toggle="tab">On Sale</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#tab-products-3" data-toggle="tab">Top Rated</a></li>
+                            <li class="nav-item"><a class="nav-link active" href="#tab-products-1" data-toggle="tab">Nổi bật</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#tab-products-2" data-toggle="tab">Mới nhất</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#tab-products-3" data-toggle="tab">Khuyến mãi</a></li>
                         </ul>
-
                         <div class="tab-content">
                             <div class="tab-pane active" id="tab-products-1" role="tabpanel">
                                 <div class="woocommerce columns-3">
-
                                     <ul class="products columns-3">
-
-
                                         <li class="product first">
                                             <div class="product-outer">
                                                 <div class="product-inner">

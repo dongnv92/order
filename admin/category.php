@@ -58,7 +58,6 @@ switch ($act){
                 if(!$id){
                     $admin_title = 'Thêm Chuyên Mục Video';
                     require_once 'header.php';
-                    echo $config->getPanelError(array('title' => 'Lỗi thêm dữ liệu', 'content' => 'Đã xảy ra lỗi khi thêm dữ liệu !'));
                     require_once 'footer.php';
                     break;
                 }
@@ -106,7 +105,7 @@ switch ($act){
                             <div class="form-group label-floating">
                                 <label class="control-label">Tên Chuyên Mục</label>
                                 <input type="text" required value="<?php $category_name;?>" name="category_name" placeholder="Nhập Tên Chuyên Mục" class="<?php echo $function->form_style('text_input')?>">
-                                <?php echo $error['category_name'] ? $config->getAlert('help_error', $error['category_name']) : '';?>
+                                <?php echo $error['category_name'] ? $function->getAlert('help_error', $error['category_name']) : '';?>
                             </div>
                             <div class="form-group label-floating">
                                 <label class="control-label">Đường Dẫn</label>
